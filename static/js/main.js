@@ -10472,7 +10472,177 @@ require('jquery.easing');
 }(jQuery));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"jquery":1,"jquery.easing":3}],3:[function(require,module,exports){
+},{"jquery":1,"jquery.easing":5}],3:[function(require,module,exports){
+arguments[4][1][0].apply(exports,arguments)
+},{"dup":1}],4:[function(require,module,exports){
+(function (global){
+/**
+ * cf-tables
+ * https://github.com/cfpb/cf-tables
+ *
+ * A public domain work of the Consumer Financial Protection Bureau
+ */
+
+global.jQuery = require('jquery');
+
+( function( $ ) {
+  'use strict';
+
+  var SortableTable = function( table, options ) {
+    /*  At the moment, there are no default settings, but here's an object
+        for their future use! */
+    var defaults = {},
+    // settings is defaults combined with user options
+    settings = {},
+    // rows is an Array of Arrays, serving as a model of the table
+    rows = [],
+    $table = $( table ),
+    $sortButtons = $table.find( '.sortable' );
+
+    /**
+     * Initializes the SortableTable
+     * @param { object } options - Customizble options object
+     */
+    function _init( options ) {
+      settings = $.extend( {}, defaults, options );
+      _clickHandler();
+      // If the following classes exist, start by sorting those columns.
+      $table.find( '.sortable__start-up, .sortable__start-up' ).click();
+    }
+
+    /**
+     * Sorting function for Array.sort()
+     *
+     * @param { number } sign - A number where a negative number indicates a
+     * reverse sort.
+     * @param { sortType } sortType - A string used for sort types. By default,
+     * the values are sorted by their native type. If this value is set to
+     * 'number', then the cells' numeric values are used.
+     * @returns function - A function to be used by the Array.sort method, where
+     * the parameters 'a' and 'b' is each an Array (of Arrays) to be sorted
+     */
+
+    function _arraySorter( sign, sortType ) {
+      return function( a, b ) {
+        // Set a and b to the first Array in each Array-of-Arrays
+        a = a[0];
+        b = b[0];
+
+        // For number sort, convert a & b to numbers.
+        if ( sortType === 'number' ) {
+          a = Number( a.replace( /[^\d.-]/g, '' ) );
+          b = Number( b.replace( /[^\d.-]/g, '' ) );
+        }
+
+        // Sort the values
+        if ( a < b ) {
+          return sign * -1;
+        }
+        if ( a > b ) {
+          return sign;
+        }
+        return 0;
+      };
+    }
+
+    /**
+     * Updates internal model of table (rows[])
+     * @param { number } index - The index of the column used for sorting,
+     * which is used as the "key" for rows[] - it is set as the only value
+     * in the first array.
+     */
+    function _getRows( index ) {
+      var child = index + 1;
+      // Clear the model
+      rows.length = 0;
+      // Find the value in each row of the column we're sorting by,
+      // add it to the rows Array
+      $table.find( 'tbody tr' ).each( function() {
+        // indices count from 0, but nth-child counts from 1
+        var key = $( this ).find( 'td:nth-child(' + child + ')' ).text().trim();
+        rows.push( [ key, $( this ) ] );
+      } );
+    }
+
+    /**
+     * Updates the table in the DOM
+     * @param { number } index - The index of the column used for sorting
+     */
+    function _updateTable( index ) {
+      // Empty the tbody to prepare for sorted rows
+      $table.find( 'tbody' ).empty();
+
+      // Insert sorted rows
+      for ( var i = 0; i < rows.length; i++ ) {
+        $table.find( 'tbody' ).append( rows[i][1] );
+      }
+    }
+
+    /**
+     * Handler for click events on the column header
+     * No parameters - uses SortableTable properties, updates the DOM.
+     */
+    function _clickHandler() {
+      $sortButtons.on( 'click', function() {
+        var $button = $( this ),
+            $headercell = $button.closest( 'th, td' ),
+            $table = $headercell.closest( '.table__sortable' ),
+            sortType = $button.attr( 'data-sort_type' ),
+            sign = 1,
+            $firstChild = $table.find( 'tr:first-child' ),
+            index = $firstChild.children( 'th, td' ).index( $headercell );
+
+        _getRows( index );
+
+        // Determine sign
+        if ( $button.hasClass( 'sorted-up' ) || $button.hasClass( 'sortable__start-down' ) ) {
+          sign = -1;
+        }
+
+        $sortButtons.removeClass( 'sortable__start-down sortable__start-up' );
+        $sortButtons.removeClass( 'sorted-down sorted-up' );
+
+        // Add correct class
+        if ( sign === 1 ) {
+          $button.addClass( 'sorted-up' );
+        } 
+        else {
+          $button.addClass( 'sorted-down' );
+        }
+
+        // Perform the row sort
+        rows.sort( _arraySorter( sign, sortType ) );
+
+        _updateTable( index );
+
+      } );
+    }
+
+    _init( options );
+
+  };
+
+  /**
+   * Instatiates the SortableTable
+   * @param { object } options - An options object
+   * @returns { object } Attached objects for each matched element
+   */
+  $.fn.sortableTable = function( options ) {
+    return this.each( function() {
+      ( options || ( options = {} ) ).$element = $( this );
+      var scol = new SortableTable( this, options );
+    } );
+  };
+
+  $( document ).ready( function() {
+    $( '.table__sortable' ).sortableTable();
+  } );
+
+
+}( jQuery ) );
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"jquery":3}],5:[function(require,module,exports){
 /*
  * jQuery Easing v1.3.2 - http://gsgd.co.uk/sandbox/jquery/easing/
  * Open source under the BSD License.
@@ -10617,7 +10787,7 @@ $.extend( $.easing,
 	}
 });})(jQuery);
 
-},{}],4:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v1.12.2
  * http://jquery.com/
@@ -21641,29 +21811,1391 @@ if ( !noGlobal ) {
 return jQuery;
 }));
 
-},{}],5:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
+// Create a range object for efficently rendering strings to elements.
+var range;
+
+var testEl = (typeof document !== 'undefined') ?
+    document.body || document.createElement('div') :
+    {};
+
+var XHTML = 'http://www.w3.org/1999/xhtml';
+
+// Fixes <https://github.com/patrick-steele-idem/morphdom/issues/32>
+// (IE7+ support) <=IE7 does not support el.hasAttribute(name)
+var hasAttribute;
+if (testEl.hasAttribute) {
+    hasAttribute = function hasAttribute(el, name) {
+        return el.hasAttribute(name);
+    };
+} else {
+    hasAttribute = function hasAttribute(el, name) {
+        return !!el.getAttributeNode(name);
+    };
+}
+
+function empty(o) {
+    for (var k in o) {
+        if (o.hasOwnProperty(k)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+function toElement(str) {
+    if (!range && document.createRange) {
+        range = document.createRange();
+        range.selectNode(document.body);
+    }
+
+    var fragment;
+    if (range && range.createContextualFragment) {
+        fragment = range.createContextualFragment(str);
+    } else {
+        fragment = document.createElement('body');
+        fragment.innerHTML = str;
+    }
+    return fragment.childNodes[0];
+}
+
+var specialElHandlers = {
+    /**
+     * Needed for IE. Apparently IE doesn't think that "selected" is an
+     * attribute when reading over the attributes using selectEl.attributes
+     */
+    OPTION: function(fromEl, toEl) {
+        fromEl.selected = toEl.selected;
+        if (fromEl.selected) {
+            fromEl.setAttribute('selected', '');
+        } else {
+            fromEl.removeAttribute('selected', '');
+        }
+    },
+    /**
+     * The "value" attribute is special for the <input> element since it sets
+     * the initial value. Changing the "value" attribute without changing the
+     * "value" property will have no effect since it is only used to the set the
+     * initial value.  Similar for the "checked" attribute, and "disabled".
+     */
+    INPUT: function(fromEl, toEl) {
+        fromEl.checked = toEl.checked;
+        if (fromEl.checked) {
+            fromEl.setAttribute('checked', '');
+        } else {
+            fromEl.removeAttribute('checked');
+        }
+
+        if (fromEl.value !== toEl.value) {
+            fromEl.value = toEl.value;
+        }
+
+        if (!hasAttribute(toEl, 'value')) {
+            fromEl.removeAttribute('value');
+        }
+
+        fromEl.disabled = toEl.disabled;
+        if (fromEl.disabled) {
+            fromEl.setAttribute('disabled', '');
+        } else {
+            fromEl.removeAttribute('disabled');
+        }
+    },
+
+    TEXTAREA: function(fromEl, toEl) {
+        var newValue = toEl.value;
+        if (fromEl.value !== newValue) {
+            fromEl.value = newValue;
+        }
+
+        if (fromEl.firstChild) {
+            fromEl.firstChild.nodeValue = newValue;
+        }
+    }
+};
+
+function noop() {}
+
+/**
+ * Returns true if two node's names and namespace URIs are the same.
+ *
+ * @param {Element} a
+ * @param {Element} b
+ * @return {boolean}
+ */
+var compareNodeNames = function(a, b) {
+    return a.nodeName === b.nodeName &&
+           a.namespaceURI === b.namespaceURI;
+};
+
+/**
+ * Create an element, optionally with a known namespace URI.
+ *
+ * @param {string} name the element name, e.g. 'div' or 'svg'
+ * @param {string} [namespaceURI] the element's namespace URI, i.e. the value of
+ * its `xmlns` attribute or its inferred namespace.
+ *
+ * @return {Element}
+ */
+function createElement(name, namespaceURI) {
+    return (namespaceURI && namespaceURI !== XHTML) ?
+        document.createElementNS(namespaceURI, name) :
+        document.createElement(name);
+}
+
+/**
+ * Loop over all of the attributes on the target node and make sure the original
+ * DOM node has the same attributes. If an attribute found on the original node
+ * is not on the new node then remove it from the original node.
+ *
+ * @param  {Element} fromNode
+ * @param  {Element} toNode
+ */
+function morphAttrs(fromNode, toNode) {
+    var attrs = toNode.attributes;
+    var i;
+    var attr;
+    var attrName;
+    var attrValue;
+    var foundAttrs = {};
+    var fromValue;
+
+    for (i = attrs.length - 1; i >= 0; i--) {
+        attr = attrs[i];
+        attrName = attr.name;
+        attrValue = attr.value;
+        fromValue = fromNode.getAttributeNS(attr.namespaceURI, attr.name);
+        foundAttrs[attrName] = true;
+
+        if (fromValue !== attrValue) {
+            fromNode.setAttributeNS(
+              attr.namespaceURI,
+              attr.name,
+              attrValue
+            );
+        }
+    }
+
+    // Remove any extra attributes found on the original DOM element that
+    // weren't found on the target element.
+    attrs = fromNode.attributes;
+
+    for (i = attrs.length - 1; i >= 0; i--) {
+        attr = attrs[i];
+        if (attr.specified !== false) {
+            attrName = attr.name;
+            if (!foundAttrs.hasOwnProperty(attrName)) {
+                fromNode.removeAttributeNode(attr);
+            }
+        }
+    }
+}
+
+/**
+ * Copies the children of one DOM element to another DOM element
+ */
+function moveChildren(fromEl, toEl) {
+    var curChild = fromEl.firstChild;
+    while (curChild) {
+        var nextChild = curChild.nextSibling;
+        toEl.appendChild(curChild);
+        curChild = nextChild;
+    }
+    return toEl;
+}
+
+function defaultGetNodeKey(node) {
+    return node.id;
+}
+
+function morphdom(fromNode, toNode, options) {
+    if (!options) {
+        options = {};
+    }
+
+    if (typeof toNode === 'string') {
+        if (fromNode.nodeName === '#document' || fromNode.nodeName === 'HTML') {
+            var toNodeHtml = toNode;
+            toNode = document.createElement('html');
+            toNode.innerHTML = toNodeHtml;
+        } else {
+            toNode = toElement(toNode);
+        }
+    }
+
+    // XXX optimization: if the nodes are equal, don't morph them
+    /*
+    if (fromNode.isEqualNode(toNode)) {
+      return fromNode;
+    }
+    */
+
+    var savedEls = {}; // Used to save off DOM elements with IDs
+    var unmatchedEls = {};
+    var getNodeKey = options.getNodeKey || defaultGetNodeKey;
+    var onBeforeNodeAdded = options.onBeforeNodeAdded || noop;
+    var onNodeAdded = options.onNodeAdded || noop;
+    var onBeforeElUpdated = options.onBeforeElUpdated || options.onBeforeMorphEl || noop;
+    var onElUpdated = options.onElUpdated || noop;
+    var onBeforeNodeDiscarded = options.onBeforeNodeDiscarded || noop;
+    var onNodeDiscarded = options.onNodeDiscarded || noop;
+    var onBeforeElChildrenUpdated = options.onBeforeElChildrenUpdated || options.onBeforeMorphElChildren || noop;
+    var childrenOnly = options.childrenOnly === true;
+    var movedEls = [];
+
+    function removeNodeHelper(node, nestedInSavedEl) {
+        var id = getNodeKey(node);
+        // If the node has an ID then save it off since we will want
+        // to reuse it in case the target DOM tree has a DOM element
+        // with the same ID
+        if (id) {
+            savedEls[id] = node;
+        } else if (!nestedInSavedEl) {
+            // If we are not nested in a saved element then we know that this node has been
+            // completely discarded and will not exist in the final DOM.
+            onNodeDiscarded(node);
+        }
+
+        if (node.nodeType === Node.ELEMENT_NODE) {
+            var curChild = node.firstChild;
+            while (curChild) {
+                removeNodeHelper(curChild, nestedInSavedEl || id);
+                curChild = curChild.nextSibling;
+            }
+        }
+    }
+
+    function walkDiscardedChildNodes(node) {
+        if (node.nodeType === Node.ELEMENT_NODE) {
+            var curChild = node.firstChild;
+            while (curChild) {
+
+
+                if (!getNodeKey(curChild)) {
+                    // We only want to handle nodes that don't have an ID to avoid double
+                    // walking the same saved element.
+
+                    onNodeDiscarded(curChild);
+
+                    // Walk recursively
+                    walkDiscardedChildNodes(curChild);
+                }
+
+                curChild = curChild.nextSibling;
+            }
+        }
+    }
+
+    function removeNode(node, parentNode, alreadyVisited) {
+        if (onBeforeNodeDiscarded(node) === false) {
+            return;
+        }
+
+        parentNode.removeChild(node);
+        if (alreadyVisited) {
+            if (!getNodeKey(node)) {
+                onNodeDiscarded(node);
+                walkDiscardedChildNodes(node);
+            }
+        } else {
+            removeNodeHelper(node);
+        }
+    }
+
+    function morphEl(fromEl, toEl, alreadyVisited, childrenOnly) {
+        var toElKey = getNodeKey(toEl);
+        if (toElKey) {
+            // If an element with an ID is being morphed then it is will be in the final
+            // DOM so clear it out of the saved elements collection
+            delete savedEls[toElKey];
+        }
+
+        if (!childrenOnly) {
+            if (onBeforeElUpdated(fromEl, toEl) === false) {
+                return;
+            }
+
+            morphAttrs(fromEl, toEl);
+            onElUpdated(fromEl);
+
+            if (onBeforeElChildrenUpdated(fromEl, toEl) === false) {
+                return;
+            }
+        }
+
+        if (fromEl.nodeName !== 'TEXTAREA') {
+            var curToNodeChild = toEl.firstChild;
+            var curFromNodeChild = fromEl.firstChild;
+            var curToNodeId;
+
+            var fromNextSibling;
+            var toNextSibling;
+            var savedEl;
+            var unmatchedEl;
+
+            outer: while (curToNodeChild) {
+                toNextSibling = curToNodeChild.nextSibling;
+                curToNodeId = getNodeKey(curToNodeChild);
+
+                while (curFromNodeChild) {
+                    var curFromNodeId = getNodeKey(curFromNodeChild);
+                    fromNextSibling = curFromNodeChild.nextSibling;
+
+                    if (!alreadyVisited) {
+                        if (curFromNodeId && (unmatchedEl = unmatchedEls[curFromNodeId])) {
+                            unmatchedEl.parentNode.replaceChild(curFromNodeChild, unmatchedEl);
+                            morphEl(curFromNodeChild, unmatchedEl, alreadyVisited);
+                            curFromNodeChild = fromNextSibling;
+                            continue;
+                        }
+                    }
+
+                    var curFromNodeType = curFromNodeChild.nodeType;
+
+                    if (curFromNodeType === curToNodeChild.nodeType) {
+                        var isCompatible = false;
+
+                        // Both nodes being compared are Element nodes
+                        if (curFromNodeType === Node.ELEMENT_NODE) {
+                            if (compareNodeNames(curFromNodeChild, curToNodeChild)) {
+                                // We have compatible DOM elements
+                                if (curFromNodeId || curToNodeId) {
+                                    // If either DOM element has an ID then we
+                                    // handle those differently since we want to
+                                    // match up by ID
+                                    if (curToNodeId === curFromNodeId) {
+                                        isCompatible = true;
+                                    }
+                                } else {
+                                    isCompatible = true;
+                                }
+                            }
+
+                            if (isCompatible) {
+                                // We found compatible DOM elements so transform
+                                // the current "from" node to match the current
+                                // target DOM node.
+                                morphEl(curFromNodeChild, curToNodeChild, alreadyVisited);
+                            }
+                        // Both nodes being compared are Text nodes
+                        } else if (curFromNodeType === Node.TEXT_NODE) {
+                            isCompatible = true;
+                            // Simply update nodeValue on the original node to
+                            // change the text value
+                            curFromNodeChild.nodeValue = curToNodeChild.nodeValue;
+                        }
+
+                        if (isCompatible) {
+                            curToNodeChild = toNextSibling;
+                            curFromNodeChild = fromNextSibling;
+                            continue outer;
+                        }
+                    }
+
+                    // No compatible match so remove the old node from the DOM
+                    // and continue trying to find a match in the original DOM
+                    removeNode(curFromNodeChild, fromEl, alreadyVisited);
+                    curFromNodeChild = fromNextSibling;
+                }
+
+                if (curToNodeId) {
+                    if ((savedEl = savedEls[curToNodeId])) {
+                        morphEl(savedEl, curToNodeChild, true);
+                        // We want to append the saved element instead
+                        curToNodeChild = savedEl;
+                    } else {
+                        // The current DOM element in the target tree has an ID
+                        // but we did not find a match in any of the
+                        // corresponding siblings. We just put the target
+                        // element in the old DOM tree but if we later find an
+                        // element in the old DOM tree that has a matching ID
+                        // then we will replace the target element with the
+                        // corresponding old element and morph the old element
+                        unmatchedEls[curToNodeId] = curToNodeChild;
+                    }
+                }
+
+                // If we got this far then we did not find a candidate match for
+                // our "to node" and we exhausted all of the children "from"
+                // nodes. Therefore, we will just append the current "to node"
+                // to the end
+                if (onBeforeNodeAdded(curToNodeChild) !== false) {
+                    fromEl.appendChild(curToNodeChild);
+                    onNodeAdded(curToNodeChild);
+                }
+
+                if (curToNodeChild.nodeType === Node.ELEMENT_NODE &&
+                    (curToNodeId || curToNodeChild.firstChild)) {
+                    // The element that was just added to the original DOM may
+                    // have some nested elements with a key/ID that needs to be
+                    // matched up with other elements. We'll add the element to
+                    // a list so that we can later process the nested elements
+                    // if there are any unmatched keyed elements that were
+                    // discarded
+                    movedEls.push(curToNodeChild);
+                }
+
+                curToNodeChild = toNextSibling;
+                curFromNodeChild = fromNextSibling;
+            }
+
+            // We have processed all of the "to nodes". If curFromNodeChild is
+            // non-null then we still have some from nodes left over that need
+            // to be removed
+            while (curFromNodeChild) {
+                fromNextSibling = curFromNodeChild.nextSibling;
+                removeNode(curFromNodeChild, fromEl, alreadyVisited);
+                curFromNodeChild = fromNextSibling;
+            }
+        }
+
+        var specialElHandler = specialElHandlers[fromEl.nodeName];
+        if (specialElHandler) {
+            specialElHandler(fromEl, toEl);
+        }
+    } // END: morphEl(...)
+
+    var morphedNode = fromNode;
+    var morphedNodeType = morphedNode.nodeType;
+    var toNodeType = toNode.nodeType;
+
+    if (!childrenOnly) {
+        // Handle the case where we are given two DOM nodes that are not
+        // compatible (e.g. <div> --> <span> or <div> --> TEXT)
+        if (morphedNodeType === Node.ELEMENT_NODE) {
+            if (toNodeType === Node.ELEMENT_NODE) {
+                if (!compareNodeNames(fromNode, toNode)) {
+                    onNodeDiscarded(fromNode);
+                    morphedNode = moveChildren(fromNode, createElement(toNode.nodeName, toNode.namespaceURI));
+                }
+            } else {
+                // Going from an element node to a text node
+                morphedNode = toNode;
+            }
+        } else if (morphedNodeType === Node.TEXT_NODE) { // Text node
+            if (toNodeType === Node.TEXT_NODE) {
+                morphedNode.nodeValue = toNode.nodeValue;
+                return morphedNode;
+            } else {
+                // Text node to something else
+                morphedNode = toNode;
+            }
+        }
+    }
+
+    if (morphedNode === toNode) {
+        // The "to node" was not compatible with the "from node" so we had to
+        // toss out the "from node" and use the "to node"
+        onNodeDiscarded(fromNode);
+    } else {
+        morphEl(morphedNode, toNode, false, childrenOnly);
+
+        /**
+         * What we will do here is walk the tree for the DOM element that was
+         * moved from the target DOM tree to the original DOM tree and we will
+         * look for keyed elements that could be matched to keyed elements that
+         * were earlier discarded.  If we find a match then we will move the
+         * saved element into the final DOM tree.
+         */
+        var handleMovedEl = function(el) {
+            var curChild = el.firstChild;
+            while (curChild) {
+                var nextSibling = curChild.nextSibling;
+
+                var key = getNodeKey(curChild);
+                if (key) {
+                    var savedEl = savedEls[key];
+                    if (savedEl && compareNodeNames(curChild, savedEl)) {
+                        curChild.parentNode.replaceChild(savedEl, curChild);
+                        // true: already visited the saved el tree
+                        morphEl(savedEl, curChild, true);
+                        curChild = nextSibling;
+                        if (empty(savedEls)) {
+                            return false;
+                        }
+                        continue;
+                    }
+                }
+
+                if (curChild.nodeType === Node.ELEMENT_NODE) {
+                    handleMovedEl(curChild);
+                }
+
+                curChild = nextSibling;
+            }
+        };
+
+        // The loop below is used to possibly match up any discarded
+        // elements in the original DOM tree with elemenets from the
+        // target tree that were moved over without visiting their
+        // children
+        if (!empty(savedEls)) {
+            handleMovedElsLoop:
+            while (movedEls.length) {
+                var movedElsTemp = movedEls;
+                movedEls = [];
+                for (var i=0; i<movedElsTemp.length; i++) {
+                    if (handleMovedEl(movedElsTemp[i]) === false) {
+                        // There are no more unmatched elements so completely end
+                        // the loop
+                        break handleMovedElsLoop;
+                    }
+                }
+            }
+        }
+
+        // Fire the "onNodeDiscarded" event for any saved elements
+        // that never found a new home in the morphed DOM
+        for (var savedElId in savedEls) {
+            if (savedEls.hasOwnProperty(savedElId)) {
+                var savedEl = savedEls[savedElId];
+                onNodeDiscarded(savedEl);
+                walkDiscardedChildNodes(savedEl);
+            }
+        }
+    }
+
+    if (!childrenOnly && morphedNode !== fromNode && fromNode.parentNode) {
+        // If we had to swap out the from node with a new node because the old
+        // node was not compatible with the target node then we need to
+        // replace the old DOM node in the original DOM tree. This is only
+        // possible if the original DOM node was part of a DOM tree which
+        // we know is the case if it has a parent node.
+        fromNode.parentNode.replaceChild(morphedNode, fromNode);
+    }
+
+    return morphedNode;
+}
+
+module.exports = morphdom;
+
+},{}],8:[function(require,module,exports){
+/* eslint no-new-func: "warn" */
+var ARROW_PATTERN = /^\s*\(?(\s*\w+\s*(,\s*\w+\s*)*)?\)?\s*=>\s*({([^}]+)}|(.+))$/;
+
+var isArrow = function(expression) {
+  return String(expression).match(ARROW_PATTERN);
+};
+
+var parseArrow = function parseArrow(expression) {
+  var match = expression.match(ARROW_PATTERN);
+  if (!match) throw new Error('invalid arrow expression: "' + expression + '"');
+  var args = match[1];
+  var body = (match[4] || match[5]).trim() || 'undefined';
+  return new Function(args, [
+    'with (this) {',
+    ' return ', body, '; ',
+    '}',
+  ].join(''));
+};
+
+module.exports = {
+  is: isArrow,
+  parse: parseArrow
+};
+
+},{}],9:[function(require,module,exports){
+var constants = require('./constants');
+var T_PREFIX = constants.T.PREFIX;
+var CONTROL_ATTRS = constants.CONTROL_ATTRS;
+
+var ns = require('./ns');
+var util = require('./util');
+var defined = util.defined;
+
+module.exports.getAttributeMap = function(node) {
+  var map = {};
+  var attrs = node.attributes;
+  for (var i = 0; i < attrs.length; i++) {
+    var attr = attrs[i];
+    var name = ns.qualify(attr.name);
+    var localName = name.localName;
+    var value = attr.value;
+    if (localName.indexOf(T_PREFIX) === 0) {
+      localName = localName.substr(T_PREFIX.length);
+      if (CONTROL_ATTRS.indexOf(localName) > -1) {
+        continue;
+      }
+      value = util.compileExpression(value);
+    }
+    var qname = name.prefix
+      ? name.prefix + ':' + localName
+      : localName;
+    map[qname] = value;
+  }
+  return map;
+};
+
+module.exports.interpolateAttributes = function(attrMap, data) {
+  var attrs = {};
+  for (var key in attrMap) {
+    if (!attrMap.hasOwnProperty(key)) {
+      continue;
+    }
+    var value = attrMap[key];
+    // only apply functions for attrs that aren't event handlers
+    if (typeof value === 'function' && key.indexOf('on') !== 0) {
+      value = value.call(this, data, key);
+    }
+    if (defined(value)) {
+      attrs[key] = value;
+    }
+  }
+  return attrs;
+};
+
+},{"./constants":11,"./ns":18,"./util":21}],10:[function(require,module,exports){
+/**
+ * functional composition functions take a function and return a
+ * wrapped function that calls the passed one and applies some
+ * additional logic.
+ */
+
+var defined = require('./util').defined;
+
+/**
+ * @param {Function}  fn
+ * @return {Function} a function that returns the inverse (`!`)
+ *                    value of the `fn`, given the same arguments.
+ */
+module.exports.not = function(fn) {
+  return function() {
+    return !fn.apply(this, arguments);
+  };
+};
+
+/**
+ * @param {Function}  fn
+ * @return {Function} a function that returns the stringified
+ *                    value of the `fn`, given the same arguments.
+ */
+module.exports.stringify = function(fn) {
+  return function() {
+    var value = fn.apply(this, arguments);
+    return defined(value) ? String(value) : '';
+  };
+};
+
+},{"./util":21}],11:[function(require,module,exports){
+var prefix = 't-';
+
+var T = {
+  PREFIX: prefix
+};
+
+T.AS = prefix + 'as';
+T.EACH = prefix + 'each';
+T.ELSE = prefix + 'else';
+T.FOREACH = prefix + 'foreach';
+T.IF = prefix + 'if';
+T.SKIP = prefix + 'skip';
+T.TEXT = prefix + 'text';
+T.WITH = prefix + 'with';
+
+module.exports.T = T;
+
+module.exports.CONTROL_ATTRS = [
+  'as',
+  'each',
+  'else',
+  'foreach',
+  'if',
+  'skip',
+  'text',
+  'with'
+];
+
+},{}],12:[function(require,module,exports){
+module.exports.getPreviousSibling = function(node, selector) {
+  // eslint-disable-next-line no-cond-assign
+  while (node = node.previousSibling) {
+    if (!node) break;
+    // FIXME this needs a vendor prefix in IE 9+
+    // <http://caniuse.com/#search=matches>
+    if (node.nodeType === 1 && node.matches(selector)) {
+      return node;
+    }
+  }
+  throw new Error('no previous sibling found matching: ' + selector);
+};
+
+},{}],13:[function(require,module,exports){
+/* eslint no-new-func: "warn" */
+var arrow = require('./arrow');
+var functor = require('./functor');
+
+var evaluate = function(expression, data) {
+  var fn = evaluator(expression);
+  return fn.call(this, data);
+};
+
+var evaluator = function(expression) {
+  if (typeof expression !== 'string') {
+    expression = String(expression);
+  }
+
+  if (!expression.trim()) {
+    return functor(undefined);
+  }
+
+  if (arrow.is(expression)) {
+    return arrow.parse(expression);
+  }
+
+  var symbol = 'd';
+  // '.' is just the identity function
+  if (expression.match(/^\s*\.\s*$/)) {
+    return identity;
+  // '.foo' addresses the context directly
+  } else if (expression.match(/^\s*\.\w/)) {
+    expression = symbol + expression;
+  }
+  return new Function(symbol, [
+    // 'console.info("', symbol, ' = ", ', symbol, ', "', expression, '"); ',
+    'try { ',
+    '  with (this) {',
+    '    with (', symbol, ') {',
+    '      return (', expression, ');',
+    '    } ',
+    '  } ',
+    '} catch (error) { }'
+  ].join('\n'));
+};
+
+module.exports = {
+  evaluate: evaluate,
+  evaluator: evaluator
+};
+
+function identity(d) {
+  return d;
+}
+
+},{"./arrow":8,"./functor":14}],14:[function(require,module,exports){
+module.exports = function functor(x) {
+  return function f() {
+    return x;
+  };
+};
+
+
+},{}],15:[function(require,module,exports){
+var ns = require('./ns');
+
+module.exports = function(name, props, children) {
+  var node;
+  if (Array.isArray(name)) {
+    node = document.createDocumentFragment();
+  } else {
+    name = ns.qualify(name);
+    node = name.namespaceURI
+      ? document.createElementNS(name.namespaceURI, name.localName)
+      : document.createElement(name.localName);
+  }
+
+  if (Array.isArray(props) || typeof props === 'string') {
+    children = props;
+  } else if (typeof props === 'object') {
+    setProps(node, props);
+  }
+
+  var append = function(child) {
+    if (Array.isArray(child)) {
+      child.forEach(append);
+    } else if (typeof child === 'object') {
+      node.appendChild(child);
+    } else if (typeof child === 'string') {
+      node.appendChild(document.createTextNode(child));
+    }
+  };
+
+  if (typeof children === 'object' || typeof children === 'string') {
+    append(children);
+  }
+
+  return node;
+};
+
+var setProps = function(el, props) {
+  for (var prop in props) {
+    if (!props.hasOwnProperty(prop)) {
+      continue;
+    }
+    var value = props[prop];
+    if (value === null || value === undefined || typeof value === 'function') {
+      // XXX: don't add null, undefined, or function values
+      continue;
+    } else if (typeof value === 'object') {
+      switch (prop) {
+        case 'class':
+          value = formatClassName(value);
+          break;
+
+        case 'style':
+          value = formatStyle(value);
+          break;
+
+        default:
+          console.warn('unrecognized object prop:', prop, value);
+          continue;
+      }
+    }
+
+    var name = ns.qualify(prop);
+    if (name.namespaceURI) {
+      el.setAttributeNS(name.namespaceURI, name.name, value);
+    } else {
+      el.setAttribute(name.localName, value);
+    }
+  }
+};
+
+var formatStyle = function(obj) {
+  if (Array.isArray(obj)) {
+    return obj.join('; ');
+  }
+  return Object.keys(obj)
+    .map(function(key) {
+      return [
+        reformatCamelCase(key),
+        ': ',
+        obj[key],
+        ';'
+      ].join('');
+    })
+    .join(' ');
+};
+
+var reformatCamelCase = function(str) {
+  return str.replace(/[A-Z]/g, function(char) {
+    return '-' + char.toLowerCase();
+  });
+};
+
+var formatClassName = function(obj) {
+  if (Array.isArray(obj)) {
+    return obj.join(' ');
+  }
+  return Object.keys(obj).filter(function(key) {
+    return !!obj[key];
+  }).join(' ');
+};
+
+},{"./ns":18}],16:[function(require,module,exports){
+var render = require('./render');
+
+module.exports = {
+  createRenderer: render.createRenderer,
+  render: render.render
+};
+
+},{"./render":19}],17:[function(require,module,exports){
+var evaluate = require('./evaluate').evaluate;
+var functor = require('./functor');
+
+var pattern = /{{\s*([^}]+)\s*}}/g;
+
+var isTemplate = function(str) {
+  return new RegExp(pattern).test(str);
+};
+
+var compile = function(template) {
+  if (typeof template !== 'string') {
+    throw new Error('interpolate.compile() expected a string;' +
+                    'got ' + (typeof template));
+  }
+
+  if (!isTemplate(template)) {
+    return functor(template);
+  }
+
+  return function(data) {
+    var that = this;
+    return template.replace(pattern, function(_, part) {
+      return evaluate.call(that, part, data);
+    });
+  };
+};
+
+var interpolate = function interpolate(str, data) {
+  return compile(str).call(this, data);
+};
+
+module.exports = interpolate;
+
+module.exports.isTemplate = isTemplate;
+
+module.exports.compile = compile;
+
+},{"./evaluate":13,"./functor":14}],18:[function(require,module,exports){
+var prefixToURI = {
+  svg: 'http://www.w3.org/2000/svg',
+  xlink: 'http://www.w3.org/TR/xlink/',
+  xmlns: 'http://www.w3.org/2000/xmlns/'
+};
+
+var uriToPrefix = {};
+Object.keys(prefixToURI).forEach(function(prefix) {
+  uriToPrefix[prefixToURI[prefix]] = prefix;
+});
+
+var qualify = function(qname) {
+  var prefix;
+  var localName = qname;
+  var colon = qname.indexOf(':');
+  if (colon > -1) {
+    prefix = qname.substr(0, colon);
+    localName = qname.substr(colon + 1);
+  }
+  return {
+    name: qname,
+    localName: localName,
+    prefix: prefix,
+    namespaceURI: prefixToURI[prefix]
+  };
+};
+
+var getPrefixedName = function(node) {
+  var name = node.nodeName.toLowerCase();
+  var prefix = node.prefix;
+  if (!prefix && node.namespaceURI) {
+    prefix = uriToPrefix[node.namespaceURI];
+  }
+  return prefix
+    ? (prefix + ':' + name)
+    : name;
+};
+
+module.exports = {
+  getPrefixedName: getPrefixedName,
+  prefixToURI: prefixToURI,
+  uriToPrefix: uriToPrefix,
+  qualify: qualify
+};
+
+},{}],19:[function(require,module,exports){
+var code = require('./evaluate');
+var interpolate = require('./interpolate');
+var compose = require('./compose');
+var h = require('./h');
+
+var morphdom = require('morphdom');
+
+var T = require('./constants').T;
+var T_ID = 't-id';
+var attr = require('./attrs');
+var dom = require('./dom');
+var util = require('./util');
+var ns = require('./ns');
+var scope = require('./scope');
+
+// this is our symbol on which we stash registered event handlers, so that
+// we can remove any registered handlers before adding new ones.
+var EVENTS = '[[t-events]]';
+
+// we stash unique event handler ids and handlers by id, each bound to the
+// renered template data
+var eventHandlerId = 0;
+var eventHandlersById = {};
+
+/**
+ * Returns a function that generates an interpolated string for the
+ * given text node (`node.nodeType === Node.TEXT_NODE`).
+ *
+ * @param {Node} node
+ * @return {Function} function(data:Object):String
+ */
+var createTextRenderer = function(node) {
+  return compose.stringify(interpolate.compile(node.nodeValue));
+};
+
+var createCommentRenderer = function(node) {
+  var value = compose.stringify(interpolate.compile(node.nodeValue));
+  return function() {
+    return document.createComment(value.apply(this, arguments));
+  };
+};
+
+/**
+ * "Pluck" event handlers from an attribute map, removing them from
+ * the map. If no event handlers are found, the return value is
+ * `undefined`.
+ *
+ * @param {Object} attrMap
+ * @return {Object}
+ */
+var pluckEventHandlers = function(attrMap) {
+  var handlers = undefined;
+  for (var name in attrMap) {
+    var value = attrMap[name];
+    if (name.indexOf('on') === 0 && typeof value === 'function') {
+      if (!handlers) {
+        handlers = {};
+      }
+      handlers[name.substr(2)] = value;
+      delete attrMap[name];
+    }
+  }
+  return handlers;
+};
+
+/**
+ * This function returns a node rendering wrapper that registers event handlers
+ * for the rendered node by assigning it a unique `t-id` attribute and stashing
+ * a reference to the data-bound handlers in a corresponding hash. After the
+ * tree is morphed, each element with a `t-id` attribute is then matched up
+ * with its event handlers.
+ *
+ * @param {Function} render
+ * @param {Object} handlers each key is an event type, and the value is a
+ * callback function.
+ * @return {Function} a function that returns the rendered node
+ */
+var registerEventHandlers = function(render, handlers) {
+  return function(data, index) {
+    var node = render.apply(this, arguments);
+    if (node) {
+      var tid = ++eventHandlerId;
+      node.setAttribute(T_ID, tid);
+      var context = this;
+      var callback = function(event) {
+        // XXX in theory, this could fail if one
+        // of the handlers gets removed (not
+        // sure how that would happen, though)
+        handlers[event.type].call(context, data, event);
+      };
+      var bound = {};
+      for (var type in handlers) {
+        bound[type] = callback;
+      }
+      eventHandlersById[tid] = bound;
+    }
+    return node;
+  };
+};
+
+/**
+ * Returns a function that generates an interpolated DOM element tree
+ * for the given element node
+ * (`node.nodeType === Node.ELEMENT_NODE`).
+ *
+ * @param {Element} node
+ * @return {Function} function(data:Object):Element
+ */
+var createElementRenderer = function(node) {
+  // this element will never be rendered if it has a truthy t-skip
+  // attribute
+  if (node.hasAttribute(T.SKIP)) {
+    return undefined;
+  }
+
+  var name = ns.getPrefixedName(node);
+  var attrMap = attr.getAttributeMap(node);
+  var handlers = pluckEventHandlers(attrMap);
+
+  var condition = node.hasAttribute(T.IF)
+    ? code.evaluator(node.getAttribute(T.IF))
+    : undefined;
+
+  if (node.hasAttribute(T.ELSE)) {
+    if (condition) {
+      throw new Error('element has both t-if and t-else attributes');
+    }
+    // TODO: ELSEIF should just collect all of the previous IF and
+    // ELSEIF nodes and negate them. Some checking should happen here to
+    // ensure that they're specified in the correct order.
+    var ifSibling = dom.getPreviousSibling(node, '[' + T.IF + ']');
+    if (!ifSibling) {
+      throw new Error('element with t-else has no matching t-if sibling');
+    }
+    condition = compose.not(code.evaluator(ifSibling.getAttribute(T.IF)));
+  }
+
+  var renderChildren;
+
+  // <span t-text="some.value"></span>
+  if (node.hasAttribute(T.TEXT)) {
+    renderChildren = compose.stringify(
+      util.compileExpression(node.getAttribute(T.TEXT))
+    );
+  } else {
+    var childRenderers = [].map.call(node.childNodes, compile);
+    renderChildren = function(data) {
+      return childRenderers.map(function(renderChild, i) {
+        return (typeof renderChild === 'function')
+          ? renderChild.call(this, data)
+          : renderChild;
+      }, this);
+    };
+  }
+
+  var renderNode = function(data) {
+    if (condition && !condition.call(this, data)) {
+      return undefined;
+    }
+
+    var attrs = attr.interpolateAttributes.call(this, attrMap, data);
+    var children = renderChildren.call(this, data);
+    return h(name, attrs, children);
+  };
+
+  // "attach" (as a single property) the event handler maps
+  if (handlers) {
+    renderNode = registerEventHandlers(renderNode, handlers);
+  }
+
+  var eachExpression = node.getAttribute(T.EACH);
+  var forEachExpression = node.getAttribute(T.FOREACH);
+  var withExpression = node.getAttribute(T.WITH);
+
+  var symbol = node.getAttribute(T.AS);
+
+  if (eachExpression) {
+    renderNode = scope.renderEach(
+      code.evaluator(eachExpression),
+      renderNode,
+      symbol
+    );
+  } else if (forEachExpression) {
+    renderChildren = scope.renderEach(
+      code.evaluator(forEachExpression),
+      renderChildren,
+      symbol
+    );
+  } else if (withExpression) {
+    renderNode = scope.renderWith(
+      code.evaluator(withExpression),
+      renderNode,
+      symbol
+    );
+  } else if (symbol) {
+    renderNode = scope.symbolSetter(symbol, renderNode);
+  }
+
+  return renderNode;
+};
+
+/**
+ * Returns a rendering function for a given source ("template") node
+ * and optional variable context for expressions.
+ *
+ * The returned function has the signatures:
+ *
+ * function(data:*)
+ * function(node:Node, data:*)
+ *
+ * Where `data` is expected to be an object and, in the second form,
+ * `node` is a target node to which the diffed DOM should be applied.
+ *
+ * @param {Node}    src
+ * @param {Object?} context
+ * @return {Function}
+ */
+var createRenderer = function(src, context) {
+  if (typeof src === 'string') {
+    var selector = src;
+    src = document.querySelector(src);
+    if (!src) {
+      throw new Error('no element found with selector: "' + selector + '"');
+    }
+  }
+
+  var renderNode = compile(src);
+  return function(node, data, options) {
+    if (arguments.length < 2) {
+      data = node;
+    }
+    if ((!node && data) || node === data) {
+      node = src;
+    }
+    eventHandlerId = 0;
+    eventHandlersById = {};
+    var dest = renderNode.call(context, data);
+    var result = morphdom(src, dest, options);
+    updateEventHandlers(result);
+    return result;
+  };
+};
+
+/**
+ * Update all of the event handlers in the given DOM tree. This looks for all
+ * elements with the `t-id` attribute (including the root), removes any
+ * existing handlers (stashed in the `[[t-events]]` symbol), then looks up the
+ * registered handlers for the corresponding `t-id` value and adds those.
+ *
+ * @param {Element} root
+ */
+var updateEventHandlers = function(root) {
+  var elements = [].slice.call(root.querySelectorAll('[' + T_ID + ']'));
+  if (root.hasAttribute(T_ID)) {
+    elements.unshift(root);
+  }
+  elements.forEach(function(el) {
+    var events = el[EVENTS];
+    var type;
+    if (events) {
+      for (type in events) {
+        el.removeEventListener(type, events[type], true);
+        delete events[type];
+      }
+      delete el[EVENTS];
+    }
+    var tid = el.getAttribute(T_ID);
+    events = eventHandlersById[tid];
+    if (events) {
+      for (type in events) {
+        el.addEventListener(type, events[type], true);
+      }
+      el[EVENTS] = events;
+    }
+    el.removeAttribute(T_ID);
+  });
+};
+
+/**
+ * Creates a renderer, renders once if data is provided, and returns
+ * a bound rendering function for subsequent calling.
+ *
+ * @param {Node}    src
+ * @param {Object?} context
+ * @return {Function}
+ */
+var render = function(src, data, context) {
+  var renderData = createRenderer(src, context);
+  if (data) {
+    renderData(src, data);
+  }
+  return renderData;
+};
+
+/**
+ * Returns a DOM element rendering function for the given "template"
+ * or source node. This may be publicly exposed if it becomes useful,
+ * e.g. for composition of referenced templates.
+ *
+ * @param {Node} node
+ * @return {Function} the returned function takes data and returns an
+ * unattached Node instance: function(data:Object):Node
+ */
+var compile = function(node) {
+  switch (node.nodeType) {
+    case 1: // Node.ELEMENT_NODE
+      return createElementRenderer(node);
+
+    case 3: // Node.TEXT_NODE
+      return createTextRenderer(node);
+
+    case 8: // Node.COMMENT_NODE
+      return createCommentRenderer(node);
+
+    // TODO: support document fragments?
+    // this would need support in h()
+
+    default:
+      throw new Error('no renderer for node type: ' + node.nodeType);
+  }
+};
+
+
+module.exports.render = render;
+module.exports.createRenderer = createRenderer;
+module.exports.compile = compile;
+
+},{"./attrs":9,"./compose":10,"./constants":11,"./dom":12,"./evaluate":13,"./h":15,"./interpolate":17,"./ns":18,"./scope":20,"./util":21,"morphdom":7}],20:[function(require,module,exports){
+var renderEach = function(fn, render, symbol) {
+  return function(data) {
+    var values = fn.call(this, data);
+    return forEach.call(this, values, render, symbol);
+  };
+};
+
+var renderWith = function(fn, render, symbol) {
+  render = symbolSetter(symbol, render);
+  return function(data) {
+    data = fn.call(this, data);
+    return render.call(this, data);
+  };
+};
+
+var forEach = function(data, fn, symbol) {
+  var iterate = symbol
+    ? symbolSetter(symbol, fn)
+    : fn;
+
+  var result = [];
+  var INDEX = '$i';
+  var each = function(d, i) {
+    this[INDEX] = i;
+    result.push(iterate.call(this, d));
+    delete this[INDEX];
+  };
+
+  if (typeof data === 'object') {
+    if (Array.isArray(data)) {
+      data.forEach(each, this);
+    } else {
+      var i = 0;
+      for (var key in data) {
+        if (data.hasOwnProperty(key)) {
+          each.call(this, {key: key, value: data[key]}, i++);
+        }
+      }
+    }
+  } else if (typeof data === 'string') {
+    data.split('').forEach(each, this);
+  }
+
+  return result;
+};
+
+var symbolSetter = function(symbol, fn) {
+  return function(data) {
+    var previous = set(this, symbol, data);
+    var result = fn.call(this, data);
+    set(this, symbol, previous);
+    return result;
+  };
+};
+
+var set = function(context, symbol, value) {
+  var previous = context[symbol];
+  if (value === undefined) {
+    delete context[symbol];
+  } else {
+    context[symbol] = value;
+  }
+  return previous;
+};
+
+module.exports = {
+  renderWith: renderWith,
+  renderEach: renderEach,
+  symbolSetter: symbolSetter
+};
+
+},{}],21:[function(require,module,exports){
+var code = require('./evaluate');
+var interpolate = require('./interpolate');
+
+module.exports.defined = function(value) {
+  return value !== null && value !== undefined;
+};
+
+module.exports.compileExpression = function(expr) {
+  return interpolate.isTemplate(expr)
+    ? interpolate.compile(expr)
+    : code.evaluator(expr);
+};
+
+},{"./evaluate":13,"./interpolate":17}],22:[function(require,module,exports){
 (function (global){
 'use strict';
 
-// The following line imports jQuery into your project. If you don't need jQuery, delete it.
-global.$ = require( 'jquery' );
+global.$ = require('jquery');
+global.tagalong = require('tagalong');
 
-// If you'd like to include cf-expandables (or any other node module in your project),
-// run `npm install cf-expandables --save` and require() it in this file.
-require( 'cf-expandables' );
-
-// Count all features included in the test page.
-$( '.feature-list' ).append(
-  '<section class="feature-list_item' +
-  ' block block__padded-top block__border-top">' +
-  '<div class="feature-header">' +
-  '<h1 class="feature-header_name">jQuery</h1>' +
-  '</div>' +
-  '<p>jQuery is working and counts a total of ' +
-  '<strong>' + $( '.feature-list_item' ).size() + '</strong> ' +
-  'cf-components.</p>' +
-  '</section>'
-);
+require('cf-expandables');
+require('cf-tables');
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"cf-expandables":2,"jquery":4}]},{},[5]);
+},{"cf-expandables":2,"cf-tables":4,"jquery":6,"tagalong":16}]},{},[22]);

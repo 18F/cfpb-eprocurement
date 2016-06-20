@@ -1,10 +1,7 @@
-(function(exports) {
-  'use strict';
+'use strict';
 
-  exports.$ = require('jquery');
+global.$ = require('jquery');
+global.tagalong = require('tagalong');
 
-  exports.tagalong = require('tagalong');
-
-  require('cf-expandables');
-
-})(window);
+require('cf-expandables');
+require('cf-tables');
