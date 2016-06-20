@@ -9,19 +9,19 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "cf-typography": "^3.0.6",
-    "cf-core": "^3.4.0",
-    "cf-core": "^3.4.0",
-    "cf-icons": "^3.1.0",
     "cf-buttons": "^3.1.0",
+    "cf-core": "^3.4.0",
+    "cf-expandables": "^3.1.0",
     "cf-forms": "^3.1.0",
     "cf-grid": "^3.1.2",
+    "cf-icons": "^3.1.0",
     "cf-layout": "^3.2.0",
     "cf-pagination": "^3.1.0",
-    "cf-expandables": "^3.1.0",
     "cf-tables": "^1.0.3",
+    "cf-typography": "^3.0.6",
     "html5shiv": "3.7.3",
-    "jquery": "1.12.2"
+    "jquery": "1.12.2",
+    "tagalong": "2.1.1"
   },
   "devDependencies": {
     "grunt": "0.4.5",
