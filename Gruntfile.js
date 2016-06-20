@@ -196,7 +196,7 @@ module.exports = function(grunt) {
             cwd: '<%= loc.src %>',
             src: [
               // HTML files
-              '**/*.html',
+              // '**/*.html',
               '!**/vendor/**'
             ],
             dest: '<%= loc.dist %>'
