@@ -9,6 +9,9 @@ Prototypes to help CFPB procure things more easily!
 - [Less](http://lesscss.org): CSS pre-processor.
 - [Capital Framework](https://cfpb.github.io/capital-framework/getting-started):
   User interface pattern-library produced by the CFPB.
+- [tagalong](https://github.com/shawnbot/tagalong) makes it easy to
+  write progressively enhanced data templates in plain old, semantic
+  HTML.
 
 **NOTE:** If you're new to Capital Framework, we encourage you to
 [start here](https://cfpb.github.io/capital-framework/getting-started).
