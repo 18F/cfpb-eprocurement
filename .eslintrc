@@ -747,7 +747,7 @@ rules:
 
   # Requires spaces inside parentheses.
   space-in-parens:
-    - 1
+    - 0
     - always
 
   # Requires spaces around operators.
