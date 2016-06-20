@@ -2,3 +2,4 @@ title: CFPB eProcurement
 
 exclude:
 - node_modules
+- src/**/*.md
