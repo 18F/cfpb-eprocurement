@@ -4,6 +4,7 @@ Prototypes to help CFPB procure things more easily!
 
 ## Dependencies
 
+- [Jekyll]: static site generator, deployed automatically with [Federalist].
 - [Grunt](http://gruntjs.com): task runner for pulling in assets,
   linting and concatenating code, etc.
 - [Less](http://lesscss.org): CSS pre-processor.
@@ -38,6 +39,14 @@ either here or in other documentation to which you link._
 
 ## Usage
 
+This is a [Jekyll] site. To view it locally, run one of the following:
+
+```sh
+jekyll serve
+# or
+npm start
+```
+
 Each time you fetch from the upstream repository (this repo), run `./setup.sh`.
 This setup script will remove and re-install the project dependencies and
 rebuild the site's JavaScript and CSS assets.
@@ -65,10 +74,7 @@ grunt watch:cssjs
 
 ## How to test the software
 
-After running `./setup.sh` or compiling with Grunt,
-you can view the site in a browser by opening `/dist/index.html`.
-Alternatively, you may want to use a local server with something like
-`python -m SimpleHTTPServer`.
+_TODO_
 
 ## Known issues
 
@@ -98,3 +104,6 @@ If you find a bug not listed in the issue tracker, please file a bug report.
 2. Related projects
 3. Books, papers, talks, or other sources that have meaniginful impact or
    influence on this project
+
+[Jekyll]: https://jekyllrb.com/
+[Federalist]: https://federalist.18f.gov/
