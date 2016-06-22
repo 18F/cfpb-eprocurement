@@ -62,6 +62,7 @@ var sortOnClick = function(e) {
     sort = {key: key, order: compare.ASCENDING};
   }
   this.sort = sort;
+  e.preventDefault();
   return false;
 };
 
