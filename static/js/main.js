@@ -10472,7 +10472,7 @@ require('jquery.easing');
 }(jQuery));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"jquery":1,"jquery.easing":5}],3:[function(require,module,exports){
+},{"jquery":1,"jquery.easing":6}],3:[function(require,module,exports){
 arguments[4][1][0].apply(exports,arguments)
 },{"dup":1}],4:[function(require,module,exports){
 (function (global){
@@ -10643,6 +10643,9 @@ global.jQuery = require('jquery');
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"jquery":3}],5:[function(require,module,exports){
+/*! (C) WebReflection Mit Style License */
+(function(e,t,n,r){"use strict";function rt(e,t){for(var n=0,r=e.length;n<r;n++)vt(e[n],t)}function it(e){for(var t=0,n=e.length,r;t<n;t++)r=e[t],nt(r,b[ot(r)])}function st(e){return function(t){j(t)&&(vt(t,e),rt(t.querySelectorAll(w),e))}}function ot(e){var t=e.getAttribute("is"),n=e.nodeName.toUpperCase(),r=S.call(y,t?v+t.toUpperCase():d+n);return t&&-1<r&&!ut(n,t)?-1:r}function ut(e,t){return-1<w.indexOf(e+'[is="'+t+'"]')}function at(e){var t=e.currentTarget,n=e.attrChange,r=e.attrName,i=e.target;Q&&(!i||i===t)&&t.attributeChangedCallback&&r!=="style"&&e.prevValue!==e.newValue&&t.attributeChangedCallback(r,n===e[a]?null:e.prevValue,n===e[l]?null:e.newValue)}function ft(e){var t=st(e);return function(e){X.push(t,e.target)}}function lt(e){K&&(K=!1,e.currentTarget.removeEventListener(h,lt)),rt((e.target||t).querySelectorAll(w),e.detail===o?o:s),B&&pt()}function ct(e,t){var n=this;q.call(n,e,t),G.call(n,{target:n})}function ht(e,t){D(e,t),et?et.observe(e,z):(J&&(e.setAttribute=ct,e[i]=Z(e),e.addEventListener(p,G)),e.addEventListener(c,at)),e.createdCallback&&Q&&(e.created=!0,e.createdCallback(),e.created=!1)}function pt(){for(var e,t=0,n=F.length;t<n;t++)e=F[t],E.contains(e)||(n--,F.splice(t--,1),vt(e,o))}function dt(e){throw new Error("A "+e+" type is already registered")}function vt(e,t){var n,r=ot(e);-1<r&&(tt(e,b[r]),r=0,t===s&&!e[s]?(e[o]=!1,e[s]=!0,r=1,B&&S.call(F,e)<0&&F.push(e)):t===o&&!e[o]&&(e[s]=!1,e[o]=!0,r=1),r&&(n=e[t+"Callback"])&&n.call(e))}if(r in t)return;var i="__"+r+(Math.random()*1e5>>0),s="attached",o="detached",u="extends",a="ADDITION",f="MODIFICATION",l="REMOVAL",c="DOMAttrModified",h="DOMContentLoaded",p="DOMSubtreeModified",d="<",v="=",m=/^[A-Z][A-Z0-9]*(?:-[A-Z0-9]+)+$/,g=["ANNOTATION-XML","COLOR-PROFILE","FONT-FACE","FONT-FACE-SRC","FONT-FACE-URI","FONT-FACE-FORMAT","FONT-FACE-NAME","MISSING-GLYPH"],y=[],b=[],w="",E=t.documentElement,S=y.indexOf||function(e){for(var t=this.length;t--&&this[t]!==e;);return t},x=n.prototype,T=x.hasOwnProperty,N=x.isPrototypeOf,C=n.defineProperty,k=n.getOwnPropertyDescriptor,L=n.getOwnPropertyNames,A=n.getPrototypeOf,O=n.setPrototypeOf,M=!!n.__proto__,_=n.create||function mt(e){return e?(mt.prototype=e,new mt):this},D=O||(M?function(e,t){return e.__proto__=t,e}:L&&k?function(){function e(e,t){for(var n,r=L(t),i=0,s=r.length;i<s;i++)n=r[i],T.call(e,n)||C(e,n,k(t,n))}return function(t,n){do e(t,n);while((n=A(n))&&!N.call(n,t));return t}}():function(e,t){for(var n in t)e[n]=t[n];return e}),P=e.MutationObserver||e.WebKitMutationObserver,H=(e.HTMLElement||e.Element||e.Node).prototype,B=!N.call(H,E),j=B?function(e){return e.nodeType===1}:function(e){return N.call(H,e)},F=B&&[],I=H.cloneNode,q=H.setAttribute,R=H.removeAttribute,U=t.createElement,z=P&&{attributes:!0,characterData:!0,attributeOldValue:!0},W=P||function(e){J=!1,E.removeEventListener(c,W)},X,V=e.requestAnimationFrame||e.webkitRequestAnimationFrame||e.mozRequestAnimationFrame||e.msRequestAnimationFrame||function(e){setTimeout(e,10)},$=!1,J=!0,K=!0,Q=!0,G,Y,Z,et,tt,nt;O||M?(tt=function(e,t){N.call(t,e)||ht(e,t)},nt=ht):(tt=function(e,t){e[i]||(e[i]=n(!0),ht(e,t))},nt=tt),B?(J=!1,function(){var e=k(H,"addEventListener"),t=e.value,n=function(e){var t=new CustomEvent(c,{bubbles:!0});t.attrName=e,t.prevValue=this.getAttribute(e),t.newValue=null,t[l]=t.attrChange=2,R.call(this,e),this.dispatchEvent(t)},r=function(e,t){var n=this.hasAttribute(e),r=n&&this.getAttribute(e),i=new CustomEvent(c,{bubbles:!0});q.call(this,e,t),i.attrName=e,i.prevValue=n?r:null,i.newValue=t,n?i[f]=i.attrChange=1:i[a]=i.attrChange=0,this.dispatchEvent(i)},s=function(e){var t=e.currentTarget,n=t[i],r=e.propertyName,s;n.hasOwnProperty(r)&&(n=n[r],s=new CustomEvent(c,{bubbles:!0}),s.attrName=n.name,s.prevValue=n.value||null,s.newValue=n.value=t[r]||null,s.prevValue==null?s[a]=s.attrChange=0:s[f]=s.attrChange=1,t.dispatchEvent(s))};e.value=function(e,o,u){e===c&&this.attributeChangedCallback&&this.setAttribute!==r&&(this[i]={className:{name:"class",value:this.className}},this.setAttribute=r,this.removeAttribute=n,t.call(this,"propertychange",s)),t.call(this,e,o,u)},C(H,"addEventListener",e)}()):P||(E.addEventListener(c,W),E.setAttribute(i,1),E.removeAttribute(i),J&&(G=function(e){var t=this,n,r,s;if(t===e.target){n=t[i],t[i]=r=Z(t);for(s in r){if(!(s in n))return Y(0,t,s,n[s],r[s],a);if(r[s]!==n[s])return Y(1,t,s,n[s],r[s],f)}for(s in n)if(!(s in r))return Y(2,t,s,n[s],r[s],l)}},Y=function(e,t,n,r,i,s){var o={attrChange:e,currentTarget:t,attrName:n,prevValue:r,newValue:i};o[s]=e,at(o)},Z=function(e){for(var t,n,r={},i=e.attributes,s=0,o=i.length;s<o;s++)t=i[s],n=t.name,n!=="setAttribute"&&(r[n]=t.value);return r})),t[r]=function(n,r){c=n.toUpperCase(),$||($=!0,P?(et=function(e,t){function n(e,t){for(var n=0,r=e.length;n<r;t(e[n++]));}return new P(function(r){for(var i,s,o,u=0,a=r.length;u<a;u++)i=r[u],i.type==="childList"?(n(i.addedNodes,e),n(i.removedNodes,t)):(s=i.target,Q&&s.attributeChangedCallback&&i.attributeName!=="style"&&(o=s.getAttribute(i.attributeName),o!==i.oldValue&&s.attributeChangedCallback(i.attributeName,i.oldValue,o)))})}(st(s),st(o)),et.observe(t,{childList:!0,subtree:!0})):(X=[],V(function E(){while(X.length)X.shift().call(null,X.shift());V(E)}),t.addEventListener("DOMNodeInserted",ft(s)),t.addEventListener("DOMNodeRemoved",ft(o))),t.addEventListener(h,lt),t.addEventListener("readystatechange",lt),t.createElement=function(e,n){var r=U.apply(t,arguments),i=""+e,s=S.call(y,(n?v:d)+(n||i).toUpperCase()),o=-1<s;return n&&(r.setAttribute("is",n=n.toLowerCase()),o&&(o=ut(i.toUpperCase(),n))),Q=!t.createElement.innerHTMLHelper,o&&nt(r,b[s]),r},H.cloneNode=function(e){var t=I.call(this,!!e),n=ot(t);return-1<n&&nt(t,b[n]),e&&it(t.querySelectorAll(w)),t}),-2<S.call(y,v+c)+S.call(y,d+c)&&dt(n);if(!m.test(c)||-1<S.call(g,c))throw new Error("The type "+n+" is invalid");var i=function(){return f?t.createElement(l,c):t.createElement(l)},a=r||x,f=T.call(a,u),l=f?r[u].toUpperCase():c,c,p;return f&&-1<S.call(y,d+l)&&dt(l),p=y.push((f?v:d)+c)-1,w=w.concat(w.length?",":"",f?l+'[is="'+n.toLowerCase()+'"]':l),i.prototype=b[p]=T.call(a,"prototype")?a.prototype:_(H),rt(t.querySelectorAll(w),s),i}})(window,document,Object,"registerElement");
+},{}],6:[function(require,module,exports){
 /*
  * jQuery Easing v1.3.2 - http://gsgd.co.uk/sandbox/jquery/easing/
  * Open source under the BSD License.
@@ -10787,7 +10790,7 @@ $.extend( $.easing,
 	}
 });})(jQuery);
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v1.12.2
  * http://jquery.com/
@@ -21811,7 +21814,7 @@ if ( !noGlobal ) {
 return jQuery;
 }));
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 // Create a range object for efficently rendering strings to elements.
 var range;
 
@@ -22369,7 +22372,7 @@ function morphdom(fromNode, toNode, options) {
 
 module.exports = morphdom;
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 /* eslint no-new-func: "warn" */
 var ARROW_PATTERN = /^\s*\(?(\s*\w+\s*(,\s*\w+\s*)*)?\)?\s*=>\s*({([^}]+)}|(.+))$/;
 
@@ -22394,7 +22397,7 @@ module.exports = {
   parse: parseArrow
 };
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 var constants = require('./constants');
 var T_PREFIX = constants.T.PREFIX;
 var CONTROL_ATTRS = constants.CONTROL_ATTRS;
@@ -22444,7 +22447,7 @@ module.exports.interpolateAttributes = function(attrMap, data) {
   return attrs;
 };
 
-},{"./constants":11,"./ns":18,"./util":21}],10:[function(require,module,exports){
+},{"./constants":12,"./ns":19,"./util":22}],11:[function(require,module,exports){
 /**
  * functional composition functions take a function and return a
  * wrapped function that calls the passed one and applies some
@@ -22476,7 +22479,7 @@ module.exports.stringify = function(fn) {
   };
 };
 
-},{"./util":21}],11:[function(require,module,exports){
+},{"./util":22}],12:[function(require,module,exports){
 var prefix = 't-';
 
 var T = {
@@ -22505,7 +22508,7 @@ module.exports.CONTROL_ATTRS = [
   'with'
 ];
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 module.exports.getPreviousSibling = function(node, selector) {
   // eslint-disable-next-line no-cond-assign
   while (node = node.previousSibling) {
@@ -22519,7 +22522,7 @@ module.exports.getPreviousSibling = function(node, selector) {
   throw new Error('no previous sibling found matching: ' + selector);
 };
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 /* eslint no-new-func: "warn" */
 var arrow = require('./arrow');
 var functor = require('./functor');
@@ -22571,7 +22574,7 @@ function identity(d) {
   return d;
 }
 
-},{"./arrow":8,"./functor":14}],14:[function(require,module,exports){
+},{"./arrow":9,"./functor":15}],15:[function(require,module,exports){
 module.exports = function functor(x) {
   return function f() {
     return x;
@@ -22579,7 +22582,7 @@ module.exports = function functor(x) {
 };
 
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 var ns = require('./ns');
 
 module.exports = function(name, props, children) {
@@ -22681,7 +22684,7 @@ var formatClassName = function(obj) {
   }).join(' ');
 };
 
-},{"./ns":18}],16:[function(require,module,exports){
+},{"./ns":19}],17:[function(require,module,exports){
 var render = require('./render');
 
 module.exports = {
@@ -22689,7 +22692,7 @@ module.exports = {
   render: render.render
 };
 
-},{"./render":19}],17:[function(require,module,exports){
+},{"./render":20}],18:[function(require,module,exports){
 var evaluate = require('./evaluate').evaluate;
 var functor = require('./functor');
 
@@ -22727,7 +22730,7 @@ module.exports.isTemplate = isTemplate;
 
 module.exports.compile = compile;
 
-},{"./evaluate":13,"./functor":14}],18:[function(require,module,exports){
+},{"./evaluate":14,"./functor":15}],19:[function(require,module,exports){
 var prefixToURI = {
   svg: 'http://www.w3.org/2000/svg',
   xlink: 'http://www.w3.org/TR/xlink/',
@@ -22773,7 +22776,7 @@ module.exports = {
   qualify: qualify
 };
 
-},{}],19:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 var code = require('./evaluate');
 var interpolate = require('./interpolate');
 var compose = require('./compose');
@@ -23101,7 +23104,7 @@ module.exports.render = render;
 module.exports.createRenderer = createRenderer;
 module.exports.compile = compile;
 
-},{"./attrs":9,"./compose":10,"./constants":11,"./dom":12,"./evaluate":13,"./h":15,"./interpolate":17,"./ns":18,"./scope":20,"./util":21,"morphdom":7}],20:[function(require,module,exports){
+},{"./attrs":10,"./compose":11,"./constants":12,"./dom":13,"./evaluate":14,"./h":16,"./interpolate":18,"./ns":19,"./scope":21,"./util":22,"morphdom":8}],21:[function(require,module,exports){
 var renderEach = function(fn, render, symbol) {
   return function(data) {
     var values = fn.call(this, data);
@@ -23173,7 +23176,7 @@ module.exports = {
   symbolSetter: symbolSetter
 };
 
-},{}],21:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 var code = require('./evaluate');
 var interpolate = require('./interpolate');
 
@@ -23187,15 +23190,291 @@ module.exports.compileExpression = function(expr) {
     : code.evaluator(expr);
 };
 
-},{"./evaluate":13,"./interpolate":17}],22:[function(require,module,exports){
+},{"./evaluate":14,"./interpolate":18}],23:[function(require,module,exports){
+require('document-register-element');
+
+var prefix = 'cfpb-';
+
+var SortableTable = document.registerElement(
+  prefix + 'sortable-table',
+  require('./sortable-table')
+);
+
+module.exports = {
+  SortableTable: SortableTable
+};
+
+},{"./sortable-table":24,"document-register-element":5}],24:[function(require,module,exports){
+var DATA_KEY = '__data__';
+var SORT_KEY = '__sort__';
+var FILTER_KEY = '__filter__';
+
+var predicate = require('../lib/predicate');
+var compare = require('../lib/compare');
+
+var functional = function(f) {
+  return function(list) {
+    return f.apply(list, Array.prototype.slice.call(arguments, 1));
+  };
+};
+
+var _slice = functional(Array.prototype.slice);
+var _map = functional(Array.prototype.map);
+var _forEach = functional(Array.prototype.forEach);
+
+var getRowData = function(tr, columns) {
+  var row = {};
+  var cells = tr.querySelectorAll('th, td');
+  columns.forEach(function(col, i) {
+    row[col] = getCellData(cells[i]);
+  });
+  return row;
+};
+
+var getCellData = function(cell) {
+  if (DATA_KEY in cell) {
+    return cell[DATA_KEY];
+  } else {
+    var data = cell.getAttribute('data-value') || cell.textContent;
+    if (data.length && !isNaN(Number(data))) {
+      data = Number(data);
+    }
+    cell[DATA_KEY] = data;
+    return data;
+  }
+};
+
+var delegate = function(selectors) {
+  return function(e) {
+    var result;
+    for (var selector in selectors) {
+      if (e.target.matches(selector)) {
+        result = selectors[selector].call(this, e);
+        if (result === false) {
+          break;
+        }
+      }
+    }
+    return result;
+  };
+};
+
+
+var sortOnClick = function(e) {
+  var key = getCellData(e.target);
+  var sort = this.sort;
+  if (sort.key === key) {
+    sort.order = compare.toggle(sort.order);
+  } else {
+    sort = {key: key, order: compare.ASCENDING};
+  }
+  this.sort = sort;
+  return false;
+};
+
+var onDelegatedClick = delegate({
+  'thead th': sortOnClick
+});
+
+var onFilterChange = function(e) {
+  this.setFilter(e.key, e.value);
+};
+
+var SortableTable = {
+  'extends': 'table',
+  prototype: Object.create(HTMLTableElement.prototype, {
+
+    attachedCallback: {value: function() {
+      this.addEventListener('click', onDelegatedClick, true);
+      this.addEventListener('filter-change', onFilterChange);
+    }},
+
+    detachedCallback: {value: function() {
+      this.removeEventListener('click', onDelegatedClick, true);
+      this.removeEventListener('filter-change', onFilterChange);
+    }},
+
+    rows: {
+      get: function() {
+        return _slice(this.querySelectorAll('tbody tr'));
+      }
+    },
+
+    headers: {
+      get: function() {
+        return _slice(this.querySelectorAll('thead tr:last-child > *'));
+      }
+    },
+
+    columns: {
+      get: function() {
+        return _map(this.headers, getCellData);
+      }
+    },
+
+    data: {
+      get: function() {
+        var columns = this.columns;
+        return _map(rows, function(tr) {
+          return getRowData(tr, columns);
+        });
+      }
+    },
+
+    sort: {
+      get: function() {
+        return this[SORT_KEY] || (this[SORT_KEY] = {
+          key: undefined,
+          asc: undefined
+        });
+      },
+      set: function(sort) {
+        this[SORT_KEY] = sort;
+        this.updateSort();
+      }
+    },
+
+    updateSort: {value: function() {
+      var sort = this.sort;
+      var columns = this.columns;
+      var col = sort.key;
+      var index = columns.indexOf(col);
+      if (index === -1) {
+        console.warn('no such column:', col, 'in', columns);
+        return false;
+      }
+
+      // update aria-sort for each heading
+      _forEach(this.headers, function(th) {
+        var order = getCellData(th) === col ? sort.order : compare.NONE;
+        th.setAttribute('aria-sort', order);
+      });
+
+      var selector = 'tr > :nth-child(' + (index + 1) + ')';
+      var value = function(row) {
+        return (SORT_KEY in row)
+          ? row[SORT_KEY]
+          : row[SORT_KEY] = getCellData(row.querySelector(selector));
+      };
+
+      var comp = compare[sort.order];
+      if (!comp) {
+        throw new Error('unrecognized sort order: "' + sort.order + '"');
+      }
+
+      var tbody = this.querySelector('tbody');
+
+      var rows = _slice(tbody.querySelectorAll('tr'))
+        .sort(function(a, b) {
+          return comp(value(a), value(b));
+        });
+
+      rows.forEach(function(row) {
+        delete row[SORT_KEY];
+        tbody.appendChild(row);
+      });
+    }},
+
+    filters: {
+      get: function() {
+        return this[FILTER_KEY] || (this[FILTER_KEY] = {});
+      },
+      set: function(filters) {
+        this[FILTER_KEY] = filters;
+        this.updateFilter();
+      }
+    },
+
+    updateFilter: {value: function() {
+      var cols = this.columns;
+      var visible = predicate(filters);
+      _forEach(this.rows, function(row) {
+        var data = getRowData(row, cols);
+        row.hidden = !visible.call(row, data);
+      });
+    }},
+
+    getFilter: {value: function(key) {
+      return this.filters[key];
+    }},
+
+    setFilter: {value: function(key, value) {
+      var filters = this.filters;
+      if (value === null || value === undefined) {
+        delete filters[key];
+      } else {
+        filters[key] = value;
+      }
+      this.filters = filters;
+    }}
+
+  })
+};
+
+module.exports = SortableTable;
+
+},{"../lib/compare":25,"../lib/predicate":26}],25:[function(require,module,exports){
+var ASCENDING = 'ascending';
+var DESCENDING = 'descending';
+var NONE = 'none';
+
+var compare = {
+  ASCENDING: ASCENDING,
+  DESCENDING: DESCENDING,
+  NONE: NONE,
+  toggle: function(order) {
+    return order === ASCENDING ? DESCENDING : ASCENDING;
+  }
+};
+
+compare[ASCENDING] = function asc(a, b) {
+  return a > b ? 1 : a < b ? -1 : 0;
+};
+
+compare[DESCENDING] = function desc(a, b) {
+  return a < b ? 1 : a > b ? -1 : 0;
+};
+
+module.exports = compare;
+
+},{}],26:[function(require,module,exports){
+module.exports = function predicate(filters) {
+  var functions = Object.keys(filters).map(function(key) {
+    var value = filters[key];
+    if (typeof value === 'function') {
+      return function(d) {
+        return value.call(this, d[key], key);
+      };
+    } else if (Array.isArray(value)) {
+      return function(d) {
+        return value.indexOf(d) > -1;
+      };
+    }
+    return function(d) {
+      return d[key] == value;
+    };
+  });
+  return function(d, i) {
+    return functions.every(function(f) {
+      return f.call(this, d, i);
+    }, this);
+  };
+};
+
+},{}],27:[function(require,module,exports){
 (function (global){
 'use strict';
 
+var cfpb = {};
+global.cfpb = cfpb;
+
 global.$ = require('jquery');
 global.tagalong = require('tagalong');
+
+cfpb.components = require('./components');
 
 require('cf-expandables');
 require('cf-tables');
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"cf-expandables":2,"cf-tables":4,"jquery":6,"tagalong":16}]},{},[22]);
+},{"./components":23,"cf-expandables":2,"cf-tables":4,"jquery":7,"tagalong":17}]},{},[27]);
