@@ -1,0 +1,37 @@
+[is="cfpb-sortable-table"] {
+
+  [aria-sort] {
+    cursor: pointer;
+    padding-right: 2em;
+    position: relative;
+
+    &::after {
+      color: $gray-40;
+      content: "▽";
+      position: absolute;
+      right: 0.5em;
+    }
+  }
+
+  [aria-sort=ascending],
+  [aria-sort=descending] {
+    background: $black;
+
+    &::after {
+      color: $white;
+    }
+  }
+
+  [aria-sort=ascending]::after {
+    content: "▼";
+  }
+
+  [aria-sort=descending]::after {
+    content: "▲";
+  }
+
+  tbody tr:nth-child(odd) {
+    background: $gray-10;
+  }
+
+}
