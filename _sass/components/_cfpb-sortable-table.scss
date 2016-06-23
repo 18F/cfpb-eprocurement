@@ -1,5 +1,6 @@
 [is="cfpb-sortable-table"] {
 
+  // all sortable headers get aria-sort
   [aria-sort] {
     cursor: pointer;
     padding-right: 2em;
@@ -13,6 +14,7 @@
     }
   }
 
+  // sorted headers have aria-sort="ascending|descending"
   [aria-sort=ascending],
   [aria-sort=descending] {
     background: $black;
@@ -22,14 +24,17 @@
     }
   }
 
+  // show a down arrow for ascending sort
   [aria-sort=ascending]::after {
     content: "▼";
   }
 
+  // show an up arrow for descending sort
   [aria-sort=descending]::after {
     content: "▲";
   }
 
+  // tiger striped body rows
   tbody tr:nth-child(odd) {
     background: $gray-10;
   }
