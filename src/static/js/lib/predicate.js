@@ -7,7 +7,7 @@ module.exports = function predicate(filters) {
       };
     } else if (Array.isArray(value)) {
       return function(d) {
-        return value.indexOf(d) > -1;
+        return value.indexOf(String(d[key])) > -1;
       };
     }
     return function(d) {
