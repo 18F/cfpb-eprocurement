@@ -11,8 +11,7 @@ cfpb-popup-menu {
 
     // this is set if there's a value selected
     &[aria-selected=true] {
-      background: $white;
-      color: $black;
+      color: $green-60;
     }
   }
 
@@ -21,14 +20,18 @@ cfpb-popup-menu {
   [role=menu] {
     background: $white;
     border: 1px solid $gray-20;
-    left: 0;
+    left: 100%;
     padding: 1em;
     position: absolute;
-    top: 100%;
+    top: -2px;
     z-index: 1000;
 
     &[aria-hidden=true] {
       display: none;
     }
+  }
+
+  select {
+    width: 100%;
   }
 }

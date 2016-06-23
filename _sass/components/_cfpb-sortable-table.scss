@@ -1,43 +1,49 @@
 [is="cfpb-sortable-table"] {
 
+  td,
+  th {
+    vertical-align: top;
+  }
+
   // all sortable headers get aria-sort
   [aria-sort] {
     cursor: pointer;
-    padding-right: 2em;
-    position: relative;
+    white-space: nowrap;
 
-    &::after {
+    .sort-icon {
       color: $gray-40;
-      content: "▽";
-      position: absolute;
-      right: 0.5em;
-      top: 0.9em;
+      display: none;
+      pointer-events: none;
     }
+
   }
 
-  // sorted headers have aria-sort="ascending|descending"
   [aria-sort=ascending],
   [aria-sort=descending] {
     background: $black;
-
-    &::after {
-      color: $white;
-    }
   }
 
-  // show a down arrow for ascending sort
-  [aria-sort=ascending]::after {
-    content: "▼";
+  [aria-sort=none] .sort-none {
+    display: initial;
   }
 
-  // show an up arrow for descending sort
-  [aria-sort=descending]::after {
-    content: "▲";
+  [aria-sort=ascending] .sort-ascending,
+  [aria-sort=descending] .sort-descending {
+    display: initial;
+    color: $green-60;
   }
 
   // tiger striped body rows
   tbody tr:nth-child(odd) {
     background: $gray-10;
+  }
+
+  tbody tr > [data-sort] {
+    background: $gray-10;
+  }
+
+  tbody tr:nth-child(odd) > [data-sort] {
+    background: $gray-20;
   }
 
 }
