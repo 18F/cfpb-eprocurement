@@ -23200,17 +23200,114 @@ var SortableTable = document.registerElement(
   require('./sortable-table')
 );
 
+var PopupMenu = document.registerElement(
+  prefix + 'popup-menu',
+  require('./popup-menu')
+);
+
 module.exports = {
-  SortableTable: SortableTable
+  SortableTable: SortableTable,
+  PopupMenu: PopupMenu
 };
 
-},{"./sortable-table":24,"document-register-element":5}],24:[function(require,module,exports){
+},{"./popup-menu":24,"./sortable-table":25,"document-register-element":5}],24:[function(require,module,exports){
+var events = require('../lib/events');
+
+var EVENTS = '__events__';
+var EXPANDED = 'aria-expanded';
+var CONTROLS = 'aria-controls';
+var HIDDEN = 'aria-hidden';
+
+var onButtonClick = events.delegate({
+  'button[aria-haspopup]': function(e) {
+    this.toggle();
+  }
+});
+
+var onClickOff = function(e) {
+  if (!this.contains(e.target)) {
+    this.close();
+  }
+};
+
+var PopupMenu = {
+  prototype: Object.create(HTMLElement.prototype, {
+
+    attachedCallback: {value: function() {
+      this[EVENTS] = {
+        clickoff: onClickOff.bind(this)
+      };
+      this.addEventListener('click', onButtonClick);
+    }},
+
+    detachedCallback: {value: function() {
+      this.removeEventListener('click', onButtonClick);
+      this.expanded = false;
+      delete this[EVENTS];
+    }},
+
+    button: {
+      get: function() {
+        return this.querySelector('button[aria-haspopup]');
+      }
+    },
+
+    menu: {
+      get: function() {
+        var button = this.button;
+        return button.hasAttribute(CONTROLS)
+          ? document.getElementById(button.getAttribute(CONTROLS))
+          : this.querySelector('menu, [role=menu]');
+      }
+    },
+
+    expanded: {
+      get: function() {
+        var expanded = this.button.getAttribute(EXPANDED);
+        return expanded === 'true';
+      },
+      set: function(expanded) {
+        if (expanded !== this.expanded) {
+          this.button.setAttribute(EXPANDED, expanded);
+          this.menu.setAttribute(HIDDEN, !expanded);
+          var events = this[EVENTS];
+          if (expanded) {
+            this.button.addEventListener('blur', events.clickoff);
+            window.addEventListener('click', events.clickoff);
+          } else {
+            this.button.removeEventListener('blur', events.clickoff);
+            window.removeEventListener('click', events.clickoff);
+          }
+        }
+      }
+    },
+
+    open: {value: function() {
+      this.expanded = true;
+    }},
+
+    close: {value: function() {
+      this.expanded = false;
+    }},
+
+    toggle: {value: function() {
+      this.expanded = !this.expanded;
+    }}
+  })
+};
+
+module.exports = PopupMenu;
+
+},{"../lib/events":27}],25:[function(require,module,exports){
 var DATA_KEY = '__data__';
 var SORT_KEY = '__sort__';
 var FILTER_KEY = '__filter__';
+var SELECTED = 'aria-selected';
 
-var predicate = require('../lib/predicate');
 var compare = require('../lib/compare');
+var events = require('../lib/events');
+var predicate = require('../lib/predicate');
+var getAncestor = require('../lib/get-ancestor');
 
 var functional = function(f) {
   return function(list) {
@@ -23220,6 +23317,7 @@ var functional = function(f) {
 
 var _slice = functional(Array.prototype.slice);
 var _map = functional(Array.prototype.map);
+var _filter = functional(Array.prototype.filter);
 var _forEach = functional(Array.prototype.forEach);
 
 var getRowData = function(tr, columns) {
@@ -23244,22 +23342,6 @@ var getCellData = function(cell) {
   }
 };
 
-var delegate = function(selectors) {
-  return function(e) {
-    var result;
-    for (var selector in selectors) {
-      if (e.target.matches(selector)) {
-        result = selectors[selector].call(this, e);
-        if (result === false) {
-          break;
-        }
-      }
-    }
-    return result;
-  };
-};
-
-
 var sortOnClick = function(e) {
   var key = getCellData(e.target);
   var sort = this.sort;
@@ -23273,12 +23355,33 @@ var sortOnClick = function(e) {
   return false;
 };
 
-var onDelegatedClick = delegate({
+var onDelegatedClick = events.delegate({
   'thead th': sortOnClick
 });
 
-var onFilterChange = function(e) {
-  this.setFilter(e.key, e.value);
+var onFilterChange = events.delegate({
+  'cfpb-popup-menu select': function(e) {
+    var select = e.target;
+    var column = select.name.replace(/^filter-/, '');
+    var value = getSelectValue(select);
+    var selected = value.length > 0;
+    this.setFilter(column, selected ? value : null);
+    getAncestor(select, 'cfpb-popup-menu')
+      .button.setAttribute(SELECTED, selected);
+  }
+});
+
+var getSelectValue = function(select) {
+  if (select.multiple) {
+    return _filter(select.options, function(option) {
+      return option.selected;
+    })
+    .map(function(option) {
+      return option.value;
+    });
+  } else {
+    return select.value;
+  }
 };
 
 var SortableTable = {
@@ -23286,13 +23389,33 @@ var SortableTable = {
   prototype: Object.create(HTMLTableElement.prototype, {
 
     attachedCallback: {value: function() {
+      var data = this.data;
+      this.headers.forEach(function(header) {
+        var select = header.querySelector('cfpb-popup-menu select');
+        var column = getCellData(header);
+
+        var values = data.map(function(d) {
+          return d[column];
+        });
+
+        values = values.filter(function(value, i) {
+          return values.indexOf(value) === i;
+        })
+        .sort(); // lexicographic
+
+        values.forEach(function(value) {
+          var option = select.appendChild(document.createElement('option'));
+          option.value = option.textContent = value;
+        });
+
+      }, this);
       this.addEventListener('click', onDelegatedClick, true);
-      this.addEventListener('filter-change', onFilterChange);
+      this.addEventListener('change', onFilterChange);
     }},
 
     detachedCallback: {value: function() {
       this.removeEventListener('click', onDelegatedClick, true);
-      this.removeEventListener('filter-change', onFilterChange);
+      this.addEventListener('change', onFilterChange);
     }},
 
     rows: {
@@ -23316,7 +23439,7 @@ var SortableTable = {
     data: {
       get: function() {
         var columns = this.columns;
-        return _map(rows, function(tr) {
+        return _map(this.rows, function(tr) {
           return getRowData(tr, columns);
         });
       }
@@ -23388,7 +23511,7 @@ var SortableTable = {
 
     updateFilter: {value: function() {
       var cols = this.columns;
-      var visible = predicate(filters);
+      var visible = predicate(this.filters);
       _forEach(this.rows, function(row) {
         var data = getRowData(row, cols);
         row.hidden = !visible.call(row, data);
@@ -23414,7 +23537,7 @@ var SortableTable = {
 
 module.exports = SortableTable;
 
-},{"../lib/compare":25,"../lib/predicate":26}],25:[function(require,module,exports){
+},{"../lib/compare":26,"../lib/events":27,"../lib/get-ancestor":28,"../lib/predicate":29}],26:[function(require,module,exports){
 var ASCENDING = 'ascending';
 var DESCENDING = 'descending';
 var NONE = 'none';
@@ -23438,7 +23561,45 @@ compare[DESCENDING] = function desc(a, b) {
 
 module.exports = compare;
 
-},{}],26:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
+module.exports.delegate = function delegate(selectors) {
+  return function(e) {
+    var result;
+    for (var selector in selectors) {
+      if (e.target.matches(selector)) {
+        result = selectors[selector].call(this, e);
+        if (result === false) {
+          break;
+        }
+      }
+    }
+    return result;
+  };
+};
+
+module.exports.every = function every(handlers) {
+  return function(e) {
+    var result;
+    handlers.some(function(fn) {
+      result = fn.call(this, e);
+      if (result !== undefined) {
+        return true;
+      }
+    }, this);
+    return result;
+  };
+};
+
+},{}],28:[function(require,module,exports){
+module.exports = function getAncestor(element, selector) {
+  while (element = element.parentNode) {
+    if (element.matches(selector)) {
+      return element;
+    }
+  }
+};
+
+},{}],29:[function(require,module,exports){
 module.exports = function predicate(filters) {
   var functions = Object.keys(filters).map(function(key) {
     var value = filters[key];
@@ -23448,7 +23609,7 @@ module.exports = function predicate(filters) {
       };
     } else if (Array.isArray(value)) {
       return function(d) {
-        return value.indexOf(d) > -1;
+        return value.indexOf(String(d[key])) > -1;
       };
     }
     return function(d) {
@@ -23462,7 +23623,7 @@ module.exports = function predicate(filters) {
   };
 };
 
-},{}],27:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -23478,4 +23639,4 @@ require('cf-expandables');
 require('cf-tables');
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./components":23,"cf-expandables":2,"cf-tables":4,"jquery":7,"tagalong":17}]},{},[27]);
+},{"./components":23,"cf-expandables":2,"cf-tables":4,"jquery":7,"tagalong":17}]},{},[30]);
