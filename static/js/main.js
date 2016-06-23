@@ -21945,12 +21945,11 @@ var _filter = functional(Array.prototype.filter);
 var _forEach = functional(Array.prototype.forEach);
 
 var getRowData = function(tr, columns) {
-  var row = {};
   var cells = tr.querySelectorAll('th, td');
-  columns.forEach(function(col, i) {
+  return columns.reduce(function(row, col, i) {
     row[col] = getCellData(cells[i]);
-  });
-  return row;
+    return row;
+  }, {});
 };
 
 var getCellData = function(cell) {
@@ -22039,7 +22038,7 @@ var SortableTable = {
 
     detachedCallback: {value: function() {
       this.removeEventListener('click', onDelegatedClick, true);
-      this.addEventListener('change', onFilterChange);
+      this.removeEventListener('change', onFilterChange);
     }},
 
     rows: {
