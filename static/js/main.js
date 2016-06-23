@@ -22201,19 +22201,6 @@ module.exports.delegate = function delegate(selectors) {
   };
 };
 
-module.exports.every = function every(handlers) {
-  return function(e) {
-    var result;
-    handlers.some(function(fn) {
-      result = fn.call(this, e);
-      if (result !== undefined) {
-        return true;
-      }
-    }, this);
-    return result;
-  };
-};
-
 },{}],13:[function(require,module,exports){
 module.exports = function getAncestor(element, selector) {
   while (element = element.parentNode) {
