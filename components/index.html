@@ -1,6 +1,14 @@
 ---
 title: Components
 layout: default
+table:
+  columns: [Name, Age]
+  rows:
+  - [Joe, 30]
+  - [Pat, 31]
+  - [Billie, 29]
+  - [Frankie, 28]
+  - [Jo, 32]
 ---
 
 <h1>Sortable Table</h1>
@@ -8,26 +16,29 @@ layout: default
 <table is="cfpb-sortable-table">
   <thead>
     <tr>
-      <th aria-sort="none">Name</th>
-      <th aria-sort="none">Age</th>
+      {% for column in page.table.columns %}
+      <th data-value="{{ column }}" aria-sort="none">
+        {{ column }}
+        <cfpb-popup-menu>
+          <button aria-haspopup="true" aria-controls="menu-{{ column }}">
+            &equals;
+          </button>
+          <div role="menu" id="menu-{{ column }}" aria-hidden="true">
+            <select name="filter-{{ column }}" multiple size="8">
+            </select>
+          </div>
+        </cfpb-popup-menu>
+      </th>
+      {% endfor %}
     </tr>
   </thead>
   <tbody>
+    {% for row in page.table.rows %}
     <tr>
-      <td>Joe</td>
-      <td>30</td>
+      {% for value in row %}
+      <td>{{ value }}</td>
+      {% endfor %}
     </tr>
-    <tr>
-      <td>Pat</td>
-      <td>31</td>
-    </tr>
-    <tr>
-      <td>Billie</td>
-      <td>29</td>
-    </tr>
-    <tr>
-      <td>Frankie</td>
-      <td>29</td>
-    </tr>
+    {% endfor %}
   </tbody>
 </table>

@@ -1,9 +1,12 @@
 var DATA_KEY = '__data__';
 var SORT_KEY = '__sort__';
 var FILTER_KEY = '__filter__';
+var SELECTED = 'aria-selected';
 
-var predicate = require('../lib/predicate');
 var compare = require('../lib/compare');
+var events = require('../lib/events');
+var predicate = require('../lib/predicate');
+var getAncestor = require('../lib/get-ancestor');
 
 var functional = function(f) {
   return function(list) {
@@ -13,6 +16,7 @@ var functional = function(f) {
 
 var _slice = functional(Array.prototype.slice);
 var _map = functional(Array.prototype.map);
+var _filter = functional(Array.prototype.filter);
 var _forEach = functional(Array.prototype.forEach);
 
 var getRowData = function(tr, columns) {
@@ -37,22 +41,6 @@ var getCellData = function(cell) {
   }
 };
 
-var delegate = function(selectors) {
-  return function(e) {
-    var result;
-    for (var selector in selectors) {
-      if (e.target.matches(selector)) {
-        result = selectors[selector].call(this, e);
-        if (result === false) {
-          break;
-        }
-      }
-    }
-    return result;
-  };
-};
-
-
 var sortOnClick = function(e) {
   var key = getCellData(e.target);
   var sort = this.sort;
@@ -66,12 +54,33 @@ var sortOnClick = function(e) {
   return false;
 };
 
-var onDelegatedClick = delegate({
+var onDelegatedClick = events.delegate({
   'thead th': sortOnClick
 });
 
-var onFilterChange = function(e) {
-  this.setFilter(e.key, e.value);
+var onFilterChange = events.delegate({
+  'cfpb-popup-menu select': function(e) {
+    var select = e.target;
+    var column = select.name.replace(/^filter-/, '');
+    var value = getSelectValue(select);
+    var selected = value.length > 0;
+    this.setFilter(column, selected ? value : null);
+    getAncestor(select, 'cfpb-popup-menu')
+      .button.setAttribute(SELECTED, selected);
+  }
+});
+
+var getSelectValue = function(select) {
+  if (select.multiple) {
+    return _filter(select.options, function(option) {
+      return option.selected;
+    })
+    .map(function(option) {
+      return option.value;
+    });
+  } else {
+    return select.value;
+  }
 };
 
 var SortableTable = {
@@ -79,13 +88,33 @@ var SortableTable = {
   prototype: Object.create(HTMLTableElement.prototype, {
 
     attachedCallback: {value: function() {
+      var data = this.data;
+      this.headers.forEach(function(header) {
+        var select = header.querySelector('cfpb-popup-menu select');
+        var column = getCellData(header);
+
+        var values = data.map(function(d) {
+          return d[column];
+        });
+
+        values = values.filter(function(value, i) {
+          return values.indexOf(value) === i;
+        })
+        .sort(); // lexicographic
+
+        values.forEach(function(value) {
+          var option = select.appendChild(document.createElement('option'));
+          option.value = option.textContent = value;
+        });
+
+      }, this);
       this.addEventListener('click', onDelegatedClick, true);
-      this.addEventListener('filter-change', onFilterChange);
+      this.addEventListener('change', onFilterChange);
     }},
 
     detachedCallback: {value: function() {
       this.removeEventListener('click', onDelegatedClick, true);
-      this.removeEventListener('filter-change', onFilterChange);
+      this.addEventListener('change', onFilterChange);
     }},
 
     rows: {
@@ -109,7 +138,7 @@ var SortableTable = {
     data: {
       get: function() {
         var columns = this.columns;
-        return _map(rows, function(tr) {
+        return _map(this.rows, function(tr) {
           return getRowData(tr, columns);
         });
       }
@@ -181,7 +210,7 @@ var SortableTable = {
 
     updateFilter: {value: function() {
       var cols = this.columns;
-      var visible = predicate(filters);
+      var visible = predicate(this.filters);
       _forEach(this.rows, function(row) {
         var data = getRowData(row, cols);
         row.hidden = !visible.call(row, data);
