@@ -1,0 +1,134 @@
+---
+title: CO Dashboard
+layout: default
+columns:
+- Requisition Number
+- Risk Level
+- Procurement Team
+- Buyer
+- CO
+- Project Manager/COTR
+- Client Office
+- Item Description
+- Action
+- Comment
+- Risk Comments
+- Status
+- Acquisition Package Complete
+- Award Date
+- Privacy Review
+- Security Review
+- PRA Review
+- DIG Review
+- Privacy/Security/DIG Comment
+- Requisition Amount
+- Potential Contract Value
+- Type of Action
+- PR Submitted
+- Client Feedback Provided
+- Solicitation Issued
+- Proposal(s) Due
+- Evaluation Complete
+- Award Amount
+- Vendor Name
+- Acquisition Savings Amount
+- Acquisition Savings Description
+- Item Type
+- Path
+---
+{% assign rows = site.data.pre_award_procurements %}
+{% assign cols = page.columns %}
+<table id="procurements">
+  <thead>
+    <th>#</th>
+    {% for col in cols %}
+    <th>{{ col }}</th>
+    {% endfor %}
+  </thead>
+  <tbody>
+    {% for row in rows %}
+    <tr>
+      <td>{{ forloop.index0 }}</td>
+      {% for col in cols %}
+      <td>{{ row[col] }}</td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<script>
+
+  window.addEventListener('load', function() {
+    var table = document.querySelector('#procurements');
+
+    var th = table.querySelectorAll('thead th');
+    var cols = [].map.call(th, function(th) {
+      return th.textContent;
+    });
+    var rows = table.querySelectorAll('tbody tr');
+
+    var dateColumns = ['Action', 'Comment', 'Risk Comments'];
+    var datePattern = /\d{1,2}\/\d{1,2}(\/\d{2,4})?/g;
+    var dateNow = Date.now();
+    var dateYear = 2016;
+    var getDates = function(content) {
+      var match = content.match(datePattern);
+      return match
+        ? [].map.call(match, function(text) {
+            var str = text;
+            var unqualified = str.split('/').length === 2;
+            if (unqualified) {
+              str = str + '/' + dateYear;
+            }
+
+            var date = new Date(str);
+            if (unqualified && +date > dateNow) {
+              str = str.replace(String(dateYear), dateYear - 1);
+              date = new Date(str);
+            }
+            return {
+              text: text,
+              date: date,
+              moment: moment(date)
+            };
+          })
+       : [];
+    };
+
+    var data = [].map.call(rows, function(tr) {
+      var row = {};
+      var cells = tr.querySelectorAll('td');
+      [].forEach.call(cells, function(td, i) {
+        row[cols[i]] = td.textContent;
+      });
+
+      row.dates = [];
+
+      dateColumns.forEach(function(column) {
+        var text = row[column];
+        if (text) {
+          var dates = getDates(text, column);
+          // {text: String, date: Date, column: String}
+          row.dates = row.dates.concat(dates);
+
+          var i = cols.indexOf(column);
+          var cell = cells[i];
+          var dateIndex = 0;
+          cell.innerHTML = cell.textContent.replace(datePattern, function() {
+            var date = dates[dateIndex++];
+            return '<b title="' + date.date.toString() + '">' + date.text + '</b>';
+          });
+        }
+      });
+
+      // determine the most recent date
+
+      return row;
+    });
+
+    window.data = data;
+
+  });
+
+</script>

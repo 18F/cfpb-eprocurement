@@ -5,6 +5,7 @@ global.cfpb = cfpb;
 
 global.$ = require('jquery');
 // global.tagalong = require('tagalong');
+global.moment = require('moment');
 
 cfpb.components = require('./components');
 

@@ -22,6 +22,7 @@
     "document-register-element": "0.5.4",
     "html5shiv": "3.7.3",
     "jquery": "1.12.2",
+    "moment": "2.13.0",
     "tagalong": "2.1.1"
   },
   "devDependencies": {
