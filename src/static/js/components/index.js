@@ -7,6 +7,12 @@ var SortableTable = document.registerElement(
   require('./sortable-table')
 );
 
+var PopupMenu = document.registerElement(
+  prefix + 'popup-menu',
+  require('./popup-menu')
+);
+
 module.exports = {
-  SortableTable: SortableTable
+  SortableTable: SortableTable,
+  PopupMenu: PopupMenu
 };
