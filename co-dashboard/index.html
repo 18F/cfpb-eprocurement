@@ -37,20 +37,23 @@ columns:
 - Path
 ---
 {% assign rows = site.data.pre_award_procurements %}
-{% assign cols = page.columns %}
-<table id="procurements">
+{% assign columns = page.columns %}
+<table id="procurements" is="cfpb-sortable-table">
   <thead>
-    <th>#</th>
-    {% for col in cols %}
-    <th>{{ col }}</th>
+    <th data-value="index" aria-sort="ascending">#</th>
+    {% for column in columns %}
+    <th data-value="{{ column }}" aria-sort="none">
+      {{ column }}
+      {% include filter-popup.html column=column %}
+    </th>
     {% endfor %}
   </thead>
   <tbody>
     {% for row in rows %}
     <tr>
-      <td>{{ forloop.index0 }}</td>
-      {% for col in cols %}
-      <td>{{ row[col] }}</td>
+      <td data-sorted="true">{{ forloop.index0 }}</td>
+      {% for column in columns %}
+      <td>{{ row[column] }}</td>
       {% endfor %}
     </tr>
     {% endfor %}

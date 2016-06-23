@@ -19,15 +19,7 @@ table:
       {% for column in page.table.columns %}
       <th data-value="{{ column }}" aria-sort="none">
         {{ column }}
-        <cfpb-popup-menu>
-          <button aria-haspopup="true" aria-controls="menu-{{ column }}">
-            &equals;
-          </button>
-          <div role="menu" id="menu-{{ column }}" aria-hidden="true">
-            <select name="filter-{{ column }}" multiple size="8">
-            </select>
-          </div>
-        </cfpb-popup-menu>
+        {% include filter-popup.html column=column %}
       </th>
       {% endfor %}
     </tr>
