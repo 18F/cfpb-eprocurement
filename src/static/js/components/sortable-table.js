@@ -1,7 +1,8 @@
 var DATA_KEY = '__data__';
 var SORT_KEY = '__sort__';
 var FILTER_KEY = '__filter__';
-var SELECTED = 'aria-selected';
+
+var SORTED = 'data-sorted';
 
 var compare = require('../lib/compare');
 var events = require('../lib/events');
@@ -40,47 +41,29 @@ var getCellData = function(cell) {
   }
 };
 
-var sortOnClick = function(e) {
-  var key = getCellData(e.target);
-  var sort = this.sort;
-  if (sort.key === key) {
-    sort.order = compare.toggle(sort.order);
-  } else {
-    sort = {key: key, order: compare.ASCENDING};
-  }
-  this.sort = sort;
-  e.preventDefault();
-  return false;
-};
-
 var onDelegatedClick = events.delegate({
-  'thead th': sortOnClick
+  'thead th': function sortOnClick(e) {
+    var key = getCellData(e.delegatedTarget || e.target);
+    var sort = this.sort;
+    if (sort.key === key) {
+      sort.order = compare.toggle(sort.order);
+    } else {
+      sort = {key: key, order: compare.ASCENDING};
+    }
+    this.sort = sort;
+    e.preventDefault();
+    return false;
+  }
 });
 
 var onFilterChange = events.delegate({
-  'cfpb-popup-menu select': function(e) {
-    var select = e.target;
-    var column = select.name.replace(/^filter-/, '');
-    var value = getSelectValue(select);
-    var selected = value.length > 0;
-    this.setFilter(column, selected ? value : null);
-    getAncestor(select, 'cfpb-popup-menu')
-      .button.setAttribute(SELECTED, selected);
+  'cfpb-popup-menu': function setFilterOnChange(e) {
+    var menu = e.delegatedTarget || e.target;
+    var header = getAncestor(menu, 'th');
+    var column = getCellData(header);
+    this.setFilter(column, menu.value);
   }
 });
-
-var getSelectValue = function(select) {
-  if (select.multiple) {
-    return _filter(select.options, function(option) {
-      return option.selected;
-    })
-    .map(function(option) {
-      return option.value;
-    });
-  } else {
-    return select.value;
-  }
-};
 
 var SortableTable = {
   'extends': 'table',
@@ -90,6 +73,9 @@ var SortableTable = {
       var data = this.data;
       this.headers.forEach(function(header) {
         var select = header.querySelector('cfpb-popup-menu select');
+        if (!select) {
+          return;
+        }
         var column = getCellData(header);
 
         var values = data.map(function(d) {
@@ -107,13 +93,18 @@ var SortableTable = {
         });
 
       }, this);
-      this.addEventListener('click', onDelegatedClick, true);
+      this.addEventListener('click', onDelegatedClick);
       this.addEventListener('change', onFilterChange);
+
+      var style = document.createElement('style');
+      style.setAttribute('scoped', '');
+      this.appendChild(style);
     }},
 
     detachedCallback: {value: function() {
-      this.removeEventListener('click', onDelegatedClick, true);
+      this.removeEventListener('click', onDelegatedClick);
       this.removeEventListener('change', onFilterChange);
+      this.removeChild(this.querySelector('style[scoped]'));
     }},
 
     rows: {
@@ -166,17 +157,30 @@ var SortableTable = {
         return false;
       }
 
+      var selector = 'tr > :nth-child(' + (index + 1) + ')';
+
       // update aria-sort for each heading
       _forEach(this.headers, function(th) {
         var order = getCellData(th) === col ? sort.order : compare.NONE;
         th.setAttribute('aria-sort', order);
       });
 
-      var selector = 'tr > :nth-child(' + (index + 1) + ')';
       var value = function(row) {
+        var cells = _filter(row.childNodes, function(node) {
+          return node.nodeType === Node.ELEMENT_NODE;
+        });
+
+        cells.forEach(function(cell, i) {
+          if (i === index) {
+            cell.setAttribute(SORTED, true);
+          } else {
+            cell.removeAttribute(SORTED);
+          }
+        });
+
         return (SORT_KEY in row)
           ? row[SORT_KEY]
-          : row[SORT_KEY] = getCellData(row.querySelector(selector));
+          : row[SORT_KEY] = getCellData(cells[index]);
       };
 
       var comp = compare[sort.order];
@@ -222,7 +226,9 @@ var SortableTable = {
 
     setFilter: {value: function(key, value) {
       var filters = this.filters;
-      if (value === null || value === undefined) {
+      if (value === null ||
+          value === undefined ||
+          (Array.isArray(value) && !value.length)) {
         delete filters[key];
       } else {
         filters[key] = value;

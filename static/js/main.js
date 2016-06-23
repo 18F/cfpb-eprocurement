@@ -25876,21 +25876,81 @@ module.exports = {
 };
 
 },{"./popup-menu":10,"./sortable-table":11,"document-register-element":5}],10:[function(require,module,exports){
-var events = require('../lib/events');
-
 var EVENTS = '__events__';
+
 var EXPANDED = 'aria-expanded';
 var CONTROLS = 'aria-controls';
 var HIDDEN = 'aria-hidden';
+var SELECTED = 'aria-selected';
+
+var events = require('../lib/events');
+var getAncestor = require('../lib/get-ancestor');
 
 var onButtonClick = events.delegate({
+  '*': function(e) {
+    e.stopPropagation();
+  },
   'button[aria-haspopup]': function(e) {
     this.toggle();
+  },
+  'button.clear': function(e) {
+    this.clearValue();
+  },
+  'button.select-all': function(e) {
+    this.selectAllValues();
   }
-});
+}, true);
+
+var getSelectValue = function(select) {
+  if (select.multiple) {
+    return [].filter.call(select.options, function(option) {
+      return option.selected;
+    })
+    .map(function(option) {
+      return option.value;
+    });
+  } else {
+    return select.value;
+  }
+};
+
+var setSelectValue = function(select, value) {
+  var changed = false;
+  var options = [].slice.call(select.options);
+  if (Array.isArray(value)) {
+    value = value.map(String);
+    options.forEach(function(option) {
+      var selected = value.indexOf(option.value) > -1;
+      if (option.selected !== selected) {
+        option.selected = selected;
+        changed = true;
+      }
+    });
+  } else {
+    value = String(value);
+    changed = select.value !== value;
+    if (changed) {
+      select.value = value;
+    }
+  }
+  return changed;
+};
 
 var onClickOff = function(e) {
   if (!this.contains(e.target)) {
+    this.close();
+  }
+};
+
+var redispatchChange = events.delegate({
+  'select': function(e) {
+    this.updateSelected();
+    this.dispatchEvent(new Event(e.type, {bubbles: true}));
+  }
+});
+
+var closeOnEscape = function(e) {
+  if (e.keyCode === 27) {
     this.close();
   }
 };
@@ -25903,10 +25963,15 @@ var PopupMenu = {
         clickoff: onClickOff.bind(this)
       };
       this.addEventListener('click', onButtonClick);
+      this.addEventListener('keydown', closeOnEscape);
+      this.addEventListener('change', redispatchChange);
+      this.updateSelected();
     }},
 
     detachedCallback: {value: function() {
       this.removeEventListener('click', onButtonClick);
+      this.removeEventListener('keydown', closeOnEscape);
+      this.removeEventListener('change', redispatchChange);
       this.expanded = false;
       delete this[EVENTS];
     }},
@@ -25947,6 +26012,26 @@ var PopupMenu = {
       }
     },
 
+    select: {
+      get: function() {
+        return this.querySelector('select');
+      }
+    },
+
+    value: {
+      get: function() {
+        return getSelectValue(this.select);
+      },
+      set: function(value) {
+        var select = this.select;
+        var changed = setSelectValue(select, value);
+        this.updateSelected();
+        if (changed) {
+          this.dispatchEvent(new Event('change', {bubbles: true}));
+        }
+      }
+    },
+
     open: {value: function() {
       this.expanded = true;
     }},
@@ -25955,19 +26040,35 @@ var PopupMenu = {
       this.expanded = false;
     }},
 
+    clearValue: {value: function() {
+      this.value = undefined;
+    }},
+
+    selectAllValues: {value: function() {
+      this.value = [].map.call(this.select.options, function(option) {
+        return option.value;
+      });
+    }},
+
     toggle: {value: function() {
       this.expanded = !this.expanded;
+    }},
+
+    updateSelected: {value: function() {
+      var selected = this.select.selectedIndex > -1;
+      this.button.setAttribute(SELECTED, selected);
     }}
   })
 };
 
 module.exports = PopupMenu;
 
-},{"../lib/events":13}],11:[function(require,module,exports){
+},{"../lib/events":13,"../lib/get-ancestor":14}],11:[function(require,module,exports){
 var DATA_KEY = '__data__';
 var SORT_KEY = '__sort__';
 var FILTER_KEY = '__filter__';
-var SELECTED = 'aria-selected';
+
+var SORTED = 'data-sorted';
 
 var compare = require('../lib/compare');
 var events = require('../lib/events');
@@ -26006,47 +26107,29 @@ var getCellData = function(cell) {
   }
 };
 
-var sortOnClick = function(e) {
-  var key = getCellData(e.target);
-  var sort = this.sort;
-  if (sort.key === key) {
-    sort.order = compare.toggle(sort.order);
-  } else {
-    sort = {key: key, order: compare.ASCENDING};
-  }
-  this.sort = sort;
-  e.preventDefault();
-  return false;
-};
-
 var onDelegatedClick = events.delegate({
-  'thead th': sortOnClick
+  'thead th': function sortOnClick(e) {
+    var key = getCellData(e.delegatedTarget || e.target);
+    var sort = this.sort;
+    if (sort.key === key) {
+      sort.order = compare.toggle(sort.order);
+    } else {
+      sort = {key: key, order: compare.ASCENDING};
+    }
+    this.sort = sort;
+    e.preventDefault();
+    return false;
+  }
 });
 
 var onFilterChange = events.delegate({
-  'cfpb-popup-menu select': function(e) {
-    var select = e.target;
-    var column = select.name.replace(/^filter-/, '');
-    var value = getSelectValue(select);
-    var selected = value.length > 0;
-    this.setFilter(column, selected ? value : null);
-    getAncestor(select, 'cfpb-popup-menu')
-      .button.setAttribute(SELECTED, selected);
+  'cfpb-popup-menu': function setFilterOnChange(e) {
+    var menu = e.delegatedTarget || e.target;
+    var header = getAncestor(menu, 'th');
+    var column = getCellData(header);
+    this.setFilter(column, menu.value);
   }
 });
-
-var getSelectValue = function(select) {
-  if (select.multiple) {
-    return _filter(select.options, function(option) {
-      return option.selected;
-    })
-    .map(function(option) {
-      return option.value;
-    });
-  } else {
-    return select.value;
-  }
-};
 
 var SortableTable = {
   'extends': 'table',
@@ -26056,6 +26139,9 @@ var SortableTable = {
       var data = this.data;
       this.headers.forEach(function(header) {
         var select = header.querySelector('cfpb-popup-menu select');
+        if (!select) {
+          return;
+        }
         var column = getCellData(header);
 
         var values = data.map(function(d) {
@@ -26073,13 +26159,18 @@ var SortableTable = {
         });
 
       }, this);
-      this.addEventListener('click', onDelegatedClick, true);
+      this.addEventListener('click', onDelegatedClick);
       this.addEventListener('change', onFilterChange);
+
+      var style = document.createElement('style');
+      style.setAttribute('scoped', '');
+      this.appendChild(style);
     }},
 
     detachedCallback: {value: function() {
-      this.removeEventListener('click', onDelegatedClick, true);
+      this.removeEventListener('click', onDelegatedClick);
       this.removeEventListener('change', onFilterChange);
+      this.removeChild(this.querySelector('style[scoped]'));
     }},
 
     rows: {
@@ -26132,17 +26223,30 @@ var SortableTable = {
         return false;
       }
 
+      var selector = 'tr > :nth-child(' + (index + 1) + ')';
+
       // update aria-sort for each heading
       _forEach(this.headers, function(th) {
         var order = getCellData(th) === col ? sort.order : compare.NONE;
         th.setAttribute('aria-sort', order);
       });
 
-      var selector = 'tr > :nth-child(' + (index + 1) + ')';
       var value = function(row) {
+        var cells = _filter(row.childNodes, function(node) {
+          return node.nodeType === Node.ELEMENT_NODE;
+        });
+
+        cells.forEach(function(cell, i) {
+          if (i === index) {
+            cell.setAttribute(SORTED, true);
+          } else {
+            cell.removeAttribute(SORTED);
+          }
+        });
+
         return (SORT_KEY in row)
           ? row[SORT_KEY]
-          : row[SORT_KEY] = getCellData(row.querySelector(selector));
+          : row[SORT_KEY] = getCellData(cells[index]);
       };
 
       var comp = compare[sort.order];
@@ -26188,7 +26292,9 @@ var SortableTable = {
 
     setFilter: {value: function(key, value) {
       var filters = this.filters;
-      if (value === null || value === undefined) {
+      if (value === null ||
+          value === undefined ||
+          (Array.isArray(value) && !value.length)) {
         delete filters[key];
       } else {
         filters[key] = value;
@@ -26226,12 +26332,30 @@ compare[DESCENDING] = function desc(a, b) {
 module.exports = compare;
 
 },{}],13:[function(require,module,exports){
+var getAncestor = require('./get-ancestor');
+
+var functor = function(d) {
+  return function() {
+    return d;
+  };
+};
+
 module.exports.delegate = function delegate(selectors) {
   return function(e) {
     var result;
+    var delegated = false;
     for (var selector in selectors) {
-      if (e.target.matches(selector)) {
+      var matches = e.target.matches(selector);
+      if (!matches) {
+        var ancestor = getAncestor(e.target, selector);
+        matches = ancestor && this.contains(ancestor);
+        if (matches) {
+          e.delegatedTarget = ancestor;
+        }
+      }
+      if (matches) {
         result = selectors[selector].call(this, e);
+        delegated = true;
         if (result === false) {
           break;
         }
@@ -26241,10 +26365,10 @@ module.exports.delegate = function delegate(selectors) {
   };
 };
 
-},{}],14:[function(require,module,exports){
+},{"./get-ancestor":14}],14:[function(require,module,exports){
 module.exports = function getAncestor(element, selector) {
   while (element = element.parentNode) {
-    if (element.matches(selector)) {
+    if (element !== document && element.matches(selector)) {
       return element;
     }
   }
