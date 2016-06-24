@@ -2,6 +2,7 @@
 title: CO Dashboard
 layout: default
 columns:
+- Age in Days
 - Requisition Number
 - Risk Level
 - Procurement Team
@@ -57,7 +58,7 @@ columns:
     <tr>
       <td data-sorted="true">{{ forloop.index0 }}</td>
       {% for column in columns %}
-      <td>{{ row[column] }}</td>
+      <td data-column="{{ column }}">{{ row[column] }}</td>
       {% endfor %}
     </tr>
     {% endfor %}
@@ -69,15 +70,17 @@ columns:
   window.addEventListener('load', function() {
     var table = document.querySelector('#procurements');
 
-    var th = table.querySelectorAll('thead th');
-    var cols = [].map.call(th, function(th) {
-      return th.textContent;
-    });
-    var rows = table.querySelectorAll('tbody tr');
+    var headers = table.headers;
+    var columns = table.columns;
+    var rows = table.rows;
 
+    var ageColumn = 'Age in Days';
     var dateColumns = ['Action', 'Comment', 'Risk Comments'];
+    var defaultDateColumn = 'Acquisition Package Complete';
     var datePattern = /\d{1,2}\/\d{1,2}(\/\d{2,4})?/g;
+    var dateFormat = 'YYYY-MM-DD';
     var dateNow = Date.now();
+    var momentNow = moment();
     var dateYear = 2016;
     var getDates = function(content) {
       var match = content.match(datePattern);
@@ -94,47 +97,56 @@ columns:
               str = str.replace(String(dateYear), dateYear - 1);
               date = new Date(str);
             }
+            var m = moment(date);
             return {
               text: text,
               date: date,
-              moment: moment(date)
+              moment: m,
+              formatted: m.format(dateFormat)
             };
           })
        : [];
     };
 
-    var data = [].map.call(rows, function(tr) {
-      var row = {};
-      var cells = tr.querySelectorAll('td');
-      [].forEach.call(cells, function(td, i) {
-        row[cols[i]] = td.textContent;
-      });
+    var descending = function(a, b) {
+      return a > b ? -1 : a < b ? 1 : 0;
+    };
 
-      row.dates = [];
+    table.data.forEach(function(row, i) {
+
+      var dates = [];
 
       dateColumns.forEach(function(column) {
         var text = row[column];
         if (text) {
-          var dates = getDates(text, column);
+          var found = getDates(text, column);
           // {text: String, date: Date, column: String}
-          row.dates = row.dates.concat(dates);
+          dates = dates.concat(found);
 
-          var i = cols.indexOf(column);
-          var cell = cells[i];
+          var index = columns.indexOf(column) + 1;
+          var cell = rows[i].querySelector('td:nth-child(' + index + ')');
           var dateIndex = 0;
           cell.innerHTML = cell.textContent.replace(datePattern, function() {
-            var date = dates[dateIndex++];
+            var date = found[dateIndex++];
             return '<b title="' + date.date.toString() + '">' + date.text + '</b>';
           });
         }
       });
 
-      // determine the most recent date
+      if (row[defaultDateColumn]) {
+        dates.push(getDates(row[defaultDateColumn])[0]);
+      }
 
-      return row;
+      var last = dates.sort(function(a, b) {
+        return descending(a.formatted, b.formatted);
+      })[0];
+
+      var rowElement = table.rows[i];
+      var ageCell = rowElement.querySelector('[data-column="' + ageColumn + '"]');
+      var age = row[ageColumn] = momentNow.diff(last.moment, 'days');
+      table.setCellData(ageCell, age);
+
     });
-
-    window.data = data;
 
   });
 
