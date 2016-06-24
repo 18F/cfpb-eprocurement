@@ -81,7 +81,9 @@ columns:
     var dateFormat = 'YYYY-MM-DD';
     var dateNow = Date.now();
     var momentNow = moment();
+    var dateNowFormatted = momentNow.format(dateFormat);
     var dateYear = 2016;
+
     var getDates = function(content) {
       var match = content.match(datePattern);
       return match
@@ -137,14 +139,21 @@ columns:
         dates.push(getDates(row[defaultDateColumn])[0]);
       }
 
-      var last = dates.sort(function(a, b) {
-        return descending(a.formatted, b.formatted);
-      })[0];
+      dates = dates
+        .filter(function(date) {
+          return date.formatted <= dateNowFormatted;
+        })
+        .sort(function(a, b) {
+          return descending(a.formatted, b.formatted);
+        });
 
-      var rowElement = table.rows[i];
-      var ageCell = rowElement.querySelector('[data-column="' + ageColumn + '"]');
-      var age = row[ageColumn] = momentNow.diff(last.moment, 'days');
-      table.setCellData(ageCell, age);
+      if (dates.length) {
+        var last = dates[0];
+        var rowElement = table.rows[i];
+        var ageCell = rowElement.querySelector('[data-column="' + ageColumn + '"]');
+        var age = row[ageColumn] = momentNow.diff(last.moment, 'days');
+        table.setCellData(ageCell, age);
+      }
 
     });
 
