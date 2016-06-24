@@ -1,5 +1,6 @@
 .site__wide .content_wrapper,
 .site__wide .wrapper__match-content {
-  margin-left: 1em;
-  margin-right: 1em;
+  margin-left: 0;
+  margin-right: 0;
+  max-width: none;
 }
