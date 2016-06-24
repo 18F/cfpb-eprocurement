@@ -1,17 +1,14 @@
 <cfpb-popup-menu>
-  <button aria-haspopup="true" aria-controls="menu-{{ include.column }}">
+  {% assign _slug = include.column | slugify | prepend: 'menu-' %}
+  <button aria-haspopup="true" aria-controls="{{ _slug }}">
     <span class="cf-icon cf-icon-menu"></span>
   </button>
-  <div role="menu" id="menu-{{ include.column }}" aria-hidden="true">
+  <div role="menu" id="{{ _slug }}" aria-hidden="true">
     <p>
       <button class="btn clear">&times;</button>
       <button class="btn select-all">select all</button>
     </p>
-    <select name="filter-{{ include.column }}" multiple size="8">
+    <select name="filter-{{ _slug }}" multiple size="8">
     </select>
   </div>
 </cfpb-popup-menu>
-<span class="sort-icon sort-none cf-icon cf-icon-arrow-down"></span>
-<span class="sort-icon sort-ascending cf-icon cf-icon-arrow-down"></span>
-<span class="sort-icon sort-descending cf-icon cf-icon-arrow-up"></span>
-
