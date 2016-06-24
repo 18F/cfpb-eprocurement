@@ -17,6 +17,7 @@ var onButtonClick = events.delegate({
   },
   'button.clear': function(e) {
     this.clearValue();
+    this.close();
   },
   'button.select-all': function(e) {
     this.selectAllValues();
