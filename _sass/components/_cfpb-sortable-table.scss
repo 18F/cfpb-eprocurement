@@ -12,7 +12,6 @@
     border-left: 1px solid $gray-80;
   }
 
-
   // all sortable headers get aria-sort
   [aria-sort] {
     cursor: pointer;
@@ -42,16 +41,25 @@
   }
 
   // tiger striped body rows
-  tbody tr:nth-child(odd) {
+  tr:nth-child(even) {
     background: $gray-10;
   }
 
-  tbody tr > [data-sorted=true] {
+  tr > [data-sorted=true] {
     background: $gray-10;
   }
 
-  tbody tr:nth-child(odd) > [data-sorted=true] {
+  tr:nth-child(even) > [data-sorted=true] {
     background: $gray-20;
   }
+
+  tr.status-green > td:nth-child(2) {                   background: $green-20; }
+  tr.status-green:nth-child(even) > td:nth-child(2) {   background: $green-40; }
+
+  tr.status-yellow > td:nth-child(2) {                  background: $gold-20; }
+  tr.status-yellow:nth-child(even) > td:nth-child(2) {  background: $gold-40; }
+
+  tr.status-red > td:nth-child(2) {                     background: $red-20; }
+  tr.status-red:nth-child(even) > td:nth-child(2) {     background: $red-40; }
 
 }
