@@ -2,8 +2,16 @@
 
   td,
   th {
+    box-sizing: border-box;
     vertical-align: top;
+    padding-left: 1em;
+    padding-right: 1em;
   }
+
+  th + th {
+    border-left: 1px solid $gray-80;
+  }
+
 
   // all sortable headers get aria-sort
   [aria-sort] {
@@ -11,7 +19,7 @@
     white-space: nowrap;
 
     .sort-icon {
-      color: $gray-40;
+      color: $gray;
       display: none;
       pointer-events: none;
     }
@@ -30,7 +38,7 @@
   [aria-sort=ascending] .sort-ascending,
   [aria-sort=descending] .sort-descending {
     display: initial;
-    color: $green-60;
+    color: $gold;
   }
 
   // tiger striped body rows
@@ -38,11 +46,11 @@
     background: $gray-10;
   }
 
-  tbody tr > [data-sort] {
+  tbody tr > [data-sorted=true] {
     background: $gray-10;
   }
 
-  tbody tr:nth-child(odd) > [data-sort] {
+  tbody tr:nth-child(odd) > [data-sorted=true] {
     background: $gray-20;
   }
 
