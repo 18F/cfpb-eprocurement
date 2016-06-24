@@ -26301,6 +26301,12 @@ var SortableTable = {
         filters[key] = value;
       }
       this.filters = filters;
+    }},
+
+    setCellData: {value: function(cell, data) {
+      cell[DATA_KEY] = data;
+      cell.setAttribute('data-value', data);
+      cell.textContent = String(data);
     }}
 
   })
