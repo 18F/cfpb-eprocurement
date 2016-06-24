@@ -42,16 +42,20 @@
   }
 
   // tiger striped body rows
+  /*
   tbody tr:nth-child(odd) {
     background: $gray-10;
   }
+  */
 
   tbody tr > [data-sorted=true] {
     background: $gray-10;
   }
 
+  /*
   tbody tr:nth-child(odd) > [data-sorted=true] {
     background: $gray-20;
   }
+  */
 
 }
