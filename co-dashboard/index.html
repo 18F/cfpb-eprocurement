@@ -40,9 +40,13 @@ columns:
 {% assign columns = page.columns %}
 <table id="procurements" is="cfpb-sortable-table">
   <thead>
-    <th data-value="index" aria-sort="ascending">#</th>
+    <th data-value="index" aria-sort="ascending">
+      #
+      {% include sort-icons.html %}
+    </th>
     {% for column in columns %}
     <th data-value="{{ column }}" aria-sort="none">
+      {% include sort-icons.html %}
       {{ column }}
       {% include filter-popup.html column=column %}
     </th>

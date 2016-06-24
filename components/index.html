@@ -18,6 +18,7 @@ table:
     <tr>
       {% for column in page.table.columns %}
       <th data-value="{{ column }}" aria-sort="none">
+        {% include sort-icons.html %}
         {{ column }}
         {% include filter-popup.html column=column %}
       </th>
