@@ -72,6 +72,5 @@ src/vendor/
 dist/
 
 # Jekyll files
-_data
 _site
 .sass-cache
