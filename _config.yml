@@ -1,5 +1,6 @@
 title: CFPB eProcurement
 
 exclude:
+- *.log
 - node_modules
 - src
