@@ -1,10 +1,11 @@
 # CFPB eProcurement
 
-Prototypes to help CFPB procure things more easily!
+Prototypes to help CFPB procure things more easily! This site is published
+automatically by [18F Pages].
 
 ## Dependencies
 
-- [Jekyll]: static site generator, deployed automatically with [Federalist].
+- [Jekyll]: the static site generator
 - [Grunt](http://gruntjs.com): task runner for pulling in assets,
   linting and concatenating code, etc.
 - [Less](http://lesscss.org): CSS pre-processor.
@@ -106,4 +107,4 @@ If you find a bug not listed in the issue tracker, please file a bug report.
    influence on this project
 
 [Jekyll]: https://jekyllrb.com/
-[Federalist]: https://federalist.18f.gov/
+[18F Pages]: https://github.com/18F/pages#readme
