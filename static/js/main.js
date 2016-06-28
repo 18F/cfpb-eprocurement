@@ -10472,7 +10472,7 @@ require('jquery.easing');
 }(jQuery));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"jquery":1,"jquery.easing":5}],3:[function(require,module,exports){
+},{"jquery":1,"jquery.easing":6}],3:[function(require,module,exports){
 arguments[4][1][0].apply(exports,arguments)
 },{"dup":1}],4:[function(require,module,exports){
 (function (global){
@@ -10643,6 +10643,9 @@ global.jQuery = require('jquery');
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"jquery":3}],5:[function(require,module,exports){
+/*! (C) WebReflection Mit Style License */
+(function(e,t,n,r){"use strict";function rt(e,t){for(var n=0,r=e.length;n<r;n++)vt(e[n],t)}function it(e){for(var t=0,n=e.length,r;t<n;t++)r=e[t],nt(r,b[ot(r)])}function st(e){return function(t){j(t)&&(vt(t,e),rt(t.querySelectorAll(w),e))}}function ot(e){var t=e.getAttribute("is"),n=e.nodeName.toUpperCase(),r=S.call(y,t?v+t.toUpperCase():d+n);return t&&-1<r&&!ut(n,t)?-1:r}function ut(e,t){return-1<w.indexOf(e+'[is="'+t+'"]')}function at(e){var t=e.currentTarget,n=e.attrChange,r=e.attrName,i=e.target;Q&&(!i||i===t)&&t.attributeChangedCallback&&r!=="style"&&e.prevValue!==e.newValue&&t.attributeChangedCallback(r,n===e[a]?null:e.prevValue,n===e[l]?null:e.newValue)}function ft(e){var t=st(e);return function(e){X.push(t,e.target)}}function lt(e){K&&(K=!1,e.currentTarget.removeEventListener(h,lt)),rt((e.target||t).querySelectorAll(w),e.detail===o?o:s),B&&pt()}function ct(e,t){var n=this;q.call(n,e,t),G.call(n,{target:n})}function ht(e,t){D(e,t),et?et.observe(e,z):(J&&(e.setAttribute=ct,e[i]=Z(e),e.addEventListener(p,G)),e.addEventListener(c,at)),e.createdCallback&&Q&&(e.created=!0,e.createdCallback(),e.created=!1)}function pt(){for(var e,t=0,n=F.length;t<n;t++)e=F[t],E.contains(e)||(n--,F.splice(t--,1),vt(e,o))}function dt(e){throw new Error("A "+e+" type is already registered")}function vt(e,t){var n,r=ot(e);-1<r&&(tt(e,b[r]),r=0,t===s&&!e[s]?(e[o]=!1,e[s]=!0,r=1,B&&S.call(F,e)<0&&F.push(e)):t===o&&!e[o]&&(e[s]=!1,e[o]=!0,r=1),r&&(n=e[t+"Callback"])&&n.call(e))}if(r in t)return;var i="__"+r+(Math.random()*1e5>>0),s="attached",o="detached",u="extends",a="ADDITION",f="MODIFICATION",l="REMOVAL",c="DOMAttrModified",h="DOMContentLoaded",p="DOMSubtreeModified",d="<",v="=",m=/^[A-Z][A-Z0-9]*(?:-[A-Z0-9]+)+$/,g=["ANNOTATION-XML","COLOR-PROFILE","FONT-FACE","FONT-FACE-SRC","FONT-FACE-URI","FONT-FACE-FORMAT","FONT-FACE-NAME","MISSING-GLYPH"],y=[],b=[],w="",E=t.documentElement,S=y.indexOf||function(e){for(var t=this.length;t--&&this[t]!==e;);return t},x=n.prototype,T=x.hasOwnProperty,N=x.isPrototypeOf,C=n.defineProperty,k=n.getOwnPropertyDescriptor,L=n.getOwnPropertyNames,A=n.getPrototypeOf,O=n.setPrototypeOf,M=!!n.__proto__,_=n.create||function mt(e){return e?(mt.prototype=e,new mt):this},D=O||(M?function(e,t){return e.__proto__=t,e}:L&&k?function(){function e(e,t){for(var n,r=L(t),i=0,s=r.length;i<s;i++)n=r[i],T.call(e,n)||C(e,n,k(t,n))}return function(t,n){do e(t,n);while((n=A(n))&&!N.call(n,t));return t}}():function(e,t){for(var n in t)e[n]=t[n];return e}),P=e.MutationObserver||e.WebKitMutationObserver,H=(e.HTMLElement||e.Element||e.Node).prototype,B=!N.call(H,E),j=B?function(e){return e.nodeType===1}:function(e){return N.call(H,e)},F=B&&[],I=H.cloneNode,q=H.setAttribute,R=H.removeAttribute,U=t.createElement,z=P&&{attributes:!0,characterData:!0,attributeOldValue:!0},W=P||function(e){J=!1,E.removeEventListener(c,W)},X,V=e.requestAnimationFrame||e.webkitRequestAnimationFrame||e.mozRequestAnimationFrame||e.msRequestAnimationFrame||function(e){setTimeout(e,10)},$=!1,J=!0,K=!0,Q=!0,G,Y,Z,et,tt,nt;O||M?(tt=function(e,t){N.call(t,e)||ht(e,t)},nt=ht):(tt=function(e,t){e[i]||(e[i]=n(!0),ht(e,t))},nt=tt),B?(J=!1,function(){var e=k(H,"addEventListener"),t=e.value,n=function(e){var t=new CustomEvent(c,{bubbles:!0});t.attrName=e,t.prevValue=this.getAttribute(e),t.newValue=null,t[l]=t.attrChange=2,R.call(this,e),this.dispatchEvent(t)},r=function(e,t){var n=this.hasAttribute(e),r=n&&this.getAttribute(e),i=new CustomEvent(c,{bubbles:!0});q.call(this,e,t),i.attrName=e,i.prevValue=n?r:null,i.newValue=t,n?i[f]=i.attrChange=1:i[a]=i.attrChange=0,this.dispatchEvent(i)},s=function(e){var t=e.currentTarget,n=t[i],r=e.propertyName,s;n.hasOwnProperty(r)&&(n=n[r],s=new CustomEvent(c,{bubbles:!0}),s.attrName=n.name,s.prevValue=n.value||null,s.newValue=n.value=t[r]||null,s.prevValue==null?s[a]=s.attrChange=0:s[f]=s.attrChange=1,t.dispatchEvent(s))};e.value=function(e,o,u){e===c&&this.attributeChangedCallback&&this.setAttribute!==r&&(this[i]={className:{name:"class",value:this.className}},this.setAttribute=r,this.removeAttribute=n,t.call(this,"propertychange",s)),t.call(this,e,o,u)},C(H,"addEventListener",e)}()):P||(E.addEventListener(c,W),E.setAttribute(i,1),E.removeAttribute(i),J&&(G=function(e){var t=this,n,r,s;if(t===e.target){n=t[i],t[i]=r=Z(t);for(s in r){if(!(s in n))return Y(0,t,s,n[s],r[s],a);if(r[s]!==n[s])return Y(1,t,s,n[s],r[s],f)}for(s in n)if(!(s in r))return Y(2,t,s,n[s],r[s],l)}},Y=function(e,t,n,r,i,s){var o={attrChange:e,currentTarget:t,attrName:n,prevValue:r,newValue:i};o[s]=e,at(o)},Z=function(e){for(var t,n,r={},i=e.attributes,s=0,o=i.length;s<o;s++)t=i[s],n=t.name,n!=="setAttribute"&&(r[n]=t.value);return r})),t[r]=function(n,r){c=n.toUpperCase(),$||($=!0,P?(et=function(e,t){function n(e,t){for(var n=0,r=e.length;n<r;t(e[n++]));}return new P(function(r){for(var i,s,o,u=0,a=r.length;u<a;u++)i=r[u],i.type==="childList"?(n(i.addedNodes,e),n(i.removedNodes,t)):(s=i.target,Q&&s.attributeChangedCallback&&i.attributeName!=="style"&&(o=s.getAttribute(i.attributeName),o!==i.oldValue&&s.attributeChangedCallback(i.attributeName,i.oldValue,o)))})}(st(s),st(o)),et.observe(t,{childList:!0,subtree:!0})):(X=[],V(function E(){while(X.length)X.shift().call(null,X.shift());V(E)}),t.addEventListener("DOMNodeInserted",ft(s)),t.addEventListener("DOMNodeRemoved",ft(o))),t.addEventListener(h,lt),t.addEventListener("readystatechange",lt),t.createElement=function(e,n){var r=U.apply(t,arguments),i=""+e,s=S.call(y,(n?v:d)+(n||i).toUpperCase()),o=-1<s;return n&&(r.setAttribute("is",n=n.toLowerCase()),o&&(o=ut(i.toUpperCase(),n))),Q=!t.createElement.innerHTMLHelper,o&&nt(r,b[s]),r},H.cloneNode=function(e){var t=I.call(this,!!e),n=ot(t);return-1<n&&nt(t,b[n]),e&&it(t.querySelectorAll(w)),t}),-2<S.call(y,v+c)+S.call(y,d+c)&&dt(n);if(!m.test(c)||-1<S.call(g,c))throw new Error("The type "+n+" is invalid");var i=function(){return f?t.createElement(l,c):t.createElement(l)},a=r||x,f=T.call(a,u),l=f?r[u].toUpperCase():c,c,p;return f&&-1<S.call(y,d+l)&&dt(l),p=y.push((f?v:d)+c)-1,w=w.concat(w.length?",":"",f?l+'[is="'+n.toLowerCase()+'"]':l),i.prototype=b[p]=T.call(a,"prototype")?a.prototype:_(H),rt(t.querySelectorAll(w),s),i}})(window,document,Object,"registerElement");
+},{}],6:[function(require,module,exports){
 /*
  * jQuery Easing v1.3.2 - http://gsgd.co.uk/sandbox/jquery/easing/
  * Open source under the BSD License.
@@ -10787,7 +10790,7 @@ $.extend( $.easing,
 	}
 });})(jQuery);
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v1.12.2
  * http://jquery.com/
@@ -21811,7 +21814,7 @@ if ( !noGlobal ) {
 return jQuery;
 }));
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 //! moment.js
 //! version : 2.13.0
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -25852,1392 +25855,571 @@ return jQuery;
     return _moment;
 
 }));
-},{}],8:[function(require,module,exports){
-// Create a range object for efficently rendering strings to elements.
-var range;
-
-var testEl = (typeof document !== 'undefined') ?
-    document.body || document.createElement('div') :
-    {};
-
-var XHTML = 'http://www.w3.org/1999/xhtml';
-
-// Fixes <https://github.com/patrick-steele-idem/morphdom/issues/32>
-// (IE7+ support) <=IE7 does not support el.hasAttribute(name)
-var hasAttribute;
-if (testEl.hasAttribute) {
-    hasAttribute = function hasAttribute(el, name) {
-        return el.hasAttribute(name);
-    };
-} else {
-    hasAttribute = function hasAttribute(el, name) {
-        return !!el.getAttributeNode(name);
-    };
-}
-
-function empty(o) {
-    for (var k in o) {
-        if (o.hasOwnProperty(k)) {
-            return false;
-        }
-    }
-    return true;
-}
-
-function toElement(str) {
-    if (!range && document.createRange) {
-        range = document.createRange();
-        range.selectNode(document.body);
-    }
-
-    var fragment;
-    if (range && range.createContextualFragment) {
-        fragment = range.createContextualFragment(str);
-    } else {
-        fragment = document.createElement('body');
-        fragment.innerHTML = str;
-    }
-    return fragment.childNodes[0];
-}
-
-var specialElHandlers = {
-    /**
-     * Needed for IE. Apparently IE doesn't think that "selected" is an
-     * attribute when reading over the attributes using selectEl.attributes
-     */
-    OPTION: function(fromEl, toEl) {
-        fromEl.selected = toEl.selected;
-        if (fromEl.selected) {
-            fromEl.setAttribute('selected', '');
-        } else {
-            fromEl.removeAttribute('selected', '');
-        }
-    },
-    /**
-     * The "value" attribute is special for the <input> element since it sets
-     * the initial value. Changing the "value" attribute without changing the
-     * "value" property will have no effect since it is only used to the set the
-     * initial value.  Similar for the "checked" attribute, and "disabled".
-     */
-    INPUT: function(fromEl, toEl) {
-        fromEl.checked = toEl.checked;
-        if (fromEl.checked) {
-            fromEl.setAttribute('checked', '');
-        } else {
-            fromEl.removeAttribute('checked');
-        }
-
-        if (fromEl.value !== toEl.value) {
-            fromEl.value = toEl.value;
-        }
-
-        if (!hasAttribute(toEl, 'value')) {
-            fromEl.removeAttribute('value');
-        }
-
-        fromEl.disabled = toEl.disabled;
-        if (fromEl.disabled) {
-            fromEl.setAttribute('disabled', '');
-        } else {
-            fromEl.removeAttribute('disabled');
-        }
-    },
-
-    TEXTAREA: function(fromEl, toEl) {
-        var newValue = toEl.value;
-        if (fromEl.value !== newValue) {
-            fromEl.value = newValue;
-        }
-
-        if (fromEl.firstChild) {
-            fromEl.firstChild.nodeValue = newValue;
-        }
-    }
-};
-
-function noop() {}
-
-/**
- * Returns true if two node's names and namespace URIs are the same.
- *
- * @param {Element} a
- * @param {Element} b
- * @return {boolean}
- */
-var compareNodeNames = function(a, b) {
-    return a.nodeName === b.nodeName &&
-           a.namespaceURI === b.namespaceURI;
-};
-
-/**
- * Create an element, optionally with a known namespace URI.
- *
- * @param {string} name the element name, e.g. 'div' or 'svg'
- * @param {string} [namespaceURI] the element's namespace URI, i.e. the value of
- * its `xmlns` attribute or its inferred namespace.
- *
- * @return {Element}
- */
-function createElement(name, namespaceURI) {
-    return (namespaceURI && namespaceURI !== XHTML) ?
-        document.createElementNS(namespaceURI, name) :
-        document.createElement(name);
-}
-
-/**
- * Loop over all of the attributes on the target node and make sure the original
- * DOM node has the same attributes. If an attribute found on the original node
- * is not on the new node then remove it from the original node.
- *
- * @param  {Element} fromNode
- * @param  {Element} toNode
- */
-function morphAttrs(fromNode, toNode) {
-    var attrs = toNode.attributes;
-    var i;
-    var attr;
-    var attrName;
-    var attrValue;
-    var foundAttrs = {};
-    var fromValue;
-
-    for (i = attrs.length - 1; i >= 0; i--) {
-        attr = attrs[i];
-        attrName = attr.name;
-        attrValue = attr.value;
-        fromValue = fromNode.getAttributeNS(attr.namespaceURI, attr.name);
-        foundAttrs[attrName] = true;
-
-        if (fromValue !== attrValue) {
-            fromNode.setAttributeNS(
-              attr.namespaceURI,
-              attr.name,
-              attrValue
-            );
-        }
-    }
-
-    // Remove any extra attributes found on the original DOM element that
-    // weren't found on the target element.
-    attrs = fromNode.attributes;
-
-    for (i = attrs.length - 1; i >= 0; i--) {
-        attr = attrs[i];
-        if (attr.specified !== false) {
-            attrName = attr.name;
-            if (!foundAttrs.hasOwnProperty(attrName)) {
-                fromNode.removeAttributeNode(attr);
-            }
-        }
-    }
-}
-
-/**
- * Copies the children of one DOM element to another DOM element
- */
-function moveChildren(fromEl, toEl) {
-    var curChild = fromEl.firstChild;
-    while (curChild) {
-        var nextChild = curChild.nextSibling;
-        toEl.appendChild(curChild);
-        curChild = nextChild;
-    }
-    return toEl;
-}
-
-function defaultGetNodeKey(node) {
-    return node.id;
-}
-
-function morphdom(fromNode, toNode, options) {
-    if (!options) {
-        options = {};
-    }
-
-    if (typeof toNode === 'string') {
-        if (fromNode.nodeName === '#document' || fromNode.nodeName === 'HTML') {
-            var toNodeHtml = toNode;
-            toNode = document.createElement('html');
-            toNode.innerHTML = toNodeHtml;
-        } else {
-            toNode = toElement(toNode);
-        }
-    }
-
-    // XXX optimization: if the nodes are equal, don't morph them
-    /*
-    if (fromNode.isEqualNode(toNode)) {
-      return fromNode;
-    }
-    */
-
-    var savedEls = {}; // Used to save off DOM elements with IDs
-    var unmatchedEls = {};
-    var getNodeKey = options.getNodeKey || defaultGetNodeKey;
-    var onBeforeNodeAdded = options.onBeforeNodeAdded || noop;
-    var onNodeAdded = options.onNodeAdded || noop;
-    var onBeforeElUpdated = options.onBeforeElUpdated || options.onBeforeMorphEl || noop;
-    var onElUpdated = options.onElUpdated || noop;
-    var onBeforeNodeDiscarded = options.onBeforeNodeDiscarded || noop;
-    var onNodeDiscarded = options.onNodeDiscarded || noop;
-    var onBeforeElChildrenUpdated = options.onBeforeElChildrenUpdated || options.onBeforeMorphElChildren || noop;
-    var childrenOnly = options.childrenOnly === true;
-    var movedEls = [];
-
-    function removeNodeHelper(node, nestedInSavedEl) {
-        var id = getNodeKey(node);
-        // If the node has an ID then save it off since we will want
-        // to reuse it in case the target DOM tree has a DOM element
-        // with the same ID
-        if (id) {
-            savedEls[id] = node;
-        } else if (!nestedInSavedEl) {
-            // If we are not nested in a saved element then we know that this node has been
-            // completely discarded and will not exist in the final DOM.
-            onNodeDiscarded(node);
-        }
-
-        if (node.nodeType === Node.ELEMENT_NODE) {
-            var curChild = node.firstChild;
-            while (curChild) {
-                removeNodeHelper(curChild, nestedInSavedEl || id);
-                curChild = curChild.nextSibling;
-            }
-        }
-    }
-
-    function walkDiscardedChildNodes(node) {
-        if (node.nodeType === Node.ELEMENT_NODE) {
-            var curChild = node.firstChild;
-            while (curChild) {
-
-
-                if (!getNodeKey(curChild)) {
-                    // We only want to handle nodes that don't have an ID to avoid double
-                    // walking the same saved element.
-
-                    onNodeDiscarded(curChild);
-
-                    // Walk recursively
-                    walkDiscardedChildNodes(curChild);
-                }
-
-                curChild = curChild.nextSibling;
-            }
-        }
-    }
-
-    function removeNode(node, parentNode, alreadyVisited) {
-        if (onBeforeNodeDiscarded(node) === false) {
-            return;
-        }
-
-        parentNode.removeChild(node);
-        if (alreadyVisited) {
-            if (!getNodeKey(node)) {
-                onNodeDiscarded(node);
-                walkDiscardedChildNodes(node);
-            }
-        } else {
-            removeNodeHelper(node);
-        }
-    }
-
-    function morphEl(fromEl, toEl, alreadyVisited, childrenOnly) {
-        var toElKey = getNodeKey(toEl);
-        if (toElKey) {
-            // If an element with an ID is being morphed then it is will be in the final
-            // DOM so clear it out of the saved elements collection
-            delete savedEls[toElKey];
-        }
-
-        if (!childrenOnly) {
-            if (onBeforeElUpdated(fromEl, toEl) === false) {
-                return;
-            }
-
-            morphAttrs(fromEl, toEl);
-            onElUpdated(fromEl);
-
-            if (onBeforeElChildrenUpdated(fromEl, toEl) === false) {
-                return;
-            }
-        }
-
-        if (fromEl.nodeName !== 'TEXTAREA') {
-            var curToNodeChild = toEl.firstChild;
-            var curFromNodeChild = fromEl.firstChild;
-            var curToNodeId;
-
-            var fromNextSibling;
-            var toNextSibling;
-            var savedEl;
-            var unmatchedEl;
-
-            outer: while (curToNodeChild) {
-                toNextSibling = curToNodeChild.nextSibling;
-                curToNodeId = getNodeKey(curToNodeChild);
-
-                while (curFromNodeChild) {
-                    var curFromNodeId = getNodeKey(curFromNodeChild);
-                    fromNextSibling = curFromNodeChild.nextSibling;
-
-                    if (!alreadyVisited) {
-                        if (curFromNodeId && (unmatchedEl = unmatchedEls[curFromNodeId])) {
-                            unmatchedEl.parentNode.replaceChild(curFromNodeChild, unmatchedEl);
-                            morphEl(curFromNodeChild, unmatchedEl, alreadyVisited);
-                            curFromNodeChild = fromNextSibling;
-                            continue;
-                        }
-                    }
-
-                    var curFromNodeType = curFromNodeChild.nodeType;
-
-                    if (curFromNodeType === curToNodeChild.nodeType) {
-                        var isCompatible = false;
-
-                        // Both nodes being compared are Element nodes
-                        if (curFromNodeType === Node.ELEMENT_NODE) {
-                            if (compareNodeNames(curFromNodeChild, curToNodeChild)) {
-                                // We have compatible DOM elements
-                                if (curFromNodeId || curToNodeId) {
-                                    // If either DOM element has an ID then we
-                                    // handle those differently since we want to
-                                    // match up by ID
-                                    if (curToNodeId === curFromNodeId) {
-                                        isCompatible = true;
-                                    }
-                                } else {
-                                    isCompatible = true;
-                                }
-                            }
-
-                            if (isCompatible) {
-                                // We found compatible DOM elements so transform
-                                // the current "from" node to match the current
-                                // target DOM node.
-                                morphEl(curFromNodeChild, curToNodeChild, alreadyVisited);
-                            }
-                        // Both nodes being compared are Text nodes
-                        } else if (curFromNodeType === Node.TEXT_NODE) {
-                            isCompatible = true;
-                            // Simply update nodeValue on the original node to
-                            // change the text value
-                            curFromNodeChild.nodeValue = curToNodeChild.nodeValue;
-                        }
-
-                        if (isCompatible) {
-                            curToNodeChild = toNextSibling;
-                            curFromNodeChild = fromNextSibling;
-                            continue outer;
-                        }
-                    }
-
-                    // No compatible match so remove the old node from the DOM
-                    // and continue trying to find a match in the original DOM
-                    removeNode(curFromNodeChild, fromEl, alreadyVisited);
-                    curFromNodeChild = fromNextSibling;
-                }
-
-                if (curToNodeId) {
-                    if ((savedEl = savedEls[curToNodeId])) {
-                        morphEl(savedEl, curToNodeChild, true);
-                        // We want to append the saved element instead
-                        curToNodeChild = savedEl;
-                    } else {
-                        // The current DOM element in the target tree has an ID
-                        // but we did not find a match in any of the
-                        // corresponding siblings. We just put the target
-                        // element in the old DOM tree but if we later find an
-                        // element in the old DOM tree that has a matching ID
-                        // then we will replace the target element with the
-                        // corresponding old element and morph the old element
-                        unmatchedEls[curToNodeId] = curToNodeChild;
-                    }
-                }
-
-                // If we got this far then we did not find a candidate match for
-                // our "to node" and we exhausted all of the children "from"
-                // nodes. Therefore, we will just append the current "to node"
-                // to the end
-                if (onBeforeNodeAdded(curToNodeChild) !== false) {
-                    fromEl.appendChild(curToNodeChild);
-                    onNodeAdded(curToNodeChild);
-                }
-
-                if (curToNodeChild.nodeType === Node.ELEMENT_NODE &&
-                    (curToNodeId || curToNodeChild.firstChild)) {
-                    // The element that was just added to the original DOM may
-                    // have some nested elements with a key/ID that needs to be
-                    // matched up with other elements. We'll add the element to
-                    // a list so that we can later process the nested elements
-                    // if there are any unmatched keyed elements that were
-                    // discarded
-                    movedEls.push(curToNodeChild);
-                }
-
-                curToNodeChild = toNextSibling;
-                curFromNodeChild = fromNextSibling;
-            }
-
-            // We have processed all of the "to nodes". If curFromNodeChild is
-            // non-null then we still have some from nodes left over that need
-            // to be removed
-            while (curFromNodeChild) {
-                fromNextSibling = curFromNodeChild.nextSibling;
-                removeNode(curFromNodeChild, fromEl, alreadyVisited);
-                curFromNodeChild = fromNextSibling;
-            }
-        }
-
-        var specialElHandler = specialElHandlers[fromEl.nodeName];
-        if (specialElHandler) {
-            specialElHandler(fromEl, toEl);
-        }
-    } // END: morphEl(...)
-
-    var morphedNode = fromNode;
-    var morphedNodeType = morphedNode.nodeType;
-    var toNodeType = toNode.nodeType;
-
-    if (!childrenOnly) {
-        // Handle the case where we are given two DOM nodes that are not
-        // compatible (e.g. <div> --> <span> or <div> --> TEXT)
-        if (morphedNodeType === Node.ELEMENT_NODE) {
-            if (toNodeType === Node.ELEMENT_NODE) {
-                if (!compareNodeNames(fromNode, toNode)) {
-                    onNodeDiscarded(fromNode);
-                    morphedNode = moveChildren(fromNode, createElement(toNode.nodeName, toNode.namespaceURI));
-                }
-            } else {
-                // Going from an element node to a text node
-                morphedNode = toNode;
-            }
-        } else if (morphedNodeType === Node.TEXT_NODE) { // Text node
-            if (toNodeType === Node.TEXT_NODE) {
-                morphedNode.nodeValue = toNode.nodeValue;
-                return morphedNode;
-            } else {
-                // Text node to something else
-                morphedNode = toNode;
-            }
-        }
-    }
-
-    if (morphedNode === toNode) {
-        // The "to node" was not compatible with the "from node" so we had to
-        // toss out the "from node" and use the "to node"
-        onNodeDiscarded(fromNode);
-    } else {
-        morphEl(morphedNode, toNode, false, childrenOnly);
-
-        /**
-         * What we will do here is walk the tree for the DOM element that was
-         * moved from the target DOM tree to the original DOM tree and we will
-         * look for keyed elements that could be matched to keyed elements that
-         * were earlier discarded.  If we find a match then we will move the
-         * saved element into the final DOM tree.
-         */
-        var handleMovedEl = function(el) {
-            var curChild = el.firstChild;
-            while (curChild) {
-                var nextSibling = curChild.nextSibling;
-
-                var key = getNodeKey(curChild);
-                if (key) {
-                    var savedEl = savedEls[key];
-                    if (savedEl && compareNodeNames(curChild, savedEl)) {
-                        curChild.parentNode.replaceChild(savedEl, curChild);
-                        // true: already visited the saved el tree
-                        morphEl(savedEl, curChild, true);
-                        curChild = nextSibling;
-                        if (empty(savedEls)) {
-                            return false;
-                        }
-                        continue;
-                    }
-                }
-
-                if (curChild.nodeType === Node.ELEMENT_NODE) {
-                    handleMovedEl(curChild);
-                }
-
-                curChild = nextSibling;
-            }
-        };
-
-        // The loop below is used to possibly match up any discarded
-        // elements in the original DOM tree with elemenets from the
-        // target tree that were moved over without visiting their
-        // children
-        if (!empty(savedEls)) {
-            handleMovedElsLoop:
-            while (movedEls.length) {
-                var movedElsTemp = movedEls;
-                movedEls = [];
-                for (var i=0; i<movedElsTemp.length; i++) {
-                    if (handleMovedEl(movedElsTemp[i]) === false) {
-                        // There are no more unmatched elements so completely end
-                        // the loop
-                        break handleMovedElsLoop;
-                    }
-                }
-            }
-        }
-
-        // Fire the "onNodeDiscarded" event for any saved elements
-        // that never found a new home in the morphed DOM
-        for (var savedElId in savedEls) {
-            if (savedEls.hasOwnProperty(savedElId)) {
-                var savedEl = savedEls[savedElId];
-                onNodeDiscarded(savedEl);
-                walkDiscardedChildNodes(savedEl);
-            }
-        }
-    }
-
-    if (!childrenOnly && morphedNode !== fromNode && fromNode.parentNode) {
-        // If we had to swap out the from node with a new node because the old
-        // node was not compatible with the target node then we need to
-        // replace the old DOM node in the original DOM tree. This is only
-        // possible if the original DOM node was part of a DOM tree which
-        // we know is the case if it has a parent node.
-        fromNode.parentNode.replaceChild(morphedNode, fromNode);
-    }
-
-    return morphedNode;
-}
-
-module.exports = morphdom;
-
 },{}],9:[function(require,module,exports){
-/* eslint no-new-func: "warn" */
-var ARROW_PATTERN = /^\s*\(?(\s*\w+\s*(,\s*\w+\s*)*)?\)?\s*=>\s*({([^}]+)}|(.+))$/;
+require('document-register-element');
 
-var isArrow = function(expression) {
-  return String(expression).match(ARROW_PATTERN);
-};
+var prefix = 'cfpb-';
 
-var parseArrow = function parseArrow(expression) {
-  var match = expression.match(ARROW_PATTERN);
-  if (!match) throw new Error('invalid arrow expression: "' + expression + '"');
-  var args = match[1];
-  var body = (match[4] || match[5]).trim() || 'undefined';
-  return new Function(args, [
-    'with (this) {',
-    ' return ', body, '; ',
-    '}',
-  ].join(''));
-};
+var SortableTable = document.registerElement(
+  prefix + 'sortable-table',
+  require('./sortable-table')
+);
+
+var PopupMenu = document.registerElement(
+  prefix + 'popup-menu',
+  require('./popup-menu')
+);
 
 module.exports = {
-  is: isArrow,
-  parse: parseArrow
+  SortableTable: SortableTable,
+  PopupMenu: PopupMenu
 };
 
-},{}],10:[function(require,module,exports){
-var constants = require('./constants');
-var T_PREFIX = constants.T.PREFIX;
-var CONTROL_ATTRS = constants.CONTROL_ATTRS;
+},{"./popup-menu":10,"./sortable-table":11,"document-register-element":5}],10:[function(require,module,exports){
+var EVENTS = '__events__';
 
-var ns = require('./ns');
-var util = require('./util');
-var defined = util.defined;
+var EXPANDED = 'aria-expanded';
+var CONTROLS = 'aria-controls';
+var HIDDEN = 'aria-hidden';
+var SELECTED = 'aria-selected';
 
-module.exports.getAttributeMap = function(node) {
-  var map = {};
-  var attrs = node.attributes;
-  for (var i = 0; i < attrs.length; i++) {
-    var attr = attrs[i];
-    var name = ns.qualify(attr.name);
-    var localName = name.localName;
-    var value = attr.value;
-    if (localName.indexOf(T_PREFIX) === 0) {
-      localName = localName.substr(T_PREFIX.length);
-      if (CONTROL_ATTRS.indexOf(localName) > -1) {
-        continue;
-      }
-      value = util.compileExpression(value);
-    }
-    var qname = name.prefix
-      ? name.prefix + ':' + localName
-      : localName;
-    map[qname] = value;
+var events = require('../lib/events');
+var getAncestor = require('../lib/get-ancestor');
+
+var onButtonClick = events.delegate({
+  '*': function(e) {
+    e.stopPropagation();
+  },
+  'button[aria-haspopup]': function(e) {
+    this.toggle();
+  },
+  'button.clear': function(e) {
+    this.clearValue();
+    this.close();
+  },
+  'button.select-all': function(e) {
+    this.selectAllValues();
   }
-  return map;
-};
+}, true);
 
-module.exports.interpolateAttributes = function(attrMap, data) {
-  var attrs = {};
-  for (var key in attrMap) {
-    if (!attrMap.hasOwnProperty(key)) {
-      continue;
-    }
-    var value = attrMap[key];
-    // only apply functions for attrs that aren't event handlers
-    if (typeof value === 'function' && key.indexOf('on') !== 0) {
-      value = value.call(this, data, key);
-    }
-    if (defined(value)) {
-      attrs[key] = value;
-    }
-  }
-  return attrs;
-};
-
-},{"./constants":12,"./ns":19,"./util":22}],11:[function(require,module,exports){
-/**
- * functional composition functions take a function and return a
- * wrapped function that calls the passed one and applies some
- * additional logic.
- */
-
-var defined = require('./util').defined;
-
-/**
- * @param {Function}  fn
- * @return {Function} a function that returns the inverse (`!`)
- *                    value of the `fn`, given the same arguments.
- */
-module.exports.not = function(fn) {
-  return function() {
-    return !fn.apply(this, arguments);
-  };
-};
-
-/**
- * @param {Function}  fn
- * @return {Function} a function that returns the stringified
- *                    value of the `fn`, given the same arguments.
- */
-module.exports.stringify = function(fn) {
-  return function() {
-    var value = fn.apply(this, arguments);
-    return defined(value) ? String(value) : '';
-  };
-};
-
-},{"./util":22}],12:[function(require,module,exports){
-var prefix = 't-';
-
-var T = {
-  PREFIX: prefix
-};
-
-T.AS = prefix + 'as';
-T.EACH = prefix + 'each';
-T.ELSE = prefix + 'else';
-T.FOREACH = prefix + 'foreach';
-T.IF = prefix + 'if';
-T.SKIP = prefix + 'skip';
-T.TEXT = prefix + 'text';
-T.WITH = prefix + 'with';
-
-module.exports.T = T;
-
-module.exports.CONTROL_ATTRS = [
-  'as',
-  'each',
-  'else',
-  'foreach',
-  'if',
-  'skip',
-  'text',
-  'with'
-];
-
-},{}],13:[function(require,module,exports){
-module.exports.getPreviousSibling = function(node, selector) {
-  // eslint-disable-next-line no-cond-assign
-  while (node = node.previousSibling) {
-    if (!node) break;
-    // FIXME this needs a vendor prefix in IE 9+
-    // <http://caniuse.com/#search=matches>
-    if (node.nodeType === 1 && node.matches(selector)) {
-      return node;
-    }
-  }
-  throw new Error('no previous sibling found matching: ' + selector);
-};
-
-},{}],14:[function(require,module,exports){
-/* eslint no-new-func: "warn" */
-var arrow = require('./arrow');
-var functor = require('./functor');
-
-var evaluate = function(expression, data) {
-  var fn = evaluator(expression);
-  return fn.call(this, data);
-};
-
-var evaluator = function(expression) {
-  if (typeof expression !== 'string') {
-    expression = String(expression);
-  }
-
-  if (!expression.trim()) {
-    return functor(undefined);
-  }
-
-  if (arrow.is(expression)) {
-    return arrow.parse(expression);
-  }
-
-  var symbol = 'd';
-  // '.' is just the identity function
-  if (expression.match(/^\s*\.\s*$/)) {
-    return identity;
-  // '.foo' addresses the context directly
-  } else if (expression.match(/^\s*\.\w/)) {
-    expression = symbol + expression;
-  }
-  return new Function(symbol, [
-    // 'console.info("', symbol, ' = ", ', symbol, ', "', expression, '"); ',
-    'try { ',
-    '  with (this) {',
-    '    with (', symbol, ') {',
-    '      return (', expression, ');',
-    '    } ',
-    '  } ',
-    '} catch (error) { }'
-  ].join('\n'));
-};
-
-module.exports = {
-  evaluate: evaluate,
-  evaluator: evaluator
-};
-
-function identity(d) {
-  return d;
-}
-
-},{"./arrow":9,"./functor":15}],15:[function(require,module,exports){
-module.exports = function functor(x) {
-  return function f() {
-    return x;
-  };
-};
-
-
-},{}],16:[function(require,module,exports){
-var ns = require('./ns');
-
-module.exports = function(name, props, children) {
-  var node;
-  if (Array.isArray(name)) {
-    node = document.createDocumentFragment();
-  } else {
-    name = ns.qualify(name);
-    node = name.namespaceURI
-      ? document.createElementNS(name.namespaceURI, name.localName)
-      : document.createElement(name.localName);
-  }
-
-  if (Array.isArray(props) || typeof props === 'string') {
-    children = props;
-  } else if (typeof props === 'object') {
-    setProps(node, props);
-  }
-
-  var append = function(child) {
-    if (Array.isArray(child)) {
-      child.forEach(append);
-    } else if (typeof child === 'object') {
-      node.appendChild(child);
-    } else if (typeof child === 'string') {
-      node.appendChild(document.createTextNode(child));
-    }
-  };
-
-  if (typeof children === 'object' || typeof children === 'string') {
-    append(children);
-  }
-
-  return node;
-};
-
-var setProps = function(el, props) {
-  for (var prop in props) {
-    if (!props.hasOwnProperty(prop)) {
-      continue;
-    }
-    var value = props[prop];
-    if (value === null || value === undefined || typeof value === 'function') {
-      // XXX: don't add null, undefined, or function values
-      continue;
-    } else if (typeof value === 'object') {
-      switch (prop) {
-        case 'class':
-          value = formatClassName(value);
-          break;
-
-        case 'style':
-          value = formatStyle(value);
-          break;
-
-        default:
-          console.warn('unrecognized object prop:', prop, value);
-          continue;
-      }
-    }
-
-    var name = ns.qualify(prop);
-    if (name.namespaceURI) {
-      el.setAttributeNS(name.namespaceURI, name.name, value);
-    } else {
-      el.setAttribute(name.localName, value);
-    }
-  }
-};
-
-var formatStyle = function(obj) {
-  if (Array.isArray(obj)) {
-    return obj.join('; ');
-  }
-  return Object.keys(obj)
-    .map(function(key) {
-      return [
-        reformatCamelCase(key),
-        ': ',
-        obj[key],
-        ';'
-      ].join('');
+var getSelectValue = function(select) {
+  if (select.multiple) {
+    return [].filter.call(select.options, function(option) {
+      return option.selected;
     })
-    .join(' ');
-};
-
-var reformatCamelCase = function(str) {
-  return str.replace(/[A-Z]/g, function(char) {
-    return '-' + char.toLowerCase();
-  });
-};
-
-var formatClassName = function(obj) {
-  if (Array.isArray(obj)) {
-    return obj.join(' ');
-  }
-  return Object.keys(obj).filter(function(key) {
-    return !!obj[key];
-  }).join(' ');
-};
-
-},{"./ns":19}],17:[function(require,module,exports){
-var render = require('./render');
-
-module.exports = {
-  createRenderer: render.createRenderer,
-  render: render.render
-};
-
-},{"./render":20}],18:[function(require,module,exports){
-var evaluate = require('./evaluate').evaluate;
-var functor = require('./functor');
-
-var pattern = /{{\s*([^}]+)\s*}}/g;
-
-var isTemplate = function(str) {
-  return new RegExp(pattern).test(str);
-};
-
-var compile = function(template) {
-  if (typeof template !== 'string') {
-    throw new Error('interpolate.compile() expected a string;' +
-                    'got ' + (typeof template));
-  }
-
-  if (!isTemplate(template)) {
-    return functor(template);
-  }
-
-  return function(data) {
-    var that = this;
-    return template.replace(pattern, function(_, part) {
-      return evaluate.call(that, part, data);
+    .map(function(option) {
+      return option.value;
     });
-  };
+  } else {
+    return select.value;
+  }
 };
 
-var interpolate = function interpolate(str, data) {
-  return compile(str).call(this, data);
+var setSelectValue = function(select, value) {
+  var changed = false;
+  var options = [].slice.call(select.options);
+  if (Array.isArray(value)) {
+    value = value.map(String);
+    options.forEach(function(option) {
+      var selected = value.indexOf(option.value) > -1;
+      if (option.selected !== selected) {
+        option.selected = selected;
+        changed = true;
+      }
+    });
+  } else {
+    value = String(value);
+    changed = select.value !== value;
+    if (changed) {
+      select.value = value;
+    }
+  }
+  return changed;
 };
 
-module.exports = interpolate;
-
-module.exports.isTemplate = isTemplate;
-
-module.exports.compile = compile;
-
-},{"./evaluate":14,"./functor":15}],19:[function(require,module,exports){
-var prefixToURI = {
-  svg: 'http://www.w3.org/2000/svg',
-  xlink: 'http://www.w3.org/TR/xlink/',
-  xmlns: 'http://www.w3.org/2000/xmlns/'
+var onClickOff = function(e) {
+  if (!this.contains(e.target)) {
+    this.close();
+  }
 };
 
-var uriToPrefix = {};
-Object.keys(prefixToURI).forEach(function(prefix) {
-  uriToPrefix[prefixToURI[prefix]] = prefix;
+var redispatchChange = events.delegate({
+  'select': function(e) {
+    this.updateSelected();
+    this.dispatchEvent(new Event(e.type, {bubbles: true}));
+  }
 });
 
-var qualify = function(qname) {
-  var prefix;
-  var localName = qname;
-  var colon = qname.indexOf(':');
-  if (colon > -1) {
-    prefix = qname.substr(0, colon);
-    localName = qname.substr(colon + 1);
+var closeOnEscape = function(e) {
+  if (e.keyCode === 27) {
+    this.close();
   }
-  return {
-    name: qname,
-    localName: localName,
-    prefix: prefix,
-    namespaceURI: prefixToURI[prefix]
-  };
 };
 
-var getPrefixedName = function(node) {
-  var name = node.nodeName.toLowerCase();
-  var prefix = node.prefix;
-  if (!prefix && node.namespaceURI) {
-    prefix = uriToPrefix[node.namespaceURI];
-  }
-  return prefix
-    ? (prefix + ':' + name)
-    : name;
-};
+var PopupMenu = {
+  prototype: Object.create(HTMLElement.prototype, {
 
-module.exports = {
-  getPrefixedName: getPrefixedName,
-  prefixToURI: prefixToURI,
-  uriToPrefix: uriToPrefix,
-  qualify: qualify
-};
-
-},{}],20:[function(require,module,exports){
-var code = require('./evaluate');
-var interpolate = require('./interpolate');
-var compose = require('./compose');
-var h = require('./h');
-
-var morphdom = require('morphdom');
-
-var T = require('./constants').T;
-var T_ID = 't-id';
-var attr = require('./attrs');
-var dom = require('./dom');
-var util = require('./util');
-var ns = require('./ns');
-var scope = require('./scope');
-
-// this is our symbol on which we stash registered event handlers, so that
-// we can remove any registered handlers before adding new ones.
-var EVENTS = '[[t-events]]';
-
-// we stash unique event handler ids and handlers by id, each bound to the
-// renered template data
-var eventHandlerId = 0;
-var eventHandlersById = {};
-
-/**
- * Returns a function that generates an interpolated string for the
- * given text node (`node.nodeType === Node.TEXT_NODE`).
- *
- * @param {Node} node
- * @return {Function} function(data:Object):String
- */
-var createTextRenderer = function(node) {
-  return compose.stringify(interpolate.compile(node.nodeValue));
-};
-
-var createCommentRenderer = function(node) {
-  var value = compose.stringify(interpolate.compile(node.nodeValue));
-  return function() {
-    return document.createComment(value.apply(this, arguments));
-  };
-};
-
-/**
- * "Pluck" event handlers from an attribute map, removing them from
- * the map. If no event handlers are found, the return value is
- * `undefined`.
- *
- * @param {Object} attrMap
- * @return {Object}
- */
-var pluckEventHandlers = function(attrMap) {
-  var handlers = undefined;
-  for (var name in attrMap) {
-    var value = attrMap[name];
-    if (name.indexOf('on') === 0 && typeof value === 'function') {
-      if (!handlers) {
-        handlers = {};
-      }
-      handlers[name.substr(2)] = value;
-      delete attrMap[name];
-    }
-  }
-  return handlers;
-};
-
-/**
- * This function returns a node rendering wrapper that registers event handlers
- * for the rendered node by assigning it a unique `t-id` attribute and stashing
- * a reference to the data-bound handlers in a corresponding hash. After the
- * tree is morphed, each element with a `t-id` attribute is then matched up
- * with its event handlers.
- *
- * @param {Function} render
- * @param {Object} handlers each key is an event type, and the value is a
- * callback function.
- * @return {Function} a function that returns the rendered node
- */
-var registerEventHandlers = function(render, handlers) {
-  return function(data, index) {
-    var node = render.apply(this, arguments);
-    if (node) {
-      var tid = ++eventHandlerId;
-      node.setAttribute(T_ID, tid);
-      var context = this;
-      var callback = function(event) {
-        // XXX in theory, this could fail if one
-        // of the handlers gets removed (not
-        // sure how that would happen, though)
-        handlers[event.type].call(context, data, event);
+    attachedCallback: {value: function() {
+      this[EVENTS] = {
+        clickoff: onClickOff.bind(this)
       };
-      var bound = {};
-      for (var type in handlers) {
-        bound[type] = callback;
+      this.addEventListener('click', onButtonClick);
+      this.addEventListener('keydown', closeOnEscape);
+      this.addEventListener('change', redispatchChange);
+      this.updateSelected();
+    }},
+
+    detachedCallback: {value: function() {
+      this.removeEventListener('click', onButtonClick);
+      this.removeEventListener('keydown', closeOnEscape);
+      this.removeEventListener('change', redispatchChange);
+      this.expanded = false;
+      delete this[EVENTS];
+    }},
+
+    button: {
+      get: function() {
+        return this.querySelector('button[aria-haspopup]');
       }
-      eventHandlersById[tid] = bound;
-    }
-    return node;
+    },
+
+    menu: {
+      get: function() {
+        var button = this.button;
+        return button.hasAttribute(CONTROLS)
+          ? document.getElementById(button.getAttribute(CONTROLS))
+          : this.querySelector('menu, [role=menu]');
+      }
+    },
+
+    expanded: {
+      get: function() {
+        var expanded = this.button.getAttribute(EXPANDED);
+        return expanded === 'true';
+      },
+      set: function(expanded) {
+        if (expanded !== this.expanded) {
+          this.button.setAttribute(EXPANDED, expanded);
+          this.menu.setAttribute(HIDDEN, !expanded);
+          var events = this[EVENTS];
+          if (expanded) {
+            this.button.addEventListener('blur', events.clickoff);
+            window.addEventListener('click', events.clickoff);
+          } else {
+            this.button.removeEventListener('blur', events.clickoff);
+            window.removeEventListener('click', events.clickoff);
+          }
+        }
+      }
+    },
+
+    select: {
+      get: function() {
+        return this.querySelector('select');
+      }
+    },
+
+    value: {
+      get: function() {
+        return getSelectValue(this.select);
+      },
+      set: function(value) {
+        var select = this.select;
+        var changed = setSelectValue(select, value);
+        this.updateSelected();
+        if (changed) {
+          this.dispatchEvent(new Event('change', {bubbles: true}));
+        }
+      }
+    },
+
+    open: {value: function() {
+      this.expanded = true;
+    }},
+
+    close: {value: function() {
+      this.expanded = false;
+    }},
+
+    clearValue: {value: function() {
+      this.value = undefined;
+    }},
+
+    selectAllValues: {value: function() {
+      this.value = [].map.call(this.select.options, function(option) {
+        return option.value;
+      });
+    }},
+
+    toggle: {value: function() {
+      this.expanded = !this.expanded;
+    }},
+
+    updateSelected: {value: function() {
+      var selected = this.select.selectedIndex > -1;
+      this.button.setAttribute(SELECTED, selected);
+    }}
+  })
+};
+
+module.exports = PopupMenu;
+
+},{"../lib/events":13,"../lib/get-ancestor":14}],11:[function(require,module,exports){
+var DATA_KEY = '__data__';
+var SORT_KEY = '__sort__';
+var FILTER_KEY = '__filter__';
+
+var SORTED = 'data-sorted';
+
+var compare = require('../lib/compare');
+var events = require('../lib/events');
+var predicate = require('../lib/predicate');
+var getAncestor = require('../lib/get-ancestor');
+
+var functional = function(f) {
+  return function(list) {
+    return f.apply(list, Array.prototype.slice.call(arguments, 1));
   };
 };
 
-/**
- * Returns a function that generates an interpolated DOM element tree
- * for the given element node
- * (`node.nodeType === Node.ELEMENT_NODE`).
- *
- * @param {Element} node
- * @return {Function} function(data:Object):Element
- */
-var createElementRenderer = function(node) {
-  // this element will never be rendered if it has a truthy t-skip
-  // attribute
-  if (node.hasAttribute(T.SKIP)) {
-    return undefined;
-  }
+var _slice = functional(Array.prototype.slice);
+var _map = functional(Array.prototype.map);
+var _filter = functional(Array.prototype.filter);
+var _forEach = functional(Array.prototype.forEach);
 
-  var name = ns.getPrefixedName(node);
-  var attrMap = attr.getAttributeMap(node);
-  var handlers = pluckEventHandlers(attrMap);
+var getRowData = function(tr, columns) {
+  var cells = tr.querySelectorAll('th, td');
+  return columns.reduce(function(row, col, i) {
+    row[col] = getCellData(cells[i]);
+    return row;
+  }, {});
+};
 
-  var condition = node.hasAttribute(T.IF)
-    ? code.evaluator(node.getAttribute(T.IF))
-    : undefined;
-
-  if (node.hasAttribute(T.ELSE)) {
-    if (condition) {
-      throw new Error('element has both t-if and t-else attributes');
-    }
-    // TODO: ELSEIF should just collect all of the previous IF and
-    // ELSEIF nodes and negate them. Some checking should happen here to
-    // ensure that they're specified in the correct order.
-    var ifSibling = dom.getPreviousSibling(node, '[' + T.IF + ']');
-    if (!ifSibling) {
-      throw new Error('element with t-else has no matching t-if sibling');
-    }
-    condition = compose.not(code.evaluator(ifSibling.getAttribute(T.IF)));
-  }
-
-  var renderChildren;
-
-  // <span t-text="some.value"></span>
-  if (node.hasAttribute(T.TEXT)) {
-    renderChildren = compose.stringify(
-      util.compileExpression(node.getAttribute(T.TEXT))
-    );
+var getCellData = function(cell) {
+  if (DATA_KEY in cell) {
+    return cell[DATA_KEY];
   } else {
-    var childRenderers = [].map.call(node.childNodes, compile);
-    renderChildren = function(data) {
-      return childRenderers.map(function(renderChild, i) {
-        return (typeof renderChild === 'function')
-          ? renderChild.call(this, data)
-          : renderChild;
-      }, this);
-    };
-  }
-
-  var renderNode = function(data) {
-    if (condition && !condition.call(this, data)) {
-      return undefined;
+    var data = cell.getAttribute('data-value') || cell.textContent;
+    if (data.length && !isNaN(Number(data))) {
+      data = Number(data);
     }
-
-    var attrs = attr.interpolateAttributes.call(this, attrMap, data);
-    var children = renderChildren.call(this, data);
-    return h(name, attrs, children);
-  };
-
-  // "attach" (as a single property) the event handler maps
-  if (handlers) {
-    renderNode = registerEventHandlers(renderNode, handlers);
-  }
-
-  var eachExpression = node.getAttribute(T.EACH);
-  var forEachExpression = node.getAttribute(T.FOREACH);
-  var withExpression = node.getAttribute(T.WITH);
-
-  var symbol = node.getAttribute(T.AS);
-
-  if (eachExpression) {
-    renderNode = scope.renderEach(
-      code.evaluator(eachExpression),
-      renderNode,
-      symbol
-    );
-  } else if (forEachExpression) {
-    renderChildren = scope.renderEach(
-      code.evaluator(forEachExpression),
-      renderChildren,
-      symbol
-    );
-  } else if (withExpression) {
-    renderNode = scope.renderWith(
-      code.evaluator(withExpression),
-      renderNode,
-      symbol
-    );
-  } else if (symbol) {
-    renderNode = scope.symbolSetter(symbol, renderNode);
-  }
-
-  return renderNode;
-};
-
-/**
- * Returns a rendering function for a given source ("template") node
- * and optional variable context for expressions.
- *
- * The returned function has the signatures:
- *
- * function(data:*)
- * function(node:Node, data:*)
- *
- * Where `data` is expected to be an object and, in the second form,
- * `node` is a target node to which the diffed DOM should be applied.
- *
- * @param {Node}    src
- * @param {Object?} context
- * @return {Function}
- */
-var createRenderer = function(src, context) {
-  if (typeof src === 'string') {
-    var selector = src;
-    src = document.querySelector(src);
-    if (!src) {
-      throw new Error('no element found with selector: "' + selector + '"');
-    }
-  }
-
-  var renderNode = compile(src);
-  return function(node, data, options) {
-    if (arguments.length < 2) {
-      data = node;
-    }
-    if ((!node && data) || node === data) {
-      node = src;
-    }
-    eventHandlerId = 0;
-    eventHandlersById = {};
-    var dest = renderNode.call(context, data);
-    var result = morphdom(src, dest, options);
-    updateEventHandlers(result);
-    return result;
-  };
-};
-
-/**
- * Update all of the event handlers in the given DOM tree. This looks for all
- * elements with the `t-id` attribute (including the root), removes any
- * existing handlers (stashed in the `[[t-events]]` symbol), then looks up the
- * registered handlers for the corresponding `t-id` value and adds those.
- *
- * @param {Element} root
- */
-var updateEventHandlers = function(root) {
-  var elements = [].slice.call(root.querySelectorAll('[' + T_ID + ']'));
-  if (root.hasAttribute(T_ID)) {
-    elements.unshift(root);
-  }
-  elements.forEach(function(el) {
-    var events = el[EVENTS];
-    var type;
-    if (events) {
-      for (type in events) {
-        el.removeEventListener(type, events[type], true);
-        delete events[type];
-      }
-      delete el[EVENTS];
-    }
-    var tid = el.getAttribute(T_ID);
-    events = eventHandlersById[tid];
-    if (events) {
-      for (type in events) {
-        el.addEventListener(type, events[type], true);
-      }
-      el[EVENTS] = events;
-    }
-    el.removeAttribute(T_ID);
-  });
-};
-
-/**
- * Creates a renderer, renders once if data is provided, and returns
- * a bound rendering function for subsequent calling.
- *
- * @param {Node}    src
- * @param {Object?} context
- * @return {Function}
- */
-var render = function(src, data, context) {
-  var renderData = createRenderer(src, context);
-  if (data) {
-    renderData(src, data);
-  }
-  return renderData;
-};
-
-/**
- * Returns a DOM element rendering function for the given "template"
- * or source node. This may be publicly exposed if it becomes useful,
- * e.g. for composition of referenced templates.
- *
- * @param {Node} node
- * @return {Function} the returned function takes data and returns an
- * unattached Node instance: function(data:Object):Node
- */
-var compile = function(node) {
-  switch (node.nodeType) {
-    case 1: // Node.ELEMENT_NODE
-      return createElementRenderer(node);
-
-    case 3: // Node.TEXT_NODE
-      return createTextRenderer(node);
-
-    case 8: // Node.COMMENT_NODE
-      return createCommentRenderer(node);
-
-    // TODO: support document fragments?
-    // this would need support in h()
-
-    default:
-      throw new Error('no renderer for node type: ' + node.nodeType);
+    cell[DATA_KEY] = data;
+    return data;
   }
 };
 
-
-module.exports.render = render;
-module.exports.createRenderer = createRenderer;
-module.exports.compile = compile;
-
-},{"./attrs":10,"./compose":11,"./constants":12,"./dom":13,"./evaluate":14,"./h":16,"./interpolate":18,"./ns":19,"./scope":21,"./util":22,"morphdom":8}],21:[function(require,module,exports){
-var renderEach = function(fn, render, symbol) {
-  return function(data) {
-    var values = fn.call(this, data);
-    return forEach.call(this, values, render, symbol);
-  };
-};
-
-var renderWith = function(fn, render, symbol) {
-  render = symbolSetter(symbol, render);
-  return function(data) {
-    data = fn.call(this, data);
-    return render.call(this, data);
-  };
-};
-
-var forEach = function(data, fn, symbol) {
-  var iterate = symbol
-    ? symbolSetter(symbol, fn)
-    : fn;
-
-  var result = [];
-  var INDEX = '$i';
-  var each = function(d, i) {
-    this[INDEX] = i;
-    result.push(iterate.call(this, d));
-    delete this[INDEX];
-  };
-
-  if (typeof data === 'object') {
-    if (Array.isArray(data)) {
-      data.forEach(each, this);
+var onDelegatedClick = events.delegate({
+  'thead th': function sortOnClick(e) {
+    var key = getCellData(e.delegatedTarget || e.target);
+    var sort = this.sort;
+    if (sort.key === key) {
+      sort.order = compare.toggle(sort.order);
     } else {
-      var i = 0;
-      for (var key in data) {
-        if (data.hasOwnProperty(key)) {
-          each.call(this, {key: key, value: data[key]}, i++);
+      sort = {key: key, order: compare.ASCENDING};
+    }
+    this.sort = sort;
+    e.preventDefault();
+    return false;
+  }
+});
+
+var onFilterChange = events.delegate({
+  'cfpb-popup-menu': function setFilterOnChange(e) {
+    var menu = e.delegatedTarget || e.target;
+    var header = getAncestor(menu, 'th');
+    var column = getCellData(header);
+    this.setFilter(column, menu.value);
+  }
+});
+
+var SortableTable = {
+  'extends': 'table',
+  prototype: Object.create(HTMLTableElement.prototype, {
+
+    attachedCallback: {value: function() {
+      var data = this.data;
+      this.headers.forEach(function(header) {
+        var select = header.querySelector('cfpb-popup-menu select');
+        if (!select) {
+          return;
+        }
+        var column = getCellData(header);
+
+        var values = data.map(function(d) {
+          return d[column];
+        });
+
+        values = values.filter(function(value, i) {
+          return values.indexOf(value) === i;
+        })
+        .sort(); // lexicographic
+
+        values.forEach(function(value) {
+          var option = select.appendChild(document.createElement('option'));
+          option.value = option.textContent = value;
+        });
+
+      }, this);
+      this.addEventListener('click', onDelegatedClick);
+      this.addEventListener('change', onFilterChange);
+
+      var style = document.createElement('style');
+      style.setAttribute('scoped', '');
+      this.appendChild(style);
+    }},
+
+    detachedCallback: {value: function() {
+      this.removeEventListener('click', onDelegatedClick);
+      this.removeEventListener('change', onFilterChange);
+      this.removeChild(this.querySelector('style[scoped]'));
+    }},
+
+    rows: {
+      get: function() {
+        return _slice(this.querySelectorAll('tbody tr'));
+      }
+    },
+
+    headers: {
+      get: function() {
+        return _slice(this.querySelectorAll('thead tr:last-child > *'));
+      }
+    },
+
+    columns: {
+      get: function() {
+        return _map(this.headers, getCellData);
+      }
+    },
+
+    data: {
+      get: function() {
+        var columns = this.columns;
+        return _map(this.rows, function(tr) {
+          return getRowData(tr, columns);
+        });
+      }
+    },
+
+    sort: {
+      get: function() {
+        return this[SORT_KEY] || (this[SORT_KEY] = {
+          key: undefined,
+          asc: undefined
+        });
+      },
+      set: function(sort) {
+        this[SORT_KEY] = sort;
+        this.updateSort();
+      }
+    },
+
+    updateSort: {value: function() {
+      var sort = this.sort;
+      var columns = this.columns;
+      var col = sort.key;
+      var index = columns.indexOf(col);
+      if (index === -1) {
+        console.warn('no such column:', col, 'in', columns);
+        return false;
+      }
+
+      var selector = 'tr > :nth-child(' + (index + 1) + ')';
+
+      // update aria-sort for each heading
+      _forEach(this.headers, function(th) {
+        var order = getCellData(th) === col ? sort.order : compare.NONE;
+        th.setAttribute('aria-sort', order);
+      });
+
+      var value = function(row) {
+        var cells = _filter(row.childNodes, function(node) {
+          return node.nodeType === Node.ELEMENT_NODE;
+        });
+
+        cells.forEach(function(cell, i) {
+          if (i === index) {
+            cell.setAttribute(SORTED, true);
+          } else {
+            cell.removeAttribute(SORTED);
+          }
+        });
+
+        return (SORT_KEY in row)
+          ? row[SORT_KEY]
+          : row[SORT_KEY] = getCellData(cells[index]);
+      };
+
+      var comp = compare[sort.order];
+      if (!comp) {
+        throw new Error('unrecognized sort order: "' + sort.order + '"');
+      }
+
+      var tbody = this.querySelector('tbody');
+
+      var rows = _slice(tbody.querySelectorAll('tr'))
+        .sort(function(a, b) {
+          return comp(value(a), value(b));
+        });
+
+      rows.forEach(function(row) {
+        delete row[SORT_KEY];
+        tbody.appendChild(row);
+      });
+    }},
+
+    filters: {
+      get: function() {
+        return this[FILTER_KEY] || (this[FILTER_KEY] = {});
+      },
+      set: function(filters) {
+        this[FILTER_KEY] = filters;
+        this.updateFilter();
+      }
+    },
+
+    updateFilter: {value: function() {
+      var cols = this.columns;
+      var visible = predicate(this.filters);
+      _forEach(this.rows, function(row) {
+        var data = getRowData(row, cols);
+        row.hidden = !visible.call(row, data);
+      });
+    }},
+
+    getFilter: {value: function(key) {
+      return this.filters[key];
+    }},
+
+    setFilter: {value: function(key, value) {
+      var filters = this.filters;
+      if (value === null ||
+          value === undefined ||
+          (Array.isArray(value) && !value.length)) {
+        delete filters[key];
+      } else {
+        filters[key] = value;
+      }
+      this.filters = filters;
+    }},
+
+    setCellData: {value: function(cell, data) {
+      cell[DATA_KEY] = data;
+      cell.setAttribute('data-value', data);
+      cell.textContent = String(data);
+    }}
+
+  })
+};
+
+module.exports = SortableTable;
+
+},{"../lib/compare":12,"../lib/events":13,"../lib/get-ancestor":14,"../lib/predicate":15}],12:[function(require,module,exports){
+var ASCENDING = 'ascending';
+var DESCENDING = 'descending';
+var NONE = 'none';
+
+var compare = {
+  ASCENDING: ASCENDING,
+  DESCENDING: DESCENDING,
+  NONE: NONE,
+  toggle: function(order) {
+    return order === ASCENDING ? DESCENDING : ASCENDING;
+  }
+};
+
+compare[ASCENDING] = function asc(a, b) {
+  return a > b ? 1 : a < b ? -1 : 0;
+};
+
+compare[DESCENDING] = function desc(a, b) {
+  return a < b ? 1 : a > b ? -1 : 0;
+};
+
+module.exports = compare;
+
+},{}],13:[function(require,module,exports){
+var getAncestor = require('./get-ancestor');
+
+var functor = function(d) {
+  return function() {
+    return d;
+  };
+};
+
+module.exports.delegate = function delegate(selectors) {
+  return function(e) {
+    var result;
+    var delegated = false;
+    for (var selector in selectors) {
+      var matches = e.target.matches(selector);
+      if (!matches) {
+        var ancestor = getAncestor(e.target, selector);
+        matches = ancestor && this.contains(ancestor);
+        if (matches) {
+          e.delegatedTarget = ancestor;
+        }
+      }
+      if (matches) {
+        result = selectors[selector].call(this, e);
+        delegated = true;
+        if (result === false) {
+          break;
         }
       }
     }
-  } else if (typeof data === 'string') {
-    data.split('').forEach(each, this);
-  }
-
-  return result;
-};
-
-var symbolSetter = function(symbol, fn) {
-  return function(data) {
-    var previous = set(this, symbol, data);
-    var result = fn.call(this, data);
-    set(this, symbol, previous);
     return result;
   };
 };
 
-var set = function(context, symbol, value) {
-  var previous = context[symbol];
-  if (value === undefined) {
-    delete context[symbol];
-  } else {
-    context[symbol] = value;
+},{"./get-ancestor":14}],14:[function(require,module,exports){
+module.exports = function getAncestor(element, selector) {
+  while (element = element.parentNode) {
+    if (element !== document && element.matches(selector)) {
+      return element;
+    }
   }
-  return previous;
 };
 
-module.exports = {
-  renderWith: renderWith,
-  renderEach: renderEach,
-  symbolSetter: symbolSetter
+},{}],15:[function(require,module,exports){
+module.exports = function predicate(filters) {
+  var functions = Object.keys(filters).map(function(key) {
+    var value = filters[key];
+    if (typeof value === 'function') {
+      return function(d) {
+        return value.call(this, d[key], key);
+      };
+    } else if (Array.isArray(value)) {
+      return function(d) {
+        return value.indexOf(String(d[key])) > -1;
+      };
+    }
+    return function(d) {
+      return d[key] == value;
+    };
+  });
+  return function(d, i) {
+    return functions.every(function(f) {
+      return f.call(this, d, i);
+    }, this);
+  };
 };
 
-},{}],22:[function(require,module,exports){
-var code = require('./evaluate');
-var interpolate = require('./interpolate');
-
-module.exports.defined = function(value) {
-  return value !== null && value !== undefined;
-};
-
-module.exports.compileExpression = function(expr) {
-  return interpolate.isTemplate(expr)
-    ? interpolate.compile(expr)
-    : code.evaluator(expr);
-};
-
-},{"./evaluate":14,"./interpolate":18}],23:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 (function (global){
 'use strict';
 
+var cfpb = {};
+global.cfpb = cfpb;
+
 global.$ = require('jquery');
-global.tagalong = require('tagalong');
+// global.tagalong = require('tagalong');
+global.moment = require('moment');
+
+cfpb.components = require('./components');
 
 require('cf-expandables');
 require('cf-tables');
-global.moment = require('moment');
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"cf-expandables":2,"cf-tables":4,"jquery":6,"moment":7,"tagalong":17}]},{},[23]);
+},{"./components":9,"cf-expandables":2,"cf-tables":4,"jquery":7,"moment":8}]},{},[16]);

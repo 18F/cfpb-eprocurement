@@ -1,0 +1,55 @@
+---
+title: Components
+layout: default
+table:
+  columns:
+    - name: Risk level
+      class: nowrap
+    - name: Procurement Team
+    - name: Buyer
+      class: nowrap
+    - name: CO
+      class: nowrap
+    - name: Project Manager/COTR
+    - name: Client Office
+  rows:
+    - ['Green - On Time', 'CFPB', 'Doyle, John', 'Smith, Janet', 'Stamper, Alex', 'EEO']
+    - ['Green - On Time', 'CFPB', 'Bob, Billy', 'Franklin, John', 'Welles, Orson', 'EEO']
+    - ['Red - At Risk', 'CFPB', 'Allen, Jimmy', 'Smith, Alex', 'Wilson, John', 'CEE']
+    - ['Green - On Time', 'BFS', 'Bob, Billy', 'Kang, Rudy', 'Stamper, Alex', 'CR']
+    - ['Green - On Time', 'BFS', 'Franklin, Joe', 'Filbert, Jill', 'Chiu, David', 'CR']
+    - ['Yellow - Moderate', 'CFPB', 'Hamilton, Judy', 'Bostock, Mark', 'Wilson, John', 'EEO']
+    - ['Green - On Time', 'CFPB', 'Doyle, John', 'Anderson, Laura', 'Phillips, Brianna', 'EEO']
+status_class:
+  'Green - On Time': green
+  'Yellow - Moderate': yellow
+  'Red - At Risk': red
+---
+
+<h1>Sortable Table</h1>
+
+<table is="cfpb-sortable-table">
+  <thead>
+    <tr>
+      <th aria-sort="ascending"># {% include sort-icons.html %}</th>
+      {% for column in page.table.columns %}
+      <th data-value="{{ column.name }}" aria-sort="none">
+        {% include sort-icons.html %}
+        {{ column.name }}
+        {% include filter-popup.html column=column.name %}
+      </th>
+      {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in page.table.rows %}
+      {% assign status = row[0] | downcase | split: ' ' | first %}
+    <tr class="status-{{ status | default: 'none' }}">
+      <td data-sorted="true">{{ forloop.index0 }}</td>
+      {% for value in row %}
+      <td class="{{ page.table.columns[forloop.index0].class }}">{{ value }}</td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>

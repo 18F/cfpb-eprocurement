@@ -11,8 +11,9 @@
   <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
   <meta name="description" content="{{ page.description | default: site.description }}">
 
-  <!--[if lt IE 9]>     <link rel="stylesheet" href="{{ site.baseurl }}/static/css/main.ie.min.css"> <![endif]-->
-  <!--[if gt IE 8]><!--><link rel="stylesheet" href="{{ site.baseurl }}/static/css/main.min.css"> <!--<![endif]-->
+  <!--[if lt IE 9]>     <link rel="stylesheet" href="{{ site.baseurl }}/static/css/main.ie.min.css"><![endif]-->
+  <!--[if gt IE 8]><!--><link rel="stylesheet" href="{{ site.baseurl }}/static/css/main.min.css"><!--<![endif]-->
+  <link rel="stylesheet" href="{{ site.baseurl }}/static/css/components.css">
 
   <script>
     // Confirm availability of JS and remove no-js class from html
@@ -21,7 +22,7 @@
   </script>
 </head>
 
-<body>
+<body class="site__wide">
 
   <header class="wrapper wrapper__match-content" role="banner">
     <div class="block block__sub">
