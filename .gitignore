@@ -71,6 +71,6 @@ bower_components/
 src/vendor/
 dist/
 
-src/vendor/
+# Jekyll files
 _site
 .sass-cache
