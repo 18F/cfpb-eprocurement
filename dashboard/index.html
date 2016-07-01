@@ -15,7 +15,8 @@ event_columns:
 - key: cumulativeDelay
   title: Delay (cumulative)
 ---
-<h2>Dashboard</h2>
+<h2>Procurements Dashboard</h2>
+<p>Each section below offers information about a specific procurement.</p>
 
 {% assign _id = 'Procurement ID' %}
 {% assign _shortdesc = 'Short description' %}
@@ -26,6 +27,7 @@ event_columns:
 <section id="{{ pid }}" class="procurement">
 
   <h3 class="feature-header">
+    <a href="#{{ pid }}"><span class="cf-icon cf-icon-document"></span></a>
     {{ procurement[_shortdesc] | default: 'No Description' }}
   </h3>
 
