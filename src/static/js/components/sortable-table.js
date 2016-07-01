@@ -42,7 +42,7 @@ var getCellData = function(cell) {
 };
 
 var onDelegatedClick = events.delegate({
-  'thead th': function sortOnClick(e) {
+  'thead th[aria-sort]': function sortOnClick(e) {
     var key = getCellData(e.delegatedTarget || e.target);
     var sort = this.sort;
     if (sort.key === key) {
@@ -156,8 +156,10 @@ var SortableTable = {
 
       // update aria-sort for each heading
       _forEach(this.headers, function(th) {
-        var order = getCellData(th) === col ? sort.order : compare.NONE;
-        th.setAttribute('aria-sort', order);
+        if (th.hasAttribute('aria-sort')) {
+          var order = getCellData(th) === col ? sort.order : compare.NONE;
+          th.setAttribute('aria-sort', order);
+        }
       });
 
       var value = function(row) {
