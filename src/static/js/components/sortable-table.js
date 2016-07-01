@@ -95,16 +95,11 @@ var SortableTable = {
       }, this);
       this.addEventListener('click', onDelegatedClick);
       this.addEventListener('change', onFilterChange);
-
-      var style = document.createElement('style');
-      style.setAttribute('scoped', '');
-      this.appendChild(style);
     }},
 
     detachedCallback: {value: function() {
       this.removeEventListener('click', onDelegatedClick);
       this.removeEventListener('change', onFilterChange);
-      this.removeChild(this.querySelector('style[scoped]'));
     }},
 
     rows: {

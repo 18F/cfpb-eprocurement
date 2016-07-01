@@ -44,6 +44,9 @@
   </footer>
 
   <script src="{{ site.baseurl }}/static/js/main.js"></script>
+  {% for script in page.scripts %}
+  <script src="{{ site.baseurl }}/static/js/{{ script }}"></script>
+  {% endfor %}
 
 </body>
 

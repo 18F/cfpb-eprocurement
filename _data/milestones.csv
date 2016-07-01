@@ -1,0 +1,13 @@
+Procurement ID,Milestone,Milestone (alternative versions),Owner,Forecasted Date,Actual Completion Date,Behind Schedule?
+1,CFPBuy requistion submitted,The Contracting Officer Representative submits the requisition cover sheet [alternative: submits the cover sheet] to the Office of the Chief Financial Officer.,COR,2016-01-11,2016-01-08,
+1,Requestion approved by OCFO,The Office of the Chief Financial Officer approves the requisition.,OCFO,2016-01-25,2016-01-26,
+1,Contracting officer assigned,The [program office] assigns a Contracting Officer. ,Deputy Procurement Office (DPO),2016-01-29,2016-02-04,
+1,Acquisition package completed and submitted for review,The Contracting Officer Representative completes and submits the acquisition package.,COR,2016-03-01,2016-03-05,
+1,The procurement office and legal team review the acquisition package.,,,,
+1,Contract put out to bid,The procurement office puts the contract out to bid. Alternative: The procurement office shares the contract with eligible vendors. Alternative: The procurement office collects bids from eligible vendors.,CO,2016-03-23,2016-03-28,
+1,Proposals from vendors ready for review,The Contracting Officer reviews proposals from vendors. Alternative: The contracting office reviews vendors' proposals.,CO,2016-04-22,2016-04-25,
+1,Vendor selected by panel,A technical evaluation panel chooses the most qualified vendor. OR The program office chooses the most qualified vendor.,COR,2016-04-30,2016-05-03,
+1,"Vendor approved, contract awarded",The program office approves the vendor and awards the contract. OR The program office awards the approved vendor a contract.,CO,2016-05-27,2016-05-27,
+1,Kick off,The Contracting Officer Representative holds a kickoff with the vendor.,COR,2016-06-25,,
+1,Contract ends,The contract ends.,COR,2017-06-25,,
+1,Contract closed out,The [title] closes out the contract. Alternative: [Title] officially closes the contract.,Ray,2017-09-30,,

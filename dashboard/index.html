@@ -1,0 +1,59 @@
+---
+title: Dashboard
+layout: default
+
+scripts:
+- dashboard.js
+
+event_columns:
+- key: Milestone
+- key: Owner
+- key: Forecasted Date
+- key: Actual Completion Date
+- key: delay
+  title: Delay (days)
+- key: cumulativeDelay
+  title: Delay (cumulative)
+---
+<h2>Dashboard</h2>
+
+{% assign _id = 'Procurement ID' %}
+{% assign _shortdesc = 'Short description' %}
+{% assign _longdesc = 'Long description' %}
+
+{% for procurement in site.data.procurements %}
+{% assign pid = 'procurement-' | append: procurement[_id] %}
+<section id="{{ pid }}" class="procurement">
+
+  <h3 class="feature-header">
+    {{ procurement[_shortdesc] | default: 'No Description' }}
+  </h3>
+
+  {% if procurement[_longdesc] %}
+  <p>{{ procurement[_longdesc] }}</p>
+  {% endif %}
+
+  {% assign events = site.data.milestones | where: _id, procurement[_id] %}
+  {% if events.size > 0 %}
+  <table is="cfpb-sortable-table" class="events">
+    <thead>
+      <tr>
+        {% for column in page.event_columns %}
+        <th>{{ column.title | default: column.key }}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+    {% for event in events %}
+      <tr id="event-{{ procurement[_id] }}-{{ forloop.index }}">
+        {% for column in page.event_columns %}
+        <td data-key="{{ column.key }}">{{ event[column.key] }}</td>
+        {% endfor %}
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+
+</section>
+{% endfor %}
