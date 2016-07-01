@@ -1,5 +1,7 @@
 (function(exports) {
 
+  var plusMinus = d3.format('+d');
+
   var tables = d3.selectAll('table[is=cfpb-sortable-table].events')
     .datum(function() { return this.data; })
 
@@ -31,7 +33,7 @@
       d.delay = (forecast && complete)
         ? getDelay(forecast, complete)
         : 0;
-      return d.delay;
+      return plusMinus(d.delay);
     })
     // color-code the cell
     .style('background-color', function(d) {
@@ -45,13 +47,25 @@
       .select('[data-key=cumulativeDelay]')
         .text(function(d) {
           delay += d.delay || 0;
-          return d.cumulativeDelay = delay;
+          d.cumulativeDelay = delay;
+          return plusMinus(d.cumulativeDelay);
         })
         // color-code the cell
         .style('background-color', function(d) {
           return cumulativeDelayScale(d.cumulativeDelay);
         });
   });
+
+  rows.selectAll('[data-format]')
+    .html(function(d) {
+      var value = this.getAttribute('data-value');
+      if (value) {
+        var date = moment(value, 'YYYY-MM-DD').toDate();
+        var format = this.getAttribute('data-format');
+        return d3.time.format(format)(date);
+      }
+      return this.textContent;
+    });
 
   /**
    * get the delay between a forecast and completion date, with a
