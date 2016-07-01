@@ -8,8 +8,22 @@
     padding-right: 1em;
   }
 
+  .fixed,
   .nowrap {
     white-space: nowrap;
+  }
+
+  .fixed {
+    font-family: monospace;
+    font-size: 1.2em;
+
+    tt {
+      color: $gray-40;
+    }
+  }
+
+  .num {
+    text-align: right;
   }
 
   thead td {
