@@ -8,10 +8,26 @@
     padding-right: 1em;
   }
 
+  .nowrap {
+    white-space: nowrap;
+  }
+
+  thead td {
+    background: transparent;
+  }
+
+  thead tr th[colspan] {
+    background: $gray-80;
+    text-align: center;
+  }
+
+  thead tr:nth-child(2) > * {
+    vertical-align: bottom;
+  }
+
   th + th {
     border-left: 1px solid $gray-80;
   }
-
 
   // all sortable headers get aria-sort
   [aria-sort] {

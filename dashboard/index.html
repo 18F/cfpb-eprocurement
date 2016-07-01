@@ -5,15 +5,19 @@ layout: default
 scripts:
 - dashboard.js
 
-event_columns:
+columns:
 - key: Milestone
 - key: Owner
 - key: Forecasted Date
+  title: Forecast
+  icon: date
 - key: Actual Completion Date
+  title: Complete
+  icon: date
 - key: delay
-  title: Delay (days)
+  title: Days
 - key: cumulativeDelay
-  title: Delay (cumulative)
+  title: Running
 ---
 <h2>Procurements Dashboard</h2>
 <p>Each section below offers information about a specific procurement.</p>
@@ -22,12 +26,14 @@ event_columns:
 {% assign _shortdesc = 'Short description' %}
 {% assign _longdesc = 'Long description' %}
 
+{% assign columns = page.columns %}
+
 {% for procurement in site.data.procurements %}
 {% assign pid = 'procurement-' | append: procurement[_id] %}
 <section id="{{ pid }}" class="procurement">
 
   <h3 class="feature-header">
-    <a href="#{{ pid }}"><span class="cf-icon cf-icon-document"></span></a>
+    <a href="#{{ pid }}"><span class="cf-icon cf-icon-contract"></span></a>
     {{ procurement[_shortdesc] | default: 'No Description' }}
   </h3>
 
@@ -40,15 +46,22 @@ event_columns:
   <table is="cfpb-sortable-table" class="events">
     <thead>
       <tr>
-        {% for column in page.event_columns %}
-        <th>{{ column.title | default: column.key }}</th>
+        <td colspan="{{ columns.size | minus: 2 }}"></td>
+        <th colspan="2">Delay</th>
+      </tr>
+      <tr>
+        {% for column in columns %}
+        <th class="nowrap" data-value="{{ column.key }}">
+          {% if column.icon %}<span class="cf-icon cf-icon-{{ column.icon }}"></span>{% endif %}
+          {{ column.title | default: column.key }}
+        </th>
         {% endfor %}
       </tr>
     </thead>
     <tbody>
     {% for event in events %}
       <tr id="event-{{ procurement[_id] }}-{{ forloop.index }}">
-        {% for column in page.event_columns %}
+        {% for column in columns %}
         <td data-key="{{ column.key }}">{{ event[column.key] }}</td>
         {% endfor %}
       </tr>
