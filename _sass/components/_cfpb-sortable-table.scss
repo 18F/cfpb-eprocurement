@@ -26,13 +26,17 @@
     text-align: right;
   }
 
+  .centered {
+    text-align: center;
+  }
+
   thead td {
     background: transparent;
   }
 
   thead tr th[colspan] {
-    background: $gray-80;
-    text-align: center;
+    color: $black;
+    background: $gray-20;
   }
 
   thead tr:nth-child(2) > * {
