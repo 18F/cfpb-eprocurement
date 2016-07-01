@@ -1,0 +1,89 @@
+---
+title: Dashboard
+layout: default
+
+scripts:
+- dashboard.js
+
+columns:
+- key: Milestone
+- key: Forecasted Date
+  title: Forecast
+  type: date
+  class: fixed
+- key: Actual Completion Date
+  title: Complete
+  type: date
+  class: fixed
+- key: delay
+  title: Days
+  class: num fixed
+- key: cumulativeDelay
+  title: Running
+  class: num fixed
+- key: Owner
+
+formats:
+  date: '%m<tt>/</tt>%d<tt>/</tt>%Y'
+---
+<h2>Procurements Dashboard</h2>
+<p>Each section below offers information about a specific procurement.</p>
+
+{% assign _id = 'Procurement ID' %}
+{% assign _shortdesc = 'Short description' %}
+{% assign _longdesc = 'Long description' %}
+
+{% assign columns = page.columns %}
+
+{% for procurement in site.data.procurements %}
+{% assign pid = 'procurement-' | append: procurement[_id] %}
+<section id="{{ pid }}" class="procurement">
+
+  <h3 class="feature-header">
+    <a href="#{{ pid }}"><span class="cf-icon cf-icon-contract"></span></a>
+    {{ procurement[_shortdesc] | default: 'No Description' }}
+  </h3>
+
+  {% if procurement[_longdesc] %}
+  <p>{{ procurement[_longdesc] }}</p>
+  {% endif %}
+
+  {% assign events = site.data.milestones | where: _id, procurement[_id] %}
+  {% if events.size > 0 %}
+  <table is="cfpb-sortable-table" class="events">
+    <thead>
+      <tr>
+        <td colspan="{{ columns.size | minus: 5 }}"></td>
+        <th colspan="2" class="centered">
+          <span class="cf-icon cf-icon-{{ column.icon }}"></span>
+          Milestone
+        </td>
+        <th colspan="2" class="centered">Delay</th>
+        <td></td>
+      </tr>
+      <tr>
+        {% for column in columns %}
+        <th data-value="{{ column.key }}">
+          {{ column.title | default: column.key }}
+        </th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+    {% for event in events %}
+      <tr id="event-{{ procurement[_id] }}-{{ forloop.index }}">
+        {% for column in columns %}
+        <td data-key="{{ column.key }}" data-value="{{ event[column.key] }}"
+          {% if column.class %}class="{{ column.class }}"{% endif %}
+          {% if page.formats[column.type] %}data-format="{{ page.formats[column.type] }}"{% endif %}>
+          {{ event[column.key] }}
+        </td>
+        {% endfor %}
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+
+</section>
+{% endfor %}
