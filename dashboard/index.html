@@ -7,17 +7,24 @@ scripts:
 
 columns:
 - key: Milestone
-- key: Owner
 - key: Forecasted Date
   title: Forecast
   icon: date
+  format: '%m<tt>/</tt>%d<tt>/</tt>%Y'
+  class: fixed
 - key: Actual Completion Date
   title: Complete
   icon: date
+  format: '%m<tt>/</tt>%d<tt>/</tt>%Y'
+  class: fixed
 - key: delay
   title: Days
+  class: num fixed
 - key: cumulativeDelay
   title: Running
+  class: num fixed
+- key: Owner
+
 ---
 <h2>Procurements Dashboard</h2>
 <p>Each section below offers information about a specific procurement.</p>
@@ -46,8 +53,9 @@ columns:
   <table is="cfpb-sortable-table" class="events">
     <thead>
       <tr>
-        <td colspan="{{ columns.size | minus: 2 }}"></td>
+        <td colspan="{{ columns.size | minus: 3 }}"></td>
         <th colspan="2">Delay</th>
+        <td></td>
       </tr>
       <tr>
         {% for column in columns %}
@@ -62,7 +70,11 @@ columns:
     {% for event in events %}
       <tr id="event-{{ procurement[_id] }}-{{ forloop.index }}">
         {% for column in columns %}
-        <td data-key="{{ column.key }}">{{ event[column.key] }}</td>
+        <td data-key="{{ column.key }}" data-value="{{ event[column.key] }}"
+          {% if column.class %}class="{{ column.class }}"{% endif %}
+          {% if column.format %}data-format="{{ column.format }}"{% endif %}>
+          {{ event[column.key] }}
+        </td>
         {% endfor %}
       </tr>
     {% endfor %}
