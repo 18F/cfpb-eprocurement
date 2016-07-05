@@ -1,5 +1,4 @@
 (function(exports) {
-
   var plusMinus = d3.format('+d');
 
   var tables = d3.selectAll('table[is=cfpb-sortable-table].events')
