@@ -59,7 +59,7 @@
     .html(function(d) {
       var value = this.getAttribute('data-value');
       var key = this.getAttribute('data-key');
-
+      
       if (value) {
         var format = this.getAttribute('data-format');
 
