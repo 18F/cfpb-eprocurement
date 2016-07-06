@@ -32,8 +32,16 @@ formats:
 {% assign _id = 'Procurement ID' %}
 {% assign _shortdesc = 'Short description' %}
 {% assign _longdesc = 'Long description' %}
+
 {% assign _primary_contact = 'Primary procurement office contact' %}
-{% assign _role = 'Role' %}
+{% assign _primary_role = 'Primary Role' %}
+{% assign _primary_number = 'Phone number' %}
+{% assign _primary_email = 'Email address' %}
+
+{% assign _secondary_contact = 'Other procurement team member' %}
+{% assign _secondary_role = 'Secondary Role' %}
+{% assign _secondary_email = 'Phone/email' %}
+
 {% assign _waiting = 'Waiting on this person...' %}
 {% assign _todo = 'To do this thing...' %}
 {% assign _remind_at = 'Remind them at this date' %}
@@ -46,9 +54,9 @@ formats:
 
   <section class="content-l">
     <div class="content-l_col content-l_col-1">
-      <h3 class="feature-header">
+      <h3 class="feature-header procurement-feature-header">
         <a href="#{{ pid }}"><span class="cf-icon cf-icon-contract"></span></a>
-        {{ procurement[_shortdesc] | default: 'No Description' }}
+        {{ procurement[_shortdesc] | default: 'No Description available' }}
       </h3>
     </div>
 
@@ -58,9 +66,29 @@ formats:
           Contact info
         </div>
       </div>
-      <ul>
-        <li>
-          {{ procurement[_primary_contact] }} ({{ procurement[_role] }}) - 555-5555
+      <ul class="contact-list">
+        <li class="contact-list__item">
+          <p class="contact-list__datum">
+            <b>{{ procurement[_primary_contact] | split: ',' | reverse | join: ' '}}</b>
+          </p>
+          <p class="micro-copy">{{ procurement[_primary_role] }}</p>
+          <p class="contact-list__datum micro-copy">
+            <strong>phone:</strong> {{ procurement[_primary_number] }}
+            <br />
+            <strong>email:</strong> {{ procurement[_primary_email] }}
+          </p>
+        </li>
+
+        <li class="contact-list__item">
+          <p class="contact-list__datum">
+            <b>{{ procurement[_secondary_contact] | split: ',' | reverse | join: ' ' }}</b>
+          </p>
+          <p class="micro-copy">{{ procurement[_secondary_role] }}</p>
+          <p class="contact-list__datum micro-copy">
+            <strong>phone:</strong> {{ procurement[_secondary_number] | default: 'N/A' }}
+            <br />
+            <strong>email:</strong> {{ procurement[_secondary_email] | default: 'N/A' }}
+          </p>
         </li>
 
       </ul>
@@ -77,12 +105,21 @@ formats:
 
     <div class="content-l_col content-l_col-1-3">
       <div class="header-slug">
-        <div class="header-slug_inner">
+        <div class="header-slug_inner header-slug_inner__important">
           Next Steps
         </div>
       </div>
       <div>
-        Waiting on <b>{{ procurement[_waiting] }}</b> for <b>{{ procurement[_todo] }}<b>. <br />Next reminder: 07/07/2016
+        <p>
+          Waiting on <b>{{ procurement[_waiting] }}</b>
+        <p>
+        <p>
+          For <b>{{ "'" | append:  procurement[_todo] | append: "''" }}</b>
+        <p>
+
+        <p class="micro-copy reminder-badge">
+          <strong>Next reminder: 07/07/2016</strong>
+        </p>
       <div>
     </div>
   </section>

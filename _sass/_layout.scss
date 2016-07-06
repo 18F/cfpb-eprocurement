@@ -1,3 +1,5 @@
+@import 'palette';
+
 .site__wide .content_wrapper,
 .site__wide .wrapper__match-content {
   margin-left: 0;
@@ -17,10 +19,53 @@
     float: right;
     margin-bottom: 0px;
   }
+}
 
-  &:after {
-    clear: both;
-    content: "";
-    display: table;
+.procurement {
+  margin: 40px 0 60px 0;
+}
+
+.procurement-feature-header {
+  background: $dark-gray;
+  border-bottom: none;
+  color: $white;
+  padding: 20px;
+
+  .cf-icon {
+    color: $white;
   }
+}
+
+.contact-list {
+  padding: 0;
+
+  .contact-list__item {
+    background: $gray-5;
+    padding: 12px;
+  }
+
+  .contact-list__item:first-child {
+    background: $gray-10;
+    box-shadow: 0px 1px 8px $gray-60;
+    //color: $white;
+  }
+
+  .contact-list__datum {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+}
+
+.events {
+  margin: 40px 0 40px 0;
+}
+
+.header-slug_inner__important {
+  border-color: $red;
+}
+
+.reminder-badge {
+  background: #ffce8d;
+  padding: 10px;
+  color: black;
 }
