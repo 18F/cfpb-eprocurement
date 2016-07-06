@@ -1,0 +1,95 @@
+[is="cfpb-sortable-table"] {
+
+  td,
+  th {
+    box-sizing: border-box;
+    vertical-align: top;
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+
+  .fixed,
+  .nowrap {
+    white-space: nowrap;
+  }
+
+  .fixed {
+    font-family: monospace;
+    font-size: 1.2em;
+
+    tt {
+      color: $gray-40;
+    }
+  }
+
+  .num {
+    text-align: right;
+  }
+
+  .centered {
+    text-align: center;
+  }
+
+  thead td {
+    background: transparent;
+  }
+
+  thead tr th[colspan] {
+    color: $black;
+    background: $gray-20;
+  }
+
+  thead tr:nth-child(2) > * {
+    vertical-align: bottom;
+  }
+
+  th + th {
+    border-left: 1px solid $gray-80;
+  }
+
+  // all sortable headers get aria-sort
+  [aria-sort] {
+    cursor: pointer;
+    white-space: nowrap;
+
+    .sort-icon {
+      color: $gray;
+      display: none;
+      pointer-events: none;
+    }
+
+  }
+
+  [aria-sort=ascending],
+  [aria-sort=descending] {
+    background: $black;
+  }
+
+  [aria-sort=none] .sort-none {
+    display: initial;
+  }
+
+  [aria-sort=ascending] .sort-ascending,
+  [aria-sort=descending] .sort-descending {
+    display: initial;
+    color: $gold;
+  }
+
+  // tiger striped body rows
+  /*
+  tbody tr:nth-child(odd) {
+    background: $gray-10;
+  }
+  */
+
+  tbody tr > [data-sorted=true] {
+    background: $gray-10;
+  }
+
+  /*
+  tbody tr:nth-child(odd) > [data-sorted=true] {
+    background: $gray-20;
+  }
+  */
+
+}

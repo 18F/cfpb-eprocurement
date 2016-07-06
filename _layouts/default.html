@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>     <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]-->
+<!--[if IE 7]>        <html lang="en" class="no-js lt-ie9 lt-ie8"><![endif]-->
+<!--[if IE 8]>        <html lang="en" class="no-js lt-ie9"><![endif]-->
+<!--[if gt IE 8]><!--><html lang="en" class="no-js"><!--<![endif]-->
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ page.description | default: site.description }}">
+
+  <!--[if lt IE 9]>     <link rel="stylesheet" href="{{ site.baseurl }}/static/css/main.ie.min.css"><![endif]-->
+  <!--[if gt IE 8]><!--><link rel="stylesheet" href="{{ site.baseurl }}/static/css/main.min.css"><!--<![endif]-->
+  <link rel="stylesheet" href="{{ site.baseurl }}/static/css/components.css">
+
+  <script>
+    // Confirm availability of JS and remove no-js class from html
+    var docElement = document.documentElement;
+    docElement.className = docElement.className.replace(/(^|\s)no-js(\s|$)/, '$1$2');
+  </script>
+</head>
+
+<body class="site__wide">
+
+  <header class="wrapper wrapper__match-content" role="banner">
+    <div class="block block__sub">
+      <div class="header u-clearfix">
+        <h1 class="header__left superheading">{{ site.title }}</h1>
+        <h6 class="header__right">
+          logged in as {{ site.user }} ({{ site.role }})
+        </h6>
+      </div>
+    </div>
+  </header>
+
+  <main class="content" id="main" role="main">
+    <div class="content_bar"></div>
+    <div class="content_wrapper">
+      <div class="content_main">
+        {{ content }}
+      </div><!-- END .content_main -->
+    </div><!-- END .content_wrapper -->
+  </main>
+
+  <footer role="contentinfo">
+    <!-- Footer stuff -->
+  </footer>
+
+  <script src="{{ site.baseurl }}/static/js/main.js"></script>
+  {% for script in page.scripts %}
+  <script src="{{ site.baseurl }}/static/js/{{ script }}"></script>
+  {% endfor %}
+
+</body>
+
+</html>
