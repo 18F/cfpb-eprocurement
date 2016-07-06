@@ -1,0 +1,165 @@
+---
+title: Dashboard
+layout: default
+
+scripts:
+- dashboard.js
+
+columns:
+- key: Milestone
+- key: Forecasted Date
+  title: Forecast
+  type: date
+  class: fixed
+- key: Actual Completion Date
+  title: Complete
+  type: date
+  class: fixed
+- key: delay
+  title: This Phase
+  class: num fixed
+- key: cumulativeDelay
+  title: To Date
+  class: num fixed
+- key: Owner
+
+formats:
+  date: '%m<tt>/</tt>%d<tt>/</tt>%Y'
+---
+<h2>Procurements Dashboard</h2>
+<p>Each section below offers information about a specific procurement.</p>
+
+{% assign _id = 'Procurement ID' %}
+{% assign _shortdesc = 'Short description' %}
+{% assign _longdesc = 'Long description' %}
+
+{% assign _primary_contact = 'Primary procurement office contact' %}
+{% assign _primary_role = 'Primary Role' %}
+{% assign _primary_number = 'Phone number' %}
+{% assign _primary_email = 'Email address' %}
+
+{% assign _secondary_contact = 'Other procurement team member' %}
+{% assign _secondary_role = 'Secondary Role' %}
+{% assign _secondary_email = 'Phone/email' %}
+
+{% assign _waiting = 'Waiting on this person...' %}
+{% assign _todo = 'To do this thing...' %}
+{% assign _remind_at = 'Remind them at this date' %}
+
+{% assign columns = page.columns %}
+
+{% for procurement in site.data.procurements %}
+{% assign pid = 'procurement-' | append: procurement[_id] %}
+<section id="{{ pid }}" class="procurement">
+
+  <section class="content-l">
+    <div class="content-l_col content-l_col-1">
+      <h3 class="feature-header procurement-feature-header">
+        <a href="#{{ pid }}"><span class="cf-icon cf-icon-contract"></span></a>
+        {{ procurement[_shortdesc] | default: 'No Description available' }}
+      </h3>
+    </div>
+
+    <div class="content-l_col content-l_col-1-3">
+      <div class="header-slug">
+        <div class="header-slug_inner">
+          Contact info
+        </div>
+      </div>
+      <ul class="contact-list">
+        <li class="contact-list__item">
+          <p class="contact-list__datum">
+            <b>{{ procurement[_primary_contact] | split: ',' | reverse | join: ' '}}</b>
+          </p>
+          <p class="micro-copy">{{ procurement[_primary_role] }}</p>
+          <p class="contact-list__datum micro-copy">
+            <strong>phone:</strong> {{ procurement[_primary_number] }}
+            <br />
+            <strong>email:</strong> {{ procurement[_primary_email] }}
+          </p>
+        </li>
+
+        <li class="contact-list__item">
+          <p class="contact-list__datum">
+            <b>{{ procurement[_secondary_contact] | split: ',' | reverse | join: ' ' }}</b>
+          </p>
+          <p class="micro-copy">{{ procurement[_secondary_role] }}</p>
+          <p class="contact-list__datum micro-copy">
+            <strong>phone:</strong> {{ procurement[_secondary_number] | default: 'N/A' }}
+            <br />
+            <strong>email:</strong> {{ procurement[_secondary_email] | default: 'N/A' }}
+          </p>
+        </li>
+
+      </ul>
+    </div>
+
+    <div class="content-l_col content-l_col-1-3">
+      <div class="header-slug">
+        <div class="header-slug_inner">
+          Description
+        </div>
+      </div>
+      <p>{{ procurement[_longdesc] || 'No description available' }}</p>
+    </div>
+
+    <div class="content-l_col content-l_col-1-3">
+      <div class="header-slug">
+        <div class="header-slug_inner header-slug_inner__important">
+          Next Steps
+        </div>
+      </div>
+      <div>
+        <p>
+          Waiting on <b>{{ procurement[_waiting] }}</b>
+        <p>
+        <p>
+          For <b>{{ "'" | append:  procurement[_todo] | append: "'" }}</b>
+        <p>
+
+        <p class="micro-copy reminder-badge">
+          <strong>Next reminder: 07/07/2016</strong>
+        </p>
+      <div>
+    </div>
+  </section>
+
+  {% assign events = site.data.milestones | where: _id, procurement[_id] %}
+  {% if events.size > 0 %}
+    <table is="cfpb-sortable-table" class="events">
+      <thead>
+        <tr>
+          <td colspan="{{ columns.size | minus: 5 }}"></td>
+          <th colspan="2" class="centered">
+            <span class="cf-icon cf-icon-{{ column.icon }}"></span>
+            Milestone
+          </td>
+          <th colspan="2" class="centered">Delay (in days)</th>
+          <td></td>
+        </tr>
+        <tr>
+          {% for column in columns %}
+          <th data-value="{{ column.key }}">
+            {{ column.title | default: column.key }}
+          </th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+      {% for event in events %}
+        <tr id="event-{{ procurement[_id] }}-{{ forloop.index }}">
+          {% for column in columns %}
+          <td data-key="{{ column.key }}" data-value="{{ event[column.key] }}"
+            {% if column.class %}class="{{ column.class }}"{% endif %}
+            {% if page.formats[column.type] %}data-format="{{ page.formats[column.type] }}"{% endif %}>
+            {{ event[column.key] }}
+          </td>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+
+</section>
+{% endfor %}

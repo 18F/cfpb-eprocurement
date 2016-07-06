@@ -1,0 +1,37 @@
+cfpb-popup-menu {
+  position: relative;
+
+  // popup menu button
+  [aria-haspopup=true] {
+    background: transparent;
+    border: none;
+    color: $gray-40;
+    display: inline-block;
+    -webkit-appearance: none;
+
+    // this is set if there's a value selected
+    &[aria-selected=true] {
+      color: $gold;
+    }
+  }
+
+  // the menu "content"
+  menu,
+  [role=menu] {
+    background: $white;
+    border: 1px solid $gray-20;
+    left: 100%;
+    padding: 1em;
+    position: absolute;
+    top: -2px;
+    z-index: 1000;
+
+    &[aria-hidden=true] {
+      display: none;
+    }
+  }
+
+  select {
+    width: 100%;
+  }
+}
