@@ -58,9 +58,17 @@
   rows.selectAll('[data-format]')
     .html(function(d) {
       var value = this.getAttribute('data-value');
+      var key = this.getAttribute('data-key');
+
       if (value) {
-        var date = moment(value, 'YYYY-MM-DD').toDate();
         var format = this.getAttribute('data-format');
+
+        // TODO: this can be cleaned up, should add a range data type
+        if (key === 'Forecasted Date') {
+          return getDateRange(value, 2, 1);
+        }
+
+        var date = moment(value, 'YYYY-MM-DD').toDate();
         return d3.time.format(format)(date);
       }
       return this.textContent;
@@ -74,6 +82,24 @@
   function getDelay(forecast, complete) {
     return moment(complete, 'YYYY-MM-DD')
       .diff(forecast, 'days');
+  }
+
+  /**
+   * Given a date, return a new string representing a range of dates around
+   * the supplied date
+   * @param  {String} date    in the format of YYYY MM DD
+   * @param  {Number} before  number of days before start date
+   * @param  {Number} after   number of days after start date
+   * @return {String}         range of dates e.g. '01/01/2016 - 01/03/2016'
+   */
+  function getDateRange(date, before, after) {
+    var FORMAT = 'MM/DD/YYYY';
+
+    var startDate = moment(date, 'YYYY-MM-DD');
+    var rangeStart = moment(startDate).subtract(before, 'days').format(FORMAT);
+    var rangeEnd = moment(startDate).add(after, 'days').format(FORMAT);
+
+    return rangeStart + ' - ' + rangeEnd;
   }
 
 })(this);
