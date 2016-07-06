@@ -65,7 +65,7 @@
 
         // TODO: this can be cleaned up, should add a range data type
         if (key === 'Forecasted Date') {
-          return getDateRange(value, 2, 1);
+          return getDateRange(value, 2);
         }
 
         var date = moment(value, 'YYYY-MM-DD').toDate();
@@ -89,7 +89,7 @@
    * the supplied date
    * @param  {String} date    in the format of YYYY MM DD
    * @param  {Number} before  number of days before start date
-   * @param  {Number} after   number of days after start date
+   * @param  {Number} after   number of days after start date (optional)
    * @return {String}         range of dates e.g. '01/01/2016 - 01/03/2016'
    */
   function getDateRange(date, before, after) {
@@ -97,7 +97,11 @@
 
     var startDate = moment(date, 'YYYY-MM-DD');
     var rangeStart = moment(startDate).subtract(before, 'days').format(FORMAT);
-    var rangeEnd = moment(startDate).add(after, 'days').format(FORMAT);
+    var rangeEnd = startDate.format(FORMAT);
+
+    if (after) {
+      rangeEnd = moment(startDate).add(after, 'days').format(FORMAT);
+    }
 
     return rangeStart + ' - ' + rangeEnd;
   }
