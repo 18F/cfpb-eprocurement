@@ -2,6 +2,8 @@ title: CFPB eProcurement
 user: Myra Ball
 role: COR
 
+navigation:
+  - url: /dashboard
 
 exclude:
 - '*.log'
