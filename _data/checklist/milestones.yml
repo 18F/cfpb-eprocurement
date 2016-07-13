@@ -7,7 +7,17 @@
   ready: true
   owner: 0
   approver: null
-  history: 
+  conversation:
+    - text: "Submitted my initial draft"
+      timestamp: ""
+      owner: 0
+    - text: "Received the draft, will be reviewing it within the next day or two."
+      timestamp: ""
+      owner: 1
+    - text: "Everything looks good, approving this Buy Request"
+      timestamp: ""
+      owner: 1
+  history:
     - text: "[Draft CFBPBuy Request]() started by E. Warren"
       date: "06/01/2016"
     - text: "[Draft CFBPBuy Request]() submitted by E. Warren"
@@ -25,7 +35,7 @@
   ready: false
   owner: 0
   approver: null
-  history: 
+  history:
     - text: "[Draft Aquisition Plan]() started by E. Warren"
       date: "06/15/2016"
     - text: "[Draft Aquisition Plan]() submitted by E. Warren"
