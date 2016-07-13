@@ -65,9 +65,13 @@
     /** mark as done **/
     function markAsDone(event) {
       var element = event.target;
-      var parent = element.parentNode;
-      parent.setAttribute('aria-hidden', true);
-      parent.parentNode.querySelector('.status-label').textContent = 'Completed';
+      var convoTab = element.parentNode;
+      var sectionTab = convoTab.parentNode;
+
+      convoTab.setAttribute('aria-hidden', true);
+
+      sectionTab.setAttribute('data-status', 'completed');
+      sectionTab.querySelector('.status-label').textContent = 'Completed';
     }
 
     var doneButtons = document.querySelectorAll('.set-done');
