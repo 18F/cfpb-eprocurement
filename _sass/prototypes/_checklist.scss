@@ -52,27 +52,33 @@
   .feature-list_item {
     position: relative;
 
+    &[data-status="past due"] {
+      .status-label {
+        background: $gold;
+        border-radius: 0.2em;
+        padding: 0.2em 0.4em;
+      }
+    }
+
     button[role=tab] {
       appearance: none;
-      -moz-appearance: none;
-      -ms-appearance: none;
-      -webkit-appearance: none;
+      background: transparent;
       border: 0;
       padding: 0;
-      background: transparent;
 
       &::after {
+        border-radius: 1em;
+        border: 1px solid;
+        color: $gray-40;
         content: "+";
         display: block;
         font-size: 2em;
-        line-height: .85;
-        width: 1em;
         height: 1em;
-        border: 1px solid $black;
-        border-radius: 1em;
+        line-height: .85;
         position: absolute;
-        top: 0;
         right: 1em;
+        top: 0;
+        width: 1em;
       }
 
       &[aria-expanded=true]::after {
