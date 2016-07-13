@@ -5,7 +5,7 @@
       "dueDate": "06/15/2016",
       "completed": true,
       "ready": true,
-      "owner": 1,
+      "owner": 0,
       "approver": null,
       "history": [
         "[Draft CFBPBuy Request]() started by E. Warren on 06/01/2016",
@@ -19,7 +19,7 @@
       "dueDate": "07/11/2016",
       "completed": false,
       "ready": false,
-      "owner": 1,
+      "owner": 0,
       "approver": null,
       "history": [
         "[Draft Aquisition Plan]() started by E. Warren on 06/15/2016",
@@ -27,7 +27,7 @@
         "[Draft Aquisition Plan]() downloaded by J. Dough on 06/18/2016",
         "[Draft Aquisition Plan]() commented on by J. Dough on 06/18/2016",
         "[Draft Aquisition Plan #2]() uploaded by E. Warren on 06/25/2016",
-        "[Draft Aquisition Plan #2]() pending review by J. Dough",
+        "[Draft Aquisition Plan #2]() pending review by J. Dough due by 07/11/2016",
       ]
     },
     {
@@ -35,7 +35,7 @@
       "dueDate": "07/14/2016",
       "completed": false,
       "ready": false,
-      "owner": 0,
+      "owner": 1,
       "approver": null,
       "history": []
     },
@@ -44,7 +44,7 @@
       "dueDate": "07/20/2016",
       "completed": false,
       "ready": false,
-      "owner": 0,
+      "owner": 1,
       "approver": null,
       "history": []
     },
@@ -53,7 +53,7 @@
       "dueDate": "07/20/2016",
       "completed": false,
       "ready": false,
-      "owner": 0,
+      "owner": 1,
       "approver": null,
       "history": []
     },
@@ -62,7 +62,7 @@
       "dueDate": "07/20/2016",
       "completed": false,
       "ready": false,
-      "owner": 0,
+      "owner": 1,
       "approver": null,
       "history": []
     }
