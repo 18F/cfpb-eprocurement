@@ -1,49 +1,25 @@
 ---
 title: Checklist
 layout: checklist
-
-milestones:
-
-- name: Complete CFPBuy Request
-  status: approved
-  date: 2016-07-12
-  owner: OCFO
-  history: []
-
-- name: Review Acquisition Plan worksheet
-  status: due
-  date: 2016-07-24
-  owner: J. Dough
-  history: 
-  - text: '[Draft Acquisition Plan](#doc) submitted by [E. Warren](#contact)'
-    status: complete
-    date: 2016-07-11
-  - text: '[J. Dough](#contact) received the [Draft Acquisition Plan](#doc)'
-    status: complete
-    date: 2016-07-18
-  - text: '[J. Dough](#contact) uploaded the [Acquisition Plan Draft #2](#doc) for review'
-    status: complete
-    date: 2016-07-21
-  - text: '[Acquisition Plan Draft #2](#doc) pending review by [E. Warren](#contact)'
-    status: pending
-    date: 2016-07-22
-    due: 2016-07-24
 ---
+{% assign milestones = site.data.checklist.milestones %}
+{% assign users = site.data.checklist.users %}
 
 <h2>Complete Acquisition Package Documents</h2>
 
 <h4>Submit the following documents:</h4>
 
 <div role="tablist" class="feature-list">
-  {% for milestone in page.milestones %}
+  {% for milestone in milestones %}
+    {% assign user = users[milestone.owner] %}
+    {% assign content_slug = milestone.title | slugify %}
   <section class="feature-list_item block block__padded-top block__border-top"
     data-status="{{ milestone.status }}">
-    {% assign content_slug = milestone.name | slugify %}
     <div>
       <h3 role="tab" aria-controls="{{ content_slug }}">
-        <img class="avatar" src="{{ site.baseurl }}/static/images/avatars/user.jpg">
+        <img class="avatar" src="{{ site.baseurl }}/static/images/avatars/{{ user.avatar }}.jpg">
         <button>
-          <span class="cf-icon cf-icon-document"></span> {{ milestone.name }}
+          <span class="cf-icon cf-icon-document"></span> {{ milestone.title }}
         </button>
       </h3>
       <h4 class="status">
