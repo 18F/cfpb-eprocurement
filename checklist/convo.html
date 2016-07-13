@@ -28,18 +28,27 @@ layout: checklist
         on
         <time>{{ milestone.date }}</time>
         by
-        <a href="#contact">{{ milestone.owner }}</a>
+        <a href="#contact">{{ user.name }}</a>
       </h4>
     </div>
     <div class="content" role="tabpanel" id="{{ content_slug }}">
       <h5>Conversation</h5>
-      {% for conversation in conversations %}
-        {% assign owner = users[conversation.owner] %}
-        <div class="content-l conversation_item" style="">
-          <img class="content-l_col content-l_col-1-4 avatar" src="{{ site.baseurl }}/static/images/avatars/{{ owner.avatar }}.jpg">
-          <p class="content-l_col content-l_col-3-4">{{conversation.text}}</p>
-        </div>
-      {% endfor %}
+      <div class="conversations">
+        {% for conversation in conversations %}
+          {% assign owner = users[conversation.owner] %}
+          <div class="conversation-block" style="">
+            <img class="content-l_col avatar" src="{{ site.baseurl }}/static/images/avatars/{{ owner.avatar }}.jpg">
+            <p class="content-l_col content-l_col-3-4 conversation-block_item bubble" style="background: {{owner.bubble}}; color: {{owner.color}}; border-color: {{owner.bubble}}">
+              {{conversation.text}}
+            </p>
+          </div>
+        {% endfor %}
+      </div>
+      <form id="{{}}" class="block comment-form">
+        <textarea class="comment-form_comment"></textarea>
+        <button type=submit class="submit-comment btn">Comment</button>
+      </form>
+      <button class="btn">Mark as done</button>
     </div>
   </section>
   {% endfor %}
@@ -81,5 +90,7 @@ layout: checklist
       panel.setAttribute('aria-hidden', !expanded);
       panel.setAttribute('tabindex', expanded ? 0 : -1);
     });
+
+    /* comments */
   });
 </script>

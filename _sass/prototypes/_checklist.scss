@@ -105,4 +105,62 @@
     }
   }
 
+  .conversations {
+    margin-left: 20px;
+  }
+
+  .conversation-block {
+    margin: 0 40px 20px 0;
+    .avatar {
+      vertical-align: middle;
+    }
+  }
+
+  .conversation-block:after {
+    display: table;
+    content: "";
+    clear: both;
+  }
+
+  .conversation-block_item {
+    margin: 0 0 0 10px;
+    max-width: 200px;
+    vertical-align: middle;
+    width: auto;
+  }
+
+  .bubble {
+    position: relative;
+    height: auto;
+    width: 200px;
+    padding: 8px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+  }
+
+  .bubble:after {
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 9px 9px 9px 0;
+    border-top-color: transparent;
+    border-right-color: inherit;
+    border-bottom-color: transparent;
+    border-left-color: inherit;
+    display: block;
+    width: 0;
+    z-index: 1;
+    left: -24px;
+    top: 45%;
+  }
+
+  .comment-form_comment {
+    border: 3px solid #eee;
+    display: block;
+    height: 100px;
+    margin-bottom: 10px;
+    width: 300px;
+  }
+
 }

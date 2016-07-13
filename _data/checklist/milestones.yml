@@ -14,7 +14,7 @@
     - text: "Received the draft, will be reviewing it within the next day or two."
       timestamp: ""
       owner: 1
-    - text: "Everything looks good, approving this Buy Request"
+    - text: "Everything looks good, this Buy Request is ready to be approved"
       timestamp: ""
       owner: 1
   history:
