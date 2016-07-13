@@ -39,8 +39,11 @@ layout: checklist
       </h4>
     </div>
 
-    <div role="tabpanel" id="{{ content_slug }}">
+    <div role="tabpanel" aria-hidden="true" id="{{ content_slug }}">
       <h5>History</h5>
+      {% if milestone.history.size == 0 %}
+      <p>This milestone has no history.</p>
+      {% else %}
       <ol>
         {% for item in milestone.history %}
         <li{% if item.status %} data-status="{{ item.status }}"{% endif %}>
@@ -54,6 +57,7 @@ layout: checklist
         </li>
         {% endfor %}
       </ol>
+      {% endif %}
     </div>
   </section>
   {% endfor %}
@@ -89,12 +93,6 @@ layout: checklist
     var TABINDEX = 'tabindex';
 
     var tablist = $('[role=tablist]');
-
-    tablist.find('[role=tabpanel]')
-      .attr(HIDDEN, true);
-
-    tablist.find('[role=tab]')
-      .attr(EXPANDED, false);
 
     tablist.on('click', '[role=tab]', function(e) {
       var id = this.getAttribute(CONTROLS);
