@@ -1,5 +1,8 @@
 - title: "Complete CFBPBuy Request"
-  due_date: "06/15/2016"
+  status: "complete"
+  date:
+    due: "06/15/2016"
+    complete: "06/16/2016"
   completed: true
   ready: true
   owner: 0
@@ -13,8 +16,11 @@
       date: "06/10/2016"
     - text: "[CFBPBuy Request]() approved by J. Dough"
       date: "06/13/2016"
+
 - title: "Draft Aquisition Plan"
-  due_date: "07/11/2016"
+  status: "due"
+  date:
+    due: "07/11/2016"
   completed: false
   ready: false
   owner: 0
@@ -32,29 +38,41 @@
       date: "06/25/2016"
     - text: "[Draft Aquisition Plan #2]() pending review by J. Dough"
       due_date: "07/11/2016"
+
 - title: "Draft IGCE"
-  due_date: "07/14/2016"
+  status: "due"
+  date:
+    due: "07/14/2016"
   completed: false
   ready: false
   owner: 1
   approver: null
   history: []
+
 - title: "Draft Scope of Work"
-  due_date: "07/20/2016"
+  status: "due"
+  date:
+    due: "07/20/2016"
   completed: false
   ready: false
   owner: 1
   approver: null
   history: []
+
 - title: "Draft Source Selection Plan"
-  due_date: "07/20/2016"
+  status: "due"
+  date:
+    due: "07/20/2016"
   completed: false
   ready: false
   owner: 1
   approver: null
   history: []
+
 - title: "Draft Service Contract Coding worksheet"
-  due_date: "07/20/2016"
+  status: "due"
+  date:
+    due: "07/20/2016"
   completed: false
   ready: false
   owner: 1
