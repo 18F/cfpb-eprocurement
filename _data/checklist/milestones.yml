@@ -1,5 +1,5 @@
 - title: "Complete CFBPBuy Request"
-  status: "complete"
+  status: "Complete"
   date:
     due: "06/15/2016"
     complete: "06/16/2016"
@@ -28,7 +28,7 @@
       date: "06/13/2016"
 
 - title: "Draft Aquisition Plan"
-  status: "due"
+  status: "Past Due"
   date:
     due: "07/11/2016"
   completed: false
@@ -50,7 +50,7 @@
       due_date: "07/11/2016"
 
 - title: "Draft IGCE"
-  status: "due"
+  status: "Due"
   date:
     due: "07/14/2016"
   completed: false
@@ -60,7 +60,7 @@
   history: []
 
 - title: "Draft Scope of Work"
-  status: "due"
+  status: "Due"
   date:
     due: "07/20/2016"
   completed: false
@@ -70,7 +70,7 @@
   history: []
 
 - title: "Draft Source Selection Plan"
-  status: "due"
+  status: "Due"
   date:
     due: "07/20/2016"
   completed: false
@@ -80,7 +80,7 @@
   history: []
 
 - title: "Draft Service Contract Coding worksheet"
-  status: "due"
+  status: "Due"
   date:
     due: "07/20/2016"
   completed: false
