@@ -20,7 +20,7 @@ layout: checklist
     <div class="feature-list_item-header">
       <h3>
         {% include user_avatar.html user=owner %}
-        <button role="tab" aria-controls="{{ content_slug }}">
+        <button role="tab"{% unless milestone.completed %} aria-controls="{{ content_slug }}"{% endunless %}>
           <span class="cf-icon cf-icon-document"></span> {{ milestone.title }}
         </button>
       </h3>
@@ -94,7 +94,7 @@ layout: checklist
 
     var tablist = $('[role=tablist]');
 
-    tablist.on('click', '[role=tab]', function(e) {
+    tablist.on('click', '[role=tab][aria-controls]', function(e) {
       var id = this.getAttribute(CONTROLS);
       var expanded = this.getAttribute(EXPANDED) !== 'true';
       this.setAttribute(EXPANDED, expanded);
