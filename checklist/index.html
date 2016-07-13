@@ -15,7 +15,7 @@ layout: checklist
     {% assign owner = users[milestone.owner] %}
     {% assign content_slug = milestone.title | slugify %}
   <section class="feature-list_item block block__padded-top block__border-top"
-    data-status="{{ milestone.status }}">
+    data-status="{{ milestone.status | downcase }}">
 
     <div class="feature-list_item-header">
       <h3>
@@ -26,8 +26,14 @@ layout: checklist
       </h3>
       <h4 class="status">
         <span class="status-label">{{ milestone.status }}</span>
+        {% if milestone.status == 'complete' %}
+          by
+        {% else %}
+          from
+        {% endif %}
+        <a href="#contact">{{ owner.name }}</a>
         on
-        <time>{{ milestone.date[milestone.status] }}</time>
+        <time>{{ milestone.date[milestone.status] | default: milestone.date.due }}</time>
         by
         <a href="#contact">{{ owner.name }}</a>
       </h4>
@@ -37,9 +43,14 @@ layout: checklist
       <h5>History</h5>
       <ol>
         {% for item in milestone.history %}
-        <li data-status="{{ item.status }}">
-          <p>{{ item.text | markdownify }}</p>
-          <time>{{ item.date }}</time>
+        <li{% if item.status %} data-status="{{ item.status }}"{% endif %}>
+          {{ item.text | markdownify }}
+          {% if item.due_date %}
+            due by
+          {% else %}
+            on
+          {% endif %}
+          <time>{{ item.date | default: item.due_date }}</time>
         </li>
         {% endfor %}
       </ol>
