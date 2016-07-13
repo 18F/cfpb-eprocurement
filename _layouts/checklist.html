@@ -13,6 +13,88 @@ layout: default
     <h2 class="project-name">Project Name Goes Here</h2>
   </div>
 
-  {{ content }}
+  {% assign milestones = site.data.checklist.milestones %}
+  {% assign users = site.data.checklist.users %}
 
+  <h2>Complete Acquisition Package Documents</h2>
+
+  <h4>Submit the following documents:</h4>
+
+  <div role="tablist" class="feature-list">
+    {% for milestone in milestones %}
+      {% assign owner = users[milestone.owner] %}
+      {% assign content_slug = milestone.title | slugify %}
+    <section class="feature-list_item block block__padded-top block__border-top"
+      data-status="{{ milestone.status | downcase }}">
+
+      <div class="feature-list_item-header">
+        <h3>
+          {% include user_avatar.html user=owner %}
+          <button role="tab"{% unless milestone.completed %} aria-controls="{{ content_slug }}"{% endunless %}>
+            <span class="cf-icon cf-icon-document"></span> {{ milestone.title }}
+          </button>
+        </h3>
+        <h4 class="status">
+          <span class="status-label">{{ milestone.status }}</span>
+          {% if milestone.status == 'complete' %}
+            by
+          {% else %}
+            from
+          {% endif %}
+          <a href="#contact">{{ owner.name }}</a>
+          on
+          <time>{{ milestone.date[milestone.status] | default: milestone.date.due }}</time>
+          by
+          <a href="#contact">{{ owner.name }}</a>
+        </h4>
+      </div>
+      <div role="tabpanel" aria-hidden="true" id="{{ content_slug }}">
+        {% include {{ page.content_include }} %}
+      </div>
+    </section>
+    {% endfor %}
+  </div>
 </section>
+
+<nav class="pagination">
+  <a class="btn btn__super pagination_prev" href="#pagination_content">
+    <span class="btn_icon__left cf-icon cf-icon-left"></span>
+    Previous: Budget Formulation
+  </a>
+  <a class="btn btn__super pagination_next" href="#pagination_content">
+    Next: T&amp;I Services
+    <span class="btn_icon__right cf-icon cf-icon-right"></span>
+  </a>
+  <form class="pagination_form" action="index.html#pagination_content">
+    <!-- XXX hack hack hack -->
+    <input
+      style="visibility: hidden"
+      class="pagination_current-page"
+      id="pagination_current-page"
+      name="pagination_current-page"
+      type="number" min="1" max="149"
+      value="149">
+  </form>
+</nav>
+
+<script>
+  window.addEventListener('load', function() {
+
+    var CONTROLS = 'aria-controls';
+    var HIDDEN = 'aria-hidden';
+    var EXPANDED = 'aria-expanded';
+    var TABINDEX = 'tabindex';
+
+    var tablist = $('[role=tablist]');
+
+    tablist.on('click', '[role=tab][aria-controls]', function(e) {
+      var id = this.getAttribute(CONTROLS);
+      var expanded = this.getAttribute(EXPANDED) !== 'true';
+      this.setAttribute(EXPANDED, expanded);
+      var panel = document.getElementById(id);
+      panel.setAttribute(HIDDEN, !expanded);
+      panel.setAttribute(TABINDEX, expanded ? 0 : -1);
+    });
+  });
+
+</script>
