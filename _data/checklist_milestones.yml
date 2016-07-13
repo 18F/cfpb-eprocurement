@@ -1,0 +1,68 @@
+- title: "Complete CFBPBuy Request"
+  due_date: "06/15/2016"
+  completed: true
+  ready: true
+  owner: 0
+  approver: null
+  history: 
+    - text: "[Draft CFBPBuy Request]() started by E. Warren"
+      date: "06/01/2016"
+    - text: "[Draft CFBPBuy Request]() submitted by E. Warren"
+      date: "06/10/2016"
+    - text: "[Draft CFBPBuy Request]() downloaded by J. Dough"
+      date: "06/10/2016"
+    - text: "[CFBPBuy Request]() approved by J. Dough"
+      date: "06/13/2016"
+- title: "Draft Aquisition Plan"
+  due_date: "07/11/2016"
+  completed: false
+  ready: false
+  owner: 0
+  approver: null
+  history: 
+    - text: "[Draft Aquisition Plan]() started by E. Warren"
+      date: "06/15/2016"
+    - text: "[Draft Aquisition Plan]() submitted by E. Warren"
+      date: "06/15/2016"
+    - text: "[Draft Aquisition Plan]() downloaded by J. Dough"
+      date: "06/18/2016"
+    - text: "[Draft Aquisition Plan]() commented on by J. Dough"
+      date: "06/18/2016"
+    - text: "[Draft Aquisition Plan #2]() uploaded by E. Warren"
+      date: "06/25/2016"
+    - text: "[Draft Aquisition Plan #2]() pending review by J. Dough"
+      due_date: "07/11/2016"
+- title: "Draft IGCE"
+  due_date: "07/14/2016"
+  completed: false
+  ready: false
+  owner: 1
+  approver: null
+  history: []
+- title: "Draft Scope of Work"
+  due_date: "07/20/2016"
+  completed: false
+  ready: false
+  owner: 1
+  approver: null
+  history: []
+- title: "Draft Source Selection Plan"
+  due_date: "07/20/2016"
+  completed: false
+  ready: false
+  owner: 1
+  approver: null
+  history: []
+- title: "Draft Service Contract Coding worksheet"
+  due_date: "07/20/2016"
+  completed: false
+  ready: false
+  owner: 1
+  approver: null
+  history: []
+
+users: 
+- name: "E. Warren"
+  role: "COR"
+- name: "J. Dough"
+  role: "CO"

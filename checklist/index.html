@@ -1,4 +1,109 @@
 ---
 title: Checklist
-layout: default
+layout: checklist
+
+milestones:
+
+- name: Complete CFPBuy Request
+  status: approved
+  date: 2016-07-12
+  owner: OCFO
+  history: []
+
+- name: Review Acquisition Plan worksheet
+  status: due
+  date: 2016-07-24
+  owner: J. Dough
+  history: 
+  - text: '[Draft Acquisition Plan](#doc) submitted by [E. Warren](#contact)'
+    status: complete
+    date: 2016-07-11
+  - text: '[J. Dough](#contact) received the [Draft Acquisition Plan](#doc)'
+    status: complete
+    date: 2016-07-18
+  - text: '[J. Dough](#contact) uploaded the [Acquisition Plan Draft #2](#doc) for review'
+    status: complete
+    date: 2016-07-21
+  - text: '[Acquisition Plan Draft #2](#doc) pending review by [E. Warren](#contact)'
+    status: pending
+    date: 2016-07-22
+    due: 2016-07-24
 ---
+
+<h2>Complete Acquisition Package Documents</h2>
+
+<h4>Submit the following documents:</h4>
+
+<div role="tablist" class="feature-list">
+  {% for milestone in page.milestones %}
+  <section class="feature-list_item block block__padded-top block__border-top"
+    data-status="{{ milestone.status }}">
+    {% assign content_slug = milestone.name | slugify %}
+    <div>
+      <h3 role="tab" aria-controls="{{ content_slug }}">
+        <img class="avatar" src="{{ site.baseurl }}/static/images/avatars/user.jpg">
+        <button>
+          <span class="cf-icon cf-icon-document"></span> {{ milestone.name }}
+        </button>
+      </h3>
+      <h4 class="status">
+        <span class="status-label">{{ milestone.status }}</span>
+        on
+        <time>{{ milestone.date }}</time>
+        by
+        <a href="#contact">{{ milestone.owner }}</a>
+      </h4>
+    </div>
+    <div role="tabpanel" id="{{ content_slug }}">
+      <h5>History</h5>
+      <ol>
+        {% for item in milestone.history %}
+        <li data-status="{{ item.status }}">
+          <p>{{ item.text | markdownify }}</p>
+          <time>{{ item.date }}</time>
+        </li>
+        {% endfor %}
+      </ol>
+    </div>
+  </section>
+  {% endfor %}
+</div>
+
+<nav class="pagination">
+  <a class="btn btn__super pagination_prev" href="#pagination_content">
+    <span class="btn_icon__left cf-icon cf-icon-left"></span>
+    Previous: Budget Formulation
+  </a>
+  <a class="btn btn__super pagination_next" href="#pagination_content">
+    Next: T&amp;I Services
+    <span class="btn_icon__right cf-icon cf-icon-right"></span>
+  </a>
+  <form class="pagination_form" action="index.html#pagination_content">
+    <!-- XXX hack hack hack -->
+    <input
+      style="visibility: hidden"
+      class="pagination_current-page"
+      id="pagination_current-page"
+      name="pagination_current-page"
+      type="number" min="1" max="149"
+      value="149">
+  </form>
+</nav>
+
+<script>
+  window.addEventListener('load', function() {
+    var tablist = $('[role=tablist]');
+
+    tablist.find('[role=tabpanel]')
+      .attr('aria-hidden', true);
+
+    tablist.on('click', '[role=tab]', function(e) {
+      var id = this.getAttribute('aria-controls');
+      var expanded = this.getAttribute('aria-expanded') !== 'true';
+      this.setAttribute('aria-expanded', expanded);
+      var panel = document.getElementById(id);
+      panel.setAttribute('aria-hidden', !expanded);
+      panel.setAttribute('tabindex', expanded ? 0 : -1);
+    });
+  });
+</script>
