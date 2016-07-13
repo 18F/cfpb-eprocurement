@@ -2,24 +2,17 @@
 layout: default
 ---
 
-<h3>Project Name Goes Here</h3>
+<section class="prototype-checklist">
 
-<style scoped>
+  <div class="project-header" role="banner">
+    <ul class="user-list">
+      {% for user in site.data.checklist.users %}
+      <li>{% include user_avatar.html user=user %}</li>
+      {% endfor %}
+    </ul>
+    <h2 class="project-name">Project Name Goes Here</h2>
+  </div>
 
-  [aria-hidden=true] { display: none; }
+  {{ content }}
 
-  .avatar {
-    float: left;
-    width: 3em;
-    height: 3em;
-    border-radius: 2em;
-    margin-right: 1em;
-  }
-
-  [data-status] {
-    position: relative;
-  }
-
-</style>
-
-{{ content }}
+</section>
