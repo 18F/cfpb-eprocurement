@@ -2,6 +2,7 @@
 title: Checklist
 layout: checklist
 ---
+
 {% assign milestones = site.data.checklist.milestones %}
 {% assign users = site.data.checklist.users %}
 
@@ -11,25 +12,27 @@ layout: checklist
 
 <div role="tablist" class="feature-list">
   {% for milestone in milestones %}
-    {% assign user = users[milestone.owner] %}
+    {% assign owner = users[milestone.owner] %}
     {% assign content_slug = milestone.title | slugify %}
   <section class="feature-list_item block block__padded-top block__border-top"
     data-status="{{ milestone.status }}">
-    <div>
-      <h3 role="tab" aria-controls="{{ content_slug }}">
-        <img class="avatar" src="{{ site.baseurl }}/static/images/avatars/{{ user.avatar }}.jpg">
-        <button>
+
+    <div class="feature-list_item-header">
+      <h3>
+        {% include user_avatar.html user=owner %}
+        <button role="tab" aria-controls="{{ content_slug }}">
           <span class="cf-icon cf-icon-document"></span> {{ milestone.title }}
         </button>
       </h3>
       <h4 class="status">
         <span class="status-label">{{ milestone.status }}</span>
         on
-        <time>{{ milestone.date }}</time>
+        <time>{{ milestone.date[milestone.status] }}</time>
         by
-        <a href="#contact">{{ milestone.owner }}</a>
+        <a href="#contact">{{ owner.name }}</a>
       </h4>
     </div>
+
     <div role="tabpanel" id="{{ content_slug }}">
       <h5>History</h5>
       <ol>
@@ -68,18 +71,28 @@ layout: checklist
 
 <script>
   window.addEventListener('load', function() {
+
+    var CONTROLS = 'aria-controls';
+    var HIDDEN = 'aria-hidden';
+    var EXPANDED = 'aria-expanded';
+    var TABINDEX = 'tabindex';
+
     var tablist = $('[role=tablist]');
 
     tablist.find('[role=tabpanel]')
-      .attr('aria-hidden', true);
+      .attr(HIDDEN, true);
+
+    tablist.find('[role=tab]')
+      .attr(EXPANDED, false);
 
     tablist.on('click', '[role=tab]', function(e) {
-      var id = this.getAttribute('aria-controls');
-      var expanded = this.getAttribute('aria-expanded') !== 'true';
-      this.setAttribute('aria-expanded', expanded);
+      var id = this.getAttribute(CONTROLS);
+      var expanded = this.getAttribute(EXPANDED) !== 'true';
+      this.setAttribute(EXPANDED, expanded);
       var panel = document.getElementById(id);
-      panel.setAttribute('aria-hidden', !expanded);
-      panel.setAttribute('tabindex', expanded ? 0 : -1);
+      panel.setAttribute(HIDDEN, !expanded);
+      panel.setAttribute(TABINDEX, expanded ? 0 : -1);
     });
   });
+
 </script>
