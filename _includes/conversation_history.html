@@ -1,0 +1,32 @@
+<h5>Conversation</h5>
+<div class="conversations">
+  {% if milestone.conversation.size  == 0 %}
+    <p><b>The item isn't being discussed yet.</b></p>
+  {% else %}
+    {% for conversation in milestone.conversation %}
+      {% assign owner = users[conversation.owner] %}
+      <div class="conversation-block" style="">
+        {% include user_avatar.html user=owner className="content-l_col" %}
+        <p class="content-l_col content-l_col-3-4 conversation-block_item bubble" style="background: {{owner.bubble}}; color: {{owner.color}}; border-color: {{owner.bubble}}">
+          {{conversation.text}}
+        </p>
+      </div>
+    {% endfor %}
+  </div>
+  {% if milestone.ready %}
+    {% if milestone.completed %}
+      {% assign class_name = 'btn__disabled' %}
+      {% assign copy = 'Done' %}
+    {% else %}
+      {% assign class_name = '' %}
+      {% assign copy ='Mark as done' %}
+    {% endif %}
+
+    <button class="btn {{class_name}}">{{copy}}</button>
+  {% else %}
+    <form id="{{}}" class="block comment-form">
+      <textarea class="comment-form_comment"></textarea>
+      <button type=submit class="submit-comment btn">Comment</button>
+    </form>
+  {% endif %}
+{% endif %}
