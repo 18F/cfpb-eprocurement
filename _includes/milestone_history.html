@@ -2,17 +2,16 @@
 {% if milestone.history.size == 0 %}
 <p>This milestone has no history.</p>
 {% else %}
-<ol>
+<table class="milestone-history">
   {% for item in milestone.history %}
-  <li{% if item.status %} data-status="{{ item.status }}"{% endif %}>
-    {{ item.text | markdownify }}
-    {% if item.due_date %}
-      due by
-    {% else %}
-      on
-    {% endif %}
-    <time>{{ item.date | default: item.due_date }}</time>
-  </li>
+  <tr{% if item.status %} data-status="{{ item.status | downcase }}"{% endif %}>
+    <td>
+      {{ item.text | markdownify }}
+    </td>
+    <td>
+      <time>{{ item.date | default: item.due_date }}</time>
+    </td>
+  </tr>
   {% endfor %}
-</ol>
+</table>
 {% endif %}

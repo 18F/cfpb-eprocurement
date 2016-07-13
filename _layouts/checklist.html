@@ -10,15 +10,15 @@ layout: default
       <li>{% include user_avatar.html user=user %}</li>
       {% endfor %}
     </ul>
-    <h2 class="project-name">Project Name Goes Here</h2>
+    <h2 class="project-name">Project name goes here</h2>
   </div>
 
   {% assign milestones = site.data.checklist.milestones %}
   {% assign users = site.data.checklist.users %}
 
-  <h2>Complete Acquisition Package Documents</h2>
+  <h2>Acquisition package document checklist</h2>
 
-  <h4>Submit the following documents:</h4>
+  <p>The following documents are required for the acquisition package. Please submit each document by the deadline listed.</p>
 
   <div role="tablist" class="feature-list">
     {% for milestone in milestones %}
@@ -36,7 +36,7 @@ layout: default
         </h3>
         <h4 class="status">
           <span class="status-label">{{ milestone.status }}</span>
-          {% if milestone.status == 'complete' %}
+          {% if milestone.status == 'Completed' %}
             by
           {% else %}
             from
@@ -44,8 +44,6 @@ layout: default
           <a href="#contact">{{ owner.name }}</a>
           on
           <time>{{ milestone.date[milestone.status] | default: milestone.date.due }}</time>
-          by
-          <a href="#contact">{{ owner.name }}</a>
         </h4>
       </div>
       <div role="tabpanel" aria-hidden="true" id="{{ content_slug }}">
@@ -83,7 +81,6 @@ layout: default
     var CONTROLS = 'aria-controls';
     var HIDDEN = 'aria-hidden';
     var EXPANDED = 'aria-expanded';
-    var TABINDEX = 'tabindex';
 
     var tablist = $('[role=tablist]');
 
@@ -93,8 +90,8 @@ layout: default
       this.setAttribute(EXPANDED, expanded);
       var panel = document.getElementById(id);
       panel.setAttribute(HIDDEN, !expanded);
-      panel.setAttribute(TABINDEX, expanded ? 0 : -1);
     });
   });
-
 </script>
+
+{{ content }}

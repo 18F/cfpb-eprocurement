@@ -1,25 +1,25 @@
 - title: "Complete CFBPBuy Request"
-  status: "Complete"
+  status: "Completed"
   date:
     due: "06/15/2016"
-    complete: "06/16/2016"
+    completed: "06/16/2016"
   completed: true
   ready: true
   owner: 0
   approver: null
   conversation: []
   history:
-    - text: "[Draft CFBPBuy Request]() started by E. Warren"
+    - text: "[Draft CFBPBuy Request](#doc) started by [E. Warren](#contact)"
       date: "06/01/2016"
-    - text: "[Draft CFBPBuy Request]() submitted by E. Warren"
+    - text: "[Draft CFBPBuy Request](#doc) submitted by [E. Warren](#contact)"
       date: "06/10/2016"
-    - text: "[Draft CFBPBuy Request]() downloaded by J. Dough"
+    - text: "[Draft CFBPBuy Request](#doc) downloaded by [J. Dough](#contact)"
       date: "06/10/2016"
-    - text: "[CFBPBuy Request]() approved by J. Dough"
+    - text: "[CFBPBuy Request](#doc) approved by [J. Dough](#contact)"
       date: "06/13/2016"
 
 - title: "Draft Aquisition Plan"
-  status: "Past Due"
+  status: "Past due"
   date:
     due: "07/11/2016"
   completed: false
@@ -34,17 +34,18 @@
       timestamp: "07/05/2016"
       owner: 1
   history:
-    - text: "[Draft Aquisition Plan]() started by E. Warren"
+    - text: "[Draft Aquisition Plan](#doc) started by [E. Warren](#contact)"
       date: "06/15/2016"
-    - text: "[Draft Aquisition Plan]() submitted by E. Warren"
+    - text: "[Draft Aquisition Plan](#doc) submitted by [E. Warren](#contact)"
       date: "06/15/2016"
-    - text: "[Draft Aquisition Plan]() downloaded by J. Dough"
+    - text: "[Draft Aquisition Plan](#doc) downloaded by [J. Dough](#contact)"
       date: "06/18/2016"
-    - text: "[Draft Aquisition Plan]() commented on by J. Dough"
+    - text: "[Draft Aquisition Plan](#doc) commented on by [J. Dough](#contact)"
       date: "06/18/2016"
-    - text: "[Draft Aquisition Plan #2]() uploaded by E. Warren"
+    - text: "[Draft Aquisition Plan #2](#doc) uploaded by [E. Warren](#contact)"
       date: "06/25/2016"
-    - text: "[Draft Aquisition Plan #2]() pending review by J. Dough"
+    - text: "[Draft Aquisition Plan #2](#doc) pending review by [J. Dough](#contact)"
+      status: Due
       due_date: "07/11/2016"
 
 - title: "Draft IGCE"
