@@ -1,0 +1,93 @@
+.prototype-checklist {
+
+  [aria-hidden=true] {
+    display: none;
+  }
+
+  time {
+    background: $gray-10;
+    border-radius: 0.2em;
+    padding: 0.2em 0.4em;
+  }
+
+  .project-header {
+    background: $green;
+    color: $white;
+    margin-bottom: 2em;
+    padding: 1em;
+
+    > * {
+      margin-bottom: 0;
+      margin-top: 0;
+    }
+
+    .project-name {
+      font-weight: bold;
+    }
+
+    &::after {
+      content: "";
+      display: table;
+      clear: both;
+      height: 0;
+    }
+  }
+
+  .user-list {
+    float: right;
+  }
+
+  .user-list li {
+    display: inline-block;
+    margin-left: 1em;
+  }
+
+  .avatar {
+    display: inline-block;
+    width: 3em;
+    height: 3em;
+    border-radius: 2em;
+  }
+
+  .feature-list_item {
+    position: relative;
+
+    button[role=tab] {
+      appearance: none;
+      -moz-appearance: none;
+      -ms-appearance: none;
+      -webkit-appearance: none;
+      border: 0;
+      padding: 0;
+      background: transparent;
+
+      &::after {
+        content: "+";
+        display: block;
+        font-size: 2em;
+        line-height: .85;
+        width: 1em;
+        height: 1em;
+        border: 1px solid $black;
+        border-radius: 1em;
+        position: absolute;
+        top: 0;
+        right: 1em;
+      }
+
+      &[aria-expanded=true]::after {
+        content: "-";
+      }
+    }
+  }
+
+  .feature-list_item-header {
+    position: relative;
+
+    .avatar {
+      float: left;
+      margin-right: 1em;
+    }
+  }
+
+}
