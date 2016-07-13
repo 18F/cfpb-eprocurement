@@ -1,13 +1,27 @@
 .prototype-checklist {
 
+  $border-radius: 3px;
+  $inline-block-padding: 0.2em 0.4em;
+
   [aria-hidden=true] {
     display: none;
   }
 
   time {
     background: $gray-10;
-    border-radius: 0.2em;
-    padding: 0.2em 0.4em;
+    border-radius: $border-radius;
+    padding: $inline-block-padding;
+  }
+
+  a[href$="#doc"]::before {
+    content: "\e400";
+    font-family: 'CFPB Minicons';
+    display: inline-block;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    margin-right: 0.2em;
   }
 
   .project-header {
@@ -46,19 +60,11 @@
     display: inline-block;
     width: 3em;
     height: 3em;
-    border-radius: 2em;
+    border-radius: $border-radius;
   }
 
   .feature-list_item {
     position: relative;
-
-    &[data-status="past due"] {
-      .status-label {
-        background: $gold;
-        border-radius: 0.2em;
-        padding: 0.2em 0.4em;
-      }
-    }
 
     button[role=tab] {
       appearance: none;
@@ -86,13 +92,37 @@
       }
     }
 
-    &[data-status="complete"] button[role=tab]::before {
+    &[data-status="completed"] button[role=tab]::before {
       content: "✔";
       color: $gray-40;
     }
 
-    &:not([data-status="complete"]) button[role=tab] {
+    &:not([data-status="completed"]) button[role=tab] {
       color: $pacific;
+    }
+
+    &[data-status="past due"] {
+      .status-label {
+        background: $gold;
+        border-radius: $border-radius;
+        padding: $inline-block-padding;
+      }
+    }
+
+  }
+
+  .milestone-history {
+    tr {
+      border-bottom: none;
+    }
+
+    tr > * {
+      vertical-align: top;
+    }
+
+    [data-status="due"] {
+      background: $gold-20;
+      font-weight: bold;
     }
   }
 
@@ -134,9 +164,9 @@
     height: auto;
     width: 200px;
     padding: 8px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
+    -webkit-border-radius: $border-radius;
+    -moz-border-radius: $border-radius;
+    border-radius: $border-radius;
   }
 
   .bubble:after {
