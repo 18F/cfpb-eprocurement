@@ -60,7 +60,7 @@
     display: inline-block;
     width: 3em;
     height: 3em;
-    border-radius: $border-radius;
+    border-radius: 3em;
   }
 
   .feature-list_item {
@@ -191,6 +191,24 @@
     height: 100px;
     margin-bottom: 10px;
     width: 300px;
+
+    &:focus {
+      outline: 0;
+    }
+  }
+
+  [data-timestamp] {
+    font-size: 12px;
+    margin-bottom: 10px;
+    display: inline-block;
+  }
+}
+
+.prototype-checklist_document {
+
+  .document-content {
+    max-width: 50em;
+    margin: 0 auto;
   }
 
 }

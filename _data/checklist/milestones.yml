@@ -28,10 +28,10 @@
   approver: null
   conversation:
     - text: "Submitted my initial draft"
-      timestamp: "07/01/2016"
+      timestamp: "07/04/2016"
       owner: 0
     - text: "Received the draft, will be reviewing it within the next day or two."
-      timestamp: "07/05/2016"
+      timestamp: "07/09/2016"
       owner: 1
   history:
     - text: "[Draft Aquisition Plan](#doc) started by [E. Warren](#contact)"
@@ -56,7 +56,10 @@
   ready: true
   owner: 1
   approver: null
-  conversation: []
+  conversation:
+    - text: "IGCE Approved"
+      timestamp: "07/14/2016"
+      owner: 1
   history: []
 
 - title: "Draft Scope of Work"
