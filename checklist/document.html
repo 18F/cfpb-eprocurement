@@ -33,6 +33,59 @@ Nunc eget bibendum ante, quis pellentesque velit. Curabitur vel auctor eros. Qui
   </div>
 
   <form action="./">
+    <div id="accept">
+      <button type="submit" class="btn"
+        name="action" value="accept">
+        Accept draft
+      </button>
+
+      <button id="submit-revisions"
+        type="button" class="btn btn__secondary">
+        Submit revisions
+      </button>
+    </div>
+
+    <div id="revise">
+      <p>
+        <button type="submit" class="btn"
+          name="action" value="revise">
+          Update and send
+        </button>
+        <button id="cancel-revisions"
+          type="button" class="btn btn__secondary">
+          Cancel
+        </button>
+      </p>
+
+      <textarea name="revisions" cols="40" rows="5"></textarea>
+    </div>
   </form>
 
 </section>
+
+<script>
+  window.addEventListener('load', function() {
+
+    var accept = $('#accept');
+    var submitButton = accept.find('[type=submit]');
+
+    var revise = $('#revise').hide();
+    var revisions = $('[name=revisions]');
+
+    var reviseButton = $('#submit-revisions')
+      .on('click', function() {
+        accept.hide();
+        revise.show();
+        revisions.focus();
+      });
+
+    var cancelButton = $('#cancel-revisions')
+      .on('click', function() {
+        accept.show();
+        submitButton.focus();
+        revise.hide();
+      });
+
+
+  });
+</script>
