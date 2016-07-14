@@ -73,4 +73,5 @@ dist/
 
 # Jekyll files
 _site
+.jekyll-metadata
 .sass-cache

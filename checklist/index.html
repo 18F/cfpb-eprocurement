@@ -1,0 +1,16 @@
+---
+title: Checklist
+layout: checklist
+content_include: milestone_history.html
+---
+
+<script>
+  window.addEventListener('load', function() {
+
+    $('body').on('click', '[href="#doc"]', function(e) {
+      e.preventDefault();
+      location.href = 'document.html';
+    });
+
+  });
+</script>

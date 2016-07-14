@@ -1,0 +1,17 @@
+<h5>History</h5>
+{% if milestone.history.size == 0 %}
+<p>This milestone has no history.</p>
+{% else %}
+<table class="milestone-history">
+  {% for item in milestone.history %}
+  <tr{% if item.status %} data-status="{{ item.status | downcase }}"{% endif %}>
+    <td>
+      {{ item.text | markdownify }}
+    </td>
+    <td>
+      <time>{{ item.date | default: item.due_date }}</time>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% endif %}

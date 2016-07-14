@@ -5,7 +5,7 @@
   "repository": "github:18F/cfpb-eprocurement.git",
   "license": "CC0",
   "scripts": {
-    "start": "jekyll serve",
+    "start": "jekyll serve --incremental",
     "test": "grunt test"
   },
   "dependencies": {

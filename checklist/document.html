@@ -1,0 +1,91 @@
+---
+title: Document
+layout: default
+---
+
+<section class="prototype-checklist prototype-checklist_document">
+
+  <div class="project-header" role="banner">
+    <ul class="user-list">
+      {% for user in site.data.checklist.users %}
+      <li>{% include user_avatar.html user=user %}</li>
+      {% endfor %}
+    </ul>
+    <h2 class="project-name">Project name goes here</h2>
+  </div>
+
+  <div class="document-content">
+    <h3><span class="cf-icon cf-icon-document"></span> Acquisition Plan draft #2</h3>
+
+    {% capture document_text %}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nec hendrerit augue. Nam vel purus vitae purus suscipit vehicula at non leo. Aenean posuere neque risus, sed mattis tellus elementum eu. Ut maximus ante enim, a lobortis felis rhoncus et. Fusce a diam vitae lacus ultrices pharetra. Duis sit amet felis in justo ultrices faucibus. Donec semper a augue sit amet sollicitudin. Donec finibus arcu velit, eu consectetur ante pretium vitae. Nulla finibus gravida nisl, non luctus velit volutpat quis. Nullam vulputate bibendum tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce nec leo sollicitudin, aliquam dolor in, blandit neque. Nam fringilla eros vel ligula placerat sollicitudin. Nullam ut auctor libero. Aliquam erat volutpat.
+
+Quisque eget quam tristique, interdum justo sed, interdum neque. Sed vitae elit ac erat fermentum ornare at sed odio. Proin convallis, felis a accumsan vestibulum, nibh est gravida nisl, id elementum tortor mauris quis odio. In eu ipsum in magna varius egestas id ac sem. Quisque sodales purus sed dignissim accumsan. Suspendisse pellentesque pharetra purus non varius. Phasellus ornare eu massa maximus posuere. Pellentesque euismod nulla id elit consectetur, vel gravida mi vulputate.
+
+Aenean euismod dolor rutrum, vehicula libero eu, viverra odio. Sed efficitur maximus volutpat. Vivamus id massa eros. In volutpat felis lectus, non malesuada sem pretium congue. Fusce scelerisque blandit felis. Vestibulum dignissim sapien eget augue imperdiet, laoreet gravida neque euismod. Etiam ultricies tortor sed justo pulvinar pharetra. Morbi consectetur turpis non malesuada ultrices. Vestibulum sodales suscipit venenatis. Suspendisse potenti. Donec in aliquam turpis, sit amet posuere ante. Phasellus vulputate nunc ut sapien placerat pulvinar.
+
+Proin sagittis imperdiet vestibulum. Sed tempus mattis orci, ac bibendum ipsum condimentum et. Fusce at consectetur libero. Praesent accumsan, diam eget molestie cursus, elit leo commodo est, vitae bibendum velit enim a augue. In justo diam, maximus a ante at, ultrices dignissim velit. Vestibulum pulvinar tristique nunc vehicula posuere. Suspendisse tellus nibh, lobortis sed feugiat nec, euismod eget est. Quisque malesuada arcu dui, eu varius nulla rhoncus vitae. Praesent nec lectus ac ligula aliquet laoreet.
+
+Nunc eget bibendum ante, quis pellentesque velit. Curabitur vel auctor eros. Quisque tempor tincidunt tincidunt. Aliquam erat volutpat. Donec sollicitudin sagittis purus, ut facilisis lacus ultrices a. Ut malesuada, mauris vel fringilla sollicitudin, ligula orci ultrices sem, at placerat lorem dolor commodo lacus. Nullam non est elit. Vivamus accumsan dictum est nec hendrerit. Pellentesque pellentesque risus sed diam rutrum, non fermentum dui molestie. Curabitur id sapien tristique, molestie ipsum quis, ultricies sapien.
+    {% endcapture %}
+
+    {{ document_text | markdownify }}
+  </div>
+
+  <form action="./">
+    <div id="accept">
+      <button type="submit" class="btn"
+        name="action" value="accept">
+        Accept draft
+      </button>
+
+      <button id="submit-revisions"
+        type="button" class="btn btn__secondary">
+        Submit revisions
+      </button>
+    </div>
+
+    <div id="revise">
+      <p>
+        <button type="submit" class="btn"
+          name="action" value="revise">
+          Update and send
+        </button>
+        <button id="cancel-revisions"
+          type="button" class="btn btn__secondary">
+          Cancel
+        </button>
+      </p>
+
+      <textarea name="revisions" cols="40" rows="5"></textarea>
+    </div>
+  </form>
+
+</section>
+
+<script>
+  window.addEventListener('load', function() {
+
+    var accept = $('#accept');
+    var submitButton = accept.find('[type=submit]');
+
+    var revise = $('#revise').hide();
+    var revisions = $('[name=revisions]');
+
+    var reviseButton = $('#submit-revisions')
+      .on('click', function() {
+        accept.hide();
+        revise.show();
+        revisions.focus();
+      });
+
+    var cancelButton = $('#cancel-revisions')
+      .on('click', function() {
+        accept.show();
+        submitButton.focus();
+        revise.hide();
+      });
+
+
+  });
+</script>

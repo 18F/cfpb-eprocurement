@@ -1,0 +1,75 @@
+---
+title: Checklist Conversation
+layout: checklist
+content_include: conversation_history.html
+---
+
+<script>
+  window.addEventListener('load', function() {
+
+    //document.body.appendChild(document.getElementById('avatar-include').textContent);
+    function findParent(klass, child) {
+      var parent = child.parentNode;
+
+      while(parent.className !== klass) {
+        parent = parent.parentNode;
+      }
+
+      return parent;
+    }
+
+    /** timestamps **/
+    var timestamps = document.querySelectorAll('[data-timestamp]');
+    var dates = [].slice.call(timestamps).forEach(function(el) {
+      var time = el.getAttribute(['data-timestamp']);
+      var formatted = moment(time, "MM-DD-YYYY").format("ddd, MMMM DD YYYY");
+      el.textContent = 'on ' + formatted + ':';
+    });
+
+    /** commenting **/
+    function handleComment(event) {
+      event.preventDefault();
+      var value = event.target.form.comment.value;
+
+      if (!value) {
+        return;
+      }
+
+      var convoTab = event.target.parentNode.previousElementSibling;
+      var fragment = document.createDocumentFragment();
+      var div = document.createElement('div');
+      var template = document.getElementById('avatar-include').innerHTML;
+      div.className = "conversation-block";
+      div.innerHTML = template;
+      div.querySelector('.comment-text').innerHTML = value;
+      div.querySelector('[data-timestamp]').textContent = moment().format("ddd, MMMM DD YYYY");
+      fragment.appendChild(div);
+      convoTab.appendChild(fragment);
+
+      event.target.form.comment.value = '';
+    }
+
+    var submitButtons = document.querySelectorAll('.submit-comment');
+    [].slice.call(submitButtons).forEach(function(button) {
+      button.addEventListener('click', handleComment);
+    });
+
+    /** mark as done **/
+    function markAsDone(event) {
+      var element = event.target;
+      var convoTab = element.parentNode;
+      var sectionTab = convoTab.parentNode;
+
+      convoTab.setAttribute('aria-hidden', true);
+
+      sectionTab.setAttribute('data-status', 'completed');
+      sectionTab.querySelector('.status-label').textContent = 'Completed';
+    }
+
+    var doneButtons = document.querySelectorAll('.set-done');
+    [].slice.call(doneButtons).forEach(function(el) {
+      el.addEventListener('click', markAsDone);
+    });
+
+  });
+</script>

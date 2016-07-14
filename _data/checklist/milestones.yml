@@ -1,0 +1,96 @@
+- title: "Complete CFBPBuy Request"
+  status: "Completed"
+  date:
+    due: "06/15/2016"
+    completed: "06/16/2016"
+  completed: true
+  ready: true
+  owner: 0
+  approver: null
+  conversation: []
+  history:
+    - text: "[Draft CFBPBuy Request](#doc) started by [E. Warren](#contact)"
+      date: "06/01/2016"
+    - text: "[Draft CFBPBuy Request](#doc) submitted by [E. Warren](#contact)"
+      date: "06/10/2016"
+    - text: "[Draft CFBPBuy Request](#doc) downloaded by [J. Dough](#contact)"
+      date: "06/10/2016"
+    - text: "[CFBPBuy Request](#doc) approved by [J. Dough](#contact)"
+      date: "06/13/2016"
+
+- title: "Draft Aquisition Plan"
+  status: "Past due"
+  date:
+    due: "07/11/2016"
+  completed: false
+  ready: false
+  owner: 0
+  approver: null
+  conversation:
+    - text: "Submitted my initial draft"
+      timestamp: "07/04/2016"
+      owner: 0
+    - text: "Received the draft, will be reviewing it within the next day or two."
+      timestamp: "07/09/2016"
+      owner: 1
+  history:
+    - text: "[Draft Aquisition Plan](#doc) started by [E. Warren](#contact)"
+      date: "06/15/2016"
+    - text: "[Draft Aquisition Plan](#doc) submitted by [E. Warren](#contact)"
+      date: "06/15/2016"
+    - text: "[Draft Aquisition Plan](#doc) downloaded by [J. Dough](#contact)"
+      date: "06/18/2016"
+    - text: "[Draft Aquisition Plan](#doc) commented on by [J. Dough](#contact)"
+      date: "06/18/2016"
+    - text: "[Draft Aquisition Plan #2](#doc) uploaded by [E. Warren](#contact)"
+      date: "06/25/2016"
+    - text: "[Draft Aquisition Plan #2](#doc) pending review by [J. Dough](#contact)"
+      status: Due
+      due_date: "07/11/2016"
+
+- title: "Draft IGCE"
+  status: "Due"
+  date:
+    due: "07/14/2016"
+  completed: false
+  ready: true
+  owner: 1
+  approver: null
+  conversation:
+    - text: "IGCE Approved"
+      timestamp: "07/14/2016"
+      owner: 1
+  history: []
+
+- title: "Draft Scope of Work"
+  status: "Due"
+  date:
+    due: "07/20/2016"
+  completed: false
+  ready: false
+  owner: 1
+  approver: null
+  conversation: []
+  history: []
+
+- title: "Draft Source Selection Plan"
+  status: "Due"
+  date:
+    due: "07/20/2016"
+  completed: false
+  ready: false
+  owner: 1
+  approver: null
+  conversation: []
+  history: []
+
+- title: "Draft Service Contract Coding worksheet"
+  status: "Due"
+  date:
+    due: "07/20/2016"
+  completed: false
+  ready: false
+  owner: 1
+  approver: null
+  conversation: []
+  history: []
