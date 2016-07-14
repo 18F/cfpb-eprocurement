@@ -3,6 +3,7 @@
   $border-radius: 3px;
   $inline-block-padding: 0.2em 0.4em;
 
+  [hidden],
   [aria-hidden=true] {
     display: none;
   }
@@ -209,6 +210,11 @@
   .document-content {
     max-width: 50em;
     margin: 0 auto;
+  }
+
+  form {
+    text-align: center;
+    margin-top: 2em;
   }
 
 }
