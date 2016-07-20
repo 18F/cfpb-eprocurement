@@ -1,0 +1,36 @@
+/* thanks css tricks! https://css-tricks.com/star-ratings/ */
+.rating {
+  font-size: 25px;
+
+  .star {
+    display: block;
+    position: relative;
+    vertical-align: middle;
+    width: 1.1em;
+
+    &:hover {
+      cursor: pointer;
+
+      &:before {
+        content: "\2605";
+        position: absolute;
+      }
+    }
+  }
+}
+
+.co-task {
+  border-top: 1px solid $gray-80;
+  border-right: 1px solid $gray-80;
+  border-bottom: 1px solid $gray-80;
+  border-left: 6px solid $gray;
+
+  border-radius: 2px 2px;
+
+  line-height: 25px;
+  padding: 10px 0 10px 0;
+
+  .procurement-title {
+    margin-bottom: 0px;
+  }
+}

@@ -1,0 +1,59 @@
+---
+  title: CO Tasks
+  layout: default
+---
+
+{% assign co_data = site.data.co_tasks.co_tasks_data %}
+
+<section>
+  <div class="content-l_col content-l_col-1">
+    <div class="co-task u-clearfix">
+      <div class="content-l_col content-l_col-1-4">
+        <div class="content-l_col content-l_col-1-4">
+          <div class="rating">
+            <span class="star">&#9734;</span>
+          </div>
+        </div>
+        <div class="content-l_col content-l_col-3-4">
+          <p class="procurement-title">test</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script id="co-task" type="text/html">
+
+</script>
+
+<script>
+  var data = {{ site.data.co_tasks.data | jsonify }};
+  console.log(data);
+  // var ParentElement = document.registerElement(
+  //   'parent-element',
+  //   {
+  //     prototype: Object.create(
+  //       HTMLElement.prototype, {
+  //         createdCallback: {
+  //           value: function() {},
+  //         },
+  //         attachedCallback: {
+  //           value: function() {
+  //
+  //           }
+  //         },
+  //         detachedCallback: {
+  //           value: function() {
+  //
+  //           }
+  //         },
+  //         attributeChangedCallback: {
+  //           value: function(attr, lastValue, nextValue) {
+  //
+  //           }
+  //         }
+  //       }
+  //     )
+  //   }
+  // );
+</script>
