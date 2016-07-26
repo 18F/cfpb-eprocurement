@@ -1,0 +1,54 @@
+---
+layout: default
+
+stylesheets:
+- enchilada.css
+
+body_class: 'site__active-overview'
+header: false
+
+global_nav:
+- href: '#tutorial'
+  text: Quick tutorial
+- href: '#resources'
+  text: Resources on the wiki
+
+offices:
+- Enforcement
+
+local_nav:
+- href: favorites/
+  text: View favorites
+- href: list/?by=priority
+  text: View by priority
+- href: list/?by=quarter
+  text: View by quarter
+---
+
+<nav>
+  <ul>
+    {% for item in page.global_nav %}
+    <li><a href="#{{ item.href }}">{{ item.text }}</a></li>
+    {% endfor %}
+  </ul>
+</nav>
+
+<h1>
+  There are <span t-text="num_active">{{ num_active }}</span>
+  active procurement project<span t-if="num_active !== 1">s</span>
+  in the
+  <select name="office">
+    {% for office in page.offices %}
+    <option{% if forloop.first %} selected{% endif %}>{{ office }}</option>
+    {% endfor %}
+  </select>
+  program office.
+</h1>
+
+<ul role="navigation">
+  {% for item in page.local_nav %}
+  <li role="presentation">
+    <a href="{{ item.href }}">{{ item.text }}</a>
+  </li>
+  {% endfor %}
+</ul>
