@@ -149,4 +149,24 @@
     }
   }
 
+  .row {
+    display: flex;
+    margin: 1em;
+    // border: 1px solid black;
+
+    .col {
+      flex: 1;
+    }
+
+    .col + .col {
+      margin-left: 0.5em;
+    }
+
+    @for $i from 1 through 12 {
+      .col-#{$i} {
+        flex: $i;
+      }
+    }
+  }
+
 }
