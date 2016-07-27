@@ -1,3 +1,4 @@
+---
 name: EEO Investigators
 description:
 obligated_value:
@@ -33,3 +34,4 @@ milestones:
           - actor: Josh
             action: review
             date: 2016-06-20
+---
