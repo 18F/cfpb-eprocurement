@@ -30,11 +30,21 @@
   {% unless page.header == false %}
   <header class="wrapper wrapper__match-content" role="banner">
     <div class="block block__sub">
+      {% if page.subtitle %}
+      <h2>{{ page.subtitle }}</h2>
+      {% endif %}
       <div class="header u-clearfix">
-        <h1 class="header__left superheading">{{ site.title }}</h1>
+        <h1 class="header__left superheading">{{ page.title | default: site.title }}</h1>
+        {% if page.user %}
+        <h6 class="header__right">
+          {{ page.user.name }} ({{ page.user.role }})
+          {% include user_avatar.html user=page.user %}
+        </h6>
+        {% elsif site.user %}
         <h6 class="header__right">
           logged in as {{ site.user }} ({{ site.role }})
         </h6>
+        {% endif %}
       </div>
     </div>
   </header>

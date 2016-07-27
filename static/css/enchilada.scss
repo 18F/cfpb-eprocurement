@@ -89,3 +89,64 @@
   }
 }
 
+.site__active-list {
+  
+  header {
+    background: $green;
+    padding-bottom: 1em;
+    padding-top: 2em;
+
+    h2 {
+      margin-bottom: 0;
+    }
+
+    .block__sub {
+      margin-bottom: 0;
+      margin-top: 0;
+    }
+
+    .header__right {
+      color: $white;
+    }
+
+    .avatar {
+      display: inline-block;
+      height: 3.5em;
+      width: 3.5em;
+      border-radius: 5em;
+      vertical-align: middle;
+    }
+  }
+
+  .procurement-card {
+    border-top: 2px solid $black;
+    margin-top: 0;
+
+    h1 {
+      background: $gray-20;
+      padding: 0.8em 1em 0.4em 2em;
+      position: relative;
+
+      &::before {
+        background: $gray-40;
+        border-radius: 1em;
+        content: "";
+        display: inline-block;
+        height: 1em;
+        margin-right: -1.5em;
+        position: absolute;
+        right: 100%;
+        text-align: center;
+        bottom: 0.5em;
+        width: 1em;
+      }
+    }
+
+    &[data-status="past due"] h1::before {
+      background: $red;
+      color: $white;
+      content: "!";
+    }
+  }
+
+}
