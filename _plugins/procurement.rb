@@ -1,4 +1,5 @@
 require 'date'
+require 'set'
 require 'liquid'
 
 NOW = DateTime.now
@@ -18,19 +19,31 @@ ACTUAL_END_DATE = "actual_end_date"
 STATUS = "status"
 ACTION = "action"
 ACTOR = "actor"
+ACTORS = "actors"
+NAME = "name"
 
 COMPLETE = "complete"
 APPROVE = "approve"
 APPROVED = "approved"
 PENDING = "pending"
 
+def get_sorted(list, key)
+  return list
+    .map { |d| d[key] }
+    .select { |d| d != nil }
+    .sort
+end
+
 module CFPB
   module Procurement
 
-    def update_procurement_dates(pr)
+    def prepare_procurement(pr)
+      actors = Set.new
 
       milestones = pr[MILESTONES]
       milestones.each do |milestone|
+
+        milestone_actors = []
 
         docs = milestone[DOCUMENTS]
         docs.each do |doc|
@@ -45,6 +58,7 @@ module CFPB
               if event[ACTION] == executor[ACTION]
                 doc[ACTUAL_END_DATE] = event[DATE]
                 executor[APPROVED] = true
+                milestone_actors.push(executor[NAME])
               end
             end
 
@@ -52,41 +66,83 @@ module CFPB
             unless reviewers.empty?
               reviewers.each do |reviewer|
                 reviews = events
-                  .select { |event| event[ACTOR] == reviewer["name"] }
+                  .select { |event| event[ACTOR] == reviewer[NAME] }
+                if reviews.size > 0
+                  milestone_actors.push(reviewer[NAME])
+                end
+                reviewers = reviewers
                   .select { |event| event[ACTION] == APPROVE }
                 reviewer[APPROVED] = reviews.size > 0
               end
             end
           end
+
+          milestone_actors = Set.new(milestone_actors)
+          milestone[ACTORS] = milestone_actors.to_a
+          actors = actors + milestone_actors
         end
 
+        # the milestone's actors
+        milestone[ACTORS] = Set.new(actors).to_a
+
+        milestone[STATUS] = PENDING
+        # FIXME if milestone has dependencies, mark as pending completion of
+        # those milestones
         unless docs.empty?
-          milestone[ACTUAL_START_DATE] = docs.first[ACTUAL_START_DATE]
-          if docs.all? { |doc| doc[ACTUAL_END_DATE] }
-            last = docs.last
+          milestone[ACTUAL_START_DATE] = get_sorted(docs, ACTUAL_START_DATE).first
+          milestone[TARGET_START_DATE] = get_sorted(docs, TARGET_START_DATE).first
+          milestone[TARGET_END_DATE] = get_sorted(docs, TARGET_END_DATE).last
+
+          working_docs = docs.select { |doc| !doc[ACTUAL_END_DATE] }
+          if working_docs.empty?
+            docs_by_end_date = docs
+              .select { |doc| doc[ACTUAL_END_DATE] }
+              .sort { |a, b| a[ACTUAL_END_DATE] - b[ACTUAL_END_DATE] }
+            last = docs_by_end_date.last
             if last[ACTION] == last[EXECUTOR][ACTION]
               milestone[ACTUAL_END_DATE] = last[ACTUAL_END_DATE]
             end
+            # FIXME: does this go into the if statement above?
+            milestone[STATUS] = APPROVED
+          else
+            milestone[STATUS] = working_docs.first[STATUS]
           end
         end
       end
 
+      pr[ACTORS] = actors.to_a
+
+      pr[STATUS] = PENDING
       unless milestones.empty?
-        pr[ACTUAL_START_DATE] = milestones.first[ACTUAL_START_DATE]
-        pr[ACTUAL_END_DATE] = milestones.last[ACTUAL_END_DATE]
-        pr[TARGET_START_DATE] = milestones.first[TARGET_START_DATE]
-        pr[TARGET_END_DATE] = milestones.last[TARGET_END_DATE]
+        # the procurement's actual start date is that of the earliest
+        # started milestone
+        pr[ACTUAL_START_DATE] = get_sorted(milestones, ACTUAL_START_DATE).first
+        # the procurement's actual end date is that of the last
+        # complete milestone
+        pr[ACTUAL_END_DATE] = get_sorted(milestones, ACTUAL_END_DATE).last
+        # the procurement's target start date is the earliest
+        # of its milestones' target start dates
+        pr[TARGET_START_DATE] = get_sorted(milestones, TARGET_START_DATE).first
+        # the procurement's target end date is the latest
+        # of its milestones' target end dates (may be nil)
+        pr[TARGET_END_DATE] = get_sorted(milestones, TARGET_END_DATE).last
+
+        # get a list of the incomplete milestones
+        incomplete = milestones
+          .select { |milestone| !milestone[ACTUAL_END_DATE] }
+
+        if incomplete.empty?
+          # if there are no incomplete milestones,
+          # the procurement is complete!
+          pr[STATUS] = COMPLETE
+        else
+          # otherwise, the procurement's status is that of
+          # the *first* incomplete milestone
+          pr[STATUS] = get_sorted(incomplete, ACTUAL_START_DATE).first
+        end
       end
 
       return pr
-    end
-
-    def get_procurement_status(pr)
-      if pr[ACTUAL_END_DATE]
-        return COMPLETE
-      end
-      last = pr[EVENTS] ? pr[EVENTS].last : nil
-      return last ? last[ACTION] : PENDING
     end
 
   end
