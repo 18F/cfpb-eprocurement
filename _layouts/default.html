@@ -35,14 +35,12 @@
       {% endif %}
       <div class="header u-clearfix">
         <h1 class="header__left superheading">{{ page.title | default: site.title }}</h1>
-        {% if page.user %}
+        {% assign _user = site.data.users[site.user] %}
+        {% if _user %}
         <h6 class="header__right">
-          {{ page.user.name }} ({{ page.user.role }})
-          {% include user_avatar.html user=page.user %}
-        </h6>
-        {% elsif site.user %}
-        <h6 class="header__right">
-          logged in as {{ site.user }} ({{ site.role }})
+          {{ _user.name | default: site.user }}
+          {% if _user.role %}({{ _user.role }}){% endif %}
+          {% include user_avatar.html user=_user %}
         </h6>
         {% endif %}
       </div>

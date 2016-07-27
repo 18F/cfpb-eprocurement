@@ -1,3 +1,2 @@
-<img class="avatar {{ include.className }}"
-  title="{{ include.user.name }} ({{ include.user.role }})"
-  src="{{ site.baseurl }}/static/images/avatars/{{ include.user.slug }}.jpg">
+<img class="avatar {{ include.className }}" alt=""
+  src="{{ site.baseurl }}/static/images/avatars/{{ include.user.avatar | default: 'none' }}.jpg">
