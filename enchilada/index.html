@@ -4,52 +4,40 @@ layout: default
 stylesheets:
 - enchilada.css
 
-body_class: 'site__active-overview'
-header: false
+body_class: 'site__active-list'
 
-global_nav:
-- href: '#tutorial'
-  text: Quick tutorial
-- href: '#resources'
-  text: Resources on the wiki
+title: Active Procurements
+subtitle: Enforcement Program Office
 
-offices:
-- Enforcement
-
-local_nav:
-- href: list/?filter=favorite
-  text: View favorites
-- href: list/?by=priority
-  text: View by priority
-- href: list/?by=quarter
-  text: View by quarter
+user:
+  id: warren
+  name: Myra Ball
+  role: COR
 ---
 
-<nav>
-  <ul>
-    {% for item in page.global_nav %}
-    <li><a href="#{{ item.href }}">{{ item.text }}</a></li>
-    {% endfor %}
-  </ul>
-</nav>
+<div class="input-with-btn">
+  <div class="input-with-btn_input">
+    <span class="cf-icon cf-icon-user-round"></span>
+    indicates your tasks
+  </div>
+  <div class="input-with-btn_btn">
+    <button class="btn" action="export/">
+      <span class="cf-icon cf-icon-download"></span>
+      Export to Excel
+    </button>
+  </div>
+</div>
 
-<h1>
-  {% assign num_active = site.data.procurements | size %}
-  There are <span t-text="num_active">{{ num_active }}</span>
-  active procurement project<span t-if="num_active !== 1">s</span>
-  in the
-  <select name="office">
-    {% for office in page.offices %}
-    <option{% if forloop.first %} selected{% endif %}>{{ office }}</option>
-    {% endfor %}
-  </select>
-  program office.
-</h1>
+{% for _proc in site.data.procurements %}
+  {% assign slug = _proc[0] | slugify %}
+  {% assign proc = _proc[1] | prepare_procurement %}
+  {% assign active_milestones = '' | split: '' %}
+<section class="procurement procurement-card"
+  id="{{ slug }}"
+  data-status="{{ proc_status }}"
+  data-values='{{ proc | jsonify }}'>
 
-<ul role="navigation">
-  {% for item in page.local_nav %}
-  <li role="presentation">
-    <a href="{{ item.href }}">{{ item.text }}</a>
-  </li>
-  {% endfor %}
-</ul>
+  <h1>{{ proc.name }}</h1>
+
+</section>
+{% endfor %}
