@@ -13,43 +13,6 @@ user:
   id: warren
   name: Myra Ball
   role: COR
-
-procurements:
-  - name: EEO Investigators
-    description:
-    obligated_value:
-    program_office: CFPB
-    responsible_parties:
-      COR: Merav
-      CO: Catherine
-      CS: Jeremy
-    requistion: XXX-YYY-ZZZZ
-    milestones:
-      - name: Market Research
-        documents:
-          - name: Sources sought notice
-            target_start_date: 2016-06-12
-            target_end_date: 2016-06-24
-            author: Merav
-            reviewers:
-              - name: Bill
-              - name: Josh
-            executor:
-              name: Catherine
-              action: post
-            events:
-              - actor: Merav
-                action: draft
-                date: 2016-06-13
-              - actor: Merav
-                action: review
-                date: 2016-06-20
-              - actor: Bill
-                action: approve
-                date: 2016-06-20
-              - actor: Josh
-                action: review
-                date: 2016-06-20
 ---
 
 <div class="input-with-btn">
@@ -65,10 +28,12 @@ procurements:
   </div>
 </div>
 
-{% for _proc in page.procurements %}
-  {% assign proc = _proc | update_procurement_dates %}
+{% for _proc in site.data.procurements %}
+  {% assign slug = _proc[0] | slugify %}
+  {% assign proc = _proc[1] | update_procurement_dates %}
   {% assign proc_status = proc | get_procurement_status %}
 <section class="procurement procurement-card"
+  id="{{ slug }}"
   data-status="{{ proc_status }}"
   data-values='{{ proc | jsonify }}'>
   <h1>{{ proc.name }}</h1>
