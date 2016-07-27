@@ -1,10 +1,5 @@
-Procurement ID,Requisition Number,Short description,Responsible team,Primary procurement office contact,Primary Role,Phone number,Email address,Other procurement team member,Secondary Role,Phone/email,Program office liaison (COR),Long description,Client Office,Waiting on this person...,To do this thing...,Remind them at this date
+id,requisition_number,shortdesc,responsible_team,primary_name,primary_role,primary_phone,primary_email,secondary_name,secondary_role,secondary_contact,COR,longdesc,client_office,next_name,next_task,reminder_date
 1,FAKE-20500-16-0012,EEO investigators,CFPB,"Newman, Daniel",Contracting Specialist,888-888-8888,dan.newman@cfpb.gov,"Best, George",Contracting Officer,george.best@cfpb.gov,Myra Ball,Opening a new contract for equal opportunity employment investigators to assist OCR.,OCR,Myra Ball,Revised SOW based on comments form Daniel,2016-02-25
 2,FAKE-20500-16-0014,Policy auditing services,CFPB,"Newman, Daniel",Contracting Specialist,888-888-8889,dan.newman@cfpb.gov,"Best, George",Contracting Officer,george.best@cfpb.gov,Myra Ball,Using a GSA schedule to contract a personnel policy auditor.,OCR,Josh Raedeke,Assign procurement officer,2016-01-26
 3,FAKE-20100-16-0013,Complaint tracking system,CFPB,"Brewer, Christopher",Client Care Specialist,888-888-8890,christopher.brewer@cfpb.gov,"Agnew, Marge",Contracting Officer,marge.agnew@cfpb.gov,Myra Ball,For purchasing a new software-as-a-serve system for tracking workplace enviornment complaints.,OCR,Christopher,Complete tier 1 review,2016-03-11
 4,FAKE-90110-16-0016,Consultant services,CFPB,"Brewer, Christopher",Client Care Specialist,888-888-8891,christopher.brewer@cfpb.gov,"Agnew, Marge",Contracting Officer,marge.agnew@cfpb.gov,Myra Ball,Trying to open a BPA for diversity consultants.,OCR,Christopher,Waiting for contractors to onboard,
-,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,
