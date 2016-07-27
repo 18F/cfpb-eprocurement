@@ -12,10 +12,10 @@ milestones:
 - name: Market research
   documents:
   - name: Sources sought notice
-    target-start-date: 2016-05-02
-    target-end-date: 2016-05-06
+    target_start_date: 2016-05-02
+    target_end_date: 2016-05-06
     url: 
-    primary-author: Catherine
+    author: Catherine
     status: complete
     executor: 
       name: Catherine
@@ -30,10 +30,10 @@ milestones:
         action: post
         revision-number: 1
   - name: Market research synthesis
-    target-start-date: 2016-05-10
-    target-end-date: 2016-05-17
+    target_start_date: 2016-05-10
+    target_end_date: 2016-05-17
     url: 
-    primary-author: Merav
+    author: Merav
     status: complete
     executor: 
       name: Merav
@@ -69,10 +69,10 @@ milestones:
 - name: Financial tasks
   documents:
   - name: Email from OCFO for funding availability
-    target-start-date: 2016-06-01
-    target-end-date: 2016-06-08
+    target_start_date: 2016-06-01
+    target_end_date: 2016-06-08
     url: 
-    primary-author: Fred
+    author: Fred
     status: complete
     executor: 
           name: Fred
@@ -87,10 +87,10 @@ milestones:
         action: send
         revision-number: 1
   - name: CFPBuy request
-    target-start-date: 2016-08-01
-    target-end-date: 2016-08-01
+    target_start_date: 2016-08-01
+    target_end_date: 2016-08-01
     url: 
-    primary-author: Merav
+    author: Merav
     status: draft
     executor: 
           name: Merav
@@ -99,10 +99,10 @@ milestones:
 - name: Technology and innovation tasks
   documents:
   - name: Technology request form
-    target-start-date: 2016-04-13
-    target-end-date: 2016-04-13
+    target_start_date: 2016-04-13
+    target_end_date: 2016-04-13
     url: 
-    primary-author: Merav
+    author: Merav
     status: complete
     executor: 
           name: Merav
@@ -117,10 +117,10 @@ milestones:
         action: submit
         revision-number: 1
   - name: T and I consultation minutes
-    target-start-date: 2016-05-25
-    target-end-date: 2016-06-03
+    target_start_date: 2016-05-25
+    target_end_date: 2016-06-03
     url: 
-    primary-author: Suzan
+    author: Suzan
     status: complete
     executor: 
           name: Suzan
@@ -145,10 +145,10 @@ milestones:
 - name: Acquisition package preperation
   documents:
   - name: Acquisition plan
-    target-start-date: 2016-06-22
-    target-end-date: 2016-7-11
+    target_start_date: 2016-06-22
+    target_end_date: 2016-7-11
     url: 
-    primary-author: Jackie
+    author: Jackie
     status: complete
     reviewers:
       - name: Merav
@@ -159,37 +159,37 @@ milestones:
       name: Jeremy
       action: Sign
   - name: PRISM requistion
-    target-start-date: 2016-08-01
-    target-end-date: 2016-08-15
+    target_start_date: 2016-08-01
+    target_end_date: 2016-08-15
     url: 
-    primary-author: OCFO
+    author: OCFO
     status: complete
     executor: 
       name: OCFO
       action: Submit 
   - name: Independent Government Cost Estimate
-    target-start-date: 2016-05-25
-    target-end-date: 2016-06-08
+    target_start_date: 2016-05-25
+    target_end_date: 2016-06-08
     url: 
-    primary-author: Merav
+    author: Merav
     status: complete
     executor: 
       name: Merav
       action: Complete
   - name: BPA Scope of Work
-    target-start-date: 2016-04-11
-    target-end-date: 2016-06-21
+    target_start_date: 2016-04-11
+    target_end_date: 2016-06-21
     url: 
-    primary-author: Merav
+    author: Merav
     status: complete
     executor: 
       name: Merav
       action: Complete
   - name: BPA Call 0001
-    target-start-date: 2016-05-25
-    target-end-date: 2016-06-21
+    target_start_date: 2016-05-25
+    target_end_date: 2016-06-21
     url: 
-    primary-author: Merav
+    author: Merav
     status: complete
     executor: 
       name: Merav
@@ -198,28 +198,28 @@ milestones:
       - name: Paul
         approved: true
   - name: Evaluation Factors
-    target-start-date: 2016-06-13
-    target-end-date: 2016-06-21
+    target_start_date: 2016-06-13
+    target_end_date: 2016-06-21
     url: 
-    primary-author: Merav
+    author: Merav
     status: complete
     executor: 
       name: Merav
       action: Finalize
   - name: Source Selection Plan
-    target-start-date: 2016-06-22
-    target-end-date: 2016-06-29
+    target_start_date: 2016-06-22
+    target_end_date: 2016-06-29
     url: 
-    primary-author: Jeremy
+    author: Jeremy
     status: complete
     executor: 
       name: Jeremy
       action: Finalize
   - name: Service Coding Contract Sheet
-    target-start-date: 2016-06-22
-    target-end-date: 2016-06-29
+    target_start_date: 2016-06-22
+    target_end_date: 2016-06-29
     url: 
-    primary-author: Merav
+    author: Merav
     status: complete
     executor: 
       name: Merav
@@ -230,10 +230,10 @@ milestones:
 - name: Acquisition package reviews and posting
   documents:
     - name: Acquisition package
-      target-start-date: 2016-07-19
-      target-end-date: 2016-09-12
+      target_start_date: 2016-07-19
+      target_end_date: 2016-09-12
       url: 
-      primary-author: Merav
+      author: Merav
       status: complete
       executor: 
         name: Matthew
@@ -254,10 +254,10 @@ milestones:
 - name: Solicitation
   documents:
   - name: Answers to vendor questions
-    target-start-date: 2016-08-23
-    target-end-date: 2016-09-05
+    target_start_date: 2016-08-23
+    target_end_date: 2016-09-05
     url: 
-    primary-author: 
+    author: 
       - name: Merav
       - name: Matthew
     status: complete
@@ -272,26 +272,26 @@ milestones:
 - name: Evaluation and award
   documents:
     - name: Redacted project proposals
-      target-start-date: 2016-09-16
-      target-end-date: 2016-09-23
+      target_start_date: 2016-09-16
+      target_end_date: 2016-09-23
       url: 
-      primary-author: Jeremy
+      author: Jeremy
       executor:
         name: Jeremy
         action: Finalized
     - name: Price analysis
-      target-start-date: 2016-09-14
-      target-end-date: 2016-09-14
+      target_start_date: 2016-09-14
+      target_end_date: 2016-09-14
       url: 
-      primary-author: Jeremy
+      author: Jeremy
       executor:
         name: Jeremy
         action: Finalized
     - name: Tehnical evaluation report
-      target-start-date: 2016-09-16
-      target-end-date: 2016-09-23
+      target_start_date: 2016-09-16
+      target_end_date: 2016-09-23
       url: 
-      primary-author: Merav
+      author: Merav
       reviewers:
         - name: Matthew
           approved: false
@@ -301,10 +301,10 @@ milestones:
         name: Merav
         action: Finalized
     - name: Award package
-      target-start-date: 2016-09-14
-      target-end-date: 2016-09-14
+      target_start_date: 2016-09-14
+      target_end_date: 2016-09-14
       url: 
-      primary-author: Merav
+      author: Merav
       reviewers:
         - name: Matthew
           approved: false

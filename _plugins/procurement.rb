@@ -27,30 +27,42 @@ APPROVE = "approve"
 APPROVED = "approved"
 PENDING = "pending"
 
-def get_sorted(list, key)
+def get_sorted(list, key, type=Date)
   return list
     .map { |d| d[key] }
-    .select { |d| d != nil }
+    .select { |d| d.is_a? type }
     .sort
 end
 
 module CFPB
   module Procurement
 
+    def prepare_for_jsonify(data)
+      # XXX if these are set, then they will cause stack overflows
+      # when you try to jsonify the object
+      data["next"] = nil
+      data["previous"] = nil
+      data["content"] = nil
+      data["output"] = nil
+      return data
+    end
+
     def prepare_procurement(pr)
+      prepare_for_jsonify(pr)
+
       actors = Set.new
 
       milestones = pr[MILESTONES]
       milestones.each do |milestone|
 
-        milestone_actors = []
+        milestone_actors = Set.new
 
         docs = milestone[DOCUMENTS]
         docs.each do |doc|
           events = doc[EVENTS]
           executor = doc[EXECUTOR]
           executor[APPROVED] = false
-          unless events.empty?
+          unless !events or events.empty?
             doc[ACTUAL_START_DATE] = events.first[DATE]
             doc[STATUS] = events.last[ACTION]
 
@@ -63,12 +75,12 @@ module CFPB
             end
 
             reviewers = doc[REVIEWERS]
-            unless reviewers.empty?
+            unless !reviewers or reviewers.empty?
               reviewers.each do |reviewer|
                 reviews = events
                   .select { |event| event[ACTOR] == reviewer[NAME] }
                 if reviews.size > 0
-                  milestone_actors.push(reviewer[NAME])
+                  milestone_actors.add(reviewer[NAME])
                 end
                 reviewers = reviewers
                   .select { |event| event[ACTION] == APPROVE }
@@ -77,13 +89,12 @@ module CFPB
             end
           end
 
-          milestone_actors = Set.new(milestone_actors)
           milestone[ACTORS] = milestone_actors.to_a
           actors = actors + milestone_actors
         end
 
         # the milestone's actors
-        milestone[ACTORS] = Set.new(actors).to_a
+        milestone[ACTORS] = actors.to_a
 
         milestone[STATUS] = PENDING
         # FIXME if milestone has dependencies, mark as pending completion of

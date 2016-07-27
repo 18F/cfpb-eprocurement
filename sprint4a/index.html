@@ -23,13 +23,11 @@ subtitle: Enforcement Program Office
   </div>
 </div>
 
-{% for _proc in site.data.procurements %}
-  {% assign slug = _proc[0] | slugify %}
-  {% assign proc = _proc[1] | prepare_procurement %}
-  {% assign active_milestones = '' | split: '' %}
+{% for _proc in site.procurements %}
+  {% assign proc = _proc | prepare_procurement %}
 <section class="procurement procurement-card"
-  id="{{ slug }}"
-  data-status="{{ proc_status }}"
+  id="{{ proc.slug }}"
+  data-status="{{ proc.status }}"
   data-values='{{ proc | jsonify }}'>
 
   <h1>{{ proc.name }}</h1>
