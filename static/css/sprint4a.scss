@@ -3,7 +3,15 @@
 
 @import 'palette';
 
-.site__active-overview {
+.avatar {
+  display: inline-block;
+  height: 3.5em;
+  width: 3.5em;
+  border-radius: 5em;
+  vertical-align: middle;
+}
+
+.site__procurements-landing {
   background: $green;
 
   nav {
@@ -89,8 +97,8 @@
   }
 }
 
-.site__active-list {
-  
+.site__procurements-list {
+
   header {
     background: $green;
     padding-bottom: 1em;
@@ -107,14 +115,6 @@
 
     .header__right {
       color: $white;
-    }
-
-    .avatar {
-      display: inline-block;
-      height: 3.5em;
-      width: 3.5em;
-      border-radius: 5em;
-      vertical-align: middle;
     }
   }
 
@@ -169,4 +169,8 @@
     }
   }
 
+}
+
+.site__procurement-detail {
+  // TODO
 }
