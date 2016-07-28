@@ -162,7 +162,10 @@ module CFPB
         else
           # otherwise, the procurement's status is that of
           # the *first* incomplete milestone
-          pr[STATUS] = get_sorted(incomplete, ACTUAL_START_DATE).first
+          pr[STATUS] = incomplete
+            .select { |milestone| milestone[ACTUAL_START_DATE] }
+            .sort { |a, b| a[ACTUAL_START_DATE] - b[ACTUAL_START_DATE] }
+            .first[STATUS] || PENDING
         end
       end
 
