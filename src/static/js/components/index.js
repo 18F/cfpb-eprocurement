@@ -12,6 +12,11 @@ var PopupMenu = document.registerElement(
   require('./popup-menu')
 );
 
+var FaveStar = document.registerElement(
+  prefix + 'fave-star',
+  require('./fave-star')
+);
+
 module.exports = {
   SortableTable: SortableTable,
   PopupMenu: PopupMenu

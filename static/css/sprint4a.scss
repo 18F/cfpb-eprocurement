@@ -140,6 +140,11 @@
         bottom: 0.5em;
         width: 1em;
       }
+
+      [is=cfpb-fave-star] {
+        position: absolute;
+        right: 1em;
+      }
     }
 
     &[data-status="past due"] h1::before {

@@ -25,12 +25,18 @@ subtitle: Enforcement Program Office
 
 {% for _proc in site.procurements %}
   {% assign proc = _proc | prepare_procurement %}
+  {% assign id = _proc.id | split: '/' | last %}
 <section class="procurement procurement-card"
-  id="{{ proc.slug }}"
+  id="{{ id }}"
   data-status="{{ proc.status }}"
   data-values='{{ proc | jsonify }}'>
 
-  <h1><a href="{{ proc.url }}">{{ proc.name }}</a></h1>
+  <h1>
+    <a href="{{ proc.url }}">{{ proc.name }}</a>
+    <label is="cfpb-fave-star">
+      <input type="checkbox" name="{{ id }}">
+    </label>
+  </h1>
 
 </section>
 {% endfor %}

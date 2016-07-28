@@ -1,0 +1,33 @@
+[is=cfpb-fave-star] {
+  display: inline-block;
+
+  // this only works in Chrome, but hides the
+  // element until its custom element definition
+  // is loaded
+  &:unresolved {
+    visibility: hidden;
+  }
+
+  input[type=checkbox] {
+            appearance: none;
+        -ms-appearance: none;
+       -moz-appearance: none;
+    -webkit-appearance: none;
+    border: none;
+    display: inline-block;
+    height: 0;
+    padding: 0;
+    width: 0;
+
+    &::before {
+      content: "★";
+      color: $gray-40;
+      cursor: pointer;
+      display: inline-block;
+    }
+
+    &:checked::before {
+      color: $red;
+    }
+  }
+}
