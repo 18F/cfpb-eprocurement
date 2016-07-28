@@ -4,3 +4,12 @@ body_class: 'site__procurement-detail'
 stylesheets:
 - sprint4a.css
 ---
+
+{% assign proc = page | prepare_procurement %}
+<pre class="json">{{ proc | jsonify }}</pre>
+
+<script>
+  [].forEach.call(document.querySelectorAll('pre.json'), function(pre) {
+    pre.textContent = JSON.stringify(JSON.parse(pre.textContent), null, '  ');
+  });
+</script>
