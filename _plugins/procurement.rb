@@ -70,7 +70,7 @@ module CFPB
               if event[ACTION] == executor[ACTION]
                 doc[ACTUAL_END_DATE] = event[DATE]
                 executor[APPROVED] = true
-                milestone_actors.push(executor[NAME])
+                milestone_actors.add(executor[NAME])
               end
             end
 
