@@ -17,13 +17,13 @@ stylesheets:
       <div class="col-3">
         <p class="detail-header__title"><b>Obligated Amount</b></p>
         <p class="detail-header__data">
-          {{ proc.obligated_value }}
+          ${{ proc.obligated_value | number_to_currency }}
         </p>
       </div>
       <div class="col-3">
         <p class="detail-header__title"><b>Award Date</b></p>
         <p class="detail-header__data">
-          {{ proc.requested_award_date }}
+          {{ proc.requested_award_date | date: '%B %d, %Y' }}
         </p>
       </div>
     </div>

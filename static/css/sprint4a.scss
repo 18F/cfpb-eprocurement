@@ -28,6 +28,10 @@ header {
   margin: 1em;
   // border: 1px solid black;
 
+  [class^="col-"]:first-child, [class*=" col-"]:first-child {
+    margin-left: -15px;
+  }
+
   .col {
     flex: 1;
   }

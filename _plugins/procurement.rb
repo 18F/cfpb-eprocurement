@@ -37,6 +37,15 @@ end
 module CFPB
   module Procurement
 
+    def number_to_currency(number)
+      return "N/A" unless number
+
+      amount = format("%.2f", number)
+      while amount.sub!(/(\d+)(\d\d\d)/,'\1,\2'); end
+
+      amount
+    end
+
     def prepare_for_jsonify(data)
       # XXX if these are set, then they will cause stack overflows
       # when you try to jsonify the object
