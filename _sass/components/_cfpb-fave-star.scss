@@ -15,6 +15,7 @@
     &::before {
       content: "★";
       color: $gray-40;
+      cursor: pointer;
       display: inline-block;
     }
 
