@@ -47,10 +47,12 @@ module CFPB
     end
 
     def prepare_for_jsonify(data)
-      # XXX if these are set, then they will cause stack overflows
-      # when you try to jsonify the object
+      # always coerce the data to a Hash
+      # (Jekyll 3.3 apparently needs this)
       data = data.to_h
 
+      # XXX if these are set, then they will cause stack overflows
+      # when you try to jsonify the object
       data["next"] = nil
       data["previous"] = nil
       data["content"] = nil
