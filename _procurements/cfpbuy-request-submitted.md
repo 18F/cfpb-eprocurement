@@ -172,7 +172,6 @@ milestones:
        - name: Acquisition Plan Draft
     responsible_parties:
       - name: TBD       
-
   - name: Acquisiton Package Sent for Legal Review
     target_start_date: 2016-07-28
     target_end_date: 2016-08-10
@@ -180,7 +179,6 @@ milestones:
        - name: Acquisiton Package Sent for Tier II Review
     responsible_parties:
       - name: Angela     
-
   - name: Solicitation Posted
     target_start_date: 2016-08-11
     target_end_date: 2016-09-08
@@ -189,7 +187,6 @@ milestones:
        - name: SOW finalized by Procurement
     responsible_parties:
       - name: Jerry    
-
   - name: Proposals Distributed to OCR TEP
     target_start_date: 2016-09-09
     target_end_date: 2016-09-09
@@ -197,7 +194,6 @@ milestones:
        - name: Procurement draft Award Docs
     responsible_parties:
       - name: Jerry
-
   - name: Procurement Price Evaluation
     target_start_date: 2016-09-09
     target_end_date: 2016-09-12
@@ -205,7 +201,6 @@ milestones:
        - name: Procurement draft Award Docs
     responsible_parties:
       - name: Vanessa 
-
   - name: OCR TEP evaluation begins
     target_start_date: 2016-09-12
     target_end_date: 2016-09-21
@@ -213,7 +208,6 @@ milestones:
        - name: Proposals Due
     responsible_parties:
       - name: Daniel   
-
   - name: OCR TEP evaluation ends
     target_start_date: 2016-09-21
     target_end_date: 2016-09-21
