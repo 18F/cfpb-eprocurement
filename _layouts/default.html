@@ -31,21 +31,23 @@
 <body class="{{ page.body_class | default: layout.body_class | default: 'site__wide' }}">
 
   {% if page.header != false and layout.header != false %}
-  <header class="wrapper wrapper__match-content" role="banner">
-    <div class="block block__sub">
-      {% if page.subtitle %}
-      <h2>{{ page.subtitle }}</h2>
-      {% endif %}
-      <div class="header u-clearfix">
-        <h1 class="header__left superheading">{{ page.title | default: site.title }}</h1>
-        {% assign _user = site.data.users[site.user] %}
-        {% if _user %}
-        <h6 class="header__right">
-          {{ _user.name | default: site.user }}
-          {% if _user.role %}({{ _user.role }}){% endif %}
-          {% include user_avatar.html user=_user %}
-        </h6>
+  <header role="banner">
+    <div class="wrapper wrapper__match-content">
+      <div class="block block__sub">
+        {% if page.subtitle %}
+        <h2>{{ page.subtitle }}</h2>
         {% endif %}
+        <div class="header u-clearfix">
+          <h1 class="header__left superheading">{{ page.title | default: site.title }}</h1>
+          {% assign _user = site.data.users[site.user] %}
+          {% if _user %}
+          <h6 class="header__right">
+            {{ _user.name | default: site.user }}
+            {% if _user.role %}({{ _user.role }}){% endif %}
+            {% include user_avatar.html user=_user %}
+          </h6>
+          {% endif %}
+        </div>
       </div>
     </div>
   </header>

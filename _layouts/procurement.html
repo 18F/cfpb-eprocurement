@@ -4,8 +4,32 @@ body_class: 'site__procurement-detail'
 stylesheets:
 - sprint4a.css
 ---
-
 {% assign proc = page | prepare_procurement %}
+<div class="detail-header">
+  <div class="wrapper wrapper__match-content">
+    <div class="row">
+      <div class="col-3">
+        <p class="detail-header__title"><b>Procurement No.</b></p>
+        <p class="detail-header__data">
+          {{ proc.requisition_number }}
+        </p>
+      </div>
+      <div class="col-3">
+        <p class="detail-header__title"><b>Obligated Amount</b></p>
+        <p class="detail-header__data">
+          {{ proc.obligated_value }}
+        </p>
+      </div>
+      <div class="col-3">
+        <p class="detail-header__title"><b>Award Date</b></p>
+        <p class="detail-header__data">
+          {{ proc.requested_award_date }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <pre class="json">{{ proc | jsonify }}</pre>
 
 <script>

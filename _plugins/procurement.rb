@@ -40,6 +40,8 @@ module CFPB
     def prepare_for_jsonify(data)
       # XXX if these are set, then they will cause stack overflows
       # when you try to jsonify the object
+      data = data.to_h
+
       data["next"] = nil
       data["previous"] = nil
       data["content"] = nil
@@ -48,16 +50,16 @@ module CFPB
     end
 
     def prepare_procurement(pr)
-      prepare_for_jsonify(pr)
+      pr = prepare_for_jsonify(pr)
 
       actors = Set.new
 
-      milestones = pr[MILESTONES]
+      milestones = pr[MILESTONES] || []
       milestones.each do |milestone|
 
         milestone_actors = Set.new
 
-        docs = milestone[DOCUMENTS]
+        docs = milestone[DOCUMENTS] || []
         docs.each do |doc|
           events = doc[EVENTS]
           executor = doc[EXECUTOR]

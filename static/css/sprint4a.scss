@@ -3,6 +3,47 @@
 
 @import 'palette';
 
+header {
+  background: $green;
+  margin: 0;
+  padding-bottom: 1em;
+  padding-top: 2em;
+
+  h2 {
+    margin-bottom: 0;
+  }
+
+  .block__sub {
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+
+  .header__right {
+    color: $white;
+  }
+}
+
+.row {
+  display: flex;
+  margin: 1em;
+  // border: 1px solid black;
+
+  .col {
+    flex: 1;
+  }
+
+  .col + .col {
+    margin-left: 0.5em;
+  }
+
+  @for $i from 1 through 12 {
+    .col-#{$i} {
+      flex: $i;
+    }
+  }
+}
+
+
 .avatar {
   display: inline-block;
   height: 3.5em;
@@ -11,112 +52,7 @@
   vertical-align: middle;
 }
 
-.site__procurements-landing {
-  background: $green;
-
-  nav {
-    margin-bottom: 2em;
-    text-align: right;
-
-    ul,
-    li {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    ul {
-      display: block;
-    }
-
-    li {
-      display: inline-block;
-      margin-left: 1em;
-    }
-
-    a:link {
-      color: $white;
-    }
-  }
-
-  h1 {
-    font-size: 4em;
-    font-weight: 600;
-
-    select {
-      appearance: none;
-      -webkit-appearance: none;
-      background: none;
-      border: none;
-      color: $white;
-      display: inline-block;
-      font: inherit;
-      padding: 0;
-      text-decoration: underline;
-
-      &::after {
-        content: "▾";
-        display: inline-block;
-        margin-left: 0.2em;
-      }
-
-    }
-  }
-
-  ul[role=navigation] {
-    display: block;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    width: auto;
-    width: 40%;
-
-    li {
-      border-bottom: 2px solid;
-      display: block;
-      font-size: 1.5em;
-      font-weight: bold;
-      padding: 0;
-
-      a:link {
-        border-bottom: none;
-        color: $white;
-        display: block;
-        padding: 0.5em;
-        position: relative;
-        text-decoration: underline;
-
-        &::after {
-          content: "▸";
-          color: $black;
-          position: absolute;
-          right: 0;
-        }
-      }
-    }
-  }
-}
-
 .site__procurements-list {
-
-  header {
-    background: $green;
-    padding-bottom: 1em;
-    padding-top: 2em;
-
-    h2 {
-      margin-bottom: 0;
-    }
-
-    .block__sub {
-      margin-bottom: 0;
-      margin-top: 0;
-    }
-
-    .header__right {
-      color: $white;
-    }
-  }
 
   .procurement-card {
     border-top: 2px solid $black;
@@ -153,29 +89,33 @@
       content: "!";
     }
   }
-
-  .row {
-    display: flex;
-    margin: 1em;
-    // border: 1px solid black;
-
-    .col {
-      flex: 1;
-    }
-
-    .col + .col {
-      margin-left: 0.5em;
-    }
-
-    @for $i from 1 through 12 {
-      .col-#{$i} {
-        flex: $i;
-      }
-    }
-  }
-
 }
 
 .site__procurement-detail {
-  // TODO
+  font-family: Helvetica, Arial, sans-serif;
+
+  .content_wrapper {
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+    width: 100%;
+  }
+  .content_main {
+    border: initial;
+    padding: 0;
+    margin: 0;
+  }
+
+  .detail-header {
+    background: $green;
+    border-top: 1px solid $white;
+
+    .detail-header__title {
+      margin-bottom: 0;
+    }
+
+    .detail-header__data {
+      color: $white;
+    }
+  }
 }
