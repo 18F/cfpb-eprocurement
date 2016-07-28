@@ -8,6 +8,7 @@ responsible_parties:
   CO: Catherine
   CS: Jeremy
 requistion: XXX-YYY-ZZZZ
+requested_award_date: 2016-08-20
 milestones:
   - name: Market Research
     documents:
