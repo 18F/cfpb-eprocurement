@@ -19,22 +19,24 @@
 
     // the default sort is by requested_award_date
     var defaultField = 'requested_award_date';
-    var defaultOrder = d3[query.order] || d3.ascending;
+    var defaultOrder = d3.ascending;
     var defaultSort = function(a, b) {
       return defaultOrder(a[defaultField], b[defaultField]);
     };
 
+    var order = d3[query.order] || d3.descending;
     procs.sort((sortField === defaultField)
       ? defaultSort
       : function(a, b) {
-          return defaultOrder(a[sortField], b[sortField])
+          return order(a[sortField], b[sortField])
               || defaultSort(a, b);
         });
   }
 
-  d3.selectAll('form.autosubmit')
+  // auto-submit forms when they change
+  d3.selectAll('.js-autosubmit')
     .on('change', function() {
-      this.submit();
+      (this.form || this).submit();
     });
 
 })(this);

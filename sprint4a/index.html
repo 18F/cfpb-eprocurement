@@ -19,20 +19,18 @@ sort_options:
   text: Favorites
 ---
 
-<form method="GET" class="autosubmit">
+<form method="GET" class="js-autosubmit">
   <div class="input-with-btn">
     <div class="input-with-btn_input">
-
-      View by
-      <select name="sort">
+      <label for="sort-by">View by</label>
+      <select id="sort-by" name="sort">
         {% for sort in page.sort_options %}
         <option value="{{ sort.by }}">{{ sort.text }}</option>
         {% endfor %}
       </select>
-
     </div>
     <div class="input-with-btn_btn">
-      <button class="btn" action="export/">
+      <button class="btn" type="button" action="export/">
         <span class="cf-icon cf-icon-download"></span>
         Export to Excel
       </button>
