@@ -30,7 +30,7 @@ subtitle: Enforcement Program Office
   data-status="{{ proc.status }}"
   data-values='{{ proc | jsonify }}'>
 
-  <h1>{{ proc.name }}</h1>
+  <h1><a href="{{ proc.url }}">{{ proc.name }}</a></h1>
 
 </section>
 {% endfor %}
