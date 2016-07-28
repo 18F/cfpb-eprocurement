@@ -35731,6 +35731,73 @@ return jQuery;
 
 }));
 },{}],12:[function(require,module,exports){
+var INDEX = 0;
+
+var createCheckbox = function(name) {
+  var input = document.createElement('input');
+  input.type = 'checkbox';
+  input.name = 'fave-star-' + (name || ++INDEX);
+  return input;
+};
+
+var attached = function() {
+  this._input = this.querySelector('input[type=checkbox]')
+    || this.appendChild(createCheckbox(this.name));
+  this._span = this._input.nextSibling
+    || this.appendChild(document.createElement('span'));
+
+  this.fetch();
+  this.addEventListener('change', onChange);
+};
+
+var detached = function() {
+  this.removeEventListener('change', onChange);
+};
+
+var onChange = function(e) {
+  if (e.target === this._input) {
+    this.store(e.target.checked);
+  }
+};
+
+module.exports = {
+  'extends': 'label',
+  prototype: Object.create(
+    HTMLLabelElement.prototype,
+    {
+      attachedCallback: {value: attached},
+      detachedCallback: {value: detached},
+
+      checked: {
+        get: function() {
+          return this._input.checked;
+        },
+        set: function(value) {
+          value = !!value;
+          if (this.checked != value) {
+            this._input.checked = value;
+            this.store(value);
+          }
+        }
+      },
+
+      toggle: {value: function() {
+        this.checked = !this.checked;
+      }},
+
+      fetch: {value: function() {
+        var value = localStorage.getItem(this._input.name);
+        this.checked = value === 'true';
+      }},
+
+      store: {value: function(value) {
+        localStorage.setItem(this._input.name, value);
+      }}
+    }
+  )
+};
+
+},{}],13:[function(require,module,exports){
 require('document-register-element');
 
 var prefix = 'cfpb-';
@@ -35745,12 +35812,17 @@ var PopupMenu = document.registerElement(
   require('./popup-menu')
 );
 
+var FaveStar = document.registerElement(
+  prefix + 'fave-star',
+  require('./fave-star')
+);
+
 module.exports = {
   SortableTable: SortableTable,
   PopupMenu: PopupMenu
 };
 
-},{"./popup-menu":13,"./sortable-table":14,"document-register-element":8}],13:[function(require,module,exports){
+},{"./fave-star":12,"./popup-menu":14,"./sortable-table":15,"document-register-element":8}],14:[function(require,module,exports){
 var EVENTS = '__events__';
 
 var EXPANDED = 'aria-expanded';
@@ -35939,7 +36011,7 @@ var PopupMenu = {
 
 module.exports = PopupMenu;
 
-},{"../lib/events":16,"../lib/get-ancestor":17}],14:[function(require,module,exports){
+},{"../lib/events":17,"../lib/get-ancestor":18}],15:[function(require,module,exports){
 var DATA_KEY = '__data__';
 var SORT_KEY = '__sort__';
 var FILTER_KEY = '__filter__';
@@ -36186,7 +36258,7 @@ var SortableTable = {
 
 module.exports = SortableTable;
 
-},{"../lib/compare":15,"../lib/events":16,"../lib/get-ancestor":17,"../lib/predicate":18}],15:[function(require,module,exports){
+},{"../lib/compare":16,"../lib/events":17,"../lib/get-ancestor":18,"../lib/predicate":19}],16:[function(require,module,exports){
 var ASCENDING = 'ascending';
 var DESCENDING = 'descending';
 var NONE = 'none';
@@ -36210,7 +36282,7 @@ compare[DESCENDING] = function desc(a, b) {
 
 module.exports = compare;
 
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 var getAncestor = require('./get-ancestor');
 
 var functor = function(d) {
@@ -36244,7 +36316,7 @@ module.exports.delegate = function delegate(selectors) {
   };
 };
 
-},{"./get-ancestor":17}],17:[function(require,module,exports){
+},{"./get-ancestor":18}],18:[function(require,module,exports){
 module.exports = function getAncestor(element, selector) {
   while (element = element.parentNode) {
     if (element !== document && element.matches(selector)) {
@@ -36253,7 +36325,7 @@ module.exports = function getAncestor(element, selector) {
   }
 };
 
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 module.exports = function predicate(filters) {
   var functions = Object.keys(filters).map(function(key) {
     var value = filters[key];
@@ -36277,7 +36349,7 @@ module.exports = function predicate(filters) {
   };
 };
 
-},{}],19:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -36297,4 +36369,4 @@ require('cf-expandables');
 require('cf-tables');
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./components":12,"cf-expandables":2,"cf-tables":4,"colorbrewer":6,"d3":7,"jquery":10,"moment":11}]},{},[19]);
+},{"./components":13,"cf-expandables":2,"cf-tables":4,"colorbrewer":6,"d3":7,"jquery":10,"moment":11}]},{},[20]);
