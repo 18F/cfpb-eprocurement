@@ -7,7 +7,8 @@ responsible_parties:
   cor: Merav
   co: Catherine
   cs: Jeremy
-requisition_number:
+requisition_number: FE-000-0000
+requested_award_date: 2016-09-19
 milestones:
   - name: Market research
     documents:
