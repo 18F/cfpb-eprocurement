@@ -4,24 +4,41 @@ layout: default
 stylesheets:
 - sprint4a.css
 
+scripts:
+- sprint4a/procurements-list.js
+
 body_class: 'site__procurements-list'
 
 title: Active Procurements
 subtitle: Enforcement Program Office
+
+sort_options:
+- by: requested_award_date
+  text: Award Date
+- by: favorite
+  text: Favorites
 ---
 
-<div class="input-with-btn">
-  <div class="input-with-btn_input">
-    <span class="cf-icon cf-icon-user-round"></span>
-    indicates your tasks
+<form method="GET" class="autosubmit">
+  <div class="input-with-btn">
+    <div class="input-with-btn_input">
+
+      View by
+      <select name="sort">
+        {% for sort in page.sort_options %}
+        <option value="{{ sort.by }}">{{ sort.text }}</option>
+        {% endfor %}
+      </select>
+
+    </div>
+    <div class="input-with-btn_btn">
+      <button class="btn" action="export/">
+        <span class="cf-icon cf-icon-download"></span>
+        Export to Excel
+      </button>
+    </div>
   </div>
-  <div class="input-with-btn_btn">
-    <button class="btn" action="export/">
-      <span class="cf-icon cf-icon-download"></span>
-      Export to Excel
-    </button>
-  </div>
-</div>
+</form>
 
 {% for _proc in site.procurements %}
   {% assign proc = _proc | prepare_procurement %}
@@ -29,10 +46,12 @@ subtitle: Enforcement Program Office
 <section class="procurement procurement-card"
   id="{{ id }}"
   data-status="{{ proc.status }}"
-  data-values='{{ proc | jsonify }}'>
+  data-json='{{ proc | jsonify | xml_escape }}'
+  hidden>
 
   <h1>
     <a href="{{ proc.url }}">{{ proc.name }}</a>
+    <b>{{ proc.requested_award_date }}</b>
     <label is="cfpb-fave-star">
       <input type="checkbox" name="{{ id }}">
     </label>
