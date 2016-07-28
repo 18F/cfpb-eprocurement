@@ -44,17 +44,25 @@ sort_options:
   {% assign id = _proc.id | split: '/' | last %}
 <section class="procurement procurement-card"
   id="{{ id }}"
-  data-status="{{ proc.status }}"
   data-json='{{ proc | jsonify | xml_escape }}'
   hidden>
 
-  <h1>
-    <a href="{{ proc.url }}">{{ proc.name }}</a>
-    <b>{{ proc.requested_award_date }}</b>
-    <label is="cfpb-fave-star">
-      <input type="checkbox" name="{{ id }}">
-    </label>
-  </h1>
+  <div class="row card-header">
+    <div class="col col-1">
+      <span class="procurement-status"
+        data-status="{{ proc.status }}">
+        {{ proc.status }}
+      </span>
+    </div>
+    <h1 class="col col-8">
+      <a href="{{ proc.url }}">{{ proc.name }}</a>
+    </h1>
+    <div class="col col-3">
+      <label is="cfpb-fave-star">
+        <input type="checkbox" name="{{ id }}">
+      </label>
+    </div>
+  </div>
 
 </section>
 {% endfor %}

@@ -66,35 +66,22 @@ header {
     border-top: 2px solid $black;
     margin-top: 0;
 
-    h1 {
+    .card-header {
       background: $gray-20;
+      margin: 0;
       padding: 0.8em 1em 0.4em 2em;
       position: relative;
 
-      &::before {
-        background: $gray-40;
-        border-radius: 1em;
-        content: "";
-        display: inline-block;
-        height: 1em;
-        margin-right: -1.5em;
-        position: absolute;
-        right: 100%;
-        text-align: center;
-        bottom: 0.5em;
-        width: 1em;
-      }
-
       [is=cfpb-fave-star] {
-        position: absolute;
-        right: 1em;
-      }
-    }
+        font-size: 2em;
 
-    &[data-status="past due"] h1::before {
-      background: $red;
-      color: $white;
-      content: "!";
+        input::after { color: $white; }
+        input:checked::after { color: $red; }
+      }
+
+      .col:last-child {
+        text-align: right;
+      }
     }
   }
 }

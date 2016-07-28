@@ -17,16 +17,16 @@
     display: inline-block;
     height: 0;
     padding: 0;
-    width: 0;
+    width: 0.6em; // XXX
 
-    &::before {
+    &::after {
       content: "★";
       color: $gray-40;
       cursor: pointer;
       display: inline-block;
     }
 
-    &:checked::before {
+    &:checked::after {
       color: $red;
     }
   }
