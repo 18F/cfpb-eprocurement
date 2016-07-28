@@ -1,8 +1,8 @@
 ---
 name: RMR Assessments BPA
 description:
-obligated_value:
-program_office:
+obligated_value: 370120.50
+program_office: Financial Education
 responsible_parties:
   cor: Merav
   co: Catherine
@@ -151,7 +151,7 @@ milestones:
             actor: Suzan
             action: submit
             revision-number: 1
-  - name: Acquisition package preperation
+  - name: Acquisition package preparation
     documents:
       - name: BPA Scope of Work
         target_start_date: 2016-04-11
@@ -285,7 +285,7 @@ milestones:
           - date: 2016-06-25
             actor: Jackie
             action: review
-            comment: Take a look at this Marav
+            comment: Take a look at this Merav
             revision-number: 2
           - date: 2016-06-27
             actor: Merav
@@ -322,7 +322,7 @@ milestones:
             actor: Jeremy
             event: complete
             revision-number: 1
-      - name: PRISM requistion
+      - name: PRISM requisition
         predecessors:
           - document: Email from OCFO for funding availability
           - document: CFPBuy request
@@ -344,7 +344,7 @@ milestones:
           - name: Independent Government Cost Estimate
           - name: BPA Call 0001
           - name: Source Selection Plan
-          - name: PRISM requistion
+          - name: PRISM requisition
         target_start_date: 2016-07-19
         target_end_date: 2016-09-12
         url:
@@ -414,7 +414,7 @@ milestones:
         executor:
           name: Jeremy
           action: Finalized
-      - name: Tehnical evaluation report
+      - name: Technical evaluation report
         predecessors:
           - name: Redacted project proposals
         target_start_date: 2016-09-16
@@ -429,7 +429,7 @@ milestones:
           action: Finalized
       - name: Award package
         predecessors:
-          - name: Tehnical evaluation report
+          - name: Technical evaluation report
           - name: Price analysis
         target_start_date: 2016-09-14
         target_end_date: 2016-09-14
