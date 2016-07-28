@@ -1,6 +1,13 @@
 [is=cfpb-fave-star] {
   display: inline-block;
 
+  // this only works in Chrome, but hides the
+  // element until its custom element definition
+  // is loaded
+  &:unresolved {
+    visibility: hidden;
+  }
+
   input[type=checkbox] {
             appearance: none;
         -ms-appearance: none;
