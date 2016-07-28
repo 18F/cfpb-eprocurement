@@ -24,6 +24,7 @@ sort_options:
     <div class="input-with-btn_input">
       <label for="sort-by">View by</label>
       <select id="sort-by" name="sort">
+        <option value="">Default</option>
         {% for sort in page.sort_options %}
         <option value="{{ sort.by }}">{{ sort.text }}</option>
         {% endfor %}
