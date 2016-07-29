@@ -1,0 +1,352 @@
+---
+---
+
+@import 'palette';
+
+body {
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+header {
+  background: $green;
+  margin: 0;
+  padding-bottom: 1em;
+  padding-top: 2em;
+
+  h2 {
+    margin-bottom: 0;
+  }
+
+  .block__sub {
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+
+  .header__right {
+    color: $white;
+  }
+}
+
+.row {
+  display: flex;
+  margin: 1em;
+  // border: 1px solid black;
+
+  .col {
+    flex: 1;
+  }
+
+  .col + .col {
+    margin-left: 15px;
+  }
+
+  @for $i from 1 through 12 {
+    .col-#{$i} {
+      flex: $i;
+    }
+  }
+}
+
+
+.avatar {
+  display: inline-block;
+  height: 3.5em;
+  width: 3.5em;
+  border-radius: 5em;
+  vertical-align: middle;
+}
+
+.mute {
+  color: $gray-60;
+}
+
+.site__procurements-list {
+
+  label {
+    display: inline-block;
+  }
+
+  .procurement-card {
+    border-top: 2px solid $black;
+    margin-top: 0;
+
+    .row {
+      margin: 0 0 1em 0;
+      padding: 0 1em;
+    }
+
+    .card-header {
+      background: $gray-20;
+      padding-top: 0.8em;
+      padding-bottom: 0.4em;
+      position: relative;
+
+      [is=cfpb-fave-star] {
+        font-size: 2em;
+
+        input::after { color: $white; }
+        input:checked::after { color: $red; }
+      }
+
+      .col:last-child {
+        text-align: right;
+      }
+
+      .procurement-due {
+        color: transparent;
+
+        &::before {
+          display: inline-block;
+        }
+
+        &[data-due="soon"]::before {
+          content: "!";
+          color: $white;
+          background: $red;
+          border-radius: 1em;
+          height: 1.5em;
+          width: 1.5em;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  .document-due {
+    display: inline-block;
+    background: $pacific-20;
+    border-radius: 3px;
+    padding: 0.1em 0.3em;
+
+    &[data-due=soon] {
+      background: $gold-40;
+    }
+
+    &[data-due=over] {
+      background: $red;
+      color: $white;
+    }
+  }
+
+  .btn-wide,
+  a.details {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+  .btn-flat {
+    color: $black;
+    font-size: 1.2em;
+    background: transparent;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  a.details {
+    font-size: 1.2em;
+    padding: 0.5em;
+  }
+
+}
+
+
+.site__document-detail {
+  padding: 0;
+  margin: 0;
+
+  .chrome {
+    display: block;
+    width: 100%;
+  }
+
+  .wrapper {
+    max-width: 40em;
+    margin: 0 auto;
+  }
+
+  main {
+    background: #938a84;
+    padding: 2em;
+  }
+
+  article {
+    background: $white;
+    border: 1px solid $black;
+    padding: 1.5em;
+    min-height: 8em;
+    max-height: 16em;
+    overflow: auto;
+
+    h1 {
+      font-weight: normal;
+      margin: 0;
+    }
+  }
+
+  button {
+    background: $pacific;
+    border-radius: 0.28571429em;
+    border: 0;
+    box-sizing: border-box;
+    color: $white;
+    cursor: pointer;
+    display: inline-block;
+    font-family: 'AvenirNextLTW01-Medium', Arial, sans-serif;
+    font-size: 0.875em;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin: 0;
+    padding: 0.57142857em 1em;
+    text-decoration: none;
+    vertical-align: middle;
+    -webkit-transition: background-color 0.1s;
+            transition: background-color 0.1s;
+    -webkit-appearance: none;
+  }
+
+  form {
+    padding: 1em 0;
+
+    textarea {
+      width: 100%;
+    }
+
+    p {
+      text-align: center;
+    }
+  }
+}
+
+.site__procurement-detail {
+  .row {
+    [class^="col-"]:first-child,
+    [class*=" col-"]:first-child {
+      margin-left: -15px;
+    }
+  }
+
+  .content_wrapper {
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+    width: 100%;
+  }
+  .content_main {
+    border: initial;
+    padding: 0;
+    margin: 0;
+  }
+
+  .detail-header {
+    background: $green;
+    border-top: 1px solid $white;
+
+    .detail-header__title {
+      margin-bottom: 0;
+    }
+
+    .detail-header__data {
+      color: $white;
+    }
+  }
+
+  .detail-content {
+    margin-top: 40px;
+  }
+
+  .avatar-group {
+    .avatar:first-child {
+      position: relative;
+      margin-left: 0;
+      z-index: 2;
+    }
+
+    .avatar {
+      position: relative;
+      margin-left: -20px;
+      z-index: 1;
+    }
+  }
+
+  .milestone-item {
+    padding: 1em;
+
+    .milestone-item-title {
+      cursor: pointer;
+      padding-top: 10px;
+      position: relative;
+      h3, p {
+        margin-bottom: 0;
+      }
+
+      &[role="tab"]::after {
+        border-radius: 1em;
+        border: 1px solid;
+        color: $gray-60;
+        content: "\0020\0020+";
+        display: inline-block;
+        font-size: 2em;
+        height: 1em;
+        line-height: .85;
+        position: absolute;
+        right: 1em;
+        text-align: center;
+        top: 35%;
+        width: 1em;
+      }
+
+      &[role="tab"][aria-expanded=true]::after {
+        content: "-";
+      }
+
+      &[role="tab"][data-status="completed"]::after {
+        content: "✔";
+        color: $gray-40;
+      }
+    }
+  }
+
+  [role="tabpanel"][aria-hidden=true] {
+    display: none;
+  }
+
+  .milestone-documents {
+    margin-top: 40px;
+
+    .milestone-documents__title {
+      border-bottom: 2px solid $black;
+      margin-bottom: 0;
+      text-transform: uppercase;
+    }
+
+    .history-avatar {
+      float: left;
+      margin-left: -1.2em;
+      margin-right: 1.2em;
+    }
+
+    .history-item {
+      margin-bottom: 40px;
+    }
+  }
+
+  .history-section {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+
+
+  // .additional-users-avatar {
+  //   color: $black;
+  //   display: inline-block;
+  //   position: relative;
+  //
+  //   span {
+  //     position: absolute;
+  //     z-index: 2;
+  //   }
+  // }
+}

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf8">
+    {% for sheet in page.stylesheets %}
+    <link rel="stylesheet" href="{{ site.baseurl }}/static/css/{{ sheet }}">
+    {% endfor %}
+  </head>
+  <body class="site__document-detail">
+
+    <img class="chrome" src="{{ site.baseurl }}/static/images/sharepoint-chrome.png">
+
+    <main id="main">
+      <div class="wrapper">
+        {{ content }}
+      </div>
+    </main>
+
+    <form action="../">
+      <div class="wrapper">
+        <textarea rows="4"
+          placeholder="Add a comment"></textarea>
+        <p>
+          <button type="submit">Save and submit</button>
+          <button type="submit">Save</button>
+        </p>
+      </div>
+    </form>
+
+    <script src="{{ site.baseurl }}/static/js/main.js"></script>
+    {% for script in page.scripts %}
+    <script src="{{ site.baseurl }}/static/js/{{ script }}"></script>
+    {% endfor %}
+  </body>
+</html>

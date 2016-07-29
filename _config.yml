@@ -1,6 +1,18 @@
 title: CFPB eProcurement
-user: Myra Ball
-role: COR
+
+user: Myra
+
+collections:
+  procurements:
+    output: true
+    permalink: /sprint4a/procurements/:slug/
+
+defaults:
+  - scope:
+      path: ''
+      type: procurements
+    values:
+      layout: procurement
 
 navigation:
   - url: /dashboard

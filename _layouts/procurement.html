@@ -1,0 +1,71 @@
+---
+layout: default
+body_class: 'site__procurement-detail'
+stylesheets:
+- sprint4a.css
+---
+{% assign DATE_FORMAT = '%B %e, %Y' %}
+{% assign proc = page | prepare_procurement %}
+<div class="detail-header">
+  <div class="wrapper wrapper__match-content">
+    <div class="row">
+      <div class="col-3">
+        <p class="detail-header__title"><b>Procurement No.</b></p>
+        <p class="detail-header__data">
+          {{ proc.requisition_number }}
+        </p>
+      </div>
+      <div class="col-3">
+        <p class="detail-header__title"><b>Obligated Amount</b></p>
+        <p class="detail-header__data">
+          {{ proc.obligated_value | number_to_currency }}
+        </p>
+      </div>
+      <div class="col-3">
+        <p class="detail-header__title"><b>Award Date</b></p>
+        <p class="detail-header__data">
+          {{ proc.requested_award_date | date: DATE_FORMAT }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="detail-content">
+  <div class="wrapper wrapper__match-content">
+    <div class="row">
+      <div class="detail-content col-12">
+        <h2>Milestones</h2>
+
+        {% for milestone in proc.milestones %}
+          <!-- <pre class="json"> {{ milestone | jsonify }}</pre> -->
+          {% include milestone_item.html milestone=milestone %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  [].forEach.call(document.querySelectorAll('pre.json'), function(pre) {
+    pre.textContent = JSON.stringify(JSON.parse(pre.textContent), null, '  ');
+  });
+
+  window.addEventListener('load', function() {
+    var CONTROLS = 'aria-controls';
+    var HIDDEN = 'aria-hidden';
+    var EXPANDED = 'aria-expanded';
+
+    var tablist = $('[role=tablist]');
+
+    tablist.on('click', '[role=tab][aria-controls]', function(e) {
+      var id = this.getAttribute(CONTROLS);
+      var expanded = this.getAttribute(EXPANDED) !== 'true';
+      this.setAttribute(EXPANDED, expanded);
+      var panel = document.getElementById(id);
+      panel.setAttribute(HIDDEN, !expanded);
+
+      e.stopPropagation();
+    });
+  });
+</script>
