@@ -4,6 +4,7 @@ body_class: 'site__procurement-detail'
 stylesheets:
 - sprint4a.css
 ---
+{% assign DATE_FORMAT = '%B %e, %Y' %}
 {% assign proc = page | prepare_procurement %}
 <div class="detail-header">
   <div class="wrapper wrapper__match-content">
@@ -23,7 +24,7 @@ stylesheets:
       <div class="col-3">
         <p class="detail-header__title"><b>Award Date</b></p>
         <p class="detail-header__data">
-          {{ proc.requested_award_date | date: '%B %d, %Y' }}
+          {{ proc.requested_award_date | date: DATE_FORMAT }}
         </p>
       </div>
     </div>
