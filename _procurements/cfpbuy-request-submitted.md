@@ -27,11 +27,11 @@ milestones:
         - date: 2016-04-28
           actor: Daniel
           action: draft
-          revision-number: 1
+          revision: 1
         - date: 2016-05-06
           actor: OCFO
           action: finalize
-          revision-number: 1
+          revision: 1
   - name: Independent Government Cost Estimate
     documents:
     - name: Independent Government Cost Estimate
@@ -48,15 +48,15 @@ milestones:
         - date: 2016-04-25
           actor: Daniel
           action: draft
-          revision-number: 1
+          revision: 1
         - date: 2016-05-15
           actor: Jackie
           action: approve
-          revision-number: 1
+          revision: 1
         - date: 2016-05-30
           actor: Stacey
           action: finalize
-          revision-number: 1
+          revision: 1
   - name: OCR - SCC signatures
     documents:
     - name : Service Coding Contract Sheet
@@ -74,19 +74,19 @@ milestones:
       - date: 2016-04-30
         actor: Jackie
         action: draft
-        revision-number: 1
+        revision: 1
       - date: 2016-05-05
         actor: Stacey
         action: review
-        revision-number: 1
+        revision: 1
       - date: 2016-05-27
         actor: Gordon
         action: approve
-        revision-number: 1
+        revision: 1
       - date: 2016-06-03
         actor: Stacey
         action: submit
-        revision-number: 1
+        revision: 1
   - name: Acquisition Plan Draft
     documents:
     - name : Acquisition Plan
@@ -98,11 +98,11 @@ milestones:
         - date: 2016-04-27
           actor: Jackie
           action: draft
-          revision-number: 1
+          revision: 1
         - date: 2016-06-03
           actor: Jackie
           action: revise
-          revision-number: 2
+          revision: 2
   - name: OCR RFI Inputs
     documents:
     - name: OCR RFI Inputs # FIXME
@@ -116,7 +116,7 @@ milestones:
       - date: 2016-04-27  
         actor: Stacey
         action: finalize
-        revision-number: 1
+        revision: 1
   - name: Request for Information
     documents:
     - name: RFI form
@@ -137,27 +137,27 @@ milestones:
         - date: 2016-05-04
           actor: Jackie
           action: draft
-          revision-number: 1
+          revision: 1
         - date: 2016-05-06
           actor: Stacey
           action: return
-          revision-number: 1
+          revision: 1
         - date: 2016-05-07
           actor: Jackie
           action: revise
-          revision-number: 2
+          revision: 2
         - date: 2016-05-08
           actor: Stacey
           action: approve
-          revision-number: 2
+          revision: 2
         - date: 2016-05-11
           actor: Jerry
           action: finalize
-          revision-number: 2
+          revision: 2
         - date: 2016-05-11
           actor: Jerry
           action: post
-          revision-number: 2
+          revision: 2
   - name: RFI evaluation factors
   - documents:
     - name : Evaluation Factors
@@ -172,15 +172,15 @@ milestones:
         - date: 2016-05-04
           actor: Daniel
           action: draft
-          revision-number: 1
+          revision: 1
         - date: 2016-05-06
           actor: Stacey
           action: finalize
-          revision-number: 1
+          revision: 1
         - date: 2016-07-15
           actor: Stacey
           action: submit
-          revision-number: 1
+          revision: 1
   - name: Procurement Compiles Responses
     documents:
     - name: Aggregated Vendor Responses
@@ -193,7 +193,7 @@ milestones:
           - date: 2016-05-24
             actor: Vanessa
             action: post
-            revision-number: 1
+            revision: 1
   - name: OCR Reviews Responses & Updates SOW
     documents:
     - name: Scope of Work
@@ -213,15 +213,15 @@ milestones:
           - date: 2016-05-26
             actor: Daniel
             action: draft
-            revision-number: 2
+            revision: 2
           - date: 2016-05-27
             actor: Stacey
             action: approve
-            revision-number: 2
+            revision: 2
           - date: 2016-06-20
             actor: Jackie
             action: finalize
-            revision-number: 2
+            revision: 2
   - name: Acquisition Plan Signatures
     documents:
     - name: Acquisition Plan
@@ -235,7 +235,7 @@ milestones:
         - date: 2016-06-07
           actor: Vanessa
           action: finalize
-          revision-number: 1
+          revision: 1
   - name: IGCE Revisions
     documents:
     - name: Independent Government Cost Estimate
@@ -252,11 +252,11 @@ milestones:
         - date: 2016-06-10
           actor: Daniel
           action: revise
-          revision-number: 2
+          revision: 2
         - date: 2016-06-20
           actor: Stacey
           action: finalize
-          revision-number: 2
+          revision: 2
   - name: Procurement submits SCC to OHC
     documents:
     - name: Service Coding Contract Sheet
@@ -274,7 +274,7 @@ milestones:
           - date: 2016-07-01
             actor: Jackie
             action: submit
-            revision-number: 1
+            revision: 1
   - name: Source Selection Plan
     documents:
     - name: Source Selection Plan
@@ -289,7 +289,7 @@ milestones:
           - date: 2016-07-22
             actor: Jerry
             action: draft
-            revision-number: 1
+            revision: 1
   - name: Acquisition Package Tier II Review
     documents:
     - name: Acquisition Package

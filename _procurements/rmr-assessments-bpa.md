@@ -24,11 +24,11 @@ milestones:
           - date: 2016-05-02
             actor: Catherine
             action: draft
-            revision-number: 1
+            revision: 1
           - date: 2016-05-06
             actor: Catherine
             action: post
-            revision-number: 1
+            revision: 1
       - name: Market research synthesis
         target_start_date: 2016-05-10
         target_end_date: 2016-05-17
@@ -43,29 +43,29 @@ milestones:
           - date: 2016-05-10
             actor: Merav
             action: draft
-            revision-number: 1
+            revision: 1
           - date: 2016-05-11
             actor: Merav
             action: review
-            revision-number: 1
+            revision: 1
           - date: 2016-05-12
             actor: Catherine
             action: return
-            revision-number: 1
+            revision: 1
             comment: Could you please revise to include the other estimate
           - date: 2016-05-13
             actor: Merav
             action: review
-            revision-number: 2
+            revision: 2
             comment: Fixed the problems
           - date: 2016-05-14
             actor: Catherine
             action: approve
-            revision-number: 2
+            revision: 2
           - date: 2016-05-15
             actor: Catherine
             action: finalize
-            revision-number: 2
+            revision: 2
   - name: Financial tasks
     documents:
       - name: Email from OCFO for funding availability
@@ -80,11 +80,11 @@ milestones:
           - date: 2016-06-01
             actor: Fred
             action: draft
-            revision-number: 1
+            revision: 1
           - date: 2016-06-07
             actor: Fred
             action: send
-            revision-number: 1
+            revision: 1
       - name: CFPBuy request
         target_start_date: 2016-06-01
         target_end_date: 2016-06-01
@@ -98,11 +98,11 @@ milestones:
           - date: 2016-06-01
             actor: Merav
             action: draft
-            revision-number: 1
+            revision: 1
           - date: 2016-06-07
             actor: Merav
             action: submit
-            revision-number: 1
+            revision: 1
   - name: Technology and innovation tasks
     documents:
       - name: Technology request form
@@ -117,11 +117,11 @@ milestones:
           - date: 2016-04-13
             actor: Fred
             action: draft
-            revision-number: 1
+            revision: 1
           - date: 2016-04-13
             actor: Fred
             action: submit
-            revision-number: 1
+            revision: 1
       - name: T and I consultation and minutes
         predecessors:
           - name: Technology request form
@@ -139,19 +139,19 @@ milestones:
           - date: 2016-05-25
             actor: Suzan
             action: draft
-            revision-number: 1
+            revision: 1
           - date: 2016-05-26
             actor: Suzan
             action: review
-            revision-number: 1
+            revision: 1
           - date: 2016-05-27
             actor: Merav
             action: approve
-            revision-number: 1
+            revision: 1
           - date: 2016-06-03
             actor: Suzan
             action: submit
-            revision-number: 1
+            revision: 1
   - name: Acquisition package preparation
     documents:
       - name: BPA Scope of Work
@@ -166,11 +166,11 @@ milestones:
           - date: 2016-04-11
             actor: Merav
             action: draft
-            revision-number: 1
+            revision: 1
           - date: 2016-06-21
             actor: Merav
             action: complete
-            revision-number: 1
+            revision: 1
       - name: Independent Government Cost Estimate
         target_start_date: 2016-05-25
         target_end_date: 2016-06-08
@@ -184,11 +184,11 @@ milestones:
           - date: 2016-05-26
             actor: Merav
             action: draft
-            revision-number: 1
+            revision: 1
           - date: 2016-06-07
             actor: Merav
             action: complete
-            revision-number: 1
+            revision: 1
       - name: BPA Call 0001
         target_start_date: 2016-05-25
         target_end_date: 2016-06-21
@@ -203,19 +203,19 @@ milestones:
           - date: 2016-05-26
             actor: Merav
             action: draft
-            revision-number: 1
+            revision: 1
           - date: 2016-06-07
             actor: Merav
             action: review
-            revision-number: 1
+            revision: 1
           - date: 2016-06-07
             actor: Paul
             action: approve
-            revision-number: 1
+            revision: 1
           - date: 2016-06-20
             actor: Merav
             action: complete
-            revision-number: 1
+            revision: 1
       - name: Evaluation Factors
         target_start_date: 2016-06-13
         target_end_date: 2016-06-21
@@ -229,11 +229,11 @@ milestones:
           - date: 2016-06-16
             actor: Merav
             action: draft
-            revision-number: 1
+            revision: 1
           - date: 2016-06-20
             actor: Merav
             action: complete
-            revision-number: 1
+            revision: 1
       - name: Service Coding Contract Sheet
         target_start_date: 2016-06-22
         target_end_date: 2016-06-29
@@ -249,15 +249,15 @@ milestones:
           - date: 2016-06-22
             actor: Merav
             action: draft
-            revision-number: 1
+            revision: 1
           - date: 2016-06-24
             actor: Jeremy
             action: review
-            revision-number: 1
+            revision: 1
           - date: 2016-06-29
             actor: Procurement SCC person
             action: complete
-            revision-number: 1
+            revision: 1
       - name: Acquisition plan
         target_start_date: 2016-06-22
         target_end_date: 2016-07-11
@@ -273,36 +273,36 @@ milestones:
           - date: 2016-06-22
             actor: Jackie
             action: draft
-            revision-number: 1
+            revision: 1
           - date: 2016-06-24
             actor: Jackie
             action: review
-            revision-number: 1
+            revision: 1
           - date: 2016-06-24
             actor: Merav
             action: return
-            revision-number: 1
+            revision: 1
             comment: I think the objective needs to be a little broader; see my edits
           - date: 2016-06-25
             actor: Jackie
             action: review
             comment: Take a look at this Merav
-            revision-number: 2
+            revision: 2
           - date: 2016-06-27
             actor: Merav
             action: approve
             comment: Thanks Jackie-looks good
-            revision-number: 2
+            revision: 2
           - date: 2016-06-28
             actor: Paul
             action: approve
             comment: Looks good to me too
-            revision-number: 2
+            revision: 2
           - date: 2016-07-11
             actor: Jeremy
             action: sign
             comment: Electronically signed and good to go
-            revision-number: 2
+            revision: 2
       - name: Source Selection Plan
         predecessors:
           - name: Evaluation plan
@@ -318,11 +318,11 @@ milestones:
           - date: 2016-07-08
             actor: Jeremy
             action: draft
-            revision-number: 1
+            revision: 1
           - date: 2016-07-18
             actor: Jeremy
             action: complete
-            revision-number: 1
+            revision: 1
       - name: PRISM requisition
         predecessors:
           - document: Email from OCFO for funding availability
@@ -338,7 +338,7 @@ milestones:
           - date: 2016-08-04
             actor: Jeremy
             action: draft
-            revision-number: 1
+            revision: 1
   - name: Acquisition package reviews and posting
     documents:
       - name: Acquisition package
@@ -370,16 +370,16 @@ milestones:
           - date: 2016-07-19
             actor: Merav
             action: draft
-            revision-number: 1
+            revision: 1
           - date: 2016-07-24
             actor: Merav
             action: review
-            revision-number: 1
+            revision: 1
           - date: 2016-07-25
             actor: Jackie
             action: return
             comment: I added a few suggestions; I'm concerned the budget and deliverable dates may not be aligned.
-            revision-number: 1
+            revision: 1
   - name: Solicitation
     predecessors:
       - name: Acquisition package
