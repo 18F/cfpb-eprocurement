@@ -3,6 +3,10 @@
 
 @import 'palette';
 
+body {
+  font-family: Helvetica, Arial, sans-serif;
+}
+
 header {
   background: $green;
   margin: 0;
@@ -28,16 +32,12 @@ header {
   margin: 1em;
   // border: 1px solid black;
 
-  [class^="col-"]:first-child, [class*=" col-"]:first-child {
-    margin-left: -15px;
-  }
-
   .col {
     flex: 1;
   }
 
   .col + .col {
-    margin-left: 0.5em;
+    margin-left: 15px;
   }
 
   @for $i from 1 through 12 {
@@ -66,10 +66,15 @@ header {
     border-top: 2px solid $black;
     margin-top: 0;
 
+    .row {
+      margin: 0 0 1em 0;
+      padding: 0 1em;
+    }
+
     .card-header {
       background: $gray-20;
-      margin: 0;
-      padding: 0.8em 1em 0.4em 2em;
+      padding-top: 0.8em;
+      padding-bottom: 0.4em;
       position: relative;
 
       [is=cfpb-fave-star] {
@@ -82,12 +87,36 @@ header {
       .col:last-child {
         text-align: right;
       }
+
+      .procurement-due {
+        color: transparent;
+
+        &::before {
+          display: inline-block;
+        }
+
+        &[data-due="soon"]::before {
+          content: "!";
+          color: $white;
+          background: $red;
+          border-radius: 1em;
+          height: 1.5em;
+          width: 1.5em;
+          text-align: center;
+        }
+      }
     }
   }
 }
 
 .site__procurement-detail {
-  font-family: Helvetica, Arial, sans-serif;
+
+  .row {
+    [class^="col-"]:first-child,
+    [class*=" col-"]:first-child {
+      margin-left: -15px;
+    }
+  }
 
   .content_wrapper {
     margin: 0;
