@@ -1,4 +1,9 @@
 {% assign content_slug = milestone.name | slugify %}
+{% if milestone.status == 'complete' %}
+  {% assign completed = 'completed' %}
+{% else %}
+  {% assign completed = '' %}
+{% endif %}
 <section class="milestone-item block__border-top" role="tablist">
   <div class="row">
     <div class="col-1 avatar-group">
@@ -11,14 +16,26 @@
         {% include additional_users.html actor_count=actor_count %}
       {% endif %} -->
     </div>
-    <div class="milestone-item-title col-3" role="tab" aria-controls="{{ content_slug }}">
-      {% assign completed = milestone.status === 'complete' ? 'completed' ? '' %}
+    <div class="milestone-item-title col-3" role="tab" aria-controls="{{ content_slug }}" data-status="{{completed}}">
+
+
       {% assign current_doc = milestone.documents | last %}
       {% assign current_event = current_doc.events | last %}
 
-      <h3><b>{{ current_doc.name }}</b></h3>
+      <h3>
+        <!-- {% if completed %}
+          <a href="../../{{current_doc.url}}">{{current_doc.name}}</a>
+        {% else %} -->
+        <!-- {% endif %} -->
+        <b>{{ current_doc.name }} {{ completed }}</b>
+      </h3>
       <p class="mute">
-        {{ current_doc.name }} {{ current_event.action | past_tensify }} by {{ current_event.actor }} on {{current_event.date | date: DATE_FORMAT }}
+        <!-- really ugly -->
+        {% if milestone.status == 'complete' %}
+          <a href="../../{{current_doc.url}}">{{ current_doc.name }}</a> {{ current_event.action | past_tensify }} by {{ current_event.actor }} on {{current_event.date | date: DATE_FORMAT }}
+        {% else %}
+          {{ current_doc.name }} {{ current_event.action | past_tensify }} by {{ current_event.actor }} on {{current_event.date | date: DATE_FORMAT }}
+        {% endif %}
       </p>
     </div>
   </div>
@@ -35,11 +52,11 @@
               <p class="col-2"><b>{{document.name}}</b></p>
             </div>
           </div>
-          <div class="row" role="tabpanel" aria-hidden="false" id="{{ document_slug }}">
+          <div class="row" role="tabpanel" aria-hidden="true" id="{{ document_slug }}">
             <div class="col-12 history-section">
               <p><b>History:</b></p>
 
-              {% for event in document.events | reversed %}
+              {% for event in document.events %}
                 <div class="row history-item">
                   <div>
                     {% assign user = site.data.users[event.actor] %}
@@ -57,7 +74,7 @@
                     {% endif %}
 
                     <p>
-                      {{ final | append: document.name }} {{ event.action | past_tensify }} by {{ event.actor }} ({{ user.role }}) on {{event.date | date: '%B %d, %Y'}}
+                      {{ final | append: document.name }} {{ event.action | past_tensify }} by {{ event.actor }} ({{ user.role }}) on {{event.date | date: DATE_FORMAT }}
                     </p>
                   </div>
                 </div>

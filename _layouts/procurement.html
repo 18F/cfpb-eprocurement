@@ -46,8 +46,6 @@ stylesheets:
   </div>
 </section>
 
-<pre class="json">{{ proc | jsonify }}</pre>
-
 <script>
   [].forEach.call(document.querySelectorAll('pre.json'), function(pre) {
     pre.textContent = JSON.stringify(JSON.parse(pre.textContent), null, '  ');
@@ -66,6 +64,8 @@ stylesheets:
       this.setAttribute(EXPANDED, expanded);
       var panel = document.getElementById(id);
       panel.setAttribute(HIDDEN, !expanded);
+
+      e.stopPropagation();
     });
   });
 </script>

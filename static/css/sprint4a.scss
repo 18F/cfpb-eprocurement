@@ -301,7 +301,7 @@ header {
         content: "-";
       }
 
-      &[role="tab"][data-status="completed"] button[role=tab]::after {
+      &[role="tab"][data-status="completed"]::after {
         content: "✔";
         color: $gray-40;
       }

@@ -159,19 +159,13 @@ module CFPB
           milestone[TARGET_START_DATE] = get_sorted(docs, TARGET_START_DATE).first
           milestone[TARGET_END_DATE] = get_sorted(docs, TARGET_END_DATE).last
 
-          working_docs = docs.select { |doc| !doc[ACTUAL_END_DATE] }
-          if working_docs.empty?
-            docs_by_end_date = docs
-              .select { |doc| doc[ACTUAL_END_DATE] }
-              .sort { |a, b| a[ACTUAL_END_DATE] - b[ACTUAL_END_DATE] }
-            last = docs_by_end_date.last
-            if last[ACTION] == last[EXECUTOR][ACTION]
-              milestone[ACTUAL_END_DATE] = last[ACTUAL_END_DATE]
-            end
-            # FIXME: does this go into the if statement above?
-            milestone[STATUS] = APPROVED
+          incomplete_docs = docs.select { |doc| doc[STATUS] != COMPLETE }
+          if incomplete_docs.empty?
+            # all docs are complete, therefore the milestone is complete
+            milestone[STATUS] = COMPLETE
+            milestone[ACTUAL_END_DATE] = get_sorted(docs, ACTUAL_END_DATE).last
           else
-            milestone[STATUS] = working_docs.first[STATUS]
+            milestone[STATUS] = incomplete_docs.first[STATUS]
           end
         end
       end
