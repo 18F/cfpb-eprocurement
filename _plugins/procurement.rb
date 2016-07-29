@@ -2,7 +2,7 @@ require 'date'
 require 'set'
 require 'liquid'
 
-NOW = DateTime.now
+NOW = DateTime.now.to_date
 
 DATE = "date"
 EVENTS = "events"
@@ -10,6 +10,9 @@ MILESTONES = "milestones"
 DOCUMENTS = "documents"
 EXECUTOR = "executor"
 REVIEWERS = "reviewers"
+
+REQUESTED_AWARD_DATE = "requested_award_date"
+DUE_IN_DAYS = "due_in_days"
 
 TARGET_START_DATE = "target_start_date"
 ACTUAL_START_DATE = "actual_start_date"
@@ -137,6 +140,10 @@ module CFPB
       pr[ACTORS] = actors.to_a
 
       pr[STATUS] = PENDING
+      if pr[REQUESTED_AWARD_DATE]
+        pr[DUE_IN_DAYS] = (pr[REQUESTED_AWARD_DATE] - NOW).to_i
+      end
+
       unless milestones.empty?
         # the procurement's actual start date is that of the earliest
         # started milestone
