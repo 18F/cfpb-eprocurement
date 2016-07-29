@@ -271,10 +271,10 @@ header {
   }
 
   .milestone-item {
-    cursor: pointer;
     padding: 1em;
 
     .milestone-item-title {
+      cursor: pointer;
       padding-top: 10px;
       position: relative;
       h3, p {
@@ -285,13 +285,14 @@ header {
         border-radius: 1em;
         border: 1px solid;
         color: $gray-60;
-        content: "+";
+        content: "\0020\0020+";
         display: inline-block;
         font-size: 2em;
         height: 1em;
         line-height: .85;
         position: absolute;
         right: 1em;
+        text-align: center;
         top: 35%;
         width: 1em;
       }
