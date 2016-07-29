@@ -2,6 +2,7 @@
 name: OCR Investigations BPA
 target_start_date: 2016-04-25
 target_end_date: 2016-10-27
+requested_award_date: 2016-10-28
 responsible_parties:
   - name: Daniel
   - name: Wanda
