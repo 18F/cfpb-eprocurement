@@ -100,8 +100,8 @@ module CFPB
 
         docs = milestone[DOCUMENTS] || []
         docs.each do |doc|
-          events = doc[EVENTS]
-          executor = doc[EXECUTOR]
+          events = doc[EVENTS] || []
+          executor = doc[EXECUTOR] || {}
           if not doc[URL]
             doc[URL] = "document/?title=#{doc[NAME]}&procurement=#{pr[NAME]}"
           end
@@ -227,6 +227,17 @@ module CFPB
 
     def title_case_word(word)
       word[0].upcase + word[1..word.size]
+    end
+
+    def due_status(days, statuses={})
+      status = nil
+      statuses.each do |key, threshold|
+        if days <= threshold
+          status = key
+          break
+        end
+      end
+      status
     end
 
   end

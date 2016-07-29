@@ -57,7 +57,7 @@
               <p><b>{{document.name}} {{doc_complete}}</b></p>
               {% assign last_action = document.events | last %}
               {% if document.status == 'complete' %}
-                <a href="../../{{document.url}}">Final {{ document.name | append: ' ' | append: last_action['revision-number'] }}</a> {{ last_action.action | past_tensify }} by {{ last_action.actor }} ({{site.data.users[last_action.actor].role}}) on {{last_action.date | date: DATE_FORMAT}}
+                <a href="../../{{document.url}}">Final {{ document.name | append: ' ' | append: last_action.revision }}</a> {{ last_action.action | past_tensify }} by {{ last_action.actor }} ({{site.data.users[last_action.actor].role}}) on {{last_action.date | date: DATE_FORMAT}}
               {% else %}
                 {% if site.data.users[document.author] %}
                   {% assign role = site.data.users[document.author].role | prepend: '(' | append: ')' %}
