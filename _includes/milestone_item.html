@@ -17,7 +17,7 @@
 
       <p><b>{{ current_doc.name }}</b></p>
       <p class="mute">
-        {{ current_doc.name }} {{ current_event.action | past_tensify }} by {{ current_event.actor }} on {{current_event.date | date: '%B %d, %Y'}}
+        {{ current_doc.name }} {{ current_event.action | past_tensify }} by {{ current_event.actor }} on {{current_event.date | date: DATE_FORMAT }}
       </p>
 
       <!-- {{current_event}} -->

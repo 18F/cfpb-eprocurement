@@ -124,7 +124,7 @@ sort_options:
         Due in {{ doc.due_in_days }} days
       {% elsif doc.due_in_days < 0 %}
         {% assign due_status = 'over' %}
-      Overdue {{ 0 | minus: doc.due_in_days }} days
+      Overdue by {{ 0 | minus: doc.due_in_days }} days
       {% endif %}
       {% endcapture %}
       <span class="document-due"

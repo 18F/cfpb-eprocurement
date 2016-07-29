@@ -9,7 +9,7 @@
       {{ item.text | markdownify }}
     </td>
     <td>
-      <time>{{ item.date | default: item.due_date }}</time>
+      <time>{{ item.date | default: item.due_date | date: DATE_FORMAT }}</time>
     </td>
   </tr>
   {% endfor %}
