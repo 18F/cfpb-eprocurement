@@ -12,6 +12,11 @@ body_class: 'site__procurements-list'
 title: Active Procurements
 subtitle: Enforcement Program Office
 
+columns:
+  left: 1
+  center: 8
+  right: 3
+
 sort_options:
 - by: requested_award_date
   text: Award Date
@@ -39,6 +44,8 @@ sort_options:
   </div>
 </form>
 
+{% assign col = page.columns %}
+
 {% for _proc in site.procurements %}
   {% assign proc = _proc | prepare_procurement %}
   {% assign id = _proc.id | split: '/' | last %}
@@ -48,19 +55,36 @@ sort_options:
   hidden>
 
   <div class="row card-header">
-    <div class="col col-1">
-      <span class="procurement-status"
-        data-status="{{ proc.status }}">
-        {{ proc.status }}
+    <div class="col col-{{ col.left }}">
+      <span class="procurement-due"
+        {% if proc.due_in_days < 0 %}
+        data-due="over"
+        {% elsif proc.due_in_days < 30 %}
+        data-due="soon"
+        {% endif %}>
+        {{ proc.due_in_days }} days
       </span>
     </div>
-    <h1 class="col col-8">
+    <h1 class="col col-{{ col.center }}">
       <a href="{{ proc.url }}">{{ proc.name }}</a>
     </h1>
-    <div class="col col-3">
+    <div class="col col-{{ col.right }}">
       <label is="cfpb-fave-star">
         <input type="checkbox" name="{{ id }}">
       </label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col col-{{ col.left }}"></div>
+    <div class="col col-{{ col.center }}">
+      <h5>Obligated amount</h5>
+      ${{ proc.obligated_value | number_to_currency }}
+    </div>
+    <div class="col col-{{ col.right }}">
+      <h5>Award date</h5>
+      Requested: <time>{{ proc.requested_award_date }}</time>
+      <br>Estimated: <time>{{ proc.estimated_award_date }}</time>
     </div>
   </div>
 
