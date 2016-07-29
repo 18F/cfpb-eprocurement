@@ -229,6 +229,17 @@ module CFPB
       word[0].upcase + word[1..word.size]
     end
 
+    def due_status(days, statuses={})
+      status = nil
+      statuses.each do |key, threshold|
+        if days <= threshold
+          status = key
+          break
+        end
+      end
+      status
+    end
+
   end
 end
 

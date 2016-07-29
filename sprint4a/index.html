@@ -58,11 +58,7 @@ sort_options:
   <div class="row card-header">
     <div class="col col-{{ col.left }}">
       <span class="procurement-due"
-        {% if pr.due_in_days < 0 %}
-        data-due="over"
-        {% elsif pr.due_in_days < 30 %}
-        data-due="soon"
-        {% endif %}>
+        data-due="{{ pr.due_in_days | due_status: site.data.due_status }}">
         {{ pr.due_in_days }} days
       </span>
     </div>
@@ -116,16 +112,13 @@ sort_options:
   <div class="row upcoming-task">
     <div class="col col-{{ col.left }}">
       {% assign due_status = nil %}
+      {% assign due_status = doc.due_in_days | due_status: site.data.due_status %}
       {% capture due_text %}
-      {% if doc.due_in_days > 0 %}
-        {% if doc.due_in_days < 30 %}
-          {% assign due_status = 'soon' %}
+        {% if due_status == 'over' %}
+          Over by {{ 0 | minus: doc.due_in_days }} day{{ doc.due_in_days | pluralize }}
+        {% else %}
+        Due in {{ doc.due_in_days }} day{{ doc.due_in_days | pluralize }}
         {% endif %}
-        Due in {{ doc.due_in_days }} days
-      {% elsif doc.due_in_days < 0 %}
-        {% assign due_status = 'over' %}
-      Over by {{ 0 | minus: doc.due_in_days }} days
-      {% endif %}
       {% endcapture %}
       <span class="document-due"
         data-due="{{ due_status }}">
