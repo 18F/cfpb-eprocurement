@@ -13,8 +13,8 @@ title: Active Procurements
 subtitle: Enforcement Program Office
 
 columns:
-  left: 1
-  center: 8
+  left: 2
+  center: 7
   right: 3
 
 sort_options:
@@ -45,6 +45,7 @@ sort_options:
 </form>
 
 {% assign col = page.columns %}
+{% assign DATE_FORMAT = '%B %e, %Y' %}
 
 {% for _pr in site.procurements %}
   {% assign pr = _pr | prepare_procurement %}
@@ -83,8 +84,8 @@ sort_options:
     </div>
     <div class="col col-{{ col.right }}">
       <h5>Award date</h5>
-      Requested: <time>{{ pr.requested_award_date }}</time>
-      <br>Estimated: <time>{{ pr.estimated_award_date }}</time>
+      Requested: <time>{{ pr.requested_award_date | date: DATE_FORMAT }}</time>
+      <br>Estimated: <time>{{ pr.estimated_award_date | date: DATE_FORMAT }}</time>
     </div>
   </div>
 
@@ -98,13 +99,60 @@ sort_options:
         <a href="{{ last_event.url }}">{{ last_event.document }}</a>
         {{ last_event.action }}ed
         by {{ last_event.actor }}
-        on {{ last_event.date }}
+        on <time>{{ last_event.date | date: DATE_FORMAT }}</time>
       </p>
       {% else %}
-      <p class="no-data">There hasn't been any activity yet.</p>
+      <em class="no-data">There hasn't been any activity yet.</em>
       {% endif %}
     </div>
   </div>
+
+  <div class="row">
+    <div class="col col-{{ col.left }}">
+    </div>
+    <div class="col col-{{ col.center | plus: col.right }}">
+      <h6>Upcoming tasks</h6>
+    </div>
+  </div>
+
+  {% for ms in pr.milestones %}
+    {% for doc in ms.documents %}
+      {% if doc.status and doc.status != 'complete' %}
+  <div class="row">
+    <div class="col col-{{ col.left }}">
+      {% if doc.due_in_days > 0 %}
+      Due in {{ doc.due_in_days }} days
+      {% elsif doc.due_in_days < 0 %}
+      Overdue {{ 0 | minus: doc.due_in_days }} days
+      {% endif %}
+    </div>
+    <div class="col col-{{ col.center | plus: col.right }}">
+        {% if doc.status == 'draft' %}
+          Draft
+          <a href="{{ doc.url }}">{{ doc.name }}</a>
+          due from {{ doc.author }}
+          by <time>{{ doc.target_end_date | date: DATE_FORMAT }}</time>
+        {% elsif doc.status == 'review' %}
+          Draft
+          <a href="{{ doc.url }}">{{ doc.name }}</a>
+          due from {{ doc.reviewers.last.name }}
+          by <time>{{ doc.target_end_date | date: DATE_FORMAT }}</time>
+        {% elsif doc.status == 'return' %}
+          Revision
+          <a href="{{ doc.url }}">{{ doc.name }}</a>
+          due from {{ doc.author }}
+          by <time>{{ doc.target_end_date | date: DATE_FORMAT }}</time>
+        {% elsif doc.status == 'finalize' %}
+          Finalize
+          <a href="{{ doc.url }}">{{ doc.name }}</a>
+          due from {{ doc.executor.name }}
+          by <time>{{ doc.target_end_date | date: DATE_FORMAT }}</time>
+        {% endif %}
+    </div>
+  </div>
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
 
 </section>
 {% endfor %}
