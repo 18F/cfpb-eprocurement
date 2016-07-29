@@ -104,6 +104,8 @@ milestones:
     target_end_date: 2016-04-28
     primary-author: Daniel
     status: complete
+    executor:
+      name: Daniel
     events:
       - date: 2016-04-27  
         actor: Daniel  
