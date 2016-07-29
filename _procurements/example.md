@@ -35,4 +35,18 @@ milestones:
           - actor: Josh
             action: review
             date: 2016-06-20
+      - name: Some document
+        target_start_date: 2016-09-12
+        target_end_date: 2016-09-24
+        author: Merav
+        reviewers:
+          - name: Bill
+          - name: Josh
+        executor:
+          name: Catherine
+          action: post
+        events:
+          - actor: Merav
+            action: draft
+            date: 2016-06-13
 ---
