@@ -106,12 +106,13 @@ module CFPB
             doc[STATUS] = events.last[ACTION]
 
             if doc[TARGET_END_DATE]
-              doc[DUE_IN_DAYS] = (NOW - doc[TARGET_END_DATE]).to_i
+              doc[DUE_IN_DAYS] = (doc[TARGET_END_DATE] - NOW).to_i
             end
 
             events.each do |event|
               if event[ACTION] == executor[ACTION]
                 doc[ACTUAL_END_DATE] = event[DATE]
+                doc[STATUS] = COMPLETE
                 executor[APPROVED] = true
                 milestone_actors.add(executor[NAME])
               end
