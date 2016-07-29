@@ -216,6 +216,14 @@ module CFPB
       return pr
     end
 
+    def pluralize(num, plural="s", singular="")
+      num == 1 ? singular : plural
+    end
+
+    def title_case_word(word)
+      word[0].upcase + word[1..word.size]
+    end
+
   end
 end
 
