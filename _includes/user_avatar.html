@@ -1,3 +1,8 @@
-<img class="avatar {{include.className}}"
-  title="{{ include.user.name }} ({{ include.user.role }})"
-  src="{{ site.baseurl }}/static/images/avatars/{{ include.user.slug }}.jpg">
+{% if include.user.avatar %}
+  {% capture _avatar_image %}{{ include.user.avatar }}.jpg{% endcapture %}
+{% else %}
+  {% assign _avatar_image = 'none.png' %}
+{% endif %}
+
+<img class="avatar {{ include.className }}" alt=""
+  src="{{ site.baseurl }}/static/images/avatars/{{ _avatar_image }}">

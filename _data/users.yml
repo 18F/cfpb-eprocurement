@@ -1,0 +1,27 @@
+Myra:
+  name: Myra Ball
+  role: COR
+  avatar: warren
+
+Fred:
+  name: Fred
+  role: COR
+
+Merav:
+  name: Merav
+  role: CO
+  avatar: dough
+
+Catherine:
+  name: Catherine
+  slug: warren
+  role: CO
+  avatar: warren
+
+Jeremy:
+  name: Jeremy
+  role: CO
+
+Jackie:
+  name: Jackie
+  role: COR

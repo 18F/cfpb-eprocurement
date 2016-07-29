@@ -14,6 +14,12 @@
   <!--[if lt IE 9]>     <link rel="stylesheet" href="{{ site.baseurl }}/static/css/main.ie.min.css"><![endif]-->
   <!--[if gt IE 8]><!--><link rel="stylesheet" href="{{ site.baseurl }}/static/css/main.min.css"><!--<![endif]-->
   <link rel="stylesheet" href="{{ site.baseurl }}/static/css/components.css">
+  {% for stylesheet in layout.stylesheets %}
+  <link rel="stylesheet" href="{{ site.baseurl }}/static/css/{{ stylesheet }}">
+  {% endfor %}
+  {% for stylesheet in page.stylesheets %}
+  <link rel="stylesheet" href="{{ site.baseurl }}/static/css/{{ stylesheet }}">
+  {% endfor %}
 
   <script>
     // Confirm availability of JS and remove no-js class from html
@@ -22,18 +28,30 @@
   </script>
 </head>
 
-<body class="site__wide">
+<body class="{{ page.body_class | default: layout.body_class | default: 'site__wide' }}">
 
-  <header class="wrapper wrapper__match-content" role="banner">
-    <div class="block block__sub">
-      <div class="header u-clearfix">
-        <h1 class="header__left superheading">{{ site.title }}</h1>
-        <h6 class="header__right">
-          logged in as {{ site.user }} ({{ site.role }})
-        </h6>
+  {% if page.header != false and layout.header != false %}
+  <header role="banner">
+    <div class="wrapper wrapper__match-content">
+      <div class="block block__sub">
+        {% if page.subtitle %}
+        <h2>{{ page.subtitle }}</h2>
+        {% endif %}
+        <div class="header u-clearfix">
+          <h1 class="header__left superheading">{{ page.title | default: site.title }}</h1>
+          {% assign _user = site.data.users[site.user] %}
+          {% if _user %}
+          <h6 class="header__right">
+            {{ _user.name | default: site.user }}
+            {% if _user.role %}({{ _user.role }}){% endif %}
+            {% include user_avatar.html user=_user %}
+          </h6>
+          {% endif %}
+        </div>
       </div>
     </div>
   </header>
+  {% endif %}
 
   <main class="content" id="main" role="main">
     <div class="content_bar"></div>
@@ -44,11 +62,16 @@
     </div><!-- END .content_wrapper -->
   </main>
 
+  {% if page.footer or layout.footer %}
   <footer role="contentinfo">
-    <!-- Footer stuff -->
+    {{ page.footer | default: layout.footer | markdownify }}
   </footer>
+  {% endif %}
 
   <script src="{{ site.baseurl }}/static/js/main.js"></script>
+  {% for script in layout.scripts %}
+  <script src="{{ site.baseurl }}/static/js/{{ script }}"></script>
+  {% endfor %}
   {% for script in page.scripts %}
   <script src="{{ site.baseurl }}/static/js/{{ script }}"></script>
   {% endfor %}
