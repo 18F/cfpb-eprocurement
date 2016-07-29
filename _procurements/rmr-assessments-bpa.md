@@ -334,6 +334,11 @@ milestones:
         executor:
           name: OCFO
           action: submit
+        events:
+          - date: 2016-08-04
+            actor: Jeremy
+            action: draft
+            revision-number: 1
   - name: Acquisition package reviews and posting
     documents:
       - name: Acquisition package

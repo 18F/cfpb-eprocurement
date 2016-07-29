@@ -60,6 +60,22 @@ header {
   color: $gray-60;
 }
 
+.document-due {
+  display: inline-block;
+  background: $pacific-20;
+  border-radius: 3px;
+  padding: 0.1em 0.3em;
+
+  &[data-due=soon] {
+    background: $gold-40;
+  }
+
+  &[data-due=over] {
+    background: $red;
+    color: $white;
+  }
+}
+
 .site__procurements-list {
 
   label {
@@ -109,22 +125,6 @@ header {
           text-align: center;
         }
       }
-    }
-  }
-
-  .document-due {
-    display: inline-block;
-    background: $pacific-20;
-    border-radius: 3px;
-    padding: 0.1em 0.3em;
-
-    &[data-due=soon] {
-      background: $gold-40;
-    }
-
-    &[data-due=over] {
-      background: $red;
-      color: $white;
     }
   }
 
