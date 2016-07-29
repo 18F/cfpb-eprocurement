@@ -24,9 +24,12 @@ sort_options:
   text: Favorites
 ---
 
+{% assign col = page.columns %}
+{% assign DATE_FORMAT = '%B %e, %Y' %}
+
 <form method="GET" class="js-autosubmit">
-  <div class="input-with-btn">
-    <div class="input-with-btn_input">
+  <div class="row">
+    <div class="col col-{{ col.left | plus: col.center }}">
       <label for="sort-by">View by</label>
       <select id="sort-by" name="sort">
         <option value="">Default</option>
@@ -35,17 +38,14 @@ sort_options:
         {% endfor %}
       </select>
     </div>
-    <div class="input-with-btn_btn">
-      <button class="btn" type="button" action="export/">
+    <div class="col col-{{ col.right }}">
+      <button class="btn btn-wide btn-flat" type="button" action="export/">
         <span class="cf-icon cf-icon-download"></span>
         Export to Excel
       </button>
     </div>
   </div>
 </form>
-
-{% assign col = page.columns %}
-{% assign DATE_FORMAT = '%B %e, %Y' %}
 
 {% for _pr in site.procurements %}
   {% assign pr = _pr | prepare_procurement %}
@@ -124,7 +124,7 @@ sort_options:
         Due in {{ doc.due_in_days }} days
       {% elsif doc.due_in_days < 0 %}
         {% assign due_status = 'over' %}
-      Overdue by {{ 0 | minus: doc.due_in_days }} days
+      Over by {{ 0 | minus: doc.due_in_days }} days
       {% endif %}
       {% endcapture %}
       <span class="document-due"
@@ -170,6 +170,17 @@ sort_options:
   </div>
   {{ upcoming_tasks }}
   {% endif %}
+
+  <div class="row">
+    <div class="col col-{{ col.left | plus: col.center }}">
+    </div>
+    <div class="col col-{{ col.right }}">
+      <a class="btn details" href="{{ pr.url }}">
+        Details
+        <span class="cf-icon cf-icon-right"></span>
+      </a>
+    </div>
+  </div>
 
 </section>
 {% endfor %}
