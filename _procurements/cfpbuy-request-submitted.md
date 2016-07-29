@@ -18,7 +18,7 @@ milestones:
       target_start_date: 2016-04-25
       target_end_date: 2016-05-12
       url:
-      primary-author: Daniel
+      author: Daniel
       status: complete
       executor:
         name: OCFO
@@ -37,7 +37,7 @@ milestones:
     - name: Independent Government Cost Estimate
       target_start_date: 2016-04-25
       target_end_date: 2016-04-25
-      primary-author: Daniel
+      author: Daniel
       status: complete
       executor:
         name: Stacey
@@ -62,7 +62,7 @@ milestones:
     - name : Service Coding Contract Sheet
       target_start_date: 2016-04-25
       target_end_date: 2016-05-31
-      primary-author: Daniel
+      author: Daniel
       status: complete
       executor:
         name: Jackie
@@ -92,7 +92,7 @@ milestones:
     - name : Acquisition Plan
       target_start_date: 2016-04-25
       target_end_date: 2016-04-27
-      primary-author: Jackie
+      author: Jackie
       status: complete
       events:
         - date: 2016-04-27
@@ -108,7 +108,7 @@ milestones:
     - name: OCR RFI Inputs # FIXME
       target_start_date: 2016-04-26
       target_end_date: 2016-04-28
-      primary-author: Daniel
+      author: Daniel
       executor:
         name: Stacey
         action: finalize
@@ -126,7 +126,7 @@ milestones:
         - name: OCR - SCC signatures
         - name: OCR RFI Inputs
         - name: Acquisition Plan Draft
-      primary-author: Jackie
+      author: Jackie
       status: complete
       executor:
         name: Jerry
@@ -163,7 +163,7 @@ milestones:
     - name : Evaluation Factors
       target_start_date: 2016-05-03
       target_end_date: 2016-05-05
-      primary-author: Daniel
+      author: Daniel
       status: complete
       executor:
         name: Stacey
@@ -202,7 +202,7 @@ milestones:
       predecessors:
         - name: Procurement Compiles Responses
         - name: Independent Government Cost Estimate
-      primary-author: Daniel
+      author: Daniel
       status: complete
       executor:
         name: Jackie
@@ -243,7 +243,7 @@ milestones:
       target_end_date: 2016-06-20
       predecessors:
         - name: RFI Posted
-      primary-author: Daniel
+      author: Daniel
       status: complete
       executor:
         name: Stacey
@@ -283,7 +283,7 @@ milestones:
       predecessors:
         - name: IGCE Revisions
         - name: Acquisition Plan Reviewed & Signed
-      primary-author: Jerry
+      author: Jerry
       status: complete
       events:
           - date: 2016-07-22
@@ -330,7 +330,7 @@ milestones:
           - name: Procurement draft Award Docs
         target_start_date: 2016-09-09
         target_end_date: 2016-09-09
-        primary-author: Jerry
+        author: Jerry
         executor:
           name: Jerry
           action: distribute
@@ -339,7 +339,7 @@ milestones:
         target_end_date: 2016-09-12
         predecessors:
           - name: Procurement draft Award Docs
-        primary-author: Vanessa
+        author: Vanessa
         executor:
           name: Vanessa
           action: finalize
@@ -356,14 +356,14 @@ milestones:
         target_end_date: 2016-09-30
         predecessors:
           - name: OCR TEP evaluation
-        primary-author: Vanessa
+        author: Vanessa
       - name: Final Award Package/TEP Report
         target_start_date: 2016-10-04
         target_end_date: 2016-10-21
         predecessors:
           - name: OCR revises TEP report, as needed
           - name: OCR TEP evaluation ends
-        primary-author: Vanessa
+        author: Vanessa
         executor:
           name: Legal (Angela)
           action: approve
@@ -372,5 +372,5 @@ milestones:
         target_end_date: 2016-10-27
         predecessors:
           - name: Decision document
-        primary-author: Vanessa
+        author: Vanessa
 ---
