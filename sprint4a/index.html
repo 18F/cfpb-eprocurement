@@ -46,27 +46,27 @@ sort_options:
 
 {% assign col = page.columns %}
 
-{% for _proc in site.procurements %}
-  {% assign proc = _proc | prepare_procurement %}
-  {% assign id = _proc.id | split: '/' | last %}
+{% for _pr in site.procurements %}
+  {% assign pr = _pr | prepare_procurement %}
+  {% assign id = _pr.id | split: '/' | last %}
 <section class="procurement procurement-card"
   id="{{ id }}"
-  data-json='{{ proc | jsonify | xml_escape }}'
+  data-json='{{ pr | jsonify | xml_escape }}'
   hidden>
 
   <div class="row card-header">
     <div class="col col-{{ col.left }}">
       <span class="procurement-due"
-        {% if proc.due_in_days < 0 %}
+        {% if pr.due_in_days < 0 %}
         data-due="over"
-        {% elsif proc.due_in_days < 30 %}
+        {% elsif pr.due_in_days < 30 %}
         data-due="soon"
         {% endif %}>
-        {{ proc.due_in_days }} days
+        {{ pr.due_in_days }} days
       </span>
     </div>
     <h1 class="col col-{{ col.center }}">
-      <a href="{{ proc.url }}">{{ proc.name }}</a>
+      <a href="{{ pr.url }}">{{ pr.name }}</a>
     </h1>
     <div class="col col-{{ col.right }}">
       <label is="cfpb-fave-star">
@@ -79,12 +79,30 @@ sort_options:
     <div class="col col-{{ col.left }}"></div>
     <div class="col col-{{ col.center }}">
       <h5>Obligated amount</h5>
-      ${{ proc.obligated_value | number_to_currency }}
+      ${{ pr.obligated_value | number_to_currency }}
     </div>
     <div class="col col-{{ col.right }}">
       <h5>Award date</h5>
-      Requested: <time>{{ proc.requested_award_date }}</time>
-      <br>Estimated: <time>{{ proc.estimated_award_date }}</time>
+      Requested: <time>{{ pr.requested_award_date }}</time>
+      <br>Estimated: <time>{{ pr.estimated_award_date }}</time>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col col-{{ col.left }}"></div>
+    <div class="col col-{{ col.center | plus: col.right }}">
+      <h5>Latest activity</h5>
+      {% assign last_event = pr.events | last %}
+      {% if last_event %}
+      <p class="last-event">
+        <a href="{{ last_event.url }}">{{ last_event.document }}</a>
+        {{ last_event.action }}ed
+        by {{ last_event.actor }}
+        on {{ last_event.date }}
+      </p>
+      {% else %}
+      <p class="no-data">There hasn't been any activity yet.</p>
+      {% endif %}
     </div>
   </div>
 

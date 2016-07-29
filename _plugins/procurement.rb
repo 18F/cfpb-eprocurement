@@ -6,8 +6,11 @@ NOW = DateTime.now.to_date
 
 DATE = "date"
 EVENTS = "events"
-MILESTONES = "milestones"
+DOCUMENT = "document"
 DOCUMENTS = "documents"
+MILESTONE = "milestone"
+MILESTONES = "milestones"
+URL = "url"
 EXECUTOR = "executor"
 REVIEWERS = "reviewers"
 
@@ -68,6 +71,8 @@ module CFPB
 
       actors = Set.new
 
+      all_events = []
+
       milestones = pr[MILESTONES] || []
       milestones.each do |milestone|
 
@@ -88,6 +93,10 @@ module CFPB
                 executor[APPROVED] = true
                 milestone_actors.add(executor[NAME])
               end
+              event[URL] = doc[URL]
+              event[DOCUMENT] = doc[NAME]
+              event[MILESTONE] = milestone[NAME]
+              all_events.push(event)
             end
 
             reviewers = doc[REVIEWERS]
@@ -138,6 +147,7 @@ module CFPB
       end
 
       pr[ACTORS] = actors.to_a
+      pr[EVENTS] = all_events.sort { |a, b| a[DATE] - b[DATE] }
 
       pr[STATUS] = PENDING
       if pr[REQUESTED_AWARD_DATE]
