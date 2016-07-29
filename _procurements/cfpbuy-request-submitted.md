@@ -21,18 +21,18 @@ milestones:
       primary-author: Daniel
       status: complete
       executor:
-        name: Daniel
-        action: Post
+        name: OCFO
+        action: finalize
       events:
         - date: 2016-04-28
           actor: Daniel
           action: draft
           revision-number: 1
         - date: 2016-05-06
-          actor: Daniel
-          action: post
+          actor: OCFO
+          action: finalize
           revision-number: 1
-  - name: OCR develops IGCE
+  - name: Independent Government Cost Estimate
     documents:
     - name: Independent Government Cost Estimate
       target_start_date: 2016-04-25
@@ -42,16 +42,18 @@ milestones:
       executor:
         name: Stacey
         action: finalize
+      reviewers:
+        - name: Jackie
       events:
         - date: 2016-04-25
           actor: Daniel
           action: draft
           revision-number: 1
-        - date: 2016-04-25
-          actor: Stacey
+        - date: 2016-05-15
+          actor: Jackie
           action: approve
           revision-number: 1
-        - date: 2016-05-15
+        - date: 2016-05-30
           actor: Stacey
           action: finalize
           revision-number: 1
@@ -86,16 +88,17 @@ milestones:
         action: submit
         revision-number: 1
   - name: Acquisition Plan Draft
-    documents: Acquisition Plan
-    target_start_date: 2016-04-25
-    target_end_date: 2016-04-27
-    primary-author: Jackie
-    status: complete
-    events:
-      - date: 2016-04-27
-        actor: Jackie
-        action: draft
-        revision-number: 1
+    documents: 
+    - name : Acquisition Plan
+      target_start_date: 2016-04-25
+      target_end_date: 2016-04-27
+      primary-author: Jackie
+      status: complete
+      events:
+        - date: 2016-04-27
+          actor: Jackie
+          action: draft
+          revision-number: 1
   - name: OCR RFI Inputs
     target_start_date: 2016-04-26
     target_end_date: 2016-04-28
@@ -105,97 +108,106 @@ milestones:
       - date: 2016-04-27  
         actor: Daniel  
         action: post
-  - name: Procurement Draft RFI
-    documents: RFI form
-    target_start_date: 2016-04-29
-    target_end_date: 2016-05-04
-    predecessors:
-      - name: OCR - SCC signatures
-      - name: OCR RFI Inputs
-      - name: Acquisition Plan Draft
-    primary-author: Jackie
-    status: complete
-    executor:
-      name: Jerry
-      action: finalize
-    reviewers:
-      - name: Stacey
-    events:
-      - date: 2016-05-04
-        actor: Jackie
-        action: draft
         revision-number: 1
-      - date: 2016-05-06
-        actor: Stacey
-        action: return
-        revision-number: 1
-      - date: 2016-05-07
-        actor: Jackie
-        action: revise
-        revision-number: 2
-      - date: 2016-05-08
-        actor: Stacey
-        action: approve
-        revision-number: 2
-      - date: 2016-05-11
-        actor: Jerry
+  - name: Request for Information
+    documents: 
+    - name: RFI form
+      target_start_date: 2016-04-29
+      target_end_date: 2016-05-04
+      predecessors:
+        - name: OCR - SCC signatures
+        - name: OCR RFI Inputs
+        - name: Acquisition Plan Draft
+      primary-author: Jackie
+      status: complete
+      executor:
+        name: Jerry
         action: finalize
-        revision-number: 2
-      - date: 2016-05-11
-        actor: Jerry
-        action: post
-        revision-number: 2
-  - name: OCR submits evaluation factors
-    target_start_date: 2016-05-03
-    target_end_date: 2016-05-05
-    responsible_parties:
-      - name: Daniel
-      - name: Stacey
-    documents: []
-  - name: RFI Posted
-    target_start_date: 2016-05-11
-    target_end_date: 2016-05-24
-    predecessors:
-      - name: OCR submits evaluation factors
-    responsible_parties:
-      - name: Jerry
-    documents: []
-  - name: Requisition Received
-    target_start_date: 2016-05-13
-    target_end_date: 2016-05-13
-    predecessors:
-      - name: CFPBuy Request Submitted
-    responsible_parties:
-      - name: OCFO
-    documents: []
-  - name: IGCE Review
-    target_start_date: 2016-05-16
-    target_end_date: 2016-06-06
-    predecessors:
-      - name: Acquisition Plan Draft
-    responsible_parties:
-      - name: Jackie
-    documents: []
+      reviewers:
+        - name: Stacey
+      events:
+        - date: 2016-05-04
+          actor: Jackie
+          action: draft
+          revision-number: 1
+        - date: 2016-05-06
+          actor: Stacey
+          action: return
+          revision-number: 1
+        - date: 2016-05-07
+          actor: Jackie
+          action: revise
+          revision-number: 2
+        - date: 2016-05-08
+          actor: Stacey
+          action: approve
+          revision-number: 2
+        - date: 2016-05-11
+          actor: Jerry
+          action: finalize
+          revision-number: 2
+        - date: 2016-05-11
+          actor: Jerry
+          action: post
+          revision-number: 2
+  - name: RFI evaluation factors
+  - documents: 
+    - name : Evaluation Factors
+      target_start_date: 2016-05-03
+      target_end_date: 2016-05-05
+      primary-author: Daniel
+      status: complete
+      executor:
+        name: Stacey
+        action: finalize
+      events:
+        - date: 2016-05-04
+          actor: Daniel
+          action: draft
+          revision-number: 1
+        - date: 2016-05-06
+          actor: Stacey
+          action: finalize
+          revision-number: 1
   - name: Procurement Compiles Responses
-    target_start_date: 2016-05-24
-    target_end_date: 2016-05-24
-    responsible_parties:
-      - name: Vanessa
-    documents: []
+    documents: 
+    - name: Aggregated Vendor Responses
+      target_start_date: 2016-05-24
+      target_end_date: 2016-05-24
+      executor: 
+        name: Vanessa
+        action: post
+      events:
+          - date: 2016-05-24
+            actor: Vanessa
+            action: post
+            revision-number: 1
   - name: OCR Reviews Responses & Updates SOW
-    target_start_date: 2016-05-25
-    target_end_date: 2016-05-25
-    predecessors:
-      - name: Procurement Update & Post RFI
-    responsible_parties:
-      - name: Daniel
-      - name: Stacey
-    documents: []
+    documents:
+    - name: Scope of Work
+      target_start_date: 2016-05-25
+      target_end_date: 2016-05-25
+      predecessors:
+        - name: Procurement Compiles Responses
+      primary-author: Daniel
+      status: complete
+      executor:
+        name: Stacey
+        action: finalize
+      events:
+          - date: 2016-05-26
+            actor: Daniel
+            action: draft
+            revision-number: 2
+          - date: 2016-05-27
+            actor: Stacey
+            action: finalize
+            revision-number: 2
   - name: Update Acquisition Plan
     target_start_date: 2016-06-01
     target_end_date: 2016-06-03
     predecessors:
-      - name: IGCE Review
+      - name: Independent Government Cost Estimate
     responsible_parties:
       - name: Jackie
       - name: Vanessa
