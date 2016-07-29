@@ -54,6 +54,10 @@ module CFPB
         'posted'
       when 'draft'
         'drafted'
+      when 'approve'
+        'approved'
+      when 'sign'
+        'signed'
       else
         action
       end

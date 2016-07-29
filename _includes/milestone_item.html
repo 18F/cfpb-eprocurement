@@ -17,26 +17,25 @@
       {% endif %} -->
     </div>
     <div class="milestone-item-title col-3" role="tab" aria-controls="{{ content_slug }}" data-status="{{completed}}">
-
-
       {% assign current_doc = milestone.documents | last %}
       {% assign current_event = current_doc.events | last %}
 
       <h3>
-        <!-- {% if completed %}
-          <a href="../../{{current_doc.url}}">{{current_doc.name}}</a>
-        {% else %} -->
-        <!-- {% endif %} -->
         <b>{{ current_doc.name }} {{ completed }}</b>
       </h3>
       <p class="mute">
         <!-- really ugly -->
         {% if milestone.status == 'complete' %}
-          <a href="../../{{current_doc.url}}">{{ current_doc.name }}</a> {{ current_event.action | past_tensify }} by {{ current_event.actor }} on {{current_event.date | date: DATE_FORMAT }}
+          <a href="../../{{current_doc.url}}">{{ current_doc.name }}</a> {{ current_event.action | past_tensify }} by {{ current_event.actor }} ({{user.role}}) on {{current_event.date | date: DATE_FORMAT }} (locked)
         {% else %}
-          {{ current_doc.name }} {{ current_event.action | past_tensify }} by {{ current_event.actor }} on {{current_event.date | date: DATE_FORMAT }}
+          {{ current_doc.name }} {{ current_event.action | past_tensify }} by {{ current_event.actor }} ({{user.role}}) on {{current_event.date | date: DATE_FORMAT }}
         {% endif %}
       </p>
+      {% if milestone.status != 'complete' %}
+        <div class="document-due">
+          <p>Due in {{current_doc.due_in_days}} days</p>
+        </div>
+      {% endif %}
     </div>
   </div>
 
@@ -45,11 +44,28 @@
     <div class="col-3 milestone-documents">
       <h4 class="milestone-documents__title">{{milestone.name}} Milestones</h4>
       {% for document in milestone.documents %}
+        {% if document.status == 'complete' %}
+          {% assign doc_complete = 'completed' %}
+        {% else %}
+          {% assign doc_complete = '' %}
+        {% endif %}
+
         {% assign document_slug = document.name | append: forloop.index | slugify %}
         <section class="milestone-item block__border-bottom" role="tablist">
           <div class="row">
             <div class="milestone-item-title col-3" role="tab" aria-controls="{{ document_slug }}">
-              <p class="col-2"><b>{{document.name}}</b></p>
+              <p><b>{{document.name}} {{doc_complete}}</b></p>
+              {% assign last_action = document.events | last %}
+              {% if document.status == 'complete' %}
+                <a href="../../{{document.url}}">Final {{ document.name | append: ' ' | append: last_action['revision-number'] }}</a> {{ last_action.action | past_tensify }} by {{ last_action.actor }} ({{site.data.users[last_action.actor].role}}) on {{last_action.date | date: DATE_FORMAT}}
+              {% else %}
+                {% if site.data.users[document.author] %}
+                  {% assign role = site.data.users[document.author].role | prepend: '(' | append: ')' %}
+                {% else %}
+                  {% assign role = '' %}
+                {% endif %}
+                {{ document.name }} due from {{ document.author }} {{role}} on {{document.target_end_date | date: DATE_FORMAT}}
+              {% endif %}
             </div>
           </div>
           <div class="row" role="tabpanel" aria-hidden="true" id="{{ document_slug }}">
