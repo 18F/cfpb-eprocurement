@@ -50,6 +50,10 @@ module CFPB
         'submitted'
       when 'return'
         'returned'
+      when 'post'
+        'posted'
+      when 'draft'
+        'drafted'
       else
         action
       end

@@ -271,13 +271,69 @@ header {
   }
 
   .milestone-item {
+    cursor: pointer;
     padding: 1em;
 
     .milestone-item-title {
-      p {
+      padding-top: 10px;
+      position: relative;
+      h3, p {
         margin-bottom: 0;
       }
+
+      &[role="tab"]::after {
+        border-radius: 1em;
+        border: 1px solid;
+        color: $gray-60;
+        content: "+";
+        display: inline-block;
+        font-size: 2em;
+        height: 1em;
+        line-height: .85;
+        position: absolute;
+        right: 1em;
+        top: 35%;
+        width: 1em;
+      }
+
+      &[role="tab"][aria-expanded=true]::after {
+        content: "-";
+      }
+
+      &[role="tab"][data-status="completed"] button[role=tab]::after {
+        content: "✔";
+        color: $gray-40;
+      }
     }
+  }
+
+  [role="tabpanel"][aria-hidden=true] {
+    display: none;
+  }
+
+  .milestone-documents {
+    margin-top: 40px;
+
+    .milestone-documents__title {
+      border-bottom: 2px solid $black;
+      margin-bottom: 0;
+      text-transform: uppercase;
+    }
+
+    .history-avatar {
+      float: left;
+      margin-left: -1.2em;
+      margin-right: 1.2em;
+    }
+
+    .history-item {
+      margin-bottom: 40px;
+    }
+  }
+
+  .history-section {
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 
 

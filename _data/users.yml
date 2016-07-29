@@ -3,11 +3,17 @@ Myra:
   role: COR
   avatar: warren
 
+Fred:
+  name: Fred
+  role: COR
+
 Merav:
-  role:
+  name: Merav
+  role: CO
   avatar: dough
 
 Catherine:
+  name: Catherine
   slug: warren
   role: CO
   avatar: warren

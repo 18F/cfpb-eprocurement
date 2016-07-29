@@ -1,4 +1,5 @@
-<section class="milestone-item block__border-top">
+{% assign content_slug = milestone.name | slugify %}
+<section class="milestone-item block__border-top" role="tablist">
   <div class="row">
     <div class="col-1 avatar-group">
       {% assign actor_count = milestone.actors.size - 2 %}
@@ -10,43 +11,61 @@
         {% include additional_users.html actor_count=actor_count %}
       {% endif %} -->
     </div>
-    <div class=" milestone-item-title col-3">
+    <div class="milestone-item-title col-3" role="tab" aria-controls="{{ content_slug }}">
       {% assign completed = milestone.status === 'complete' ? 'completed' ? '' %}
       {% assign current_doc = milestone.documents | last %}
       {% assign current_event = current_doc.events | last %}
 
-      <p><b>{{ current_doc.name }}</b></p>
+      <h3><b>{{ current_doc.name }}</b></h3>
       <p class="mute">
         {{ current_doc.name }} {{ current_event.action | past_tensify }} by {{ current_event.actor }} on {{current_event.date | date: DATE_FORMAT }}
       </p>
-
-      <!-- {{current_event}} -->
-      <!-- {{ milestone.name }} {{completed}} -->
-
     </div>
   </div>
 
+  <div class="row" role="tabpanel" aria-hidden="true" id="{{ content_slug }}">
+    <div class="col-1"></div>
+    <div class="col-3 milestone-documents">
+      <h4 class="milestone-documents__title">{{milestone.name}} Milestones</h4>
+      {% for document in milestone.documents %}
+        {% assign document_slug = document.name | append: forloop.index | slugify %}
+        <section class="milestone-item block__border-bottom" role="tablist">
+          <div class="row">
+            <div class="milestone-item-title col-3" role="tab" aria-controls="{{ document_slug }}">
+              <p class="col-2"><b>{{document.name}}</b></p>
+            </div>
+          </div>
+          <div class="row" role="tabpanel" aria-hidden="false" id="{{ document_slug }}">
+            <div class="col-12 history-section">
+              <p><b>History:</b></p>
 
-  <!-- <div class="feature-list_item-header">
-    <h3>
-      {% include user_avatar.html user=owner %}
-      <button role="tab"{% unless milestone.completed %} aria-controls="{{ content_slug }}"{% endunless %}>
-        <span class="cf-icon cf-icon-document"></span> {{ milestone.name }}
-      </button>
-    </h3>
-    <h4 class="status">
-      <span class="status-label">{{ milestone.status }}</span>
-      {% if milestone.status == 'Completed' %}
-        by
-      {% else %}
-        from
-      {% endif %}
-      <a href="#contact">{{ owner.name }}</a>
-      on
-      <time>{{ milestone.date[milestone.status] | default: milestone.date.due }}</time>
-    </h4>
+              {% for event in document.events | reversed %}
+                <div class="row history-item">
+                  <div>
+                    {% assign user = site.data.users[event.actor] %}
+                    {% include user_avatar.html user=user className="history-avatar" %}
+                  </div>
+                  <div class="milestone-item-title col-3">
+                    {% if event.action == 'approve' %}
+                      {% assign final = 'Final ' %}
+                    {% else %}
+                      {% assign final = '' %}
+                    {% endif %}
+
+                    {% if event.comment %}
+                      <p><b>"{{ event.comment }}"</b></p>
+                    {% endif %}
+
+                    <p>
+                      {{ final | append: document.name }} {{ event.action | past_tensify }} by {{ event.actor }} ({{ user.role }}) on {{event.date | date: '%B %d, %Y'}}
+                    </p>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </section>
+      {% endfor %}
+    </div>
   </div>
-  <div role="tabpanel" aria-hidden="true" id="{{ content_slug }}">
-
-  </div> -->
 </section>

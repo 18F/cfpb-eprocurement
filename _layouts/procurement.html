@@ -52,4 +52,20 @@ stylesheets:
   [].forEach.call(document.querySelectorAll('pre.json'), function(pre) {
     pre.textContent = JSON.stringify(JSON.parse(pre.textContent), null, '  ');
   });
+
+  window.addEventListener('load', function() {
+    var CONTROLS = 'aria-controls';
+    var HIDDEN = 'aria-hidden';
+    var EXPANDED = 'aria-expanded';
+
+    var tablist = $('[role=tablist]');
+
+    tablist.on('click', '[role=tab][aria-controls]', function(e) {
+      var id = this.getAttribute(CONTROLS);
+      var expanded = this.getAttribute(EXPANDED) !== 'true';
+      this.setAttribute(EXPANDED, expanded);
+      var panel = document.getElementById(id);
+      panel.setAttribute(HIDDEN, !expanded);
+    });
+  });
 </script>
