@@ -17,49 +17,68 @@ milestones:
       url:
       primary-author: Daniel
       executor: 
-      name: Daniel
-      action: Post
-    events:
-      - date: 2016-04-28
-        actor: Daniel
-        action: draft
-        revision-number: 1
-      - date: 2016-05-06
-        actor: Daniel
-        action: post
-        revision-number: 1
+        name: Daniel
+        action: Post
+      events:
+        - date: 2016-04-28
+          actor: Daniel
+          action: draft
+          revision-number: 1
+        - date: 2016-05-06
+          actor: Daniel
+          action: post
+          revision-number: 1
   - name: OCR develops IGCE
-    documents: IGCE form
-    target_start_date: 2016-04-25
-    target_end_date: 2016-04-25
-    primary-author: Daniel
-    executor: 
-      name: Stacey
-      action: finalize
-    events:
-      - date: 2016-04-25
-        actor: Daniel
+    documents: 
+    - name: IGCE form
+      target_start_date: 2016-04-25
+      target_end_date: 2016-04-25
+      primary-author: Daniel
+      executor: 
+        name: Stacey
+        action: finalize
+      events:
+        - date: 2016-04-25
+          actor: Daniel
+          action: draft
+          revision-number: 1
+        - date: 2016-04-25
+          actor: Stacey
+          action: approve
+          revision-number: 1
+        - date: 2016-05-15
+          actor: Stacey
+          action: finalize
+          revision-number: 1
+  - name: OCR - SCC signatures
+    documents: 
+    - name : Service Coding Worksheet
+      target_start_date: 2016-04-25
+      target_end_date: 2016-05-31
+      primary-author: Daniel
+      executor: 
+        name: Jackie
+        action: Finalize
+      reviewers:
+        - name: Stacey
+        - name: Gordon
+      events:
+      - date: 2016-04-30
+        actor: Jackie
         action: draft
         revision-number: 1
-      - date: 2016-04-25
+      - date: 2016-05-05
         actor: Stacey
+        action: review
+        revision-number: 1
+      - date: 2016-05-27
+        actor: Gordon
         action: approve
         revision-number: 1
-      - date: 2016-05-15
+      - date: 2016-06-03
         actor: Stacey
-        action: finalize
+        action: submit
         revision-number: 1
-  - name: OCR - SCC signatures
-    documents: Service Coding Worksheet
-    target_start_date: 2016-04-25
-    target_end_date: 2016-05-31
-    primary-author: Daniel
-    executor: 
-      name: Jackie
-      action: Finalize
-    reviewers:
-      - name: Stacey
-      - name: Gordon
   - name: Acquisition Plan Draft
     target_start_date: 2016-04-25
     target_end_date: 2016-04-27
