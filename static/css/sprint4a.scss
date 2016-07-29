@@ -111,6 +111,92 @@ header {
       }
     }
   }
+
+  .document-due {
+    display: inline-block;
+    background: $pacific-20;
+    border-radius: 3px;
+    padding: 0.1em 0.3em;
+
+    &[data-due=soon] {
+      background: $gold-40;
+    }
+
+    &[data-due=over] {
+      background: $red;
+      color: $white;
+    }
+  }
+
+}
+
+
+.site__document-detail {
+  padding: 0;
+  margin: 0;
+
+  .chrome {
+    display: block;
+    width: 100%;
+  }
+
+  .wrapper {
+    max-width: 40em;
+    margin: 0 auto;
+  }
+
+  main {
+    background: #938a84;
+    padding: 2em;
+  }
+
+  article {
+    background: $white;
+    border: 1px solid $black;
+    padding: 1.5em;
+    min-height: 8em;
+    max-height: 16em;
+    overflow: auto;
+
+    h1 {
+      font-weight: normal;
+      margin: 0;
+    }
+  }
+
+  button {
+    background: $pacific;
+    border-radius: 0.28571429em;
+    border: 0;
+    box-sizing: border-box;
+    color: $white;
+    cursor: pointer;
+    display: inline-block;
+    font-family: 'AvenirNextLTW01-Medium', Arial, sans-serif;
+    font-size: 0.875em;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin: 0;
+    padding: 0.57142857em 1em;
+    text-decoration: none;
+    vertical-align: middle;
+    -webkit-transition: background-color 0.1s;
+            transition: background-color 0.1s;
+    -webkit-appearance: none;
+  }
+
+  form {
+    padding: 1em 0;
+
+    textarea {
+      width: 100%;
+    }
+
+    p {
+      text-align: center;
+    }
+  }
 }
 
 .site__procurement-detail {
