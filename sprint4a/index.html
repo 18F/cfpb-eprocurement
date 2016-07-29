@@ -80,7 +80,7 @@ sort_options:
     <div class="col col-{{ col.left }}"></div>
     <div class="col col-{{ col.center }}">
       <h5>Obligated amount</h5>
-      ${{ pr.obligated_value | number_to_currency }}
+      {{ pr.obligated_value | number_to_currency }}
     </div>
     <div class="col col-{{ col.right }}">
       <h5>Award date</h5>
@@ -107,52 +107,69 @@ sort_options:
     </div>
   </div>
 
-  <div class="row">
+{% assign has_upcoming = false %}
+
+{% capture upcoming_tasks %}
+  {% for ms in pr.milestones %}
+    {% for doc in ms.documents %}
+      {% if doc.status and doc.status != 'pending' and doc.status != 'complete' %}
+  <div class="row upcoming-task">
+    <div class="col col-{{ col.left }}">
+      {% assign due_status = nil %}
+      {% capture due_text %}
+      {% if doc.due_in_days > 0 %}
+        {% if doc.due_in_days < 30 %}
+          {% assign due_status = 'soon' %}
+        {% endif %}
+        Due in {{ doc.due_in_days }} days
+      {% elsif doc.due_in_days < 0 %}
+        {% assign due_status = 'over' %}
+      Overdue {{ 0 | minus: doc.due_in_days }} days
+      {% endif %}
+      {% endcapture %}
+      <span class="document-due"
+        data-due="{{ due_status }}">
+        {{ due_text }}
+      </span>
+    </div>
+    <div class="col col-{{ col.center | plus: col.right }}">
+        {% assign what = doc.status | title_case_word %}
+        {% assign from = doc.author %}
+        {% if doc.status == 'review' %}
+          {% for reviewer in doc.reviewers %}
+            {% unless reviewer.approved %}
+              {% assign from = reviewer.name %}
+              {% break %}
+            {% endunless %}
+          {% endfor %}
+        {% elsif doc.status == 'return' %}
+          {% assign what = 'Revision of' %}
+          {% assign from = doc.author %}
+        {% elsif doc.status == 'finalize' %}
+          {% assign from = doc.executor.name %}
+        {% endif %}
+      {{ what }}
+      <a href="{{ doc.url }}">{{ doc.name }}</a>
+      due from {{ from }}
+      by <time>{{ doc.target_end_date | date: DATE_FORMAT }}</time>
+    </div>
+  </div>
+        {% assign has_upcoming = true %}
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+{% endcapture %}
+
+  {% if has_upcoming %}
+  <div class="row upcoming-header">
     <div class="col col-{{ col.left }}">
     </div>
     <div class="col col-{{ col.center | plus: col.right }}">
       <h6>Upcoming tasks</h6>
     </div>
   </div>
-
-  {% for ms in pr.milestones %}
-    {% for doc in ms.documents %}
-      {% if doc.status and doc.status != 'complete' %}
-  <div class="row">
-    <div class="col col-{{ col.left }}">
-      {% if doc.due_in_days > 0 %}
-      Due in {{ doc.due_in_days }} days
-      {% elsif doc.due_in_days < 0 %}
-      Overdue {{ 0 | minus: doc.due_in_days }} days
-      {% endif %}
-    </div>
-    <div class="col col-{{ col.center | plus: col.right }}">
-        {% if doc.status == 'draft' %}
-          Draft
-          <a href="{{ doc.url }}">{{ doc.name }}</a>
-          due from {{ doc.author }}
-          by <time>{{ doc.target_end_date | date: DATE_FORMAT }}</time>
-        {% elsif doc.status == 'review' %}
-          Draft
-          <a href="{{ doc.url }}">{{ doc.name }}</a>
-          due from {{ doc.reviewers.last.name }}
-          by <time>{{ doc.target_end_date | date: DATE_FORMAT }}</time>
-        {% elsif doc.status == 'return' %}
-          Revision
-          <a href="{{ doc.url }}">{{ doc.name }}</a>
-          due from {{ doc.author }}
-          by <time>{{ doc.target_end_date | date: DATE_FORMAT }}</time>
-        {% elsif doc.status == 'finalize' %}
-          Finalize
-          <a href="{{ doc.url }}">{{ doc.name }}</a>
-          due from {{ doc.executor.name }}
-          by <time>{{ doc.target_end_date | date: DATE_FORMAT }}</time>
-        {% endif %}
-    </div>
-  </div>
-      {% endif %}
-    {% endfor %}
-  {% endfor %}
+  {{ upcoming_tasks }}
+  {% endif %}
 
 </section>
 {% endfor %}
