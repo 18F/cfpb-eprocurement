@@ -82,10 +82,20 @@ module CFPB
         docs.each do |doc|
           events = doc[EVENTS]
           executor = doc[EXECUTOR]
+
+          # XXX always lowercase actions
+          if executor[ACTION]
+            executor[ACTION] = executor[ACTION].downcase
+          end
+
           executor[APPROVED] = false
           unless !events or events.empty?
             doc[ACTUAL_START_DATE] = events.first[DATE]
             doc[STATUS] = events.last[ACTION]
+
+            if doc[TARGET_END_DATE]
+              doc[DUE_IN_DAYS] = (NOW - doc[TARGET_END_DATE]).to_i
+            end
 
             events.each do |event|
               if event[ACTION] == executor[ACTION]
