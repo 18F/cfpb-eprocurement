@@ -46,7 +46,7 @@ module CFPB
       amount = format("%.2f", number)
       while amount.sub!(/(\d+)(\d\d\d)/,'\1,\2'); end
 
-      amount
+      "$#{amount}"
     end
 
     def prepare_for_jsonify(data)

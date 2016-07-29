@@ -17,7 +17,7 @@ stylesheets:
       <div class="col-3">
         <p class="detail-header__title"><b>Obligated Amount</b></p>
         <p class="detail-header__data">
-          ${{ proc.obligated_value | number_to_currency }}
+          {{ proc.obligated_value | number_to_currency }}
         </p>
       </div>
       <div class="col-3">
@@ -30,7 +30,22 @@ stylesheets:
   </div>
 </div>
 
-<pre class="json">{{ proc | jsonify }}</pre>
+<section class="detail-content">
+  <div class="wrapper wrapper__match-content">
+    <div class="row">
+      <div class="detail-content col-12">
+        <h2>Milestones</h2>
+
+        {% for milestone in proc.milestones %}
+          <!-- <pre class="json"> {{ milestone | jsonify }}</pre> -->
+          {% include milestone_item.html milestone=milestone %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <pre class="json">{{ proc | jsonify }}</pre> -->
 
 <script>
   [].forEach.call(document.querySelectorAll('pre.json'), function(pre) {

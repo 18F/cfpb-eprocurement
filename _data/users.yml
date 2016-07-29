@@ -5,10 +5,9 @@ Myra:
 
 Merav:
   role:
-  avatar: jdough
+  avatar: dough
 
 Catherine:
   slug: warren
-
-Catherine:
   role: CO
+  avatar: warren

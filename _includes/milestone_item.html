@@ -1,0 +1,42 @@
+<section class="feature-list_item block block__padded-top block__border-top">
+  <div class="row">
+    <div class="col-1 avatar-group">
+      {% assign actor_count = milestone.actors.size - 2 %}
+      {% for actor in milestone.actors limit: 2 %}
+        {% assign user = site.data.users[actor] %}
+        {% include user_avatar.html user=user %}
+      {% endfor %}
+      <!-- {% if actor_count > 0 %}
+        {% include additional_users.html actor_count=actor_count %}
+      {% endif %} -->
+    </div>
+    <div class="col-3">
+      {% assign completed = milestone.status === 'complete' ? 'completed' ? '' %}
+      {{ milestone.name }} {{completed}}
+    </div>
+  </div>
+
+
+  <!-- <div class="feature-list_item-header">
+    <h3>
+      {% include user_avatar.html user=owner %}
+      <button role="tab"{% unless milestone.completed %} aria-controls="{{ content_slug }}"{% endunless %}>
+        <span class="cf-icon cf-icon-document"></span> {{ milestone.name }}
+      </button>
+    </h3>
+    <h4 class="status">
+      <span class="status-label">{{ milestone.status }}</span>
+      {% if milestone.status == 'Completed' %}
+        by
+      {% else %}
+        from
+      {% endif %}
+      <a href="#contact">{{ owner.name }}</a>
+      on
+      <time>{{ milestone.date[milestone.status] | default: milestone.date.due }}</time>
+    </h4>
+  </div>
+  <div role="tabpanel" aria-hidden="true" id="{{ content_slug }}">
+
+  </div> -->
+</section>

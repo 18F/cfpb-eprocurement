@@ -142,4 +142,33 @@ header {
       color: $white;
     }
   }
+
+  .detail-content {
+    margin-top: 40px;
+  }
+
+  .avatar-group {
+    .avatar:first-child {
+      position: relative;
+      margin-left: 0;
+      z-index: 2;
+    }
+
+    .avatar {
+      position: relative;
+      margin-left: -20px;
+      z-index: 1;
+    }
+  }
+
+  // .additional-users-avatar {
+  //   color: $black;
+  //   display: inline-block;
+  //   position: relative;
+  //
+  //   span {
+  //     position: absolute;
+  //     z-index: 2;
+  //   }
+  // }
 }

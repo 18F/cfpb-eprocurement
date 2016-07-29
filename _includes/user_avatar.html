@@ -3,5 +3,6 @@
 {% else %}
   {% assign _avatar_image = 'none.png' %}
 {% endif %}
+
 <img class="avatar {{ include.className }}" alt=""
   src="{{ site.baseurl }}/static/images/avatars/{{ _avatar_image }}">
