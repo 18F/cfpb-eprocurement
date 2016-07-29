@@ -88,7 +88,7 @@ milestones:
         action: submit
         revision-number: 1
   - name: Acquisition Plan Draft
-    documents: 
+    documents:
     - name : Acquisition Plan
       target_start_date: 2016-04-25
       target_end_date: 2016-04-27
@@ -108,13 +108,17 @@ milestones:
     target_end_date: 2016-04-28
     primary-author: Daniel
     status: complete
-    events:
+    executor:
+      name: Stacey
+      action: finalize
+    documents:
+      events:
       - date: 2016-04-27  
         actor: Daniel  
-        action: post
+        action: finalize
         revision-number: 1
   - name: Request for Information
-    documents: 
+    documents:
     - name: RFI form
       target_start_date: 2016-04-29
       target_end_date: 2016-05-04
@@ -155,7 +159,7 @@ milestones:
           action: post
           revision-number: 2
   - name: RFI evaluation factors
-  - documents: 
+  - documents:
     - name : Evaluation Factors
       target_start_date: 2016-05-03
       target_end_date: 2016-05-05
@@ -178,11 +182,11 @@ milestones:
           action: submit
           revision-number: 1
   - name: Procurement Compiles Responses
-    documents: 
+    documents:
     - name: Aggregated Vendor Responses
       target_start_date: 2016-05-24
       target_end_date: 2016-05-24
-      executor: 
+      executor:
         name: Vanessa
         action: post
       events:
@@ -225,7 +229,7 @@ milestones:
       target_end_date: 2016-06-07
       predecessors:
         - name: Acquisition Plan Draft
-      executor: 
+      executor:
         - name: Vanessa
       - date: 2016-06-07
             actor: Vanessa
@@ -338,7 +342,7 @@ milestones:
         executor:
           name: Vanessa
           action: finalize
-      - name: OCR TEP evaluation 
+      - name: OCR TEP evaluation
         target_start_date: 2016-09-12
         target_end_date: 2016-09-28
         executor:
