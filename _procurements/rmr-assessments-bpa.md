@@ -19,7 +19,7 @@ milestones:
         author: Catherine
         executor:
           name: Catherine
-          action: Post
+          action: post
         events:
           - date: 2016-05-02
             actor: Catherine
@@ -36,7 +36,7 @@ milestones:
         author: Merav
         executor:
           name: Merav
-          action: Finalize
+          action: finalize
         reviewers:
           - name: Catherine
         events:
@@ -75,7 +75,7 @@ milestones:
         author: Fred
         executor:
           name: Fred
-          action: Send
+          action: send
         events:
           - date: 2016-06-01
             actor: Fred
@@ -93,7 +93,7 @@ milestones:
         status: draft
         executor:
           name: Merav
-          action: Submit
+          action: submit
         events:
           - date: 2016-06-01
             actor: Merav
@@ -112,7 +112,7 @@ milestones:
         author: Merav
         executor:
           name: Merav
-          action: Submit
+          action: submit
         events:
           - date: 2016-04-13
             actor: Fred
@@ -132,7 +132,7 @@ milestones:
         status: complete
         executor:
           name: Suzan
-          action: Submit
+          action: submit
         reviewers:
           - name: Merav
         events:
@@ -161,15 +161,15 @@ milestones:
         author: Merav
         executor:
           name: Merav
-          action:
+          action: complete
         events:
           - date: 2016-04-11
             actor: Merav
-            event: draft
+            action: draft
             revision-number: 1
           - date: 2016-06-21
             actor: Merav
-            event: complete
+            action: complete
             revision-number: 1
       - name: Independent Government Cost Estimate
         target_start_date: 2016-05-25
@@ -179,15 +179,15 @@ milestones:
         status: complete
         executor:
           name: Merav
-          action: Complete
+          action: complete
         events:
           - date: 2016-05-26
             actor: Merav
-            event: draft
+            action: draft
             revision-number: 1
           - date: 2016-06-07
             actor: Merav
-            event: complete
+            action: complete
             revision-number: 1
       - name: BPA Call 0001
         target_start_date: 2016-05-25
@@ -196,25 +196,25 @@ milestones:
         author: Merav
         executor:
           name: Merav
-          action: Complete
+          action: complete
         reviewers:
           - name: Paul
         events:
           - date: 2016-05-26
             actor: Merav
-            event: draft
+            action: draft
             revision-number: 1
           - date: 2016-06-07
             actor: Merav
-            event: review
+            action: review
             revision-number: 1
           - date: 2016-06-07
             actor: Paul
-            event: approve
+            action: approve
             revision-number: 1
           - date: 2016-06-20
             actor: Merav
-            event: complete
+            action: complete
             revision-number: 1
       - name: Evaluation Factors
         target_start_date: 2016-06-13
@@ -224,15 +224,15 @@ milestones:
         status: complete
         executor:
           name: Merav
-          action: Finalize
+          action: finalize
         events:
           - date: 2016-06-16
             actor: Merav
-            event: draft
+            action: draft
             revision-number: 1
           - date: 2016-06-20
             actor: Merav
-            event: complete
+            action: complete
             revision-number: 1
       - name: Service Coding Contract Sheet
         target_start_date: 2016-06-22
@@ -242,21 +242,21 @@ milestones:
         status: complete
         executor:
           name: Procurement SCC person
-          action: Complete
+          action: complete
         reviewers:
           - name: Procurement SCC
         events:
           - date: 2016-06-22
             actor: Merav
-            event: draft
+            action: draft
             revision-number: 1
           - date: 2016-06-24
             actor: Jeremy
-            event: review
+            action: review
             revision-number: 1
           - date: 2016-06-29
             actor: Procurement SCC person
-            event: complete
+            action: complete
             revision-number: 1
       - name: Acquisition plan
         target_start_date: 2016-06-22
@@ -268,7 +268,7 @@ milestones:
           - name: Paul
         executor:
           name: Jeremy
-          action: Sign
+          action: sign
         events:
           - date: 2016-06-22
             actor: Jackie
@@ -313,15 +313,15 @@ milestones:
         status: complete
         executor:
           name: Jeremy
-          action: Finalize
+          action: finalize
         events:
           - date: 2016-07-08
             actor: Jeremy
-            event: draft
+            action: draft
             revision-number: 1
           - date: 2016-07-18
             actor: Jeremy
-            event: complete
+            action: complete
             revision-number: 1
       - name: PRISM requisition
         predecessors:
@@ -333,7 +333,7 @@ milestones:
         author: OCFO
         executor:
           name: OCFO
-          action: Submit
+          action: submit
   - name: Acquisition package reviews and posting
     documents:
       - name: Acquisition package
@@ -353,7 +353,7 @@ milestones:
         status: complete
         executor:
           name: Matthew
-          action: Post
+          action: post
         reviewers:
           - name: Jackie
           - name: Matthew
@@ -392,7 +392,7 @@ milestones:
           - name: Legal
         executor:
           name: Jeremy
-          action: Post
+          action: post
   - name: Evaluation and award
     documents:
       - name: Redacted project proposals
@@ -404,7 +404,7 @@ milestones:
         author: Jeremy
         executor:
           name: Jeremy
-          action: Finalized
+          action: finalize
       - name: Price analysis
         predecessors:
           - name: Redacted project proposals
@@ -414,7 +414,7 @@ milestones:
         author: Jeremy
         executor:
           name: Jeremy
-          action: Finalized
+          action: finalize
       - name: Technical evaluation report
         predecessors:
           - name: Redacted project proposals
@@ -427,7 +427,7 @@ milestones:
           - name: Jeremy
         executor:
           name: Merav
-          action: Finalized
+          action: finalize
       - name: Award package
         predecessors:
           - name: Technical evaluation report
@@ -441,5 +441,5 @@ milestones:
           - name: Jeremy
         executor:
           name: Jeremy
-          action: Finalize
+          action: finalize
 ---
