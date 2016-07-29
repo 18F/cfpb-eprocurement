@@ -260,7 +260,7 @@ milestones:
             revision-number: 1
       - name: Acquisition plan
         target_start_date: 2016-06-22
-        target_end_date: 2016-7-11
+        target_end_date: 2016-07-11
         url:
         author: Jackie
         reviewers:
