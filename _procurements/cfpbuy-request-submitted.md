@@ -101,10 +101,10 @@ milestones:
     target_end_date: 2016-04-28
     primary-author: Daniel
     status: complete
-      events:
-        - date: 2016-04-27  
-          actor: Daniel  
-          action: post
+    events:
+      - date: 2016-04-27  
+        actor: Daniel  
+        action: post
   - name: Procurement Draft RFI
     documents: RFI form
     target_start_date: 2016-04-29
