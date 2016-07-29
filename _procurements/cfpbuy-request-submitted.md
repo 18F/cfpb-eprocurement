@@ -1,5 +1,8 @@
 ---
 name: OCR Investigations BPA
+description:  
+obligated_value: 38000.00
+program_office: Enforcement
 target_start_date: 2016-04-25
 target_end_date: 2016-10-27
 requested_award_date: 2016-10-28
@@ -7,17 +10,17 @@ responsible_parties:
   cor: Daniel
   co: Wanda
   cs: Jackie
-requisition-number:  
+requisition-number: EN-000-0000   
 milestones:
   - name: CFPBuy Request Submitted
-    documents: 
+    documents:
     - name: CFPBuy Request
       target_start_date: 2016-04-25
       target_end_date: 2016-05-12
       url:
       primary-author: Daniel
       status: complete
-      executor: 
+      executor:
         name: Daniel
         action: Post
       events:
@@ -30,13 +33,13 @@ milestones:
           action: post
           revision-number: 1
   - name: OCR develops IGCE
-    documents: 
+    documents:
     - name: Independent Government Cost Estimate
       target_start_date: 2016-04-25
       target_end_date: 2016-04-25
       primary-author: Daniel
       status: complete
-      executor: 
+      executor:
         name: Stacey
         action: finalize
       events:
@@ -53,15 +56,15 @@ milestones:
           action: finalize
           revision-number: 1
   - name: OCR - SCC signatures
-    documents: 
+    documents:
     - name : Service Coding Contract Sheet
       target_start_date: 2016-04-25
       target_end_date: 2016-05-31
       primary-author: Daniel
       status: complete
-      executor: 
+      executor:
         name: Jackie
-        action: Finalize
+        action: finalize
       reviewers:
         - name: Stacey
         - name: Gordon
@@ -108,7 +111,7 @@ milestones:
       - name: Acquisition Plan Draft
     primary-author: Jackie
     status: complete
-    executor: 
+    executor:
       name: Jerry
       action: finalize
     reviewers:
@@ -138,7 +141,7 @@ milestones:
         actor: Jerry
         action: post
         revision-number: 2
-  - name: OCR submits evalution factors
+  - name: OCR submits evaluation factors
     target_start_date: 2016-05-03
     target_end_date: 2016-05-05
     responsible_parties:
@@ -149,7 +152,7 @@ milestones:
     target_start_date: 2016-05-11
     target_end_date: 2016-05-24
     predecessors:
-      - name: OCR submits evalution factors
+      - name: OCR submits evaluation factors
     responsible_parties:
       - name: Jerry
     documents: []
@@ -209,7 +212,7 @@ milestones:
     responsible_parties:
       - name: Stacey
     documents: []
-  - name: Acquisiton Plan Reviewed & Signed
+  - name: Acquisition Plan Reviewed & Signed
     target_start_date: 2016-06-06
     target_end_date: 2016-06-07
     predecessors:
@@ -250,12 +253,12 @@ milestones:
     target_end_date: 2016-07-20
     predecessors:
       - name: IGCE Revisions
-      - name: Acquisiton Plan Reviewed & Signed
+      - name: Acquisition Plan Reviewed & Signed
     responsible_parties:
       - name: Jerry
       - name: Vanessa
     documents: []
-  - name: Acquisiton Package Sent for Tier II Review
+  - name: Acquisition Package Sent for Tier II Review
     target_start_date: 2016-07-21
     target_end_date: 2016-07-27
     predecessors:
@@ -267,11 +270,11 @@ milestones:
     responsible_parties:
       - name: TBD
     documents: []
-  - name: Acquisiton Package Sent for Legal Review
+  - name: Acquisition Package Sent for Legal Review
     target_start_date: 2016-07-28
     target_end_date: 2016-08-10
     predecessors:
-      - name: Acquisiton Package Sent for Tier II Review
+      - name: Acquisition Package Sent for Tier II Review
     responsible_parties:
       - name: Angela
     documents: []
@@ -279,7 +282,7 @@ milestones:
     target_start_date: 2016-08-11
     target_end_date: 2016-09-08
     predecessors:
-      - name: Acquisiton Package Sent for Legal Review
+      - name: Acquisition Package Sent for Legal Review
       - name: SOW finalized by Procurement
     responsible_parties:
       - name: Jerry
