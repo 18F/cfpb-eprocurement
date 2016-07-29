@@ -94,6 +94,9 @@ module CFPB
         docs.each do |doc|
           events = doc[EVENTS]
           executor = doc[EXECUTOR]
+          if not doc[URL]
+            doc[URL] = "document/?title=#{doc[NAME]}&procurement=#{pr[NAME]}"
+          end
 
           # XXX always lowercase actions
           if executor[ACTION]
