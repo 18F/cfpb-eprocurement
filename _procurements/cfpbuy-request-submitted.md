@@ -1,6 +1,6 @@
 ---
 name: OCR Investigations BPA
-description:  
+description:
 obligated_value: 38000.00
 program_office: Enforcement
 target_start_date: 2016-04-25
@@ -10,7 +10,7 @@ responsible_parties:
   cor: Daniel
   co: Wanda
   cs: Jackie
-requisition-number: EN-000-0000   
+requisition-number: EN-000-0000
 milestones:
   - name: CFPBuy Request Submitted
     documents:
@@ -59,7 +59,7 @@ milestones:
           revision: 1
   - name: OCR - SCC signatures
     documents:
-    - name : Service Coding Contract Sheet
+    - name: Service Coding Contract Sheet
       target_start_date: 2016-04-25
       target_end_date: 2016-05-31
       author: Daniel
@@ -89,7 +89,7 @@ milestones:
         revision: 1
   - name: Acquisition Plan Draft
     documents:
-    - name : Acquisition Plan
+    - name: Acquisition Plan
       target_start_date: 2016-04-25
       target_end_date: 2016-04-27
       author: Jackie
@@ -105,7 +105,7 @@ milestones:
           revision: 2
   - name: OCR RFI Inputs
     documents:
-    - name: OCR RFI Inputs # FIXME
+    - name: OCR RFI Inputs  # FIXME
       target_start_date: 2016-04-26
       target_end_date: 2016-04-28
       author: Daniel
@@ -113,7 +113,7 @@ milestones:
         name: Stacey
         action: finalize
       events:
-      - date: 2016-04-27  
+      - date: 2016-04-27
         actor: Stacey
         action: finalize
         revision: 1
@@ -160,7 +160,7 @@ milestones:
           revision: 2
   - name: RFI evaluation factors
   - documents:
-    - name : Evaluation Factors
+    - name: Evaluation Factors
       target_start_date: 2016-05-03
       target_end_date: 2016-05-05
       author: Daniel
