@@ -1,4 +1,4 @@
-<section class="feature-list_item block block__padded-top block__border-top">
+<section class="milestone-item block__border-top">
   <div class="row">
     <div class="col-1 avatar-group">
       {% assign actor_count = milestone.actors.size - 2 %}
@@ -10,9 +10,19 @@
         {% include additional_users.html actor_count=actor_count %}
       {% endif %} -->
     </div>
-    <div class="col-3">
+    <div class=" milestone-item-title col-3">
       {% assign completed = milestone.status === 'complete' ? 'completed' ? '' %}
-      {{ milestone.name }} {{completed}}
+      {% assign current_doc = milestone.documents | last %}
+      {% assign current_event = current_doc.events | last %}
+
+      <p><b>{{ current_doc.name }}</b></p>
+      <p class="mute">
+        {{ current_doc.name }} {{ current_event.action | past_tensify }} by {{ current_event.actor }} on {{current_event.date | date: '%B %d, %Y'}}
+      </p>
+
+      <!-- {{current_event}} -->
+      <!-- {{ milestone.name }} {{completed}} -->
+
     </div>
   </div>
 

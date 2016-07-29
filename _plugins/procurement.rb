@@ -42,6 +42,18 @@ end
 
 module CFPB
   module Procurement
+    def past_tensify(action)
+      case action
+      when 'finalize'
+        'finalized'
+      when 'submit'
+        'submitted'
+      when 'return'
+        'returned'
+      else
+        action
+      end
+    end
 
     def number_to_currency(number)
       return "N/A" unless number
@@ -63,7 +75,7 @@ module CFPB
       data["previous"] = nil
       data["content"] = nil
       data["output"] = nil
-      return data
+      data
     end
 
     def prepare_procurement(pr)

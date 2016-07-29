@@ -56,6 +56,10 @@ header {
   vertical-align: middle;
 }
 
+.mute {
+  color: $gray-60;
+}
+
 .site__procurements-list {
 
   label {
@@ -110,7 +114,6 @@ header {
 }
 
 .site__procurement-detail {
-
   .row {
     [class^="col-"]:first-child,
     [class*=" col-"]:first-child {
@@ -160,6 +163,18 @@ header {
       z-index: 1;
     }
   }
+
+  .milestone-item {
+    padding: 1em;
+
+    .milestone-item-title {
+      p {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+
 
   // .additional-users-avatar {
   //   color: $black;
