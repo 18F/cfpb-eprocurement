@@ -67,7 +67,7 @@ sort_options:
       </span>
     </div>
     <h1 class="col col-{{ col.center }}">
-      <a href="{{ pr.url }}">{{ pr.name }}</a>
+      <a href="{{ site.baseurl }}{{ pr.url }}">{{ pr.name }}</a>
     </h1>
     <div class="col col-{{ col.right }}">
       <label is="cfpb-fave-star">
@@ -175,7 +175,7 @@ sort_options:
     <div class="col col-{{ col.left | plus: col.center }}">
     </div>
     <div class="col col-{{ col.right }}">
-      <a class="btn details" href="{{ pr.url }}">
+      <a class="btn details" href="{{ site.baseurl }}{{ pr.url }}">
         Details
         <span class="cf-icon cf-icon-right"></span>
       </a>
