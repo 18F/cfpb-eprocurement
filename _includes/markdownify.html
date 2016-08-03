@@ -1,0 +1,8 @@
+{% capture _markdown %}
+{{ include.content }}
+
+{% for _link in include.links %}
+[{{ _link.name }}]: {{ site.baseurl }}{{ _link.href }}
+{% endfor %}
+{% endcapture %}
+{{ _markdown | markdownify }}
