@@ -76,6 +76,20 @@ header {
   }
 }
 
+time.due {
+  background: $pacific-20;
+  border-radius: 5px;
+  display: inline-block;
+  padding: 0.1em 0.5em;
+
+
+  &[data-status="soon"],
+  &[data-status="over"] {
+    background: $red;
+    color: $white;
+  }
+}
+
 .site__procurements-list {
 
   label {
@@ -108,24 +122,36 @@ header {
         text-align: right;
       }
 
-      .procurement-due {
-        color: transparent;
+      .procurement-status {
+        background: $white;
+        display: block;
+        margin-top: 0.7em;
+        text-align: center;
 
-        &::before {
-          display: inline-block;
-        }
-
-        &[data-due="soon"]::before {
-          content: "!";
-          color: $white;
+        &[data-status="soon"] {
           background: $red;
-          border-radius: 1em;
-          height: 1.5em;
-          width: 1.5em;
-          text-align: center;
+          color: $white;
         }
+
+        &[data-status="new"] {
+          background: $green;
+          color: $white;
+        }
+
       }
+
     }
+
+    .award-date {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    &[data-status="soon"] .award-date--estimated {
+      color: $red;
+      font-weight: bold;
+    }
+
   }
 
   .btn-wide,

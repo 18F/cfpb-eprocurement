@@ -56,6 +56,7 @@ sort_options:
   {% assign id = pr.id | split: '/' | last %}
 <section class="procurement procurement-card"
   id="{{ id }}"
+  data-status="{{ pr.status }}"
   data-json='{{ pr | prepare_for_jsonify | jsonify | xml_escape }}'
   hidden>
 
@@ -84,16 +85,22 @@ sort_options:
     </div>
     <div class="col col-{{ col.right }}">
       <h5>Award date</h5>
-      Requested: <time>{{ pr.requested_award_date | date: DATE_FORMAT }}</time>
+      <p class="award-date award-date--requested">
+        Requested:
+        <time datetime="{{ pr.requested_award_date }}">{{ pr.requested_award_date | date: DATE_FORMAT }}
+      </p>
       {% if pr.estimated_award_date %}
-      <br>Estimated: <time>{{ pr.estimated_award_date | date: DATE_FORMAT }}</time>
+      <p class="award-date award-date--estimated">
+        Estimated:
+        <time datetime="{{ pr.estimated_award_date }}">{{ pr.estimated_award_date | date: DATE_FORMAT }}</time>
+      </p>
       {% endif %}
     </div>
   </div>
 
   <div class="row">
     <div class="col col-{{ col.left }}"></div>
-    <div class="col col-{{ col.center | plus: col.right }}">
+    <div class="col col-{{ col.center }}">
       <h2>Latest Activity</h2>
       {% assign activity = pr.activity | sort_by: 'date' | reverse %}
       {% if activity.empty %}
@@ -104,6 +111,7 @@ sort_options:
       {% endfor %}
       {% endif %}
     </div>
+    <div class="col col-{{ col.right }}"></div>
   </div>
 
   {% assign tasks = pr.tasks | sort_by: 'date' | reverse %}
