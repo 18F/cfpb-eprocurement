@@ -229,6 +229,10 @@ module CFPB
       word[0].upcase + word[1..word.size]
     end
 
+    def due_days(date)
+      (date - NOW).to_i
+    end
+
     def due_status(days, statuses={})
       status = nil
       statuses.each do |key, threshold|
