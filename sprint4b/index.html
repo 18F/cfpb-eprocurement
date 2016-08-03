@@ -12,6 +12,10 @@ body_class: 'site__procurements-list'
 title: Active Procurements
 subtitle: Enforcement Program Office
 
+due_status:
+  over: 0
+  soon: 10
+
 columns:
   left: 2
   center: 7
@@ -47,19 +51,19 @@ sort_options:
   </div>
 </form>
 
-{% for _pr in site.procurements %}
-  {% assign pr = _pr | prepare_procurement %}
-  {% assign id = _pr.id | split: '/' | last %}
+{% assign prs = site.procurements | where: 'sprint', '4b' %}
+{% for pr in prs %}
+  {% assign id = pr.id | split: '/' | last %}
 <section class="procurement procurement-card"
   id="{{ id }}"
-  data-json='{{ pr | jsonify | xml_escape }}'
+  data-json='{{ pr | prepare_for_jsonify | jsonify | xml_escape }}'
   hidden>
 
   <div class="row card-header">
     <div class="col col-{{ col.left }}">
-      <span class="procurement-due"
-        data-due="{{ pr.due_in_days | due_status: site.data.due_status }}">
-        {{ pr.due_in_days }} days
+      <span class="procurement-status"
+        data-status="{{ pr.status }}">
+        {{ pr.status }}
       </span>
     </div>
     <h1 class="col col-{{ col.center }}">
@@ -81,88 +85,48 @@ sort_options:
     <div class="col col-{{ col.right }}">
       <h5>Award date</h5>
       Requested: <time>{{ pr.requested_award_date | date: DATE_FORMAT }}</time>
+      {% if pr.estimated_award_date %}
       <br>Estimated: <time>{{ pr.estimated_award_date | date: DATE_FORMAT }}</time>
+      {% endif %}
     </div>
   </div>
 
   <div class="row">
     <div class="col col-{{ col.left }}"></div>
     <div class="col col-{{ col.center | plus: col.right }}">
-      <h5>Latest activity</h5>
-      {% assign last_event = pr.events | last %}
-      {% if last_event %}
-      <p class="last-event">
-        <a href="{{ last_event.url }}">{{ last_event.document }}</a>
-        {{ last_event.action }}ed
-        by {{ last_event.actor }}
-        on <time>{{ last_event.date | date: DATE_FORMAT }}</time>
-      </p>
+      <h2>Latest Activity</h2>
+      {% assign activity = pr.activity | sort_by: 'date' | reverse %}
+      {% if activity.empty %}
+      <p>No activity.</p>
       {% else %}
-      <em class="no-data">There hasn't been any activity yet.</em>
+      {% for item in activity %}
+      <p>{% include markdownify.html content=item.message links=pr.links %}</p>
+      {% endfor %}
       {% endif %}
     </div>
   </div>
 
-{% assign has_upcoming = false %}
+  {% assign tasks = pr.tasks | sort_by: 'date' | reverse %}
 
-{% capture upcoming_tasks %}
-  {% for ms in pr.milestones %}
-    {% for doc in ms.documents %}
-      {% if doc.status and doc.status != 'pending' and doc.status != 'complete' %}
-  <div class="row upcoming-task">
-    <div class="col col-{{ col.left }}">
-      {% assign due_status = nil %}
-      {% assign due_status = doc.due_in_days | due_status: site.data.due_status %}
-      {% capture due_text %}
-        {% if due_status == 'over' %}
-          Over by {{ 0 | minus: doc.due_in_days }} day{{ doc.due_in_days | pluralize }}
-        {% else %}
-        Due in {{ doc.due_in_days }} day{{ doc.due_in_days | pluralize }}
-        {% endif %}
-      {% endcapture %}
-      <span class="document-due"
-        data-due="{{ due_status }}">
-        {{ due_text }}
-      </span>
-    </div>
-    <div class="col col-{{ col.center | plus: col.right }}">
-        {% assign what = doc.status | title_case_word %}
-        {% assign from = doc.author %}
-        {% if doc.status == 'review' %}
-          {% for reviewer in doc.reviewers %}
-            {% unless reviewer.approved %}
-              {% assign from = reviewer.name %}
-              {% break %}
-            {% endunless %}
-          {% endfor %}
-        {% elsif doc.status == 'return' %}
-          {% assign what = 'Revision of' %}
-          {% assign from = doc.author %}
-        {% elsif doc.status == 'finalize' %}
-          {% assign from = doc.executor.name %}
-        {% endif %}
-      {{ what }}
-      <a href="{{ doc.url }}">{{ doc.name }}</a>
-      due from {{ from }}
-      by <time>{{ doc.target_end_date | date: DATE_FORMAT }}</time>
-    </div>
-  </div>
-        {% assign has_upcoming = true %}
-      {% endif %}
-    {% endfor %}
-  {% endfor %}
-{% endcapture %}
-
-  {% if has_upcoming %}
+  {% unless tasks.empty %}
   <div class="row upcoming-header">
     <div class="col col-{{ col.left }}">
     </div>
     <div class="col col-{{ col.center | plus: col.right }}">
-      <h6>Upcoming tasks</h6>
+      <h6>Upcoming task{{ pr.tasks.size | pluralize }}</h6>
     </div>
   </div>
-  {{ upcoming_tasks }}
-  {% endif %}
+
+  {% for task in tasks %}
+  <div class="row upcoming-header">
+    <div class="col col-{{ col.left }}">
+      {% include due_label.html date=task.due_date due_status=page.due_status %}
+    </div>
+    <div class="col col-{{ col.center | plus: col.right }}">
+      {% include markdownify.html content=task.message links=pr.links %}
+    </div>
+  </div>
+  {% endfor %}
 
   <div class="row">
     <div class="col col-{{ col.left | plus: col.center }}">
@@ -174,6 +138,7 @@ sort_options:
       </a>
     </div>
   </div>
+  {% endunless %}
 
 </section>
 {% endfor %}
