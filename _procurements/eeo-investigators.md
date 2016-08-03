@@ -1,5 +1,6 @@
 ---
 name: EEO Investigators
+sprint: 4b
 
 # status is "new", "soon", "over"[due], or "pending"
 status: soon

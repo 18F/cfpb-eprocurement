@@ -1,5 +1,6 @@
 ---
 name: The procurement title
+sprint: 4b
 
 # status is "new", "soon", "over"[due], or "pending"
 status: new
