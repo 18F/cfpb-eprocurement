@@ -6,7 +6,7 @@ sprint: 4b
 status: soon
 
 # dollars, specified as a number
-obligated_amount: 100000
+obligated_value: 100000
 
 # requested award date in YYYY-MM-DD form
 requested_award_date: 2016-08-10
