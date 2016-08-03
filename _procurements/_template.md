@@ -28,6 +28,15 @@ activity:
     # 2. a "date" in YYYY-MM-DD form
     date: 2016-08-04
 
+# a milestone is a list of high level groupings for tasks
+milestones:
+  # each milestone has:
+  # a unique identifier
+  - id: 1
+    # a name to be displayed to the user
+    name: "xyz milestone"
+    # the list of actors who are currently involved in the milestone
+    actors: [Merav, Cindy]
 # tasks is a list of tasks
 tasks:
   # each task has:
@@ -35,6 +44,8 @@ tasks:
   - message: "Review [Draft SOW] due from you by August 15, 2016."
     # 2. "due_date" in YYYY-MM-DD form
     due_date: 2016-08-15
+    # 3. The id of the milestone it will be grouped with on the detail page
+    milestone_id: 1
 
 # OPTIONAL: links is an optional list of links to include in the
 # markdownified activity and task content.
