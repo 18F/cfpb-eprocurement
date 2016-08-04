@@ -239,9 +239,10 @@ module CFPB
 
     def due_status(days, statuses={})
       status = nil
+      statuses = {"over": 0, "soon": 10}
       statuses.each do |key, threshold|
         if days <= threshold
-          status = key
+          status = key.to_s
           break
         end
       end

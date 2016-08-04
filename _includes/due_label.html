@@ -1,5 +1,5 @@
 {% assign _due_days = include.date | due_days %}
-{% assign _due_status = _due_days | due_status: include.due_status %}
+{% assign _due_status = _due_days | due_status %}
 <time class="due" datetime="{{ include.date }}"
   {% if _due_status %}data-status="{{ _due_status }}"{% endif %}>
   {% if _due_status == 'over' %}

@@ -15,7 +15,6 @@
         {% assign user = site.data.users[actor] %}
         {% include user_avatar.html user=user %}
       {% endfor %}
-      {{DUE_STATUS}}
     </div>
     <div class="milestone-item-title col-3"
       role="tab"
@@ -88,7 +87,9 @@
               {% if upcoming %}
                 <h6>Upcoming task:</h6>
                 <p>{% include markdownify.html content=upcoming.message links=LINKS %}</p>
-
+                {% if current_task.status != 'complete' %}
+                  {% include due_label.html date=current_task.due_date %}
+                {% endif %}
               {% endif %}
 
 
