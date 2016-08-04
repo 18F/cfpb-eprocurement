@@ -9,7 +9,7 @@
   <body class="site__document-detail">
     {% assign pr = site.procurements | where: 'requisition_number': 'FA-956-XXXX' | first %}
     {% assign milestones = pr.milestones | jsonify %}
-{{pr.name}}
+
     <img class="chrome" src="{{ site.baseurl }}/static/images/sharepoint-chrome.png">
     <main id="main">
       <div>
