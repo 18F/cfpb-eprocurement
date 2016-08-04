@@ -63,6 +63,10 @@ module CFPB
       end
     end
 
+    def format_task_message date, status, message
+      "#{message} #{get_preposition_by status} #{date}"
+    end
+
     def get_preposition_by status
       status == 'complete' ? ' on ' : ' by '
     end

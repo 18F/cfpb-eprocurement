@@ -300,11 +300,15 @@ time.due {
     padding: 1em;
 
     .milestone-item-title {
-      cursor: pointer;
+
       padding-top: 10px;
       position: relative;
       h3, p {
         margin-bottom: 0;
+      }
+
+      &:not([data-status="new"]) {
+        cursor: pointer;  
       }
 
       &[role="tab"]::after {
@@ -323,12 +327,27 @@ time.due {
         width: 1em;
       }
 
-      &[role="tab"][aria-expanded=true]::after {
+      &[role="tab"][data-status="new"]::after {
+        border-radius: 1em;
+        border: 1px solid;
+        color: $gray-20;
+        content: "\0020\0020+";
+        display: inline-block;
+        font-size: 2em;
+        height: 1em;
+        line-height: .85;
+        position: absolute;
+        right: 1em;
+        text-align: center;
+        top: 35%;
+        width: 1em;
+      }
+
+      &[role="tab"]:not([data-status="completed"])[aria-expanded=true]::after {
         content: "-";
         color: white;
         background: $black;
       }
-
       &[role="tab"][data-status="completed"]::after {
         content: "✔";
         color: $gray-40;

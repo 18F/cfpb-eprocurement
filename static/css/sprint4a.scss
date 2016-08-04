@@ -297,7 +297,7 @@ header {
         width: 1em;
       }
 
-      &[role="tab"][aria-expanded=true]::after {
+      &[role="tab"][data-status~="pending new"][aria-expanded=true]::after {
         content: "-";
         color: $white;
         background: $black;

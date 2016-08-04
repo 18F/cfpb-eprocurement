@@ -39,7 +39,6 @@
       {% else %}
         {% include markdownify.html content=message links=LINKS %}
       {% endif %}
-
     </div>
   </div>
 
@@ -51,24 +50,26 @@
         {% if milestone.status == 'complete' %}
           {% assign milestone_done = 'completed' %}
         {% else %}
-          {% assign milestone = milestone.status %}
+          {% assign milestone_done = milestone.status %}
         {% endif %}
 
         {% assign current_task = include.tasks | where: 'milestone_id', milestone.id | first %}
 
-        {% if current_task.upcoming_id %}
-          {% assign upcoming = UPCOMING | where: "id", current_task.upcoming_id %}
+        {% if current_task.upcoming_message %}
+          {% assign upcoming = true %}
         {% else if current_task.status == "new"}
           {% assign upcoming = true %}
         {% else %}
           {% assign upcoming = false %}
         {% endif %}
 
+        {% assign milestone_slug = milestone.name | append: forloop.index %}
         <section class="milestone-item block__border-bottom" role="tablist">
           <div class="row">
             <div class="milestone-item-title col-3"
               role="tab"
               data-status="{{ milestone_done }}"
+              aria-controls="{{milestone_slug}}"
             >
               {% assign date = current_task.due_date | date: DATE_FORMAT %}
               {% assign preposition = current_task.status | get_preposition_by %}
@@ -85,14 +86,49 @@
               {% endif %}
 
               {% if upcoming %}
+                {% if current_task.upcoming_message %}
+                  {% assign message = current_task.upcoming_due_date | date: DATE_FORMAT | format_task_message: "new", current_task.upcoming_message  %}
+                {% else %}
+                  {% assign message = current_task.due_date | date: DATE_FORMAT | format_task_message: current_task.status, current_task.message %}
+                {% endif %}
                 <h6>Upcoming task:</h6>
-                <p>{% include markdownify.html content=upcoming.message links=LINKS %}</p>
+                <p>{% include markdownify.html content=message links=LINKS %}</p>
+                <br>
                 {% if current_task.status != 'complete' %}
                   {% include due_label.html date=current_task.due_date %}
+                {% else if current_task.upcoming_status == 'pending' %}
+                  {% include due_label.html date=current_task.upcoming_due_date %}
                 {% endif %}
               {% endif %}
+            </div>
+          </div>
+          <div class="row" role="tabpanel" aria-hidden="true" id="{{ milestone_slug }}">
+            <div class="col-12 history-section">
+              <p><b>History:</b></p>
 
+              {% for event in milestone.events %}
+                <div class="row history-item">
+                  <div>
+                    {% assign user = site.data.users[event.actor] %}
+                    {% include user_avatar.html user=user className="history-avatar" %}
+                  </div>
+                  <div class="milestone-item-title col-3">
+                    {% if event.action == 'approve' %}
+                      {% assign final = 'Final ' %}
+                    {% else %}
+                      {% assign final = '' %}
+                    {% endif %}
 
+                    {% if event.comment %}
+                      <p><b>"{{ event.comment }}"</b></p>
+                    {% endif %}
+
+                    <p>
+                      {{ final | append: document.name }} {{ event.action | past_tensify }} by {{ event.actor }} ({{ user.role }}) on {{event.date | date: DATE_FORMAT }}
+                    </p>
+                  </div>
+                </div>
+              {% endfor %}
             </div>
           </div>
         </section>

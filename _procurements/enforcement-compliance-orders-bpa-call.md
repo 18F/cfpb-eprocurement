@@ -104,7 +104,9 @@ tasks:
     due_date: 2016-08-02
     milestone_id: 1
     status: complete
-    upcoming_id: 1
+    upcoming_message: "[Draft IGCE v.1] awaiting review by Catherine (CO)"
+    upcoming_due_date: 2016-08-10
+    upcoming_status: pending
   - message: "[Draft Performance Work Statement] due from Myra (COR)"
     due_date: 2016-08-06
     milestone_id: 2
@@ -117,11 +119,6 @@ tasks:
     due_date: 2016-08-29
     milestone_id: 4
     status: new
-
-upcoming:
-  - message: "[Draft IGCE v.1] awaiting review by Catherine (CO)"
-    due_date: 2016-08-10
-    id: 1
 
 # OPTIONAL: links is an optional list of links to include in the
 # markdownified activity and task content.
