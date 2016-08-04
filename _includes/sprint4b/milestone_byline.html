@@ -1,0 +1,24 @@
+{% if include.task.status == 'new' %}
+  <p class="mute"><em>No activity yet</em></p>
+{% else %}
+  <p class="mute">
+    {% include markdownify.html content=include.task.message links=LINKS %}
+  </p>
+
+  {% if upcoming != false %}
+    {% if upcoming.message %}
+      {% assign message = upcoming.message %}
+    {% else %}
+      {% assign message = task.message %}
+    {% endif %}
+
+    <h6>Upcoming task:</h6>
+    {% include markdownify.html content=message links=LINKS %}
+  {% endif %}
+
+  {% if include.status != 'complete' %}
+    <div class="document-due">
+      <!-- how do we access the top level page object here? -->
+    </div>
+  {% endif %}
+{% endif %}

@@ -1,0 +1,20 @@
+<div class="milestone-item-title col-3"
+  role="tab"
+  aria-controls="{{ include.content_slug }}"
+  data-status="{{include.finished}}"
+>
+  {% assign task = include.byline_task %}
+  {% assign date = task.due_date | date: DATE_FORMAT %}
+  {% assign preposition = task.status == 'complete' ? ' on ' : ' by ' %}
+  {% assign message = task.message | append: preposition | append: date %}
+
+  {% if include.size == "small" %}
+    <h5><b>{{include.name}}</b></h5>
+  {% else %}
+    <h3>
+      <b>{{ include.name }}</b>
+    </h3>
+  {% endif %}
+
+  {% include sprint4b/milestone_byline.html task=task status=include.status upcoming=include.upcoming %}
+</div>

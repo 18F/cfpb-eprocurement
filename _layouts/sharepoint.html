@@ -7,7 +7,8 @@
     {% endfor %}
   </head>
   <body class="site__document-detail">
-
+    {% assign pr = site.procurements | where: 'requisition_number': 'FA-956-XXXX' | first %}
+    {% assign last = pr.milestones | jsonify %}
     <img class="chrome" src="{{ site.baseurl }}/static/images/sharepoint-chrome.png">
 
     <main id="main">
@@ -16,20 +17,52 @@
       </div>
     </main>
 
-    <form action="../">
-      <div class="wrapper">
-        <textarea rows="4"
-          placeholder="Add a comment"></textarea>
-        <p>
-          <button type="submit">Save and submit</button>
-          <button type="submit">Save</button>
+    <div class="row">
+      <div class="col-2">
+        <b>History</b>
+        <p id="history-content">
         </p>
       </div>
-    </form>
+      <div class="col-10">
+        <form class="wrapper" action="../" style="margin-left: 90px;">
+          <textarea rows="4"
+            placeholder="Add a comment"></textarea>
+          <p>
+            <button type="submit">Save and submit</button>
+            <button type="submit">Save</button>
+          </p>
+        </form>
+      </div>
+    </div>
 
     <script src="{{ site.baseurl }}/static/js/main.js"></script>
     {% for script in page.scripts %}
     <script src="{{ site.baseurl }}/static/js/{{ script }}"></script>
     {% endfor %}
+    <script>
+      var milestones = {{last}}
+
+      var getQueryString = function ( field, url ) {
+          var href = window.location.href
+          var reg = new RegExp( '[?&]' + field + '=([^&#]*)', 'i' );
+          var string = reg.exec(href);
+          return string ? decodeURIComponent(string[1]) : null;
+      };
+      var safeTitle = getQueryString('title').replace(/\+/g, ' ').replace(/\s{1}#.+/, '');
+
+      var thisMilestone = milestones.find(function(milestone) {
+        return new RegExp(safeTitle).test(milestone.name);
+      });
+
+      if (thisMilestone) {
+        var historyEl = document.getElementById('history-content');
+        thisMilestone.history.forEach(function(item) {
+          var p = document.createElement('p');
+          p.innerHTML = item;
+          historyEl.appendChild(p);
+        });
+      }
+
+    </script>
   </body>
 </html>
