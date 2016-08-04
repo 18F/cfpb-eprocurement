@@ -299,6 +299,8 @@ header {
 
       &[role="tab"][aria-expanded=true]::after {
         content: "-";
+        color: $white;
+        background: $black;
       }
 
       &[role="tab"][data-status="completed"]::after {

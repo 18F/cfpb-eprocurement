@@ -37,6 +37,7 @@ milestones:
     name: "xyz milestone"
     # the list of actors who are currently involved in the milestone
     actors: [Merav, Cindy]
+
 # tasks is a list of tasks
 tasks:
   # each task has:

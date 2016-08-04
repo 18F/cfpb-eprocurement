@@ -8,6 +8,8 @@ status: new
 # dollars, specified as a number
 obligated_value: 80000
 
+requisition_number: FA-956-XXXX
+
 # requested award date in YYYY-MM-DD form
 requested_award_date: 2016-10-10
 
@@ -28,13 +30,29 @@ activity:
     # 2. a "date" in YYYY-MM-DD form
     date: 2016-08-04
 
+milestones:
+  - id: 1
+    name: "Pre-Acquisition Tasks and Planning"
+    actors: [Myra, Merav]
+    status: "complete"
+  - id: 2
+    name: "Acquisition Package Preparation"
+    actors: [Myra, Merav]
+    status: "pending"
+
 # tasks is a list of tasks
 tasks:
   # each task has:
   # 1. "content", which is markdown, and will be processed in the same
   #    way as activity messages (see above).
+  - message: "[CFPBuy Request] (locked) approved by OCFO"
+    due_date: 2016-08-01
+    milestone_id: 1
+    status: complete
   - message: "[Determine milestones and timeline]."
     due_date: 2016-08-10
+    milestone_id: 1
+    status: complete
 
 # OPTIONAL: links is an optional list of links to include in the
 # markdownified activity and task content.
