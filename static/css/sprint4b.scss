@@ -57,7 +57,7 @@ header {
 }
 
 .mute {
-  color: $gray-60 !important;
+  color: $gray-60;
 }
 
 .document-due {
@@ -71,6 +71,20 @@ header {
   }
 
   &[data-due=over] {
+    background: $red;
+    color: $white;
+  }
+}
+
+time.due {
+  background: $pacific-20;
+  border-radius: 5px;
+  display: inline-block;
+  padding: 0.1em 0.5em;
+
+
+  &[data-status="soon"],
+  &[data-status="over"] {
     background: $red;
     color: $white;
   }
@@ -108,24 +122,36 @@ header {
         text-align: right;
       }
 
-      .procurement-due {
-        color: transparent;
+      .procurement-status {
+        background: $white;
+        display: block;
+        margin-top: 0.7em;
+        text-align: center;
 
-        &::before {
-          display: inline-block;
-        }
-
-        &[data-due="soon"]::before {
-          content: "!";
-          color: $white;
+        &[data-status="soon"] {
           background: $red;
-          border-radius: 1em;
-          height: 1.5em;
-          width: 1.5em;
-          text-align: center;
+          color: $white;
         }
+
+        &[data-status="new"] {
+          background: $green;
+          color: $white;
+        }
+
       }
+
     }
+
+    .award-date {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    &[data-status="soon"] .award-date--estimated {
+      color: $red;
+      font-weight: bold;
+    }
+
   }
 
   .btn-wide,
@@ -274,11 +300,15 @@ header {
     padding: 1em;
 
     .milestone-item-title {
-      cursor: pointer;
+
       padding-top: 10px;
       position: relative;
       h3, p {
         margin-bottom: 0;
+      }
+
+      &:not([data-status="new"]) {
+        cursor: pointer;  
       }
 
       &[role="tab"]::after {
@@ -297,12 +327,27 @@ header {
         width: 1em;
       }
 
-      &[role="tab"][data-status~="pending new"][aria-expanded=true]::after {
-        content: "-";
-        color: $white;
-        background: $black;
+      &[role="tab"][data-status="new"]::after {
+        border-radius: 1em;
+        border: 1px solid;
+        color: $gray-20;
+        content: "\0020\0020+";
+        display: inline-block;
+        font-size: 2em;
+        height: 1em;
+        line-height: .85;
+        position: absolute;
+        right: 1em;
+        text-align: center;
+        top: 35%;
+        width: 1em;
       }
 
+      &[role="tab"]:not([data-status="completed"])[aria-expanded=true]::after {
+        content: "-";
+        color: white;
+        background: $black;
+      }
       &[role="tab"][data-status="completed"]::after {
         content: "✔";
         color: $gray-40;

@@ -1,0 +1,11 @@
+{% assign _due_days = include.date | due_days %}
+{% assign _due_status = _due_days | due_status %}
+<time class="due" datetime="{{ include.date }}"
+  {% if _due_status %}data-status="{{ _due_status }}"{% endif %}>
+  {% if _due_status == 'over' %}
+    Overdue
+  {% else %}
+    Due in
+  {% endif %}
+  {{ _due_days }} day{{ _due_days | pluralize }}
+</time>

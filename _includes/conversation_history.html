@@ -25,9 +25,9 @@
 
     <button class="btn {{class_name}} set-done">{{copy}}</button>
   {% else %}
-    <form class="block comment-form">
-      <textarea name="comment" class="comment-form_comment"></textarea>
+    <div class="block comment-form">
+      <textarea class="comment-form_comment"></textarea>
       <button type=submit class="submit-comment btn">Comment</button>
-    </form>
+    </div>
   {% endif %}
 {% endif %}

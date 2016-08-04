@@ -63,6 +63,14 @@ module CFPB
       end
     end
 
+    def format_task_message date, status, message
+      "#{message} #{get_preposition_by status} #{date}"
+    end
+
+    def get_preposition_by status
+      status == 'complete' ? ' on ' : ' by '
+    end
+
     def number_to_currency(number)
       return "N/A" unless number
 
@@ -229,11 +237,16 @@ module CFPB
       word[0].upcase + word[1..word.size]
     end
 
+    def due_days(date)
+      (date - NOW).to_i
+    end
+
     def due_status(days, statuses={})
       status = nil
+      statuses = {"over": 0, "soon": 10}
       statuses.each do |key, threshold|
         if days <= threshold
-          status = key
+          status = key.to_s
           break
         end
       end
