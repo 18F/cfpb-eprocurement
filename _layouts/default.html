@@ -35,10 +35,10 @@
     <div class="wrapper wrapper__match-content">
       <div class="block block__sub">
         {% if page.subtitle %}
-        <h2>{{ page.subtitle }}</h2>
+        <h2 data-bind="subtitle">{{ page.subtitle }}</h2>
         {% endif %}
         <div class="header u-clearfix">
-          <h1 class="header__left superheading">{{ page.title | default: site.title }}</h1>
+          <h1 data-bind="title" class="header__left superheading">{{ page.title | default: site.title }}</h1>
           {% assign _user = site.data.users[site.user] %}
           {% if _user %}
           <h6 class="header__right">
