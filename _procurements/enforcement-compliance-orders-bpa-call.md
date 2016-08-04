@@ -114,7 +114,7 @@ tasks:
     due_date: 2016-08-02
     milestone_id: 1
     status: complete
-    upcoming_message: "[Draft IGCE v.1] awaiting review by Catherine (CO)"
+    upcoming_message: "[Draft ICGE v.1] awaiting review by Catherine (CO)"
     upcoming_due_date: 2016-08-10
     upcoming_status: pending
   - message: "[Draft Performance Work Statement] due from Myra (COR)"

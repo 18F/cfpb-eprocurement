@@ -3,6 +3,10 @@
 
 @import 'palette';
 
+[hidden] {
+  display: none !important;
+}
+
 body {
   font-family: Helvetica, Arial, sans-serif;
 }
