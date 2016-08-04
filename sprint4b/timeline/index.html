@@ -1,0 +1,120 @@
+---
+layout: default
+
+stylesheets:
+- sprint4b.css
+
+scripts:
+- sprint4b/document-detail.js
+
+body_class: 'site__procurement-detail site__procurement-timeline'
+
+subtitle: Name of Program Office / Active Procurements
+title: " "
+
+# This is for the timeline view
+timeline:
+  title: Milestones and timeline
+  text: "We will create a custom timeline and list of milestones for
+    you based on information from your
+    [CFPBuy Request # XXX-XXXX-XXX][CFPBuy Request]
+    (**locked**), along with your answers to the following questions."
+  fields:
+    - title: Type of Action
+      value: Task Order / Call
+    - title: "Contract / Agreement #"
+      value: MASCS BPA
+  questions:
+    - title: Does this have T&amp;I implications?
+      name: t_and_i
+      options:
+        - label: "No"
+          value: false
+          selected: true
+        - label: "Yes"
+          value: true
+    - title: Does this involve contractor personnel?
+      name: contractor_personnel
+      options:
+        - label: "None"
+          value: none
+          selected: true
+        - label: "Yes - Onsite"
+          value: onsite
+        - label: "Yes - Offsite"
+          value: offsite
+
+---
+
+{% assign DATE_FORMAT = '%B %e, %Y' %}
+{% assign LINKS = page.links %}
+{% assign UPCOMING = page.upcoming %}
+
+{% assign proc = site.procurements | where: 'requisition_number': 'FA-956-XXXX' | first %}
+
+<div class="detail-header">
+  <div class="wrapper wrapper__match-content">
+    <div class="row">
+      <div class="col-3">
+        <p class="detail-header__title"><b>Procurement No.</b></p>
+        <p class="detail-header__data">
+          {{ proc.requisition_number }}
+        </p>
+      </div>
+      <div class="col-3">
+        <p class="detail-header__title"><b>Obligated Amount</b></p>
+        <p class="detail-header__data">
+          {{ proc.obligated_value | number_to_currency }}
+        </p>
+      </div>
+      <div class="col-3">
+        <p class="detail-header__title"><b>Award Date</b></p>
+        <p class="detail-header__data">
+          {{ proc.requested_award_date | date: DATE_FORMAT }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main class="content">
+  <form action="{{ site.baseurl }}{{ pr.url }}" class="wrapper wrapper__match-content">
+    <h2>Milestones and timeline</h2>
+
+    {% assign timeline = page.timeline %}
+
+    {%
+      include markdownify.html
+      content=timeline.text
+      links=pr.links
+    %}
+
+    {% for field in timeline.fields %}
+    <h3>{{ field.title }}</h3>
+    <p>{{ field.value }}</p>
+    {% endfor %}
+
+    {% if timeline.questions %}
+    <h3>Additional questions</h3>
+    {% for question in timeline.questions %}
+    <p>{{ question.title }}</p>
+    <p class="question-option">
+      {% for option in question.options %}
+      {% assign option_id = question.name | append: '-' | append: option.value %}
+      <input id="{{ option_id }}" type="radio" name="{{ question.name }}"
+        value="{{ option.value }}"
+        {% if option.selected %}checked{% endif %}>
+      <label class="option btn" for="{{ option_id }}">
+        {{ option.label }}
+      </label>
+      {% endfor %}
+    </p>
+    {% endfor %}
+    {% endif %}
+
+    <button type="submit" class="btn btn__super">
+      Submit
+      <span class="cf-icon cf-icon-right"></span>
+    </button>
+  </form>
+</main>
