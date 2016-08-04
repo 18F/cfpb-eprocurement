@@ -115,7 +115,7 @@ sort_options:
     <div class="col col-{{ col.right }}"></div>
   </div>
 
-  {% assign tasks = pr.tasks | sort_by: 'date' | reverse %}
+  {% assign tasks = pr.tasks | sort_by: 'date' %}
 
   {% unless tasks.empty %}
   <div class="row upcoming-header">
