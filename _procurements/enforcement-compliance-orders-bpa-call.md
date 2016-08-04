@@ -93,7 +93,7 @@ milestones:
     status: complete
     section_id: 1
     history: [
-      "CFPBuy Request # xxx-xxxx-xxx approved by OCFO on July 29, 2016.",
+      "CFPBuy Request # XXX-XXXX-XXX approved by OCFO on July 29, 2016.",
       "CFPBuy Request submitted by Myra (COR) on July 15, 2016."
     ]
 
@@ -102,7 +102,7 @@ tasks:
   # each task has:
   # 1. "content", which is markdown, and will be processed in the same
   #    way as activity messages (see above).
-  - message: "[CFPBuy Request] (locked) approved by OCFO"
+  - message: "[CFPBuy Request] (**locked**) approved by OCFO"
     due_date: 2016-08-03
     milestone_id: 5
     status: complete
@@ -140,7 +140,7 @@ links:
     # 2. "href": an absolute URI, e.g. "/sprint4b/documents/..."
     href: "/sprint4b/document/?title=CFPB+Buy+Request+%23+XXX-XXXX-XXX&locked=true"
   - name: "Determine milestones and timeline"
-    href: /sprint4b/determine/
+    href: /sprint4b/timeline/
   - name: "Draft ICGE v.1"
     href: "/sprint4b/document?title=Draft+ICGE+Timeline&version=1"
   - name: "Draft Performance Work Statement"
