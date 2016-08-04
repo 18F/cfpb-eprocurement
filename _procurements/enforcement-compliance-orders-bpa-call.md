@@ -93,7 +93,7 @@ milestones:
     status: complete
     section_id: 1
     history: [
-      "CFPBuy Request # xxx-xxxx-xxx approved by OCFO on July 29, 2016.",
+      "CFPBuy Request # XXX-XXXX-XXX approved by OCFO on July 29, 2016.",
       "CFPBuy Request submitted by Myra (COR) on July 15, 2016."
     ]
 
@@ -102,7 +102,7 @@ tasks:
   # each task has:
   # 1. "content", which is markdown, and will be processed in the same
   #    way as activity messages (see above).
-  - message: "[CFPBuy Request] (locked) approved by OCFO"
+  - message: "[CFPBuy Request] (**locked**) approved by OCFO"
     due_date: 2016-08-03
     milestone_id: 5
     status: complete
@@ -130,6 +130,38 @@ tasks:
     milestone_id: 4
     status: new
 
+# This is for the timeline view
+timeline:
+  title: Milestones and timeline
+  text: "We will create a custom timeline and list of milestones for
+    you based on information from your
+    [CFPBuy Request # XXX-XXXX-XXX][CFPBuy Request]
+    (**locked**), along with your answers to the following questions."
+  fields:
+    - title: Type of Action
+      value: Task Order / Call
+    - title: "Contract / Agreement #"
+      value: MASCS BPA
+  questions:
+    - title: Does this have T&amp;I implications?
+      name: tni
+      options:
+        - label: "No"
+          value: false
+          selected: true
+        - label: "Yes"
+          value: true
+    - title: Does this involve contractor personnel?
+      name: contractor_personnel
+      options:
+        - label: "None"
+          value: none
+          selected: true
+        - label: "Yes - Onsite"
+          value: onsite
+        - label: "Yes - Offsite"
+          value: offsite
+
 # OPTIONAL: links is an optional list of links to include in the
 # markdownified activity and task content.
 links:
@@ -140,7 +172,7 @@ links:
     # 2. "href": an absolute URI, e.g. "/sprint4b/documents/..."
     href: "/sprint4b/document/?title=CFPB+Buy+Request+%23+XXX-XXXX-XXX&locked=true"
   - name: "Determine milestones and timeline"
-    href: /sprint4b/determine/
+    href: /sprint4b/timeline/
   - name: "Draft ICGE v.1"
     href: "/sprint4b/document?title=Draft+ICGE+Timeline&version=1"
   - name: "Draft Performance Work Statement"

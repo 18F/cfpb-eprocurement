@@ -40,7 +40,7 @@ links:
   #    and task messages above.
   - name: Acquisition Package
     # 2. "href": an absolute URI, e.g. "/sprint4b/documents/..."
-    href: "/sprint4b/documents/?title=Acquisition+Package+%23+XXX-XXXX-XXX&locked=true"
+    href: "/sprint4b/document/?title=Acquisition+Package+%23+XXX-XXXX-XXX&locked=true"
 
     # NOTE: quote the name if it contains "#"
 

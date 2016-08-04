@@ -18,6 +18,6 @@ navigation:
   - url: /dashboard
 
 exclude:
-- '*.log'
-- node_modules
-- src
+  - '*.log'
+  - node_modules
+  - src

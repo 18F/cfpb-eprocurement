@@ -397,3 +397,33 @@ time.due {
   //   }
   // }
 }
+
+.site__procurement-timeline {
+
+  .question-option {
+    input[type=radio] {
+      display: none;
+    }
+
+    input + .btn {
+      background: $gray-60;
+      font-size: 1.2em;
+      margin-right: 1em;
+      min-width: 10em;
+      text-align: center;
+    }
+
+    input:checked + .btn {
+      background: $dark-pacific;
+    }
+  }
+
+  .btn__super {
+    display: block;
+    font-size: 1.7em;
+    margin: 1em auto;
+    min-width: 10em;
+    width: auto;
+  }
+
+}
