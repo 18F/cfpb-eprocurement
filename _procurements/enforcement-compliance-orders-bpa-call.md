@@ -130,6 +130,38 @@ tasks:
     milestone_id: 4
     status: new
 
+# This is for the timeline view
+timeline:
+  title: Milestones and timeline
+  text: "We will create a custom timeline and list of milestones for
+    you based on information from your
+    [CFPBuy Request # XXX-XXXX-XXX][CFPBuy Request]
+    (**locked**), along with your answers to the following questions."
+  fields:
+    - title: Type of Action
+      value: Task Order / Call
+    - title: "Contract / Agreement #"
+      value: MASCS BPA
+  questions:
+    - title: Does this have T&amp;I implications?
+      name: tni
+      options:
+        - label: "No"
+          value: false
+          selected: true
+        - label: "Yes"
+          value: true
+    - title: Does this involve contractor personnel?
+      name: contractor_personnel
+      options:
+        - label: "None"
+          value: none
+          selected: true
+        - label: "Yes - Onsite"
+          value: onsite
+        - label: "Yes - Offsite"
+          value: offsite
+
 # OPTIONAL: links is an optional list of links to include in the
 # markdownified activity and task content.
 links:
