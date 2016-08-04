@@ -8,8 +8,8 @@
   </head>
   <body class="site__document-detail">
     {% assign pr = site.procurements | where: 'requisition_number': 'FA-956-XXXX' | first %}
-    {% assign last = pr.milestones | jsonify %}
-
+    {% assign milestones = pr.milestones | jsonify %}
+{{pr.name}}
     <img class="chrome" src="{{ site.baseurl }}/static/images/sharepoint-chrome.png">
     <main id="main">
       <div>
@@ -40,7 +40,7 @@
     <script src="{{ site.baseurl }}/static/js/{{ script }}"></script>
     {% endfor %}
     <script>
-      var milestones = {{last}}
+      var milestones = {{milestones}}
 
       var getQueryString = function ( field, url ) {
           var href = window.location.href
@@ -53,9 +53,9 @@
       var thisMilestone = milestones.find(function(milestone) {
         return new RegExp(safeTitle).test(milestone.name);
       });
+      var historyEl = document.getElementById('history-content');
 
       if (thisMilestone) {
-        var historyEl = document.getElementById('history-content');
         thisMilestone.history.forEach(function(item) {
           var p = document.createElement('p');
           p.innerHTML = item;
@@ -63,6 +63,9 @@
         });
       }
 
+      if (!thisMilestone || !thisMilestone.history.length) {
+        historyEl.innerHTML = '<em>None</em>';
+      }
     </script>
   </body>
 </html>
