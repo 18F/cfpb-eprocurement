@@ -124,7 +124,7 @@ sort_options:
 
   {% for task in tasks %}
     {% if task.status != 'complete' %}
-  <div class="row upcoming-header">
+    <div class="row upcoming-header"{% if task.status == 'new' %} hidden{% endif %}>
     <div class="col col-{{ col.left }}">
       {% include due_label.html date=task.due_date %}
     </div>
