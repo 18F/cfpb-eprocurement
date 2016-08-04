@@ -12,10 +12,6 @@ body_class: 'site__procurements-list'
 title: Active Procurements
 subtitle: Enforcement Program Office
 
-due_status:
-  over: 0
-  soon: 10
-
 columns:
   left: 2
   center: 7
@@ -129,7 +125,7 @@ sort_options:
   {% for task in tasks | limit: 4 %}
   <div class="row upcoming-header">
     <div class="col col-{{ col.left }}">
-      {% include due_label.html date=task.due_date due_status=page.due_status %}
+      {% include due_label.html date=task.due_date %}
     </div>
     <div class="col col-{{ col.center | plus: col.right }}">
       {% include markdownify.html content=task.message links=pr.links %}
