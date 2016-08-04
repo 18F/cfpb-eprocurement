@@ -77,6 +77,10 @@ due_status:
     var tablist = $('[role=tablist]');
 
     tablist.on('click', '[role=tab][aria-controls]', function(e) {
+      if (this.getAttribute('data-status') === 'new') {
+        return;
+      }
+
       var id = this.getAttribute(CONTROLS);
       var expanded = this.getAttribute(EXPANDED) !== 'true';
       this.setAttribute(EXPANDED, expanded);

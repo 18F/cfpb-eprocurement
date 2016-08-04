@@ -66,26 +66,36 @@ milestones:
     actors: []
     status: pending
     section_id: 2
+    history: [
+      "Draft ICGE v.1 submitted by Myra (COR) on August 2, 2016"
+    ]
   - id: 2
     name: "Draft Performance Work Statement"
     actors: []
     status: new
     section_id: 2
+    history: []
   - id: 3
     name: "Draft Source Selection Plan"
     actors: []
     status: new
     section_id: 2
+    history: []
   - id: 4
     name: "Draft Service Contract Coding Worksheet"
     actors: []
     status: new
     section_id: 2
+    history: []
   - id: 5
     name: CFPBuy Request
     actors: []
     status: complete
     section_id: 1
+    history: [
+      "CFPBuy Request # xxx-xxxx-xxx approved by OCFO on July 29, 2016.",
+      "CFPBuy Request submitted by Myra (COR) on July 15, 2016."
+    ]
 
 # tasks is a list of tasks
 tasks:

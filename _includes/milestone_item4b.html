@@ -105,30 +105,13 @@
           <div class="row" role="tabpanel" aria-hidden="true" id="{{ milestone_slug }}">
             <div class="col-12 history-section">
               <p><b>History:</b></p>
-
-              {% for event in milestone.events %}
-                <div class="row history-item">
-                  <div>
-                    {% assign user = site.data.users[event.actor] %}
-                    {% include user_avatar.html user=user className="history-avatar" %}
-                  </div>
-                  <div class="milestone-item-title col-3">
-                    {% if event.action == 'approve' %}
-                      {% assign final = 'Final ' %}
-                    {% else %}
-                      {% assign final = '' %}
-                    {% endif %}
-
-                    {% if event.comment %}
-                      <p><b>"{{ event.comment }}"</b></p>
-                    {% endif %}
-
-                    <p>
-                      {{ final | append: document.name }} {{ event.action | past_tensify }} by {{ event.actor }} ({{ user.role }}) on {{event.date | date: DATE_FORMAT }}
-                    </p>
-                  </div>
-                </div>
-              {% endfor %}
+              {% if milestone.history.size == 0 %}
+                <em>None</em>
+              {% else %}
+                {% for history in milestone.history %}
+                  <p>{{history}}</p>
+                {% endfor %}
+              {% endif %}
             </div>
           </div>
         </section>
