@@ -122,7 +122,8 @@ sort_options:
     </div>
   </div>
 
-  {% for task in tasks | limit: 4 %}
+  {% for task in tasks %}
+    {% if task.status != 'complete' %}
   <div class="row upcoming-header">
     <div class="col col-{{ col.left }}">
       {% include due_label.html date=task.due_date %}
@@ -131,6 +132,7 @@ sort_options:
       {% include markdownify.html content=task.message links=pr.links %}
     </div>
   </div>
+    {% endif %}
   {% endfor %}
 
   <div class="row">
