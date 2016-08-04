@@ -2,10 +2,19 @@
 layout: default
 body_class: 'site__procurement-detail'
 stylesheets:
-- sprint4a.css
+- sprint4b.css
 ---
+
 {% assign DATE_FORMAT = '%B %e, %Y' %}
-{% assign proc = page | prepare_procurement %}
+{% assign LINKS = page.links %}
+{% assign UPCOMING = page.upcoming %}
+
+{% if page.sprint == '4b' %}
+  {% assign proc = page %}
+{% else %}
+  {% assign proc = page | prepare_procurement %}
+{% endif %}
+
 <div class="detail-header">
   <div class="wrapper wrapper__match-content">
     <div class="row">
@@ -36,11 +45,16 @@ stylesheets:
     <div class="row">
       <div class="detail-content col-12">
         <h2>Milestones</h2>
-
-        {% for milestone in proc.milestones %}
-          <!-- <pre class="json"> {{ milestone | jsonify }}</pre> -->
-          {% include milestone_item.html milestone=milestone %}
-        {% endfor %}
+        {% if proc.sprint == "4b" %}
+          {% for section in proc.sections %}
+            {% assign milestones = proc.milestones | where: "section_id", section.id %}
+            {% include milestone_item4b.html section=section milestones=milestones tasks=proc.tasks page=page %}
+          {% endfor %}
+        {% else %}
+          {% for milestone in proc.milestones %}
+            {% include milestone_item.html milestone=milestone %}
+          {% endfor %}
+        {% endif %}
       </div>
     </div>
   </div>
@@ -59,6 +73,10 @@ stylesheets:
     var tablist = $('[role=tablist]');
 
     tablist.on('click', '[role=tab][aria-controls]', function(e) {
+      if (this.getAttribute('data-status') === 'new') {
+        return;
+      }
+
       var id = this.getAttribute(CONTROLS);
       var expanded = this.getAttribute(EXPANDED) !== 'true';
       this.setAttribute(EXPANDED, expanded);

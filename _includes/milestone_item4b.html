@@ -1,0 +1,122 @@
+{% assign content_slug = section.name | slugify %}
+{% if section.status == 'complete' %}
+  {% assign section_done = 'completed' %}
+{% else %}
+ {% assign section_done = section.status %}
+{% endif %}
+{% assign most_recent_milestone = milestones | first %}
+{% assign most_recent_task = include.tasks | where: 'milestone_id', most_recent_milestone.id | first%}
+
+<section class="milestone-item block__border-top" role="tablist">
+  <div class="row">
+    <div class="col-1 avatar-group">
+      {% assign actor_count = section.actors.size - 2 %}
+      {% for actor in section.actors limit: 2 %}
+        {% assign user = site.data.users[actor] %}
+        {% include user_avatar.html user=user %}
+      {% endfor %}
+    </div>
+    <div class="milestone-item-title col-3"
+      role="tab"
+      aria-controls="{{ content_slug }}"
+      data-status="{{ section_done }}"
+    >
+      {% assign task = most_recent_task %}
+      {% assign date = task.due_date | date: DATE_FORMAT %}
+      {% assign preposition = task.status | get_preposition_by %}
+      {% assign message = task.message | append: preposition | append: date %}
+
+      <h3>
+        <b>{{ section.name }}</b>
+      </h3>
+
+      {% if section.status == 'new' %}
+        <p class="mute">
+          <em>
+            Awaiting completion of {{section.depends_on}}
+          </em>
+        </p>
+      {% else %}
+        {% include markdownify.html content=message links=LINKS %}
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="row" role="tabpanel" aria-hidden="true" id="{{ content_slug }}">
+    <div class="col-1"></div>
+    <div class="col-3 milestone-documents">
+      <h4 class="milestone-documents__title">Milestones</h4>
+      {% for milestone in milestones %}
+        {% if milestone.status == 'complete' %}
+          {% assign milestone_done = 'completed' %}
+        {% else %}
+          {% assign milestone_done = milestone.status %}
+        {% endif %}
+
+        {% assign current_task = include.tasks | where: 'milestone_id', milestone.id | first %}
+
+        {% if current_task.upcoming_message %}
+          {% assign upcoming = true %}
+        {% else if current_task.status == "new"}
+          {% assign upcoming = true %}
+        {% else %}
+          {% assign upcoming = false %}
+        {% endif %}
+
+        {% assign milestone_slug = milestone.name | append: forloop.index %}
+        <section class="milestone-item block__border-bottom" role="tablist">
+          <div class="row">
+            <div class="milestone-item-title col-3"
+              role="tab"
+              data-status="{{ milestone_done }}"
+              aria-controls="{{milestone_slug}}"
+            >
+              {% assign date = current_task.due_date | date: DATE_FORMAT %}
+              {% assign preposition = current_task.status | get_preposition_by %}
+              {% assign message = current_task.message | append: preposition | append: date %}
+
+              <h5 style="margin-bottom: 0">
+                <b>{{ milestone.name }}</b>
+              </h5>
+
+              {% if milestone.status == 'new' %}
+                <p class="mute">No activity yet</p>
+              {% else %}
+                {% include markdownify.html content=message links=LINKS %}
+              {% endif %}
+
+              {% if upcoming %}
+                {% if current_task.upcoming_message %}
+                  {% assign message = current_task.upcoming_due_date | date: DATE_FORMAT | format_task_message: "new", current_task.upcoming_message  %}
+                {% else %}
+                  {% assign message = current_task.due_date | date: DATE_FORMAT | format_task_message: current_task.status, current_task.message %}
+                {% endif %}
+                <h6>Upcoming task:</h6>
+                <p>{% include markdownify.html content=message links=LINKS %}</p>
+                <br>
+                {% if current_task.status != 'complete' %}
+                  {% include due_label.html date=current_task.due_date %}
+                {% else if current_task.upcoming_status == 'pending' %}
+                  {% include due_label.html date=current_task.upcoming_due_date %}
+                {% endif %}
+              {% endif %}
+            </div>
+          </div>
+          <div class="row" role="tabpanel" aria-hidden="true" id="{{ milestone_slug }}">
+            <div class="col-12 history-section">
+              <p><b>History:</b></p>
+              {% if milestone.history.size == 0 %}
+                <em>None</em>
+              {% else %}
+                {% for history in milestone.history %}
+                  <p>{{history}}</p>
+                {% endfor %}
+              {% endif %}
+            </div>
+          </div>
+        </section>
+
+      {% endfor %}
+    </div>
+  </div>
+</section>

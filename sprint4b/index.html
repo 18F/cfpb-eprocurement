@@ -1,0 +1,151 @@
+---
+layout: default
+
+stylesheets:
+- sprint4b.css
+
+scripts:
+- sprint4b/procurements-list.js
+
+body_class: 'site__procurements-list'
+
+title: Active Procurements
+subtitle: Enforcement Program Office
+
+columns:
+  left: 2
+  center: 7
+  right: 3
+
+sort_options:
+- by: requested_award_date
+  text: Award Date
+- by: favorite
+  text: Favorites
+---
+
+{% assign col = page.columns %}
+{% assign DATE_FORMAT = '%B %e, %Y' %}
+
+<form method="GET" class="js-autosubmit">
+  <div class="row">
+    <div class="col col-{{ col.left | plus: col.center }}">
+      <label for="sort-by">View by</label>
+      <select id="sort-by" name="sort">
+        <option value="">Default</option>
+        {% for sort in page.sort_options %}
+        <option value="{{ sort.by }}">{{ sort.text }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col col-{{ col.right }}">
+      <button class="btn btn-wide btn-flat" type="button" action="export/">
+        <span class="cf-icon cf-icon-download"></span>
+        Export to Excel
+      </button>
+    </div>
+  </div>
+</form>
+
+{% assign prs = site.procurements | where: 'sprint', '4b' %}
+{% for pr in prs %}
+
+  {% assign id = pr.id | split: '/' | last %}
+<section class="procurement procurement-card"
+  id="{{ id }}"
+  data-status="{{ pr.status }}"
+  data-json='{{ pr | prepare_for_jsonify | jsonify | xml_escape }}'
+  hidden>
+
+  <div class="row card-header">
+    <div class="col col-{{ col.left }}">
+      <span class="procurement-status"
+        data-status="{{ pr.status }}">
+        {{ pr.status }}
+      </span>
+    </div>
+    <h1 class="col col-{{ col.center }}">
+      <a href="{{ site.baseurl }}{{ pr.url }}">{{ pr.name }}</a>
+    </h1>
+    <div class="col col-{{ col.right }}">
+      <label is="cfpb-fave-star">
+        <input type="checkbox" name="{{ id }}">
+      </label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col col-{{ col.left }}"></div>
+    <div class="col col-{{ col.center }}">
+      <h5>Obligated amount</h5>
+      {{ pr.obligated_value | number_to_currency }}
+    </div>
+    <div class="col col-{{ col.right }}">
+      <h5>Award date</h5>
+      <p class="award-date award-date--requested">
+        Requested:
+        <time datetime="{{ pr.requested_award_date }}">{{ pr.requested_award_date | date: DATE_FORMAT }}
+      </p>
+      {% if pr.estimated_award_date %}
+      <p class="award-date award-date--estimated">
+        Estimated:
+        <time datetime="{{ pr.estimated_award_date }}">{{ pr.estimated_award_date | date: DATE_FORMAT }}</time>
+      </p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col col-{{ col.left }}"></div>
+    <div class="col col-{{ col.center }}">
+      <h2>Latest Activity</h2>
+      {% assign activity = pr.activity | sort_by: 'date' | reverse %}
+      {% if activity.empty %}
+      <p>No activity.</p>
+      {% else %}
+      {% for item in activity %}
+      <p>{% include markdownify.html content=item.message links=pr.links %}</p>
+      {% endfor %}
+      {% endif %}
+    </div>
+    <div class="col col-{{ col.right }}"></div>
+  </div>
+
+  {% assign tasks = pr.tasks | sort_by: 'date' %}
+
+  {% unless tasks.empty %}
+  <div class="row upcoming-header">
+    <div class="col col-{{ col.left }}">
+    </div>
+    <div class="col col-{{ col.center | plus: col.right }}">
+      <h6>Upcoming task{{ pr.tasks.size | pluralize }}</h6>
+    </div>
+  </div>
+
+  {% for task in tasks %}
+    {% if task.status != 'complete' %}
+  <div class="row upcoming-header">
+    <div class="col col-{{ col.left }}">
+      {% include due_label.html date=task.due_date %}
+    </div>
+    <div class="col col-{{ col.center | plus: col.right }}">
+      {% include markdownify.html content=task.message links=pr.links %}
+    </div>
+  </div>
+    {% endif %}
+  {% endfor %}
+
+  <div class="row">
+    <div class="col col-{{ col.left | plus: col.center }}">
+    </div>
+    <div class="col col-{{ col.right }}">
+      <a class="btn details" href="{{ site.baseurl }}{{ pr.url }}">
+        Details
+        <span class="cf-icon cf-icon-right"></span>
+      </a>
+    </div>
+  </div>
+  {% endunless %}
+
+</section>
+{% endfor %}
