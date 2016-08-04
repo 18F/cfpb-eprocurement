@@ -30,7 +30,7 @@ activity:
     # 2. a "date" in YYYY-MM-DD form
     date: 2016-08-04
 
-milestones:
+sections:
   - id: 1
     name: "Pre-Acquisition Tasks and Planning"
     actors: [Myra, Merav]
@@ -39,6 +39,53 @@ milestones:
     name: "Acquisition Package Preparation"
     actors: [Myra, Merav]
     status: "pending"
+  - id: 3
+    name: "Acquisition Package Finalization"
+    actors: [Myra, Merav]
+    status: "new"
+    depends_on: "Acquisition Package Preparation"
+  - id: 4
+    name: "Internal Reviews"
+    actors: [Myra, Merav]
+    status: "new"
+    depends_on: "Acquisition Package Finalization"
+  - id: 5
+    name: "Solicitation"
+    actors: [Myra, Merav]
+    status: "new"
+    depends_on: "Internal Reviews"
+  - id: 5
+    name: "Evaluation & Award"
+    actors: [Myra, Merav]
+    status: "new"
+    depends_on: "Solicitation"
+
+milestones:
+  - id: 1
+    name: "Draft IGCE"
+    actors: []
+    status: pending
+    section_id: 2
+  - id: 2
+    name: "Draft Performance Work Statement"
+    actors: []
+    status: new
+    section_id: 2
+  - id: 3
+    name: "Draft Source Selection Plan"
+    actors: []
+    status: new
+    section_id: 2
+  - id: 4
+    name: "Draft Service Contract Coding Worksheet"
+    actors: []
+    status: new
+    section_id: 2
+  - id: 5
+    name: CFPBuy Request
+    actors: []
+    status: complete
+    section_id: 1
 
 # tasks is a list of tasks
 tasks:
@@ -46,13 +93,35 @@ tasks:
   # 1. "content", which is markdown, and will be processed in the same
   #    way as activity messages (see above).
   - message: "[CFPBuy Request] (locked) approved by OCFO"
+    due_date: 2016-08-03
+    milestone_id: 5
+    status: complete
+  - message: "[Determine milestones and timeline]"
     due_date: 2016-08-01
+    milestone_id: 5
+    status: complete
+  - message: "[Draft ICGE v.1] submitted by Myra (COR)"
+    due_date: 2016-08-02
     milestone_id: 1
     status: complete
-  - message: "[Determine milestones and timeline]."
+    upcoming_id: 1
+  - message: "[Draft Performance Work Statement] due from Myra (COR)"
+    due_date: 2016-08-06
+    milestone_id: 2
+    status: new
+  - message: "[Draft Source Selection Plan] due from Myra (COR)"
+    due_date: 2016-08-29
+    milestone_id: 3
+    status: new
+  - message: "[Draft Service Contract Coding Worksheet] due from Myra (COR)"
+    due_date: 2016-08-29
+    milestone_id: 4
+    status: new
+
+upcoming:
+  - message: "[Draft IGCE v.1] awaiting review by Catherine (CO)"
     due_date: 2016-08-10
-    milestone_id: 1
-    status: complete
+    id: 1
 
 # OPTIONAL: links is an optional list of links to include in the
 # markdownified activity and task content.
@@ -65,4 +134,12 @@ links:
     href: "/sprint4b/document/?title=CFPB+Buy+Request+%23+XXX-XXXX-XXX&locked=true"
   - name: "Determine milestones and timeline"
     href: /sprint4b/determine/
+  - name: "Draft ICGE v.1"
+    href: "/sprint4b/document?title=Draft+ICGE+Timeline&version=1"
+  - name: "Draft Performance Work Statement"
+    href: /sprint4b/document?title=Draft+Performance+Work+Statement
+  - name: "Draft Source Selection Plan"
+    href: /sprint4b/document?title=Draft+Source+Selection+Plan
+  - name: "Draft Service Contract Coding Worksheet"
+    href: /sprint4b/document?title=Draft+Service+Contract+Coding+Worksheet
 ---

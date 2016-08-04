@@ -53,6 +53,7 @@ sort_options:
 
 {% assign prs = site.procurements | where: 'sprint', '4b' %}
 {% for pr in prs %}
+{{pr.url}}
   {% assign id = pr.id | split: '/' | last %}
 <section class="procurement procurement-card"
   id="{{ id }}"
@@ -125,7 +126,7 @@ sort_options:
     </div>
   </div>
 
-  {% for task in tasks %}
+  {% for task in tasks | limit: 4 %}
   <div class="row upcoming-header">
     <div class="col col-{{ col.left }}">
       {% include due_label.html date=task.due_date due_status=page.due_status %}

@@ -63,6 +63,10 @@ module CFPB
       end
     end
 
+    def get_preposition_by status
+      status == 'complete' ? ' on ' : ' by '
+    end
+
     def number_to_currency(number)
       return "N/A" unless number
 

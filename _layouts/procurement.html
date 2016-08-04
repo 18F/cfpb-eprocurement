@@ -3,9 +3,16 @@ layout: default
 body_class: 'site__procurement-detail'
 stylesheets:
 - sprint4a.css
+due_status:
+  over: 0
+  soon: 10
+
 ---
 
 {% assign DATE_FORMAT = '%B %e, %Y' %}
+{% assign LINKS = page.links %}
+{% assign UPCOMING = page.upcoming %}
+
 
 {% if page.sprint == '4b' %}
   {% assign proc = page %}
@@ -43,16 +50,16 @@ stylesheets:
     <div class="row">
       <div class="detail-content col-12">
         <h2>Milestones</h2>
-        {% for milestone in proc.milestones %}
-
-          <!-- <pre class="json"> {{ milestone | jsonify }}</pre> -->
-          {% if proc.sprint == "4b" %}
-            {% assign tasks = proc.tasks | where: "milestone_id", milestone.id %}
-            {% include milestone_item4b.html milestone=milestone tasks=tasks links=proc.links %}
-          {% else %}
+        {% if proc.sprint == "4b" %}
+          {% for section in proc.sections %}
+            {% assign milestones = proc.milestones | where: "section_id", section.id %}
+            {% include milestone_item4b.html section=section milestones=milestones tasks=proc.tasks page=page %}
+          {% endfor %}
+        {% else %}
+          {% for milestone in proc.milestones %}
             {% include milestone_item.html milestone=milestone %}
-          {% endif %}
-        {% endfor %}
+          {% endfor %}
+        {% endif %}
       </div>
     </div>
   </div>

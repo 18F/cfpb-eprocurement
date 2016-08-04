@@ -1,92 +1,101 @@
-{% assign content_slug = milestone.name | slugify %}
+{% assign content_slug = section.name | slugify %}
+{% if section.status == 'complete' %}
+  {% assign section_done = 'completed' %}
+{% else %}
+ {% assign section_done = section.status %}
+{% endif %}
+{% assign most_recent_milestone = milestones | first %}
+{% assign most_recent_task = include.tasks | where: 'milestone_id', most_recent_milestone.id | first%}
 
 <section class="milestone-item block__border-top" role="tablist">
   <div class="row">
     <div class="col-1 avatar-group">
-      {% assign actor_count = milestone.actors.size - 2 %}
-      {% for actor in milestone.actors limit: 2 %}
+      {% assign actor_count = section.actors.size - 2 %}
+      {% for actor in section.actors limit: 2 %}
         {% assign user = site.data.users[actor] %}
         {% include user_avatar.html user=user %}
       {% endfor %}
+      {{DUE_STATUS}}
     </div>
-    <div class="milestone-item-title col-3" role="tab" aria-controls="{{ content_slug }}" data-status="{{completed}}">
-      {% assign task = tasks | first %}
+    <div class="milestone-item-title col-3"
+      role="tab"
+      aria-controls="{{ content_slug }}"
+      data-status="{{ section_done }}"
+    >
+      {% assign task = most_recent_task %}
       {% assign date = task.due_date | date: DATE_FORMAT %}
-      {% assign message = task.message | append: ' on ' | append: date %}
+      {% assign preposition = task.status | get_preposition_by %}
+      {% assign message = task.message | append: preposition | append: date %}
 
       <h3>
-        <b>{{ milestone.name }}<b>
+        <b>{{ section.name }}</b>
       </h3>
-      <p class="mute">
-        {% include markdownify.html content=message links=include.links %}
-      </p>
-      {% if milestone.status != 'complete' %}
-        <div class="document-due">
-          <p>Due in {{current_doc.due_in_days}} days</p>
-        </div>
+
+      {% if section.status == 'new' %}
+        <p class="mute">
+          <em>
+            Awaiting completion of {{section.depends_on}}
+          </em>
+        </p>
+      {% else %}
+        {% include markdownify.html content=message links=LINKS %}
       {% endif %}
+
     </div>
   </div>
 
   <div class="row" role="tabpanel" aria-hidden="true" id="{{ content_slug }}">
     <div class="col-1"></div>
     <div class="col-3 milestone-documents">
-      <h4 class="milestone-documents__title">{{milestone.name}} Milestones</h4>
-      {% for document in milestone.documents %}
-        {% if document.status == 'complete' %}
-          {% assign doc_complete = 'completed' %}
+      <h4 class="milestone-documents__title">Milestones</h4>
+      {% for milestone in milestones %}
+        {% if milestone.status == 'complete' %}
+          {% assign milestone_done = 'completed' %}
         {% else %}
-          {% assign doc_complete = '' %}
+          {% assign milestone = milestone.status %}
         {% endif %}
 
-        {% assign document_slug = document.name | append: forloop.index | slugify %}
+        {% assign current_task = include.tasks | where: 'milestone_id', milestone.id | first %}
+
+        {% if current_task.upcoming_id %}
+          {% assign upcoming = UPCOMING | where: "id", current_task.upcoming_id %}
+        {% else if current_task.status == "new"}
+          {% assign upcoming = true %}
+        {% else %}
+          {% assign upcoming = false %}
+        {% endif %}
+
         <section class="milestone-item block__border-bottom" role="tablist">
           <div class="row">
-            <div class="milestone-item-title col-3" role="tab" aria-controls="{{ document_slug }}">
-              <p><b>{{document.name}} {{doc_complete}}</b></p>
-              {% assign last_action = document.events | last %}
-              {% if document.status == 'complete' %}
-                <a href="../../{{document.url}}">Final {{ document.name | append: ' ' | append: last_action.revision }}</a> {{ last_action.action | past_tensify }} by {{ last_action.actor }} ({{site.data.users[last_action.actor].role}}) on {{last_action.date | date: DATE_FORMAT}}
+            <div class="milestone-item-title col-3"
+              role="tab"
+              data-status="{{ milestone_done }}"
+            >
+              {% assign date = current_task.due_date | date: DATE_FORMAT %}
+              {% assign preposition = current_task.status | get_preposition_by %}
+              {% assign message = current_task.message | append: preposition | append: date %}
+
+              <h5 style="margin-bottom: 0">
+                <b>{{ milestone.name }}</b>
+              </h5>
+
+              {% if milestone.status == 'new' %}
+                <p class="mute">No activity yet</p>
               {% else %}
-                {% if site.data.users[document.author] %}
-                  {% assign role = site.data.users[document.author].role | prepend: '(' | append: ')' %}
-                {% else %}
-                  {% assign role = '' %}
-                {% endif %}
-                {{ document.name }} due from {{ document.author }} {{role}} on {{document.target_end_date | date: DATE_FORMAT}}
+                {% include markdownify.html content=message links=LINKS %}
               {% endif %}
-            </div>
-          </div>
-          <div class="row" role="tabpanel" aria-hidden="true" id="{{ document_slug }}">
-            <div class="col-12 history-section">
-              <p><b>History:</b></p>
 
-              {% for event in document.events %}
-                <div class="row history-item">
-                  <div>
-                    {% assign user = site.data.users[event.actor] %}
-                    {% include user_avatar.html user=user className="history-avatar" %}
-                  </div>
-                  <div class="milestone-item-title col-3">
-                    {% if event.action == 'approve' %}
-                      {% assign final = 'Final ' %}
-                    {% else %}
-                      {% assign final = '' %}
-                    {% endif %}
+              {% if upcoming %}
+                <h6>Upcoming task:</h6>
+                <p>{% include markdownify.html content=upcoming.message links=LINKS %}</p>
 
-                    {% if event.comment %}
-                      <p><b>"{{ event.comment }}"</b></p>
-                    {% endif %}
+              {% endif %}
 
-                    <p>
-                      {{ final | append: document.name }} {{ event.action | past_tensify }} by {{ event.actor }} ({{ user.role }}) on {{event.date | date: DATE_FORMAT }}
-                    </p>
-                  </div>
-                </div>
-              {% endfor %}
+
             </div>
           </div>
         </section>
+
       {% endfor %}
     </div>
   </div>
