@@ -109,7 +109,7 @@ tasks:
   - message: "[Determine milestones and timeline]"
     due_date: 2016-08-01
     milestone_id: 5
-    status: complete
+    status: pending
   - message: "[Draft ICGE v.1] submitted by Myra (COR)"
     due_date: 2016-08-02
     milestone_id: 1
@@ -170,7 +170,7 @@ links:
   #    and task messages above.
   - name: "CFPBuy Request"
     # 2. "href": an absolute URI, e.g. "/sprint4b/documents/..."
-    href: "/sprint4b/document/?title=CFPB+Buy+Request+%23+XXX-XXXX-XXX&locked=true"
+    href: "/sprint4b/document/?title=CFPBuy+Request+%23+XXX-XXXX-XXX&locked=true"
   - name: "Determine milestones and timeline"
     href: /sprint4b/timeline/
   - name: "Draft ICGE v.1"

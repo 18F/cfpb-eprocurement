@@ -18,9 +18,16 @@
       return query[key];
     });
 
+
   templates
     .each(function(key) {
       this.setAttribute('data-' + key, query[key]);
     });
+
+    if (query.locked === "true") {
+      var h2 = document.createElement('h3');
+      h2.textContent = 'Sample view-only (locked or non-editable) document on Sharepoint';
+      document.querySelector('[data-bind=title]').appendChild(h2);
+    }
 
 })(this);
