@@ -22,13 +22,13 @@ activity:
   # 1. a "message" property, which is markdown, and in which links
   #    "[Document Name]" references will be turned into links
   #    automatically.
-  - message: "An email was automatically sent to you on August 4, 2016 to
+  - message: "An email was automatically sent to you on August 5, 2016 to
       confirm that your [CFPBuy Request # XXX-XXXX-XXX][CFPBuy Request]
-      (**locked**) was approved on July 29, 2016. Your case has been assigned
+      (**locked**) was approved on August 1, 2016. Your case has been assigned
       to the CFPB Procurement team and Catherine will be the Contracting
       Officer (CO), who will help you with your requisition."
     # 2. a "date" in YYYY-MM-DD form
-    date: 2016-08-04
+    date: 2016-08-05
 
 sections:
   - id: 1
@@ -93,7 +93,7 @@ milestones:
     status: complete
     section_id: 1
     history: [
-      "CFPBuy Request # XXX-XXXX-XXX approved by OCFO on July 29, 2016.",
+      "CFPBuy Request # XXX-XXXX-XXX approved by OCFO on August 1, 2016.",
       "CFPBuy Request submitted by Myra (COR) on July 15, 2016."
     ]
 
@@ -103,11 +103,11 @@ tasks:
   # 1. "content", which is markdown, and will be processed in the same
   #    way as activity messages (see above).
   - message: "[CFPBuy Request] (**locked**) approved by OCFO"
-    due_date: 2016-08-03
+    due_date: 2016-08-01
     milestone_id: 5
     status: complete
   - message: "[Determine milestones and timeline]"
-    due_date: 2016-08-01
+    due_date: 2016-08-09
     milestone_id: 5
     status: pending
   - message: "[Draft ICGE v.1] submitted by Myra (COR)"
@@ -118,7 +118,7 @@ tasks:
     upcoming_due_date: 2016-08-10
     upcoming_status: pending
   - message: "[Draft Performance Work Statement] due from Myra (COR)"
-    due_date: 2016-08-06
+    due_date: 2016-08-19
     milestone_id: 2
     status: new
   - message: "[Draft Source Selection Plan] due from Myra (COR)"
